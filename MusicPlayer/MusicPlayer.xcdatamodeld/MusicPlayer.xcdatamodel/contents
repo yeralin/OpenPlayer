@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PlaylistEntity" representedClassName="PlaylistEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="playlistName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="playlistOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SongEntity" inverseName="playlist" inverseEntity="SongEntity" syncable="YES"/>
+    </entity>
+    <entity name="SongEntity" representedClassName="SongEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="songArtist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songArtwork" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="songOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="songTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="PlaylistEntity" inverseName="songs" inverseEntity="PlaylistEntity" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="PlaylistEntity" positionX="-27" positionY="18" width="128" height="88"/>
+        <element name="SongEntity" positionX="277" positionY="-36" width="128" height="133"/>
+    </elements>
+</model>
