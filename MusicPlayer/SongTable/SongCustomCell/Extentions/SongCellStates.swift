@@ -12,24 +12,25 @@ extension SongCellStates {
     
     //AudioPlayerDelegate Callees
     func setPlaySongCell() {
-        setupUpdateSlider()
-        playPauseButton.setIconWithSize(icon: pauseIcon, font: .Ionicon, size: 26)
-        shuffleButton.isHidden = false
-        if AudioPlayer.sharedInstance.shuffleMode == true {
-            shuffleButton.setIconWithSize(icon: shuffleIcon, font: .Ionicon, size: 24)
+        if updateSlider == nil {
+            setupUpdateSlider()
+            playPauseButton.setIconWithSize(icon: pauseIcon, font: .Ionicon, size: 26)
+            shuffleButton.isHidden = false
+            if AudioPlayer.sharedInstance.shuffleMode == true {
+                shuffleButton.setIconWithSize(icon: shuffleIcon, font: .Ionicon, size: 24)
+            } else {
+                shuffleButton.setIconWithSize(icon: nextIcon, font: .Ionicon, size: 24)
+            }
         } else {
-            shuffleButton.setIconWithSize(icon: nextIcon, font: .Ionicon, size: 24)
+            updateSlider.isPaused = false
+            playPauseButton.setIconWithSize(icon: pauseIcon, font: .Ionicon, size: 26)
         }
+        
     }
     
     func setPauseSongCell() {
         updateSlider.isPaused = true
         playPauseButton.setIconWithSize(icon: playIcon, font: .Ionicon, size: 24)
-    }
-    
-    func setResumeSongCell() {
-        updateSlider.isPaused = false
-        playPauseButton.setIconWithSize(icon: pauseIcon, font: .Ionicon, size: 26)
     }
     
     func resetSongCell() {
@@ -38,5 +39,6 @@ extension SongCellStates {
         songProgressSlider.isEnabled = false
         playPauseButton.setIconWithSize(icon: playIcon, font: .Ionicon, size: 24)
         shuffleButton.isHidden = false
+        updateSlider = nil
     }
 }

@@ -25,11 +25,6 @@ extension AudioPlayerDelegateImpl: AudioPlayerDelegate {
         cell.setPauseSongCell()
     }
     
-    func cellResumeState(song: SongEntity) {
-        let cell = getCell(atIndex: Int(song.songOrder))
-        cell.setResumeSongCell()
-    }
-    
     func cellStopState(song: SongEntity) {
         let songArray = SongPersistancyManager.sharedInstance.getSongArray(cntx: managedObjectContext, playlist: self.playlist)
         if songArray.contains(song) {
