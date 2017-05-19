@@ -28,7 +28,8 @@ extension ChangeSongNameAlert {
                 self.song.songTitle = songTitle
                 self.artistName.text = self.song.songArtist
                 self.songTitle.text = self.song.songTitle
-                SongPersistancyManager.sharedInstance.saveContext(cntx: (self.parentViewController as! SongTableViewController).managedObjectContext!)
+                SongPersistancyManager.sharedInstance.saveContext(cntx:
+                    (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
             }
             
         }))

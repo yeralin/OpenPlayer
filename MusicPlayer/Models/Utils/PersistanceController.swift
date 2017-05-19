@@ -34,7 +34,6 @@ class PersistanceController {
     
     func deleteEntity(toDelete: NSManagedObject, toDeleteUrl: URL, cntx: NSManagedObjectContext) {
         do {
-            
             try fm.removeItem(at: toDeleteUrl)
             cntx.delete(toDelete)
         } catch {
@@ -47,8 +46,7 @@ class PersistanceController {
     func saveContext(cntx: NSManagedObjectContext) {
         do {
             try cntx.save()
-        } catch {
-            print("Could not save context")
-        }
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")        }
     }
 }

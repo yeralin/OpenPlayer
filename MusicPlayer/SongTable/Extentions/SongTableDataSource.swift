@@ -25,6 +25,7 @@ extension SongTableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
         let song = AudioPlayer.sharedInstance.songsArray[indexPath.row]
         let AudioPlayerInst = AudioPlayer.sharedInstance
+        cell.delegate = self
         //If there is a song that is playing inside a playlist, restore its view
         if AudioPlayerInst.player != nil
             && AudioPlayerInst.currentSong == song {
@@ -44,12 +45,14 @@ extension SongTableViewDataSource {
         if editingStyle == .delete {
             let song = AudioPlayer.sharedInstance.songsArray[indexPath.row]
             let SongPerstManager = SongPersistancyManager.sharedInstance
-            var songsArray = AudioPlayer.sharedInstance.songsArray
             SongPerstManager.deleteEntity(toDelete: song,
                                           toDeleteUrl: SongPersistancyManager.sharedInstance.getSongPath(song: song),
                                           cntx: managedObjectContext!)
-            songsArray = SongPerstManager.getSongArray(cntx: managedObjectContext, playlist: playlist)
+            AudioPlayer.sharedInstance.songsArray = SongPerstManager.getSongArray(cntx: managedObjectContext, playlist: playlist)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            SongPersistancyManager.sharedInstance
+                .resetSongsOrder(songArray: AudioPlayer.sharedInstance.songsArray,
+                                 cntx: managedObjectContext!)
         }
     }
     
@@ -58,9 +61,8 @@ extension SongTableViewDataSource {
     //  to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let songToMove = AudioPlayer.sharedInstance.songsArray[fromIndexPath.row]
-        var songsArray = AudioPlayer.sharedInstance.songsArray
-        songsArray.remove(at: fromIndexPath.row)
-        songsArray.insert(songToMove, at: to.row)
+        AudioPlayer.sharedInstance.songsArray.remove(at: fromIndexPath.row)
+        AudioPlayer.sharedInstance.songsArray.insert(songToMove, at: to.row)
         SongPersistancyManager.sharedInstance
             .resetSongsOrder(songArray: AudioPlayer.sharedInstance.songsArray,
                              cntx: managedObjectContext!)

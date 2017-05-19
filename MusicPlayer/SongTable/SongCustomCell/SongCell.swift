@@ -9,8 +9,13 @@
 import UIKit
 import SwiftIconFont
 
+protocol SongCellDelegate : class {
+    func presentAlertForCell(alert: UIAlertController)
+    func performSegueForCell(sender: Any?, identifier: String)
+}
+
 class SongCell: UITableViewCell {
-    
+    weak var delegate: SongCellDelegate!
     var song: SongEntity! {
         didSet {
             artistName.text = song.songArtist
@@ -85,11 +90,11 @@ class SongCell: UITableViewCell {
     }
     
     @IBAction func moveButtonTapped(_ sender: UIButton) {
-        (self.parentViewController as! SongTableViewController).showMoveSongToPlaylistPicker(toMove: self)
+        delegate.performSegueForCell(sender: song, identifier: "showPlaylistPicker")
     }
 
     @IBAction func changeSongNameTapped(_ sender: UIButton) {
-        self.parentViewController!.present(createChangeSongNameAlert(), animated: true, completion: nil)
+        delegate.presentAlertForCell(alert: createChangeSongNameAlert())
     }
     
     @IBAction func changeSongPosition(_ sender: UISlider) {

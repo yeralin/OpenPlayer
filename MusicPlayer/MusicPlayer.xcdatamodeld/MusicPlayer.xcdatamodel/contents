@@ -11,10 +11,10 @@
         <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="songOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="songTitle" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="PlaylistEntity" inverseName="songs" inverseEntity="PlaylistEntity" syncable="YES"/>
+        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlaylistEntity" inverseName="songs" inverseEntity="PlaylistEntity" syncable="YES"/>
     </entity>
     <elements>
         <element name="PlaylistEntity" positionX="-27" positionY="18" width="128" height="88"/>
-        <element name="SongEntity" positionX="277" positionY="-36" width="128" height="133"/>
+        <element name="SongEntity" positionX="277" positionY="-36" width="128" height="135"/>
     </elements>
 </model>

@@ -20,6 +20,11 @@ class PlaylistPersistancyManager: PersistanceController {
                          cntx: cntx) as! [PlaylistEntity]
     }
     
+    func getPlaylistPath(playlist: PlaylistEntity) -> URL {
+        let playlistName = playlist.playlistName
+        return docsUrl.appendingPathComponent(playlistName!)
+    }
+    
     func resetPlaylistsOrder(playlistArray: [PlaylistEntity], cntx: NSManagedObjectContext) {
         for (index, _) in playlistArray.enumerated() {
             playlistArray[index].playlistOrder = Int32(index)
@@ -33,14 +38,11 @@ class PlaylistPersistancyManager: PersistanceController {
         var toMatchWithDirs = playlistArray
         let contentsArray = try! fm.contentsOfDirectory(at:docsUrl,
                                                         includingPropertiesForKeys: nil)
-        
-        resetPlaylistsOrder(playlistArray: playlistArray, cntx: cntx)
-        
         var isDir : ObjCBool = false
         for entryPath in contentsArray {
             if fm.fileExists(atPath: entryPath.path, isDirectory: &isDir) {
                 if isDir.boolValue {
-                    let index = playlistArray.index(where: {el in el.playlistName == entryPath.lastPathComponent })
+                    let index = toMatchWithDirs.index(where: {el in el.playlistName == entryPath.lastPathComponent })
                     if index == nil {
                         _ = createPlaylist(name: entryPath.lastPathComponent, cntx: cntx)
                     } else {
@@ -61,6 +63,7 @@ class PlaylistPersistancyManager: PersistanceController {
         }
         
         //Get updated content
+        resetPlaylistsOrder(playlistArray: playlistArray, cntx: cntx)
         return getPlaylistArray(cntx: cntx)
     }
     
@@ -74,7 +77,7 @@ class PlaylistPersistancyManager: PersistanceController {
                                           predicate: nil,
                                           cntx: cntx) as! [PlaylistEntity]
             let playlistMaxOrder = playlistArray.max(by: {$0.playlistOrder < $1.playlistOrder})?.playlistOrder
-            if playlistMaxOrder == nil {
+            if playlistArray.count == 1 {
                 return 0
             }
             return playlistMaxOrder! + next

@@ -32,8 +32,9 @@ extension PlaylistTableViewDataSource {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let songsView = segue.destination as! SongTableViewController
-        let playlist = sender as! PlaylistEntity
-        songsView.prepareSongs(receivedPlaylist: playlist)
+        if let playlist = sender as? PlaylistEntity {
+            songsView.prepareSongs(receivedPlaylist: playlist)
+        }
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -45,6 +46,8 @@ extension PlaylistTableViewDataSource {
                                                   toDeleteUrl: docsUrl.appendingPathComponent(playlist.playlistName!), cntx: self.managedObjectContext)
                 self.playlistArray = playlistPerstManager.getPlaylistArray(cntx: self.managedObjectContext)
                 self.playlistTableView.deleteRows(at: [indexPath], with: .fade)
+                playlistPerstManager.resetPlaylistsOrder(playlistArray: self.playlistArray,
+                                                                              cntx: self.managedObjectContext)
             }), animated: true, completion: nil)
             
         }

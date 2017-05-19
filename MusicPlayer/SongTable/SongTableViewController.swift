@@ -17,9 +17,6 @@ class SongTableViewController: UITableViewController {
     }()
     var playlist: PlaylistEntity!
     
-    var songToMoveModalView: UIView!
-    var moveSongToPlaylistPicker: UIPickerView!
-    var songToMoveCell: SongCell? = nil
     
     @IBOutlet var songTableView: UITableView!
     
@@ -29,7 +26,6 @@ class SongTableViewController: UITableViewController {
         songTableView.allowsSelection = false
         self.title = playlist.playlistName
         initAudioPlayerDelegateImpl()
-        initMoveSongToPlaylistPicker()
     }
     
     func getCell(atIndex: Int) -> SongCell {
@@ -38,10 +34,9 @@ class SongTableViewController: UITableViewController {
     
     func prepareSongs(receivedPlaylist: PlaylistEntity) {
         playlist = receivedPlaylist
-        let songsArray = SongPersistancyManager.sharedInstance.populateSongs(forPlaylist: receivedPlaylist, playlistName: playlist.playlistName!, cntx: managedObjectContext!)
+        let songsArray = SongPersistancyManager.sharedInstance.populateSongs(forPlaylist: receivedPlaylist,
+                                                                             cntx: managedObjectContext!)
         AudioPlayer.sharedInstance.songsArray = songsArray
     }
-    
-    
     
 }

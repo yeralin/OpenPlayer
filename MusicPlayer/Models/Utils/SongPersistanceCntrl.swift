@@ -36,10 +36,20 @@ class SongPersistancyManager: PersistanceController {
         saveContext(cntx: cntx)
     }
     
-    func populateSongs(forPlaylist: PlaylistEntity, playlistName: String, cntx: NSManagedObjectContext) -> [SongEntity] {
+    func moveSongToPlaylist(toMove: SongEntity, toPlaylist: PlaylistEntity) {
+        let toPath = PlaylistPersistancyManager.sharedInstance.getPlaylistPath(playlist: toPlaylist).appendingPathComponent(toMove.songName!)
+        do {
+            try fm.moveItem(at: getSongPath(song: toMove), to: toPath)
+            toMove.setValue(toPlaylist, forKey: "playlist")
+        }
+        catch let error as NSError {
+            print("Could not move song to a different playlist: \(error)")
+        }
+    }
+    
+    func populateSongs(forPlaylist: PlaylistEntity, cntx: NSManagedObjectContext) -> [SongEntity] {
+        let playlistName = forPlaylist.playlistName!
         let songsArray = getSongArray(cntx: cntx, playlist: forPlaylist)
-        resetSongsOrder(songArray: songsArray, cntx: cntx)
-        
         var toMatchWithAudioFiles = songsArray
         let playlistUrl: URL = docsUrl.appendingPathComponent(playlistName) //Inside playlist dir
         let contentsArray = try! fm.contentsOfDirectory(at: playlistUrl,
@@ -68,6 +78,7 @@ class SongPersistancyManager: PersistanceController {
             }
         }
         //Get updated content
+        resetSongsOrder(songArray: songsArray, cntx: cntx)
         return getSongArray(cntx: cntx, playlist: forPlaylist)
     }
     
@@ -80,7 +91,7 @@ class SongPersistancyManager: PersistanceController {
             let next: Int32 = 1
             let songsArray = getSongArray(cntx: cntx, playlist: playlist)
             let songsMaxOrder = songsArray.max(by: {$0.songOrder < $1.songOrder})?.songOrder
-            if songsMaxOrder == nil {
+            if songsArray.count == 1 {
                 return 0
             }
             return songsMaxOrder! + next

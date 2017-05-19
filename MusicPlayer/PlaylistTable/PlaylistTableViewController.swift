@@ -46,9 +46,12 @@ class PlaylistTableViewController: UITableViewController {
         alertNewPlaylist.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
             let playlistName = alertNewPlaylist.textFields![0].text!
             if !playlistName.isEmpty {
-                let newOrder: Int = PlaylistPersistancyManager.sharedInstance.createPlaylist(name: playlistName, cntx: self.managedObjectContext)
-                self.playlistArray = PlaylistPersistancyManager.sharedInstance.getPlaylistArray(cntx: self.managedObjectContext)
-                self.playlistTableView.insertRows(at: [IndexPath(row: newOrder, section: 0)], with: .fade)
+                let playlistPerstManager = PlaylistPersistancyManager.sharedInstance
+                let newOrder: Int = playlistPerstManager.createPlaylist(name: playlistName,
+                                                                        cntx: self.managedObjectContext)
+                self.playlistArray = playlistPerstManager.getPlaylistArray(cntx: self.managedObjectContext)
+                self.playlistTableView.insertRows(at: [IndexPath(row: newOrder, section: 0)],
+                                                  with: .fade)
             }
             
         }))
