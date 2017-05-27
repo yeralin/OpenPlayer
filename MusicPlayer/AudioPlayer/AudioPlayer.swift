@@ -9,10 +9,15 @@
 import UIKit
 import MediaPlayer
 
+enum State {
+    case play
+    case pause
+    case resume
+    case stop
+}
+
 protocol AudioPlayerDelegate : class {
-    func cellPlayState(song: SongEntity)
-    func cellPauseState(song: SongEntity)
-    func cellStopState(song: SongEntity)
+    func cellState(state: State, song: SongEntity)
 }
 
 
@@ -38,22 +43,16 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         }
     }
     
-    enum State {
-        case paused
-        case resumed
-        case stopped
-    }
-    
     func updateControllsTime(state: State) {
         let mpic = MPNowPlayingInfoCenter.default()
         if var meta = mpic.nowPlayingInfo {
-            if state == State.paused {
+            if state == State.pause {
                 meta[MPNowPlayingInfoPropertyPlaybackRate] = 0
                 meta[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
-            } else if state == State.resumed {
+            } else if state == State.resume {
                 meta[MPNowPlayingInfoPropertyPlaybackRate] = 1
                 meta[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentTime
-            } else if state == State.stopped {
+            } else if state == State.stop {
                 meta[MPNowPlayingInfoPropertyPlaybackRate] = 0
                 meta[MPNowPlayingInfoPropertyElapsedPlaybackTime] = 0
             }
@@ -93,7 +92,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             self.player.prepareToPlay()
             self.player.delegate = self
             currentSong = song
-            delegate.cellPlayState(song: song)
+            delegate.cellState(state: State.play, song: song)
             self.player.play()
             updateControlls()
         }
@@ -103,8 +102,8 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         if let song = currentSong {
             if !player.isPlaying {
                 player.play()
-                delegate?.cellPlayState(song: song)
-                updateControllsTime(state: State.resumed)
+                delegate?.cellState(state: State.play,song: song)
+                updateControllsTime(state: State.resume)
             }
         }
         
@@ -115,8 +114,8 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             if let song = currentSong {
                 player?.stop()
                 player.currentTime = 0
-                delegate?.cellStopState(song: song)
-                updateControllsTime(state: State.stopped)
+                delegate?.cellState(state: State.stop,song: song)
+                updateControllsTime(state: State.stop)
             }
         }
     }
@@ -124,9 +123,9 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     func pauseSong() {
         if player != nil && player.isPlaying {
             if let song = currentSong {
-                delegate?.cellPauseState(song: song)
+                delegate?.cellState(state: State.pause, song: song)
                 player.pause()
-                updateControllsTime(state: State.paused)
+                updateControllsTime(state: State.pause)
             }
         }
     }
@@ -135,9 +134,9 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         if player != nil {
             player.currentTime -= TimeInterval(10)
             if player.isPlaying {
-                updateControllsTime(state: State.resumed)
+                updateControllsTime(state: State.resume)
             } else {
-                updateControllsTime(state: State.paused)
+                updateControllsTime(state: State.pause)
             }
         }
     }
@@ -146,9 +145,9 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         if player != nil {
             player.currentTime += TimeInterval(10)
             if player.isPlaying {
-                updateControllsTime(state: State.resumed)
+                updateControllsTime(state: State.resume)
             } else {
-                updateControllsTime(state: State.paused)
+                updateControllsTime(state: State.pause)
             }
             
         }
@@ -157,7 +156,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     func seekTo(position: TimeInterval) {
         if player != nil {
             player.currentTime = position
-            updateControllsTime(state: State.resumed)
+            updateControllsTime(state: State.resume)
         }
     }
     

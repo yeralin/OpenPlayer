@@ -15,21 +15,19 @@ extension AudioPlayerDelegateImpl: AudioPlayerDelegate {
         AudioPlayer.sharedInstance.delegate = self
     }
     
-    func cellPlayState(song: SongEntity) {
-        let cell = getCell(atIndex: Int(song.songOrder))
-        cell.setPlaySongCell()
-    }
-    
-    func cellPauseState(song: SongEntity) {
-        let cell = getCell(atIndex: Int(song.songOrder))
-        cell.setPauseSongCell()
-    }
-    
-    func cellStopState(song: SongEntity) {
-        let songArray = SongPersistancyManager.sharedInstance.getSongArray(cntx: managedObjectContext, playlist: self.playlist)
-        if songArray.contains(song) {
-            let cell = getCell(atIndex: Int(song.songOrder))
-            cell.resetSongCell()
+    func cellState(state: State, song: SongEntity) {
+        if let cell = getCell(withSong: song) {
+            if state == State.play {
+                cell.setPlaySongCell()
+            } else if state == State.pause {
+                cell.setPauseSongCell()
+            } else if state == State.resume {
+                cell.setPlaySongCell()
+            } else if state == State.stop {
+                cell.resetSongCell()
+            } else {
+                print("Error: should never happen")
+            }
         }
     }
 }
