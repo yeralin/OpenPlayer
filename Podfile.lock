@@ -1,15 +1,30 @@
 PODS:
+  - CocoaLumberjack (3.2.0):
+    - CocoaLumberjack/Default (= 3.2.0)
+    - CocoaLumberjack/Extensions (= 3.2.0)
+  - CocoaLumberjack/Default (3.2.0)
+  - CocoaLumberjack/Extensions (3.2.0):
+    - CocoaLumberjack/Default
+  - GCDWebServer/Core (3.3.2)
+  - GCDWebServer/WebUploader (3.3.2):
+    - GCDWebServer/WebUploader/Core (= 3.3.2)
+  - GCDWebServer/WebUploader/Core (3.3.2):
+    - GCDWebServer/Core
   - SlideMenuControllerSwift (3.0.1)
-  - SwiftIconFont (2.6.0)
+  - SwiftIcons (1.4.1)
 
 DEPENDENCIES:
+  - CocoaLumberjack (~> 3.0)
+  - GCDWebServer/WebUploader (~> 3.3)
   - SlideMenuControllerSwift
-  - SwiftIconFont
+  - SwiftIcons (~> 1.4.1)
 
 SPEC CHECKSUMS:
+  CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
+  GCDWebServer: 2a375ec42839a41d7187d04e5b688d32fa5c4cd5
   SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
-  SwiftIconFont: bbe1f32e1e16bac87dad8566afc80132cb8d072c
+  SwiftIcons: 7a3fb54d2876b5b207a68c5e34dfbde2c4e00296
 
-PODFILE CHECKSUM: 259c1c320c8b67013dd30ba48597a17d81d384b1
+PODFILE CHECKSUM: 946e1d2cbd1bdf572288f7dd0f53954225c5f6f2
 
 COCOAPODS: 1.2.0
