@@ -16,7 +16,7 @@ extension SongCellDelegateImpl: SongCellDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let pickerView = segue.destination as! MoveToPickerViewController
+        let pickerView = segue.destination as! MoveSongPickerViewController
         pickerView.delegate = self
         if let songToMove = sender as? SongEntity {
             print(songToMove.songName!)

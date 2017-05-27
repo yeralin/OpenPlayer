@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AudioPlayer.sharedInstance.initAudioPlayer()
         do {
             UIApplication.shared.beginReceivingRemoteControlEvents()
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: .mixWithOthers)
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
             print("Could not attach AVAudioSession")

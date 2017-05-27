@@ -11,17 +11,21 @@ import Foundation
 private typealias MoveToPickerViewDelegateImpl = SongTableViewController
 extension MoveToPickerViewDelegateImpl: MoveToPickerViewDelegate {
     
-    func songMovedPlaylist(song: SongEntity, toPlaylist: PlaylistEntity) {
-        let songPerstManager = SongPersistancyManager.sharedInstance
-        let audioPlayer = AudioPlayer.sharedInstance
-        let rowPosition = Int(song.songOrder)
-        songPerstManager.moveSongToPlaylist(toMove: song, toPlaylist: toPlaylist)
-        audioPlayer.songsArray = songPerstManager.getSongArray(cntx: managedObjectContext, playlist: self.playlist)
-        SongPersistancyManager.sharedInstance
-            .resetSongsOrder(songArray: AudioPlayer.sharedInstance.songsArray,
-                             cntx: managedObjectContext!)
-        songTableView.deleteRows(at: [IndexPath(row: rowPosition, section: 0)], with: .fade)
+    func moveSong(song: SongEntity, toPlaylist: PlaylistEntity) {
+        if let fromPlaylist = self.playlist {
+            let songPerstManager = SongPersistancyManager.sharedInstance
+            let audioPlayer = AudioPlayer.sharedInstance
+            let rowPosition = Int(song.songOrder)
+            songPerstManager.moveSong(toMove: song, fromPlaylist: fromPlaylist, toPlaylist: toPlaylist)
+            let songsArray = songPerstManager.getSongArray(cntx: managedObjectContext, playlist: self.playlist)
+            audioPlayer.songsArray = songsArray.enumerated().map { (index, song) in
+                song.songOrder = Int32(index)
+                return song
+            }
+            songPerstManager.saveContext(cntx: managedObjectContext)
+            songTableView.deleteRows(at: [IndexPath(row: rowPosition, section: 0)], with: .fade)
+        }
     }
-
-
+    
+    
 }

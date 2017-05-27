@@ -1,5 +1,5 @@
 //
-//  MoveToPickerViewController.swift
+//  MoveSongPickerViewController.swift
 //  MusicPlayer
 //
 //  Created by Daniyar Yeralin on 5/18/17.
@@ -9,11 +9,11 @@
 import UIKit
 
 protocol MoveToPickerViewDelegate : class {
-    func songMovedPlaylist(song: SongEntity, toPlaylist: PlaylistEntity)
+    func moveSong(song: SongEntity, toPlaylist: PlaylistEntity)
 }
 
 
-class MoveToPickerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class MoveSongPickerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     weak var delegate: MoveToPickerViewDelegate!
     @IBOutlet weak var playlistPicker: UIPickerView!
@@ -29,7 +29,7 @@ class MoveToPickerViewController: UIViewController, UIPickerViewDataSource, UIPi
         if playlistArray.count != 0 {
             let selectedPlaylistIndex = playlistPicker.selectedRow(inComponent: 0)
             let toPlaylist = playlistArray[selectedPlaylistIndex]
-            delegate.songMovedPlaylist(song: songToMove, toPlaylist: toPlaylist)
+            delegate.moveSong(song: songToMove, toPlaylist: toPlaylist)
         }
         self.dismiss(animated: true, completion: nil)
         
@@ -45,12 +45,10 @@ class MoveToPickerViewController: UIViewController, UIPickerViewDataSource, UIPi
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        //let playlistArray = PlaylistPersistancyManager.sharedInstance.getPlaylistArray(cntx: managedObjectContext)
         return playlistArray.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        //let playlistArray = PlaylistPersistancyManager.sharedInstance.getPlaylistArray(cntx: managedObjectContext)
         return playlistArray[row].playlistName
     }
 }
