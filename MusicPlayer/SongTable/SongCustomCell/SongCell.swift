@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftIconFont
+import SwiftIcons
 
 protocol SongCellDelegate : class {
     func presentAlertForCell(alert: UIAlertController)
@@ -30,49 +30,12 @@ class SongCell: UITableViewCell {
     @IBOutlet weak var editSongButton: UIButton!
     @IBOutlet weak var moveSong: UIButton!
     @IBOutlet weak var songProgressSlider: UISlider!
-    internal var updateSlider: CADisplayLink! = nil
-    
-    internal final var playIcon: String = "play"
-    internal final var pauseIcon: String = "ios-pause"
-    internal final var nextIcon: String = "arrow-return-right"
-    internal final var shuffleIcon: String = "shuffle"
-    internal final var editIcon: String = "edit"
-    internal final var folderIcon: String = "ios-folder"
-    
-    func initCell(initSong: SongEntity) {
-        self.song = initSong
-        shuffleButton.isHidden = true
-    }
-    
-    func restorePlayingCell(song: SongEntity) {
-        self.song = song
-        let audioPlayer = AudioPlayer.sharedInstance
-        if audioPlayer.player.isPlaying {
-            playPauseButton.setIconWithSize(icon: pauseIcon, font: .Ionicon, size: 24)
-        } else {
-            playPauseButton.setIconWithSize(icon: playIcon, font: .Ionicon, size: 24)
-        }
-        shuffleButton.isHidden = false
-        if audioPlayer.shuffleMode {
-            shuffleButton.setIconWithSize(icon: shuffleIcon, font: .Ionicon, size: 26)
-        } else {
-            shuffleButton.setIconWithSize(icon: nextIcon, font: .Ionicon, size: 26)
-        }
-        setupUpdateSlider()
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        moveSong.setTitle(String.fontIonIcon(folderIcon), for: .normal)
-        playPauseButton.setIconWithSize(icon: playIcon, font: .Ionicon, size: 24)
-        editSongButton.setIconWithSize(icon: editIcon, font: .Ionicon, size: 24)
-        moveSong.setIconWithSize(icon: folderIcon, font: .Ionicon, size: 22)
-        songProgressSlider.value = 0
-        songProgressSlider.isEnabled = false
-    }
+    internal var updateSlider: CADisplayLink!
+
     
     @IBAction func playPauseTapped(_ sender: UIButton) {
-        if playPauseButton.title(for: .normal) == String.fontIonIcon(playIcon) {
+        //TODO: Change logic, don't depend on title
+        if playPauseButton.title(for: .normal) == FontType.ionicons(.play).text {
             AudioPlayer.sharedInstance.playSong(song: song)
         } else {
             AudioPlayer.sharedInstance.pauseSong()
@@ -80,11 +43,12 @@ class SongCell: UITableViewCell {
     }
     
     @IBAction func shuffleButtonTapped(_ sender: UIButton) {
-        if shuffleButton.title(for: .normal) == String.fontIonIcon(nextIcon) {
-            shuffleButton.setIconWithSize(icon: shuffleIcon, font: .Ionicon, size: 26)
+        //TODO: Change logic, don't depend on title
+        if shuffleButton.title(for: .normal) == FontType.ionicons(.arrowReturnRight).text {
+            shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26, color: systemColor, forState: .normal)
             AudioPlayer.sharedInstance.shuffleMode = true
         } else {
-            shuffleButton.setIconWithSize(icon: nextIcon, font: .Ionicon, size: 26)
+            shuffleButton.setIcon(icon: .ionicons(.arrowReturnRight), iconSize: 26, color: systemColor, forState: .normal)
             AudioPlayer.sharedInstance.shuffleMode = false
         }
     }
@@ -101,22 +65,5 @@ class SongCell: UITableViewCell {
         let songNewPosition = TimeInterval(sender.value)
         AudioPlayer.sharedInstance.seekTo(position: songNewPosition)
     }
-    
-    func setupUpdateSlider() {
-        songProgressSlider.isEnabled = true
-        songProgressSlider.minimumValue = 0
-        songProgressSlider.maximumValue = Float(AudioPlayer.sharedInstance.player.duration)
-        updateSlider = CADisplayLink(target: self, selector: #selector(self.updateAudioSlider))
-        updateSlider.preferredFramesPerSecond = 60
-        updateSlider.add(to: .current, forMode: .defaultRunLoopMode)
-    }
-    
-    func updateAudioSlider() {
-        let player = AudioPlayer.sharedInstance.player!
-        songProgressSlider.value = Float(player.currentTime)
-    }
-    
-    
-    
 }
 

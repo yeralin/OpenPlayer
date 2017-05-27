@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SwiftIconFontVersionNumber;
-FOUNDATION_EXPORT const unsigned char SwiftIconFontVersionString[];
+FOUNDATION_EXPORT double SwiftIconsVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftIconsVersionString[];
 

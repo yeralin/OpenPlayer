@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SwiftIconFont
+import SwiftIcons
 import CoreData
 
 class PlaylistCell: UITableViewCell {
@@ -18,7 +18,7 @@ class PlaylistCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        selectIcon.setIconWithSize(icon: arrowIcon, font: .Themify, size: 20)
+        selectIcon.setIcon(icon: .fontAwesome(.angleRight), iconSize: 28, color: systemColor, forState: .normal)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
