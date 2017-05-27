@@ -33,18 +33,31 @@ class PlaylistPersistancyManager: PersistanceController {
     }
     
     func populatePlaylists(cntx: NSManagedObjectContext) -> [PlaylistEntity]{
-        let playlistArray = getPlaylistArray(cntx: cntx)
+        var playlistArray = getPlaylistArray(cntx: cntx)
         //Go through folders, if new found -> create playlist
         var toMatchWithDirs = playlistArray
         let contentsArray = try! fm.contentsOfDirectory(at:docsUrl,
                                                         includingPropertiesForKeys: nil)
+        var nextOrder: Int32 = {
+            let next: Int32 = 1
+            let playlistArray = fetchData(entityName: "PlaylistEntity",
+                                          sortIn: NSSortDescriptor(key: "playlistOrder", ascending: true),
+                                          predicate: nil,
+                                          cntx: cntx) as! [PlaylistEntity]
+            if let playlistMaxOrder = playlistArray.max(by: {$0.playlistOrder < $1.playlistOrder})?.playlistOrder {
+                return playlistMaxOrder + next
+            } else {
+                return 0
+            }
+        }()
         var isDir : ObjCBool = false
         for entryPath in contentsArray {
             if fm.fileExists(atPath: entryPath.path, isDirectory: &isDir) {
                 if isDir.boolValue {
                     let index = toMatchWithDirs.index(where: {el in el.playlistName == entryPath.lastPathComponent })
                     if index == nil {
-                        _ = createPlaylist(name: entryPath.lastPathComponent, cntx: cntx)
+                        _ = createPlaylist(name: entryPath.lastPathComponent, order: nextOrder, cntx: cntx)
+                        nextOrder += 1
                     } else {
                         //Remove playlists to find unlinked one
                         toMatchWithDirs.remove(at: index!)
@@ -60,6 +73,7 @@ class PlaylistPersistancyManager: PersistanceController {
                 cntx.delete(redundantPlaylistEntity)
                 saveContext(cntx: cntx)
             }
+            playlistArray = getPlaylistArray(cntx: cntx)
         }
         
         //Get updated content
@@ -67,21 +81,10 @@ class PlaylistPersistancyManager: PersistanceController {
         return getPlaylistArray(cntx: cntx)
     }
     
-    func createPlaylist(name: String, cntx: NSManagedObjectContext) -> Int {
+    func createPlaylist(name: String, order: Int32, cntx: NSManagedObjectContext) -> Int {
         let playlistEntity = PlaylistEntity(context: cntx)
         playlistEntity.playlistName = name
-        playlistEntity.playlistOrder = {
-            let next: Int32 = 1
-            let playlistArray = fetchData(entityName: "PlaylistEntity",
-                                          sortIn: NSSortDescriptor(key: "playlistOrder", ascending: true),
-                                          predicate: nil,
-                                          cntx: cntx) as! [PlaylistEntity]
-            let playlistMaxOrder = playlistArray.max(by: {$0.playlistOrder < $1.playlistOrder})?.playlistOrder
-            if playlistArray.count == 1 {
-                return 0
-            }
-            return playlistMaxOrder! + next
-        }()
+        playlistEntity.playlistOrder = order
         let newPlaylist = docsUrl.appendingPathComponent(name)
         do {
             try fm.createDirectory(at:newPlaylist, withIntermediateDirectories: true)

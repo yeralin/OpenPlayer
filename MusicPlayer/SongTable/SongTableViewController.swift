@@ -28,15 +28,24 @@ class SongTableViewController: UITableViewController {
         initAudioPlayerDelegateImpl()
     }
     
-    func getCell(atIndex: Int) -> SongCell {
-        return songTableView.cellForRow(at: IndexPath(row: atIndex, section: 0)) as! SongCell
+    func getCell(withSong song: SongEntity) -> SongCell? {
+        let visibleSongCells = tableView.visibleCells as! [SongCell]
+        if let index = visibleSongCells.index(where: { el in el.song == song }) {
+            return visibleSongCells[index]
+        } else {
+            return nil
+        }
     }
     
     func prepareSongs(receivedPlaylist: PlaylistEntity) {
+        let start = NSDate()
         playlist = receivedPlaylist
         let songsArray = SongPersistancyManager.sharedInstance.populateSongs(forPlaylist: receivedPlaylist,
                                                                              cntx: managedObjectContext!)
         AudioPlayer.sharedInstance.songsArray = songsArray
+        let end = NSDate();
+        let timeInterval: Double = end.timeIntervalSince(start as Date);
+        print("Time to do everything \(timeInterval) seconds");
     }
     
 }

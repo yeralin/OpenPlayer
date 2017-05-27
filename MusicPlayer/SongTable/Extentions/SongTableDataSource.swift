@@ -22,9 +22,9 @@ extension SongTableViewDataSource {
     
     //Fill SongTable with SongCells
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
-        let song = AudioPlayer.sharedInstance.songsArray[indexPath.row]
         let AudioPlayerInst = AudioPlayer.sharedInstance
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
+        let song = AudioPlayerInst.songsArray[indexPath.row]
         cell.delegate = self
         //If there is a song that is playing inside a playlist, restore its view
         if AudioPlayerInst.player != nil
@@ -36,38 +36,51 @@ extension SongTableViewDataSource {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let song = AudioPlayer.sharedInstance.songsArray[indexPath.row]
-            let SongPerstManager = SongPersistancyManager.sharedInstance
-            SongPerstManager.deleteEntity(toDelete: song,
-                                          toDeleteUrl: SongPersistancyManager.sharedInstance.getSongPath(song: song),
+            let songPerstManager = SongPersistancyManager.sharedInstance
+            var songsArray = AudioPlayer.sharedInstance.songsArray
+            let song = songsArray[indexPath.row]
+            songPerstManager.deleteEntity(toDelete: song,
+                                          toDeleteUrl: songPerstManager.getSongPath(song: song),
                                           cntx: managedObjectContext!)
-            AudioPlayer.sharedInstance.songsArray = SongPerstManager.getSongArray(cntx: managedObjectContext, playlist: playlist)
+            songsArray.remove(at: indexPath.row)
+            //TODO: Can be optimized (reset order only after deleted song)
+            AudioPlayer.sharedInstance.songsArray = songsArray.enumerated().map { (index, song) in
+                song.songOrder = Int32(index)
+                return song
+            }
+            songPerstManager.saveContext(cntx: managedObjectContext)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            SongPersistancyManager.sharedInstance
-                .resetSongsOrder(songArray: AudioPlayer.sharedInstance.songsArray,
-                                 cntx: managedObjectContext!)
+            
         }
     }
     
-    
-    
     //  to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        let songToMove = AudioPlayer.sharedInstance.songsArray[fromIndexPath.row]
-        AudioPlayer.sharedInstance.songsArray.remove(at: fromIndexPath.row)
-        AudioPlayer.sharedInstance.songsArray.insert(songToMove, at: to.row)
-        SongPersistancyManager.sharedInstance
-            .resetSongsOrder(songArray: AudioPlayer.sharedInstance.songsArray,
-                             cntx: managedObjectContext!)
+        let songPerstManager = SongPersistancyManager.sharedInstance
+        var songsArray = AudioPlayer.sharedInstance.songsArray
+        let songToMove = songsArray[fromIndexPath.row]
+        songsArray.remove(at: fromIndexPath.row)
+        songsArray.insert(songToMove, at: to.row)
+        //TODO: Can be optimized (reset order only after deleted song)
+        AudioPlayer.sharedInstance.songsArray = songsArray.enumerated().map { (index, song) in
+            song.songOrder = Int32(index)
+            return song
+        }
+        songPerstManager.saveContext(cntx: managedObjectContext)
     }
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if tableView.isEditing {
+            return .delete
+        }
+        return .none
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
