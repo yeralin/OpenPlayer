@@ -43,7 +43,7 @@ extension PlaylistTableViewDataSource {
                 let playlist = self.playlistArray[indexPath.row]
                 let playlistPerstManager = PlaylistPersistancyManager.sharedInstance
                 playlistPerstManager.deleteEntity(toDelete: playlist,
-                                                  toDeleteUrl: docsUrl.appendingPathComponent(playlist.playlistName!), cntx: self.managedObjectContext)
+                                                  cntx: self.managedObjectContext)
                 self.playlistArray = playlistPerstManager.getPlaylistArray(cntx: self.managedObjectContext)
                 self.playlistTableView.deleteRows(at: [indexPath], with: .fade)
                 playlistPerstManager.resetPlaylistsOrder(playlistArray: self.playlistArray,

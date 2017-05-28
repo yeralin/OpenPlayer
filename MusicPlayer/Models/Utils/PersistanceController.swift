@@ -9,10 +9,20 @@
 import Foundation
 import CoreData
 
-let fm = FileManager.default
-let docsUrl: URL! = try! fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-
 class PersistanceController {
+    
+    var fm: FileManager
+    var docsUrl: URL
+    
+    init() {
+        fm = FileManager.default
+        docsUrl = try! fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+    }
+
+    func overrideInit(overrideFm: FileManager, overrideDocsUrl: URL) {
+        fm = overrideFm
+        docsUrl = overrideDocsUrl
+    }
     
     func fetchData(entityName: String, sortIn: NSSortDescriptor?, predicate: NSPredicate?, cntx: NSManagedObjectContext) -> [NSManagedObject] {
         
@@ -32,9 +42,18 @@ class PersistanceController {
         return fetchedObjects
     }
     
-    func deleteEntity(toDelete: NSManagedObject, toDeleteUrl: URL, cntx: NSManagedObjectContext) {
+    func deleteEntity(toDelete: NSManagedObject, cntx: NSManagedObjectContext) {
         do {
-            try fm.removeItem(at: toDeleteUrl)
+            if let toDeletePlaylist = toDelete as? PlaylistEntity {
+                let playlistPath = PlaylistPersistancyManager.sharedInstance.getPlaylistPath(playlist: toDeletePlaylist)
+                try fm.removeItem(at: playlistPath)
+            } else if let toDeleteSong = toDelete as? SongEntity {
+                let songPath = SongPersistancyManager.sharedInstance.getSongPath(song: toDeleteSong)
+                try fm.removeItem(at: songPath)
+            } else {
+                print("Error: could not identify entity of \"toDelete\" object")
+                return
+            }
             cntx.delete(toDelete)
         } catch {
             print("Could not delete entity  \(String(describing: toDelete))")

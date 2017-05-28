@@ -42,7 +42,6 @@ extension SongTableViewDataSource {
             var songsArray = AudioPlayer.sharedInstance.songsArray
             let song = songsArray[indexPath.row]
             songPerstManager.deleteEntity(toDelete: song,
-                                          toDeleteUrl: songPerstManager.getSongPath(song: song),
                                           cntx: managedObjectContext!)
             songsArray.remove(at: indexPath.row)
             //TODO: Can be optimized (reset order only after deleted song)

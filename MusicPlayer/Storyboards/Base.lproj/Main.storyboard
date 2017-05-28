@@ -98,7 +98,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="AJ0-dD-Ysz">
-                        <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="Zzz-cU-xWB">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="Zzz-cU-xWB">
                             <connections>
                                 <action selector="openMenu:" destination="SUh-zq-jCq" id="Xj9-WC-obU"/>
                             </connections>
@@ -135,7 +135,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2VC-ra-4ci" id="kZm-CC-TrE">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="q21-cc-AgN">
@@ -308,7 +308,7 @@
             <objects>
                 <navigationController storyboardIdentifier="navigationView" automaticallyAdjustsScrollViewInsets="NO" id="ik8-wZ-hWS" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Jim-Gy-rlg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jim-Gy-rlg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
