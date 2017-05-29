@@ -18,6 +18,7 @@ extension MoveToPickerViewDelegateImpl: MoveToPickerViewDelegate {
             let rowPosition = Int(song.songOrder)
             songPerstManager.moveSong(toMove: song, fromPlaylist: fromPlaylist, toPlaylist: toPlaylist)
             let songsArray = songPerstManager.getSongArray(cntx: managedObjectContext, playlist: self.playlist)
+            song.songOrder = -1
             audioPlayer.songsArray = songsArray.enumerated().map { (index, song) in
                 song.songOrder = Int32(index)
                 return song

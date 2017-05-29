@@ -18,11 +18,6 @@ class PersistanceController {
         fm = FileManager.default
         docsUrl = try! fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     }
-
-    func overrideInit(overrideFm: FileManager, overrideDocsUrl: URL) {
-        fm = overrideFm
-        docsUrl = overrideDocsUrl
-    }
     
     func fetchData(entityName: String, sortIn: NSSortDescriptor?, predicate: NSPredicate?, cntx: NSManagedObjectContext) -> [NSManagedObject] {
         

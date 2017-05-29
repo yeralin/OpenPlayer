@@ -44,7 +44,7 @@ class SongPersistancyManager: PersistanceController {
     
     func populateSongs(forPlaylist: PlaylistEntity, cntx: NSManagedObjectContext) -> [SongEntity] {
         let playlistName = forPlaylist.playlistName!
-    var songsArray = getSongArray(cntx: cntx, playlist: forPlaylist)
+        var songsArray = getSongArray(cntx: cntx, playlist: forPlaylist)
         var toMatchWithAudioFiles = songsArray
         let playlistUrl: URL = docsUrl.appendingPathComponent(playlistName) //Inside playlist dir
         let contentsArray = try! fm.contentsOfDirectory(at: playlistUrl,
@@ -76,9 +76,11 @@ class SongPersistancyManager: PersistanceController {
         if !toMatchWithAudioFiles.isEmpty {
             //There are songs w/o corresponding audio file
             //Probably was removed manually
-            for (i, redundantSongEntity) in toMatchWithAudioFiles.enumerated() {
-                cntx.delete(redundantSongEntity)
-                songsArray.remove(at: i)
+            for redundantSongEntity in toMatchWithAudioFiles {
+                if let index = songsArray.index(where: {el in el == redundantSongEntity}) {
+                    cntx.delete(redundantSongEntity)
+                    songsArray.remove(at: index)
+                }
             }
         }
         //Reset order
@@ -105,8 +107,8 @@ class SongPersistancyManager: PersistanceController {
                 song.songTitle = meta[artist].value as? String
             }
             //if let artwork = meta.index(where: { el in el.commonKey == "artwork"}) {
-                //let imageData = meta.value as! Data
-                // song.songArtwork = UIImageJPEGRepresentation(UIImage(data: imageData)!, 1) as NSData?
+            //let imageData = meta.value as! Data
+            // song.songArtwork = UIImageJPEGRepresentation(UIImage(data: imageData)!, 1) as NSData?
             //}
         }
         if song.songArtist == nil || song.songTitle == nil {

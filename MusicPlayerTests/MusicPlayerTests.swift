@@ -13,8 +13,9 @@ import CoreData
 class MusicPlayerTests: XCTestCase {
     
     override func setUp() {
+        TestUtils.sharedInstance.wipeDocumentDir()
+        TestUtils.sharedInstance.copyTestData()
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
@@ -22,17 +23,8 @@ class MusicPlayerTests: XCTestCase {
         super.tearDown()
     }
     
-    func testCreateAndDeletePlaylist() {
-        //let managedObjectContext = setUpInMemoryManagedObjectContext()
-        let entity = NSEntityDescription.insertNewObjectForEntityForName("EntityName", inManagedObjectContext: managedObjectContext)
+    func test() {
         
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
     }
     
 }
