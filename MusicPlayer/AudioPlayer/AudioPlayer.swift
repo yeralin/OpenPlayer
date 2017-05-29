@@ -23,7 +23,11 @@ protocol AudioPlayerDelegate : class {
 
 class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     
-    var player : AVAudioPlayer!
+    var player : AVAudioPlayer! {
+        didSet {
+            player.enableRate = true
+        }
+    }
     var songsArray = [SongEntity]()
     var currentSong: SongEntity?
     var shuffleMode = false
@@ -66,14 +70,19 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         scc.pauseCommand.addTarget(self, action: #selector(pauseSong))
         scc.nextTrackCommand.addTarget(self, action: #selector(playNextSong))
         scc.previousTrackCommand.addTarget(self, action: #selector(playPreviousSong))
-        scc.seekBackwardCommand.addTarget(self, action: #selector(seekBackward))
-        scc.seekForwardCommand.addTarget(self, action: #selector(seekForward))
+        scc.seekBackwardCommand.addTarget(self, action: #selector(handleSeekBackwardCommandEvent(event:)))
+        scc.seekForwardCommand.addTarget(self, action: #selector(handleSeekForwardCommandEvent(event:)))
     }
     
     deinit {
         let scc = MPRemoteCommandCenter.shared()
         scc.playCommand.removeTarget(self)
         scc.pauseCommand.removeTarget(self)
+        scc.pauseCommand.removeTarget(self)
+        scc.nextTrackCommand.removeTarget(self)
+        scc.previousTrackCommand.removeTarget(self)
+        scc.seekBackwardCommand.removeTarget(self)
+        scc.seekForwardCommand.removeTarget(self)
     }
     
     func playSong(song: SongEntity) {
@@ -100,6 +109,9 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     
     func resumeSong() {
         if let song = currentSong {
+            if player == nil {
+                playSong(song: song)
+            }
             if !player.isPlaying {
                 player.play()
                 delegate?.cellState(state: State.play,song: song)
@@ -114,6 +126,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             if let song = currentSong {
                 player?.stop()
                 player.currentTime = 0
+                player = nil
                 delegate?.cellState(state: State.stop,song: song)
                 updateControllsTime(state: State.stop)
             }
@@ -130,27 +143,27 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         }
     }
     
-    func seekBackward() {
-        if player != nil {
-            player.currentTime -= TimeInterval(10)
-            if player.isPlaying {
-                updateControllsTime(state: State.resume)
-            } else {
-                updateControllsTime(state: State.pause)
-            }
+    var seekFor: TimeInterval!
+    func handleSeekForwardCommandEvent(event: MPSeekCommandEvent) -> MPRemoteCommandHandlerStatus {
+        switch event.type {
+        case .beginSeeking:
+            seekFor = NSDate.timeIntervalSinceReferenceDate
+        case .endSeeking:
+            seekFor = (NSDate.timeIntervalSinceReferenceDate - seekFor)*5
+            player.currentTime += seekFor
         }
+        return .success
     }
     
-    func seekForward() {
-        if player != nil {
-            player.currentTime += TimeInterval(10)
-            if player.isPlaying {
-                updateControllsTime(state: State.resume)
-            } else {
-                updateControllsTime(state: State.pause)
-            }
-            
+    func handleSeekBackwardCommandEvent(event: MPSeekCommandEvent) -> MPRemoteCommandHandlerStatus {
+        switch event.type {
+        case .beginSeeking:
+            seekFor = NSDate.timeIntervalSinceReferenceDate
+        case .endSeeking:
+            seekFor = (NSDate.timeIntervalSinceReferenceDate - seekFor)*5
+            player.currentTime -= seekFor
         }
+        return .success
     }
     
     func seekTo(position: TimeInterval) {
@@ -195,7 +208,6 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         playNextSong()
     }
-    
     
     func getCurrentTimeAsString() -> String {
         var seconds = 0
