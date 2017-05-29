@@ -88,7 +88,7 @@ class MusicPlayerUITests: XCTestCase {
         let tablesQuery = app.tables
         let test1StaticText = tablesQuery.staticTexts["Test 1"]
         test1StaticText.tap()
-        let testingCell = tablesQuery.cells.allElementsBoundByIndex[FIRST_CELL]
+        let testingCell = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[FIRST_CELL]
         
         testingCell.buttons.allElementsBoundByIndex[PLAY_BUTTON].tap()
         
@@ -122,7 +122,7 @@ class MusicPlayerUITests: XCTestCase {
         let app = XCUIApplication()
         let tablesQuery = app.tables
         tablesQuery.staticTexts["Test 1"].tap()
-        let testingCell = tablesQuery.cells.allElementsBoundByIndex[FIRST_CELL]
+        let testingCell = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[FIRST_CELL]
         let toTestSongName = testingCell.staticTexts.allElementsBoundByAccessibilityElement[SONG_LABLE].label
         let toTestArtistName = testingCell.staticTexts.allElementsBoundByAccessibilityElement[ARTIST_LABLE].label
         testingCell.buttons.allElementsBoundByIndex[MOVE_BUTTON].tap()
@@ -149,8 +149,8 @@ class MusicPlayerUITests: XCTestCase {
         
         let test2NavigationBar = app.navigationBars["Test 2"]
         test2NavigationBar.buttons["Edit"].tap()
-        let cell1 = tablesQuery.cells.allElementsBoundByIndex[0]
-        let cell2 = tablesQuery.cells.allElementsBoundByIndex[1]
+        let cell1 = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[0]
+        let cell2 = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[1]
         let reorderCellButton = cell1.buttons.allElementsBoundByIndex[CELL_REORDER_BUTTON]
         let toTestSongName = cell1.staticTexts.allElementsBoundByIndex[SONG_LABLE].label
         reorderCellButton.press(forDuration: 1.5, thenDragTo: cell2)
@@ -161,7 +161,7 @@ class MusicPlayerUITests: XCTestCase {
         test2.press(forDuration: 1.5, thenDragTo: test1)
         app.navigationBars["Playlists"].buttons["Done"].tap()
         tablesQuery.staticTexts["Test 2"].tap()
-        let cell2SongName = tablesQuery.cells.allElementsBoundByIndex[1].staticTexts.allElementsBoundByIndex[SONG_LABLE].label
+        let cell2SongName = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[1].staticTexts.allElementsBoundByIndex[SONG_LABLE].label
         assert(cell2SongName == toTestSongName, "SongName does not match before changing its position")
     }
     
@@ -171,14 +171,14 @@ class MusicPlayerUITests: XCTestCase {
         let PLAY_BUTTON = 0
         let app = XCUIApplication()
         let tablesQuery = app.tables.allElementsBoundByIndex[0]
-        let test1StaticText = tablesQuery.staticTexts["Test 1"]
+        let test1StaticText = app.tables.staticTexts["Test 1"]
         test1StaticText.tap()
-        let testingCell = tablesQuery.cells.allElementsBoundByIndex[FIRST_CELL]
+        let testingCell = app.tables.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[FIRST_CELL]
         testingCell.buttons.allElementsBoundByIndex[PLAY_BUTTON].tap()
         for _ in 1...3 {
             tablesQuery.swipeUp()
         }
-        let nextReusableCell = tablesQuery.cells.allElementsBoundByIndex[NEXT_REUSABLE_CELL]
+        let nextReusableCell = app.tables.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[NEXT_REUSABLE_CELL]
         nextReusableCell.buttons.allElementsBoundByIndex[PLAY_BUTTON].tap()
         
     }
