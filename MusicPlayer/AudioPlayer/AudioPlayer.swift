@@ -23,11 +23,7 @@ protocol AudioPlayerDelegate : class {
 
 class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     
-    var player : AVAudioPlayer! {
-        didSet {
-            player.enableRate = true
-        }
-    }
+    var player : AVAudioPlayer!
     var songsArray = [SongEntity]()
     var currentSong: SongEntity?
     var shuffleMode = false
@@ -114,7 +110,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             }
             if !player.isPlaying {
                 player.play()
-                delegate?.cellState(state: State.play,song: song)
+                delegate?.cellState(state: State.resume,song: song)
                 updateControllsTime(state: State.resume)
             }
         }

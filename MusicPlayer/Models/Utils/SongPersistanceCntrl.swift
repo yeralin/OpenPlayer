@@ -49,15 +49,6 @@ class SongPersistancyManager: PersistanceController {
         let playlistUrl: URL = docsUrl.appendingPathComponent(playlistName) //Inside playlist dir
         let contentsArray = try! fm.contentsOfDirectory(at: playlistUrl,
                                                         includingPropertiesForKeys: nil)
-        var nextOrder: Int32 = {
-            let next: Int32 = 1
-            let songsArray = getSongArray(cntx: cntx, playlist: forPlaylist)
-            if let songsMaxOrder = songsArray.max(by: {$0.songOrder < $1.songOrder})?.songOrder {
-                return songsMaxOrder + next
-            } else {
-                return 0
-            }
-        }()
         contentsArray.forEach {
             entry in
             let fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, entry.pathExtension as CFString, nil)?.takeRetainedValue()
@@ -65,8 +56,12 @@ class SongPersistancyManager: PersistanceController {
             if ifAudio {
                 let index = toMatchWithAudioFiles.index(where: {el in el.songName == entry.lastPathComponent })
                 if index == nil {
-                    songsArray.append(processAndCreateSong(songUrl: entry, playlist: forPlaylist, songOrder: nextOrder, cntx: cntx))
-                    nextOrder += 1
+                    let song = SongEntity(context: cntx)
+                    song.songName = entry.lastPathComponent
+                    song.songOrder = -1
+                    song.isProcessed = false
+                    forPlaylist.addToSongs(song)
+                    songsArray.append(song)
                 } else {
                     //Remove songs to find unlinked one
                     toMatchWithAudioFiles.remove(at: index!)
@@ -92,12 +87,9 @@ class SongPersistancyManager: PersistanceController {
         return songsArray
     }
     
-    func processAndCreateSong(songUrl: URL, playlist: PlaylistEntity, songOrder: Int32, cntx: NSManagedObjectContext) -> SongEntity {
-        let song = SongEntity(context: cntx)
+    func processSong(toProcess song: SongEntity, cntx: NSManagedObjectContext) {
+        let songUrl = self.getSongPath(song: song)
         let songAsset = AVAsset.init(url: songUrl)
-        song.songName = songUrl.lastPathComponent
-        song.songOrder = songOrder
-        playlist.addToSongs(song)
         if !songAsset.commonMetadata.isEmpty {
             let meta = songAsset.commonMetadata
             if let title = meta.index(where: { el in el.commonKey == "title"}) {
@@ -127,7 +119,8 @@ class SongPersistancyManager: PersistanceController {
         if song.songArtwork == nil {
             //put placeholder
         }
-        return song
+        song.isProcessed = true
+        saveContext(cntx: cntx)
     }
     
 }

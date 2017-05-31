@@ -91,7 +91,8 @@ extension SongCellStates {
     }
     
     func updateAudioSlider() {
-        let player = AudioPlayer.sharedInstance.player!
-        songProgressSlider.value = Float(player.currentTime)
+        if let player = AudioPlayer.sharedInstance.player {
+            songProgressSlider.value = Float(player.currentTime)
+        }
     }
 }

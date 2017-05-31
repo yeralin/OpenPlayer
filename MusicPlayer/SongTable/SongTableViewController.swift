@@ -38,14 +38,10 @@ class SongTableViewController: UITableViewController {
     }
     
     func prepareSongs(receivedPlaylist: PlaylistEntity) {
-        let start = NSDate()
         playlist = receivedPlaylist
         let songsArray = SongPersistancyManager.sharedInstance.populateSongs(forPlaylist: receivedPlaylist,
                                                                              cntx: managedObjectContext!)
         AudioPlayer.sharedInstance.songsArray = songsArray
-        let end = NSDate();
-        let timeInterval: Double = end.timeIntervalSince(start as Date);
-        print("Time to do everything \(timeInterval) seconds");
     }
     
 }
