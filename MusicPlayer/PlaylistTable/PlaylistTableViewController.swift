@@ -42,37 +42,8 @@ class PlaylistTableViewController: UITableViewController {
     }
     
     @IBAction func insertNewPlaylist(_ sender: Any) {
-        let alertNewPlaylist = UIAlertController(title: "Create new playlist", message: "Enter playlist name", preferredStyle: .alert)
-        alertNewPlaylist.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Playlist Name"
-        })
-        alertNewPlaylist.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertNewPlaylist.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-            let playlistName = alertNewPlaylist.textFields![0].text!
-            if !playlistName.isEmpty {
-                let playlistPerstManager = PlaylistPersistancyManager.sharedInstance
-                let nextOrder: Int32 = {
-                    let next: Int32 = 1
-                    let playlistArray = playlistPerstManager.fetchData(entityName: "PlaylistEntity",
-                                                  sortIn: NSSortDescriptor(key: "playlistOrder", ascending: true),
-                                                  predicate: nil,
-                                                  cntx: self.managedObjectContext) as! [PlaylistEntity]
-                    if let playlistMaxOrder = playlistArray.max(by: {$0.playlistOrder < $1.playlistOrder})?.playlistOrder {
-                        return playlistMaxOrder + next
-                    } else {
-                        return 0
-                    }
-                }()
-                let newOrder: Int = playlistPerstManager.createPlaylist(name: playlistName,
-                                                                        order: nextOrder,
-                                                                        cntx: self.managedObjectContext)
-                self.playlistArray = playlistPerstManager.getPlaylistArray(cntx: self.managedObjectContext)
-                self.playlistTableView.insertRows(at: [IndexPath(row: newOrder, section: 0)],
-                                                  with: .fade)
-            }
-            
-        }))
-        self.present(alertNewPlaylist, animated: true, completion: nil)
+        let alert = createInsertPlaylistAlert()
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
