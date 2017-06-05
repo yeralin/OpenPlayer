@@ -25,8 +25,16 @@ class PlaylistTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: systemColor)
         playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists(cntx: managedObjectContext)
+        refreshControl?.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
         //PlaylistPersistancyManager.sharedInstance.wipePlaylistCoreData(cntx: managedObjectContext)
     }
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists(cntx: managedObjectContext)
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
     
     
     
