@@ -16,18 +16,17 @@ extension AudioPlayerDelegateImpl: AudioPlayerDelegate {
     }
     
     func cellState(state: State, song: SongEntity) {
-        if !song.isProcessed {
-            SongPersistancyManager.sharedInstance.processSong(toProcess: song, cntx: managedObjectContext)
-        }
         if let cell = getCell(withSong: song) {
+            if !song.isProcessed {
+                log.info("Processing \(song.songName!)")
+                SongPersistancyManager.sharedInstance.processSong(toProcess: song, cntx: managedObjectContext)
+            }
             if state == .play || state == .resume {
                 cell.setPlaySongCell()
             } else if state == .pause {
                 cell.setPauseSongCell()
             } else if state == .stop {
                 cell.resetSongCell()
-            } else {
-                print("Error: should never happen")
             }
         }
     }
