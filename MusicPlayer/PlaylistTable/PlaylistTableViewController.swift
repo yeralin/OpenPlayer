@@ -10,6 +10,18 @@ import UIKit
 import SwiftIcons
 import CoreData
 
+class PlaylistCell: UITableViewCell {
+    
+    @IBOutlet weak var playlistName: UILabel!
+    @IBOutlet weak var selectIcon: UIButton!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        selectIcon.setIcon(icon: .fontAwesome(.angleRight), iconSize: 28, color: systemColor, forState: .normal)
+    }
+}
+
+
 class PlaylistTableViewController: UITableViewController {
     
     @IBOutlet var playlistTableView: UITableView!
