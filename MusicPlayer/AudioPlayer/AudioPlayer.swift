@@ -90,7 +90,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             self.player?.delegate = nil
             let songPath = SongPersistancyManager.sharedInstance.getSongPath(song: song)
             guard let p = try? AVAudioPlayer(contentsOf: songPath) else {
-                print("Could not resolve song path \(songPath.absoluteString)")
+                log.error("Could not resolve song path \(songPath.absoluteString)")
                 return
             }
             self.player = p

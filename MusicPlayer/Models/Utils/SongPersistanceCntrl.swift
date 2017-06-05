@@ -38,7 +38,7 @@ class SongPersistancyManager: PersistanceController {
             toPlaylist.addToSongs(toMove)
         }
         catch let error as NSError {
-            print("Could not move song to a different playlist: \(error)")
+            log.error("Could not move song to a different playlist: \(error)")
         }
     }
     
@@ -46,6 +46,10 @@ class SongPersistancyManager: PersistanceController {
         let playlistName = forPlaylist.playlistName!
         var songsArray = getSongArray(cntx: cntx, playlist: forPlaylist)
         var toMatchWithAudioFiles = songsArray
+        //That's how fm and docsUrl are initialized
+        //fm = FileManager.default
+        //docsUrl = try! fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        //playlistName is a directory
         let playlistUrl: URL = docsUrl.appendingPathComponent(playlistName) //Inside playlist dir
         let contentsArray = try! fm.contentsOfDirectory(at: playlistUrl,
                                                         includingPropertiesForKeys: nil)

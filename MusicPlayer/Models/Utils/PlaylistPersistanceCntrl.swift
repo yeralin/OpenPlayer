@@ -89,7 +89,7 @@ class PlaylistPersistancyManager: PersistanceController {
         do {
             try fm.createDirectory(at:newPlaylist, withIntermediateDirectories: true)
         } catch {
-            print("Could not save playlist: \(String(describing: playlistEntity.playlistName))")
+            log.error("Could not save playlist: \(String(describing: playlistEntity.playlistName))")
         }
         saveContext(cntx: cntx)
         return Int(playlistEntity.playlistOrder)

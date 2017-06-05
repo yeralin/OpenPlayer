@@ -10,6 +10,8 @@ import UIKit
 import CoreData
 import AVFoundation
 import SlideMenuControllerSwift
+import SwiftyBeaver
+let log = SwiftyBeaver.self
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,8 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
-            print("Could not attach AVAudioSession")
+            log.error("Could not attach AVAudioSession")
         }
+        let console = ConsoleDestination()
+        let file = FileDestination()
+        console.format = "$DHH:mm:ss$d $L $M"
+        log.addDestination(console)
+        log.addDestination(file)
         return true
     }
     
@@ -59,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             try AVAudioSession.sharedInstance().setActive(true)
         } catch {
-            print("Could not attach AVAudioSession")
+            log.error("Could not activate AVAudioSession")
         }
     }
     

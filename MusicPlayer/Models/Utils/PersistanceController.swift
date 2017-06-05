@@ -32,7 +32,7 @@ class PersistanceController {
         do {
             fetchedObjects = try cntx.fetch(fetchRequest) as! [NSManagedObject]
         } catch {
-            print("Could not fetch \(entityName) entity")
+            log.error("Could not fetch \(entityName) entity")
         }
         return fetchedObjects
     }
@@ -46,12 +46,12 @@ class PersistanceController {
                 let songPath = SongPersistancyManager.sharedInstance.getSongPath(song: toDeleteSong)
                 try fm.removeItem(at: songPath)
             } else {
-                print("Error: could not identify entity of \"toDelete\" object")
+                log.error("Could not identify entity of \"toDelete\" object")
                 return
             }
             cntx.delete(toDelete)
         } catch {
-            print("Could not delete entity  \(String(describing: toDelete))")
+            log.error("Could not delete entity  \(String(describing: toDelete))")
         }
         saveContext(cntx: cntx)
         
@@ -61,6 +61,6 @@ class PersistanceController {
         do {
             try cntx.save()
         } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")        }
+            log.error("Could not save context: \(error), \(error.userInfo)")        }
     }
 }
