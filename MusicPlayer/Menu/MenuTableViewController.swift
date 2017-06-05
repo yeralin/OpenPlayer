@@ -7,16 +7,30 @@
 //
 
 import UIKit
-import GCDWebServer
+import SwiftIcons
+
+//import GCDWebServer
+
+class MenuCell: UITableViewCell {
+    @IBOutlet weak var menuIcon: UILabel!
+    @IBOutlet weak var menuLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
 
 class MenuTableViewController: UITableViewController {
     
-    let menuEntries = ["Playlists", "Download", "Search", "Server", "Settings"]
-    var webUploader: GCDWebUploader? = nil
+    let menuLabels = [("Playlists", FontType.ionicons(.iosMusicalNotes), 28),
+                      ("Download", FontType.ionicons(.iosSearchStrong), 25),
+                      ("Server", FontType.ionicons(.iosCloud), 25),
+                      ("Settings", FontType.ionicons(.iosGear), 25)]
     
-    @IBOutlet weak var address: UILabel!
+    //var webUploader: GCDWebUploader? = nil
     
-    @IBAction func serverSwitch(_ sender: UISwitch) {
+    
+   /*@IBAction func serverSwitch(_ sender: UISwitch) {
         if sender.isOn {
             let documentsPath: String? = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first
             webUploader = GCDWebUploader(uploadDirectory: documentsPath)
@@ -26,10 +40,12 @@ class MenuTableViewController: UITableViewController {
             webUploader?.stop()
         }
         
-    }
+    }*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
+        navigationController?.hidesBarsOnTap = false
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,54 +53,18 @@ class MenuTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuEntries.count
+        return menuLabels.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "menuCell")
-        cell.textLabel?.text = menuEntries[indexPath.row]
-        // Configure the cell...
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as! MenuCell
+        let label = menuLabels[indexPath.row].0
+        let icon = menuLabels[indexPath.row].1
+        let iconSize = CGFloat(menuLabels[indexPath.row].2)
+        cell.menuLabel.text = label
+        cell.menuIcon.setIcon(icon: icon, iconSize: iconSize, color: systemColor, bgColor: .clear)
         return cell
     }
     
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

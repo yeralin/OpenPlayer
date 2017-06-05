@@ -27,13 +27,15 @@ extension PlaylistTableViewDataSource {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showSongs", sender: playlistArray[indexPath.row])
+        performSegue(withIdentifier: "presentSongs", sender: playlistArray[indexPath.row])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let songsView = segue.destination as! SongTableViewController
-        if let playlist = sender as? PlaylistEntity {
-            songsView.prepareSongs(receivedPlaylist: playlist)
+        if segue.identifier == "presentSongs" {
+            let songsView = segue.destination as! SongTableViewController
+            if let playlist = sender as? PlaylistEntity {
+                songsView.prepareSongs(receivedPlaylist: playlist)
+            }
         }
     }
     
@@ -47,7 +49,7 @@ extension PlaylistTableViewDataSource {
                 self.playlistArray = playlistPerstManager.getPlaylistArray(cntx: self.managedObjectContext)
                 self.playlistTableView.deleteRows(at: [indexPath], with: .fade)
                 playlistPerstManager.resetPlaylistsOrder(playlistArray: self.playlistArray,
-                                                                              cntx: self.managedObjectContext)
+                                                         cntx: self.managedObjectContext)
             }), animated: true, completion: nil)
             
         }

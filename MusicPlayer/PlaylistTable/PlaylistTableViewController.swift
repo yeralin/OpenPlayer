@@ -24,6 +24,7 @@ class PlaylistTableViewController: UITableViewController {
         self.title = "Playlists"
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: systemColor)
+        
         playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists(cntx: managedObjectContext)
         refreshControl?.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
         //PlaylistPersistancyManager.sharedInstance.wipePlaylistCoreData(cntx: managedObjectContext)
@@ -35,10 +36,7 @@ class PlaylistTableViewController: UITableViewController {
         refreshControl.endRefreshing()
     }
     
-    
-    
-    
-    @IBAction func openMenu(_ sender: Any) {
+    /*@IBAction func openMenu(_ sender: Any) {
         if let slideMenuController = self.slideMenuController() {
             if slideMenuController.isLeftOpen() {
                 slideMenuController.closeLeft()
@@ -47,7 +45,7 @@ class PlaylistTableViewController: UITableViewController {
             }
         }
         
-    }
+    }*/
     
     @IBAction func insertNewPlaylist(_ sender: Any) {
         let alert = createInsertPlaylistAlert()

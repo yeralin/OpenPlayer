@@ -10,24 +10,24 @@ PODS:
     - GCDWebServer/WebUploader/Core (= 3.3.2)
   - GCDWebServer/WebUploader/Core (3.3.2):
     - GCDWebServer/Core
-  - SlideMenuControllerSwift (3.0.1)
+  - SideMenu (2.3.2)
   - SwiftIcons (1.4.1)
   - SwiftyBeaver (1.2.2)
 
 DEPENDENCIES:
   - CocoaLumberjack (~> 3.0)
   - GCDWebServer/WebUploader (~> 3.3)
-  - SlideMenuControllerSwift
+  - SideMenu
   - SwiftIcons (~> 1.4.1)
   - SwiftyBeaver
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   GCDWebServer: 2a375ec42839a41d7187d04e5b688d32fa5c4cd5
-  SlideMenuControllerSwift: 9a163b16d54afab734add42858cba7ef7c307755
+  SideMenu: 3fa07dd05d4bade2b6f9889fb1877e312e1ba319
   SwiftIcons: 7a3fb54d2876b5b207a68c5e34dfbde2c4e00296
   SwiftyBeaver: 90a39e3dc5136b7285f2e4c870b107e3933b8b84
 
-PODFILE CHECKSUM: ad5da9e6c3ae8f2e784fc3a95d2324961790b0e2
+PODFILE CHECKSUM: 92791b2d80be9a31da0006accf6f38d4df6de9ef
 
 COCOAPODS: 1.2.0

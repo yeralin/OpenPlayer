@@ -7,296 +7,303 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00F10B4C5719C8AFDF0F253B0FC32E09 /* GCDWebServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 47630DC3ADBBB7B211B1552B4C0DAA80 /* GCDWebServerRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		01630B2CDB6B45477072484503523233 /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E39359BD5847386E3C7C28BEB68FD7E /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		01962FFE8CEF4A71E31C24AABABFCF67 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C611D4A81962669A484DBF842E48FA2E /* GCDWebServerStreamedResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		06270CD9D8C26C49505C5F53FF11D927 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 395B2DDECAC2B188AA551F3DC6B1B75C /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		08284B0947FEECE865742912B045BCCF /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 530149A44D0C11935127417F448C6AFC /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		0A3B7B6191C870C9C38AD2696A0CF425 /* GCDWebServerFileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D10221618899B96041F801D793FC8CAA /* GCDWebServerFileRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		0A3E701F3C232476117E23BDDD8BA645 /* GCDWebServerDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = ECC40CA93D592E2C9D779E168ED08D52 /* GCDWebServerDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0BC7E34AD3EFF3C2B497A0B6CF4AEBD5 /* GCDWebServerFileRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C886F639ED54DEDAABB2BABC01863FC /* GCDWebServerFileRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0D03986EAE1590B12F6269B51C866460 /* GCDWebServerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E189D178F7A5C50C4D01C2EB9D7A711 /* GCDWebServerRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		12559F1604618A8EB0113C941942EBC7 /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F3AFE4B0084681CCF484587DD9C6D331 /* GCDWebServerConnection.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		1437647AF7C88C65998EFA2A2C2B4C01 /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = B7FD94943C459684E1D6504DA28651D7 /* DDOSLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D27BD8CAE508AC012491F62D5DAEAA4 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00D917123BC4C6A49F8167277F0F8EC7 /* MaterialIcons.ttf */; };
-		1EEE9B4782F24B44E17F74129AE2CCD9 /* SwiftIcons-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D2AE0A6D817C7B4C515778F088BE870 /* SwiftIcons-dummy.m */; };
-		1FE784EA6C983CCFADBBC32B77159FAE /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 010DA29F77792AB423826B6A52A8B722 /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00F10B4C5719C8AFDF0F253B0FC32E09 /* GCDWebServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EA56836CF020FEC62FC9540983D5FD2D /* GCDWebServerRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		01630B2CDB6B45477072484503523233 /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = D885BD5BCBC259DDF916220E1868ADBF /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01962FFE8CEF4A71E31C24AABABFCF67 /* GCDWebServerStreamedResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 90C838B44C0CE85792AB3B6CA7A470AB /* GCDWebServerStreamedResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		06270CD9D8C26C49505C5F53FF11D927 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 671C43BF1CED700E02338CD98E3B50A0 /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		08284B0947FEECE865742912B045BCCF /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8878BC6DEB3D86DD7134982427BA4BF1 /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0A3B7B6191C870C9C38AD2696A0CF425 /* GCDWebServerFileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB564E2EA6BB9006B0757B29F72A4F6 /* GCDWebServerFileRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		0A3E701F3C232476117E23BDDD8BA645 /* GCDWebServerDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = C089FCFD577F6DE3EF474CF3A9719A04 /* GCDWebServerDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0BC7E34AD3EFF3C2B497A0B6CF4AEBD5 /* GCDWebServerFileRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = C1E7F6332DAEC8012329BB2FF7836EB0 /* GCDWebServerFileRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D03986EAE1590B12F6269B51C866460 /* GCDWebServerRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E33D9631E732E02E7BE4071018B5F6A3 /* GCDWebServerRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		12559F1604618A8EB0113C941942EBC7 /* GCDWebServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5590FC5A4CE3EBED03547328A83C2B93 /* GCDWebServerConnection.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		13F12CF90EDDA834852BB0140C142A61 /* SwiftIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414C02EA0E6D777638E6D2755D8B1BBA /* SwiftIcons.swift */; };
+		1437647AF7C88C65998EFA2A2C2B4C01 /* DDOSLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 960F055E69B1444F429106F27E03D513 /* DDOSLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		175058FDD3B9BEF0EC0E6C47855C9D3E /* Linearicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BA6FEA5E756E64DF55E0BB6A0B5996D /* Linearicons.ttf */; };
+		1BA9E1ED1354B264662BB81F8A4D71BD /* Pods-MusicPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7839BC9159F05A6433038F67111007E7 /* Pods-MusicPlayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F4DA5195C2BFFE7CC514E057D44860E /* SwiftIcons-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C136028B32C3523C1E128E6CEADC8E82 /* SwiftIcons-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FE784EA6C983CCFADBBC32B77159FAE /* DDMultiFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = D4F2ED609A65D80E15C26F7934157832 /* DDMultiFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22F874DD492A2EE8EA52806887ECBB8D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
-		23C7A95FE6B5FD3E1663F19998E29053 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = CFEFA4134132F200A6E00FF3E264DE9E /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		23E52CCB7ED0D5DBDC22F1329FA5EFF3 /* SBPlatformDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D894B676B42EA96C8929D49ADAEE6 /* SBPlatformDestination.swift */; };
-		23EDF5CFB408071F8A42EB434BF1DAB8 /* WeatherIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A537CC8C78CFA023BB53E392A715826 /* WeatherIcons.ttf */; };
+		23B998B29E1D1E591EFF34A767B29964 /* Stateface.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CCDE01794039A28587884F651022DAD /* Stateface.ttf */; };
+		23C7A95FE6B5FD3E1663F19998E29053 /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FC874B706150FDEEAEA232C1892E490 /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		251ED3D0CF127D2B34D0DA780348AEE3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 915DFDF33AD8CC026A6227714AA70585 /* CFNetwork.framework */; };
-		25D8ED023642E7806F3064112A1978E2 /* SlideMenuControllerSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D41152FD2C01C05611FA2A22422BD62 /* SlideMenuControllerSwift-dummy.m */; };
-		273F1F41D8470F6EF24A7E72540E18F0 /* GCDWebServerDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B54A3923F25CC14D5FC5DE17C653C3C5 /* GCDWebServerDataRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		267FF877F2E617B2EBC526F14E3FDE5A /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF22AA345ED73CFD9B6EE4523AF42D9 /* BaseDestination.swift */; };
+		273F1F41D8470F6EF24A7E72540E18F0 /* GCDWebServerDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C6535FFEF03CDE3FDCCD707069CA3AD /* GCDWebServerDataRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		28DDFF25768E01F1890BCFA79B2DDCE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
-		297AF31D2A932DFA4D46D6CCC649334E /* BaseDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B3662A2E45E23ACA0E3ECE8DCC77CC /* BaseDestination.swift */; };
-		2A2793C3F0451AD8ACFDD5F34FBBD024 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
-		2B5D51260910EC428B99623999561CF6 /* GCDWebServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 352214B3EDBA6DCB5EE1F0350227BC3E /* GCDWebServerResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2DBA4141D7B052E43958C96F3466FA6E /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 15EB29E1B00B80F566965E4D729CD710 /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		2F7F3D3B2C0A0C5DBA773B231A36A297 /* SwiftIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44091539518D8F66511700C9A222BE8E /* SwiftIcons.swift */; };
-		34ADF6CEA813D96341D2C4ED247D0DFD /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 927BA769008F54AC93F5FB0037939B27 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		351F42CE0E4287ADDA29C608DFA09494 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
-		381685FA8A1867BFBA1812E8D793DC93 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC225387F8C93929613680235121B50 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		3AAC8808B74A90226F82AD59BBB1D2F8 /* GCDWebServerFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = FD205AFE735C455205FD5D238823EE4D /* GCDWebServerFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3B8F8F37A45DEFC44192F7072B3ABF03 /* SwiftIcons-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 06C006FD7EDC0F5E9B8993C0CF366151 /* SwiftIcons-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3FFB518D11A6E10939ADC380F61245E9 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1725977500CAD4597C4281D87B4293F8 /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		42C5F25F10D9D8A0CC46E0C09D2E5CDD /* GCDWebUploader.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6EE00B54E9E3D253F37F083B1125D8FB /* GCDWebUploader.bundle */; };
-		43331D1D7D5CFB8426CC224E85EA27C9 /* Pods-MusicPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7839BC9159F05A6433038F67111007E7 /* Pods-MusicPlayer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		466560586F04FC7219636C25771ADAB7 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FAE60F876F3866EBDB06869ACD8F136 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4A583FA0DCAF12C21CDF2D94D6F88517 /* GCDWebServerDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AEF6A97BB8B41455D520D8D57BC40F0 /* GCDWebServerDataRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4C13635F4179CE26B66156F001F44361 /* SwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D30BFCEE6D4220440D077F941C0A4 /* SwiftyBeaver.swift */; };
-		4F7315C8A1B700DA743975B0398FF5AC /* GoogleCloudDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452F4C89BE2EFC32B162983A32AEBA64 /* GoogleCloudDestination.swift */; };
-		50A18600130CFF89969C5799317581C7 /* GCDWebServerResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = DFD9C05370F71262CB9F2E48E782E409 /* GCDWebServerResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		51F0920D3181F9C291415A801871446F /* GCDWebServerErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 965E58CCD02B22FF09BF1466FA4F856C /* GCDWebServerErrorResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5318CF156A8F9F3A4DBA3E0577ADCC8A /* GCDWebServerMultiPartFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = F87CB6B5D9B80BB0CFAEF19C26F436F9 /* GCDWebServerMultiPartFormRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		54649C620FD6FC3BFA039E981314E28D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
-		561CE7C109F1FE42BB0574EF4027C7EC /* GCDWebServerPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 792E013186F8FE2CFC0615F7DE1CABCB /* GCDWebServerPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		5A74A41B37A91947D68D511FE425C620 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB3CA0346A1E288502392ED9F4AC187 /* GCDWebServer.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		5E430623E9C044139BC05DA3E4404988 /* SwiftIcons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1AB812F4EB582E95DD571C5B52EB816A /* SwiftIcons.bundle */; };
-		6642590E6DBD6CBA17CCAB1C8FF640E9 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EB2CED76779AEEA5D6861B249075F5 /* Filter.swift */; };
-		664FB7D5CB5D197A2C8AD55E11445E6B /* GCDWebServerDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = BE63CD0038DE1EF184E6ADB63A25BD15 /* GCDWebServerDataResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		69BF4B126B5D7A8B816780EC645B8EAE /* SwiftyBeaver-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2475B8484AFCB3BCEE12A764FC379098 /* SwiftyBeaver-dummy.m */; };
-		6E99F926A1C73E7430147601350FFA26 /* GCDWebServerErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBC5A7A1AADCC7D46BE86AF8902BE0C /* GCDWebServerErrorResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		6FBEEE1877FB889F85EEE3C252F67762 /* SwiftyBeaver-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A84D4EF49EFD1E68BF3D1B5B0B1E72EB /* SwiftyBeaver-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7163FCA57C02C890435DFA2A4F3AE4C8 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F12405B38B6007A68D4A85E53790334 /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		75CC69BC081384EA3033F3AB5CF97E29 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFB26F182F5E6312E9879C251F38098 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		77F55DA1292F4A23365745071EF0B667 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 068BB07A0C52733380B03382EE260294 /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		81BC46308E536D2AFD13B4D753329BFF /* MapIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2BB2EF9277B6457A492F1D5CA9E2072C /* MapIcons.ttf */; };
-		8A8BAF40EEEB86002DF22FC24BA21627 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0BC238D6047FC7E353EC068A986C57 /* ConsoleDestination.swift */; };
-		90BD90B4014CE1DCCA00E2BA0281A1C5 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4D86B1A0CF294F2D34EA7C5B436EAAE /* Ionicons.ttf */; };
-		99607C2F446BACAFF147E79F20BE30AE /* GCDWebServerFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = ECA71A537764E53E02E78CD7D8AD8BDC /* GCDWebServerFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A0A20E017C4F2B6443E5D2DC82C2AC2 /* SlideMenuControllerSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C530F186139B183941958C758DE1FBA5 /* SlideMenuControllerSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A573799F7C6349B5B9F5A94D19703BF /* GCDWebServerHTTPStatusCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = B39814A0D64D942102F5DE8BB7C79910 /* GCDWebServerHTTPStatusCodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9D6C64CB8DA1E12B9B735DEE9DF28467 /* Icofont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01AB886D10CDD4983633981839068346 /* Icofont.ttf */; };
-		9D8574458CA7D613DDC01380DBC0152C /* Pods-MusicPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1B990C0C0D51CE7B80C97E30C8829 /* Pods-MusicPlayer-dummy.m */; };
-		9ECDFDB4B9829BBB0E369F85D240B8AE /* CocoaLumberjack-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E1FECEF1E0CD5E1DA668BF86991D378 /* CocoaLumberjack-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A38FD606BF174D0485A33F01074216FA /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCC22ADCFF1275A3CF1E49235953A5A /* DDOSLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		A3ECC32F54F06C2BF85EAEC1DA74413F /* GCDWebServerMultiPartFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A868F5819CC85292A6D7F836EA1235F /* GCDWebServerMultiPartFormRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2B5D51260910EC428B99623999561CF6 /* GCDWebServerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5A363F4F25CE65C128D8185D083896 /* GCDWebServerResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		2DBA4141D7B052E43958C96F3466FA6E /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D0AFB05B7689D03A32F8DD53AE54428B /* DDLog.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3139C0FB86659F9CEB6B2D189035EB2C /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7EED2BE347540E5987F497BDFCD9F9 /* Filter.swift */; };
+		3252450655F6EE2057FCAAC046E18D48 /* UISideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D718AE8451103E6F4BD23BD5BBD031D /* UISideMenuNavigationController.swift */; };
+		34ADF6CEA813D96341D2C4ED247D0DFD /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D8B5D2BC67CC3EC966EACDA60678880 /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		381685FA8A1867BFBA1812E8D793DC93 /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AD5474577C0B99ECF382EDCB232F0B5 /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		3918E274BDB8B0158357C3562630E39B /* SwiftyBeaver-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C2032A53FF66C9DA7487C61C6767F8B8 /* SwiftyBeaver-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3AAC8808B74A90226F82AD59BBB1D2F8 /* GCDWebServerFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 750A4D5FDCF83FDD2510A2651A6CD8E5 /* GCDWebServerFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3B9F10BA4D2110C2468A1A85E4703A0C /* OpenIconic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89E00DA7FAD59A2A784FC55806B69A26 /* OpenIconic.ttf */; };
+		3FFB518D11A6E10939ADC380F61245E9 /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 886C17D9EA9B8E4E7E31BEEA4723EEE1 /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		42C5F25F10D9D8A0CC46E0C09D2E5CDD /* GCDWebUploader.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 94370AC0A6A78369F12A86D9CCC452A2 /* GCDWebUploader.bundle */; };
+		466560586F04FC7219636C25771ADAB7 /* DDLegacyMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 073F639D7B02C7DD013AA876EA77A055 /* DDLegacyMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		46A5A61B7C4E11C377B5BF6336A18C57 /* SwiftIcons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68E00F7AE9865720B4742159746CA219 /* SwiftIcons.bundle */; };
+		4A583FA0DCAF12C21CDF2D94D6F88517 /* GCDWebServerDataRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = BE822A113B3888ADE5F1FC0B8CD67571 /* GCDWebServerDataRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4B3D814143315233F6DFBCC7441E047B /* SBPlatformDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88F6C39140881BEBC7F916C41DC8064 /* SBPlatformDestination.swift */; };
+		50A18600130CFF89969C5799317581C7 /* GCDWebServerResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = C930CFC8372122EEABFED41D1E5E8177 /* GCDWebServerResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		51F0920D3181F9C291415A801871446F /* GCDWebServerErrorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = F3D1A9DD817360AC5690D50B801FA40B /* GCDWebServerErrorResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5318CF156A8F9F3A4DBA3E0577ADCC8A /* GCDWebServerMultiPartFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B82B908DFC8210B47C74EA0A712086 /* GCDWebServerMultiPartFormRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		534665DD44DBC20FFEBE3F1248667C8F /* SideMenu-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 77E2CF6F38101CB20940D80B18CB45F7 /* SideMenu-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		543E1E55468F79412C6B36F0C5ED839F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
+		561CE7C109F1FE42BB0574EF4027C7EC /* GCDWebServerPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 81C8ADFCC4EE785DCF078C239360B18F /* GCDWebServerPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		574FA6E707AC72D9A6E50BF9DD22FF53 /* Pods-MusicPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1B990C0C0D51CE7B80C97E30C8829 /* Pods-MusicPlayer-dummy.m */; };
+		5A74A41B37A91947D68D511FE425C620 /* GCDWebServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C15C43804826439C194E1F336AFCDA74 /* GCDWebServer.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		61D9C63828CA26A4B94871F65BEB77E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
+		61EDBCAA17F0A0A8C37BC7B9AEAFCAF7 /* GoogleCloudDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD19E1BA87F8D32C94CC44241911D39 /* GoogleCloudDestination.swift */; };
+		664FB7D5CB5D197A2C8AD55E11445E6B /* GCDWebServerDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 40175A9D25A1A3345649C79B025D5917 /* GCDWebServerDataResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		69CF9BD5FB55D024B1DEBFA5F804ED58 /* SwiftIcons-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E8037C63F782049A70ED320E27FC198A /* SwiftIcons-dummy.m */; };
+		6C8620615ED095C0BFF5325A61193476 /* AES256CBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0DD9F14670991819CF9457D5D3216 /* AES256CBC.swift */; };
+		6E99F926A1C73E7430147601350FFA26 /* GCDWebServerErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A929BCF54C5E021DA83006F03F5B6EC /* GCDWebServerErrorResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		7163FCA57C02C890435DFA2A4F3AE4C8 /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DE1F369806C0EA76F834F1CBFDA9BD0 /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		75CC69BC081384EA3033F3AB5CF97E29 /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 004E95AB3307B2C099B5BB8D7599EC16 /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		76F44929B3A2A57AB8F0076C265F9C48 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ADC3A16C082DCC23864C173B324ADA6E /* Ionicons.ttf */; };
+		77F55DA1292F4A23365745071EF0B667 /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F98E6D9222F7541B13DEA2DBB4DC2F75 /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		7917DB7CCFEB0A32FE5C5C6B1464F8D8 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE22F6F4264A451D14678AFCE0E1C55B /* MaterialIcons.ttf */; };
+		7F46FFB718E0E94F0A1D1CF011E594B2 /* Icofont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB9435E5ED485B81134A290A9FDC0CE2 /* Icofont.ttf */; };
+		8671A646B730203B2EE6000948651084 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
+		8A4522DA5CC5D3DC32FF881ED9556DD9 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B606EB3A03841CE0CDF2BD9FA5F8F9 /* ConsoleDestination.swift */; };
+		8FA7C543C57A0CE6920D0DE140F5ACD2 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1AE5EFE36AC912034C775DDEED190DB /* FontAwesome.ttf */; };
+		99607C2F446BACAFF147E79F20BE30AE /* GCDWebServerFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 564A84481D4E934D183F2FBC86C292FE /* GCDWebServerFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9A573799F7C6349B5B9F5A94D19703BF /* GCDWebServerHTTPStatusCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = A2B807B682366370A15120609D257CFB /* GCDWebServerHTTPStatusCodes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9ECDFDB4B9829BBB0E369F85D240B8AE /* CocoaLumberjack-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A53A7BD29EE2EAB6DCFFCD318F5CAAB /* CocoaLumberjack-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2379EFD5E0A40AEE4C6EADBADD10F53 /* WeatherIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FD71EFCC4A28E9D6ECE63965A313F62 /* WeatherIcons.ttf */; };
+		A38FD606BF174D0485A33F01074216FA /* DDOSLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CBEF1D1917A79AF16F08280AFAF546 /* DDOSLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		A3ECC32F54F06C2BF85EAEC1DA74413F /* GCDWebServerMultiPartFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 257398D1BBB92B763CD080CB3BBD1A76 /* GCDWebServerMultiPartFormRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		A81CC5224DE5CF124A527E5ECF981C57 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B83D360A162650AB55409AB85C29D8C /* MobileCoreServices.framework */; };
-		ACE3622DBB471E970BE3E4E53F0B2EA9 /* Stateface.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4176FF722B3602675981DE154EE1901 /* Stateface.ttf */; };
-		AEEA2330772394FAD1DC92504A47919F /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 436FEA78309D3C3698665BD536B1912C /* FontAwesome.ttf */; };
-		B5A9059DE8FD9F87C6927274C4A6C5F8 /* Emoji.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4A0AF34EAF6CAA5521817ED6BD8B9C8 /* Emoji.ttf */; };
-		B8D00D039135E8ABE6417C5D2E3D6C9E /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E18BA027461E4530E4FAA684648CC6B /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BAEF8CCE5E5BB8ACB688BDA5CF101682 /* SlideMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC06C5C2DA7CB7039F6A92A8EC5B015 /* SlideMenuController.swift */; };
-		BB1698E49898E350DDA6DDEA4A7172AB /* GCDWebUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B2AC3D661CDF2C0BD70A5B312429E99 /* GCDWebUploader.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		BC5BB4F6EE3E015546CBA06F83D96A21 /* Linearicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 543C9690FB20B910670D025E366DC97F /* Linearicons.ttf */; };
-		C134DB1DD8281BB9C918C358009AA471 /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C866C2C85A6475B2EADD4955861A269B /* GCDWebServerFileResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		C592821D9C86A16075F492CDDD7EBFA0 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 386D133ACEBCC474A6B91EF5ECC502CE /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C6DDC840836592382565874D9FDC2613 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D9C8055FDB9A352E7647D79C8F6AA03 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C6F8F9FD9146C80B8913691FE1C62D7B /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9DCC602F1876665618E7929B506B1C /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C86B3DD10333DEDE08E06D3D726B55F6 /* GCDWebServerURLEncodedFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DD1858E47AF2D4CA96D16CD076E7ED3 /* GCDWebServerURLEncodedFormRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		CC870D61CBE8FD2A0D24A3A3D8CE5C62 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ABC6AB4AE4852907313537522F1E446 /* CocoaLumberjack-dummy.m */; };
-		CE0DDEB478F72FC416E2C6C52D0C2B29 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 91586B38BFE490DDA38DEDB2D97FAB39 /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D306B03DA8E492568032265CD23C6462 /* GCDWebServer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 711F61C949D3C1B392BEC2EF4B6AAF3E /* GCDWebServer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D31F305A7AB202CE47351BE495F3CE77 /* GCDWebServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = D11441C0E0EC563B4FF8DE23EB87934B /* GCDWebServerConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D5D4A699779F1796A4F24BFE1FB94E20 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = C3799C0253E2E829DE7DBA9D142855F3 /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		D6CA3C9CCD66A29359C0BB070AE1B74C /* GCDWebServerStreamedResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = A6EE934282931D3DD1D19328189701E7 /* GCDWebServerStreamedResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DA9B436408E2C274B67172AFA5CA8BC8 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = AC14C8B8DDA5FF2F780DFFAE9D061432 /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DFAA6D8B407F7183C7B7C51F824891F7 /* GCDWebUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = 56D5B9F135BCD20153150FF97858372F /* GCDWebUploader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E097C58ABE788123F57BDAC849938D18 /* GCDWebServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A8AFC13D33E4701D353F6E06AF9DB71D /* GCDWebServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3C5456FB49A749739230C235355D473 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 105D1309B9736681261F378BC8E4B622 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E79E5CED486D902CED0F5D4B546EBF64 /* GCDWebServerFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D1A66413BCF2BECA2C379A3C4264DDF /* GCDWebServerFunctions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		EBA3B097DD9C15B86C3763C374D5FD97 /* Dripicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 702B72C782684C7DF40E8CE59B327462 /* Dripicons.ttf */; };
-		EC10B1AE275C62DB2AEA9129114FBC72 /* AES256CBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0515177D229D8D8863C242687E5A9081 /* AES256CBC.swift */; };
-		EC1CF406FF976FF9A2D0DB622DECA58B /* GCDWebServer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C22EA846520AF3EA41B713704C428D /* GCDWebServer-dummy.m */; };
-		EE2B6A6EDA7FA2F2724D438C89F33780 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7BCB652B3BC2A48DE92EE5D6AB6B1A /* FileDestination.swift */; };
-		F17D3D26ADE94380EAEE45707FDED798 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = A603E375FEF967502C629D7FC3212D7B /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC1615ACE4FF20081559149DCA6FB73A /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 12CD24FF87BE392BA25CB5BF8212F918 /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FE86155CAB3ED6D02E5012B5F13A78F6 /* GCDWebServerURLEncodedFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 47E7DFC1BE7ABFD4574BF3A9DAD0F416 /* GCDWebServerURLEncodedFormRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FF39371E234FB0A230F39700A1289EB4 /* OpenIconic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A229850498C483C5C74F248B9DFA030F /* OpenIconic.ttf */; };
-		FF586A3E85ECE4372137A34D069E3B77 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
+		A9ABD12367BE98E48AAE511247E63C74 /* SideMenu-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2BAB03DA8CE0AC24E79C4D1A6A4C2D /* SideMenu-dummy.m */; };
+		B5F41505865990F3B09B9294DDE3024B /* Dripicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CEB77BB9EB76892692476C58B62D064 /* Dripicons.ttf */; };
+		B8D00D039135E8ABE6417C5D2E3D6C9E /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A018C0C9DCA6C8B6502CCA0733A09496 /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA8A5650DA4A1C86BD97A2E79FB3A762 /* SwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 540B26EBBBD8E99E6369B2E83FA574BF /* SwiftyBeaver.swift */; };
+		BB1698E49898E350DDA6DDEA4A7172AB /* GCDWebUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CEC33AD67365B6076AABB918E15CE /* GCDWebUploader.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		BC821394F2903578DBF88E62D596542D /* SwiftyBeaver-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 59690F78EE4A289BEC08C9E1F59BC187 /* SwiftyBeaver-dummy.m */; };
+		C134DB1DD8281BB9C918C358009AA471 /* GCDWebServerFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = BB09DCF9D9D4D7D63EE97F4222D06D35 /* GCDWebServerFileResponse.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		C592821D9C86A16075F492CDDD7EBFA0 /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D3B841C2773486939C0FFD77033846 /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6DDC840836592382565874D9FDC2613 /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 37E7BEFDC2D6452705F02095A28822A2 /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6F8F9FD9146C80B8913691FE1C62D7B /* DDContextFilterLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = EB2113AA88B5420246B856C3126B2303 /* DDContextFilterLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C86B3DD10333DEDE08E06D3D726B55F6 /* GCDWebServerURLEncodedFormRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E4A5722D3BDE40F8FD2F860C404971 /* GCDWebServerURLEncodedFormRequest.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		CC870D61CBE8FD2A0D24A3A3D8CE5C62 /* CocoaLumberjack-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C48491DF4F62F95AC5E235F3FB7B765E /* CocoaLumberjack-dummy.m */; };
+		CCD32BFB7A3C673C14879A3D361B9588 /* MapIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A05641BC712B26B3AF6802D7A809D96C /* MapIcons.ttf */; };
+		CE0DDEB478F72FC416E2C6C52D0C2B29 /* DDDispatchQueueLogFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B5B8713DCFCA74841AA568D8614C381 /* DDDispatchQueueLogFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D306B03DA8E492568032265CD23C6462 /* GCDWebServer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B946AA574FC836FA4964360E951A44A /* GCDWebServer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D31F305A7AB202CE47351BE495F3CE77 /* GCDWebServerConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F47D09F5CA70583D736269FCB284C12 /* GCDWebServerConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3E3F8765A1E6B6F2E2E0AC4D906FC75 /* SideMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21742A08E7C3A6DA529F1FF50DFF30F /* SideMenuManager.swift */; };
+		D5D4A699779F1796A4F24BFE1FB94E20 /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F6E5C7E20709C8A148203BA3F3B2000A /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		D639F78F403F486A00AF020D03457926 /* UITableViewVibrantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC763FCEF07A4A938F4C9758C78CB55A /* UITableViewVibrantCell.swift */; };
+		D6CA3C9CCD66A29359C0BB070AE1B74C /* GCDWebServerStreamedResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 37658433EBA019CDB42E3D67F37B0437 /* GCDWebServerStreamedResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DA9B436408E2C274B67172AFA5CA8BC8 /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BB3360CC5F3F323D258A2B70297EC7F /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DFAA6D8B407F7183C7B7C51F824891F7 /* GCDWebUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8615716C4B85CE1C79B779F12A79336D /* GCDWebUploader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E097C58ABE788123F57BDAC849938D18 /* GCDWebServer.h in Headers */ = {isa = PBXBuildFile; fileRef = A836343FD687DCA26BE3B5655675C4E3 /* GCDWebServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E35282D58F9AED5C064AAD7336266A15 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */; };
+		E3C5456FB49A749739230C235355D473 /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 10B1923A3685AE7C8948ABD11549A6D9 /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E79E5CED486D902CED0F5D4B546EBF64 /* GCDWebServerFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = BDD0BB0D6705C6F074F5E61A26B16E00 /* GCDWebServerFunctions.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		EB7F4D79AD4868835A54B3669C5F2300 /* FileDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5C5BF77A637382C3E3815EC4EBEFA9 /* FileDestination.swift */; };
+		EC1CF406FF976FF9A2D0DB622DECA58B /* GCDWebServer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0140732C8759DE73618D0E72D75BBBAA /* GCDWebServer-dummy.m */; };
+		F17D3D26ADE94380EAEE45707FDED798 /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = DF8DDB19606612A82B19463905AAC44D /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F2F43F98DC7C368568FC97C41C7D4ACF /* SideMenuTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15FD553677E809F5DCC9FE7F4837929A /* SideMenuTransition.swift */; };
+		FC1615ACE4FF20081559149DCA6FB73A /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D21497128EB9069F4DEB2CE627AA283 /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCC7C08EAF3A65B6E7266C7D61A2DDAE /* Emoji.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00636AA2C1CF3C584C1DFE1B99927BB5 /* Emoji.ttf */; };
+		FE86155CAB3ED6D02E5012B5F13A78F6 /* GCDWebServerURLEncodedFormRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 0E5793305E6A57020719D8B9C74C1EEF /* GCDWebServerURLEncodedFormRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1EBCE011ABC35A8F9DECF03F2521D710 /* PBXContainerItemProxy */ = {
+		17379E2DB16F65B47919B811D8BB0CFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 6F50BE7A20651876A4D60C2EDFF6CD6E;
-			remoteInfo = SlideMenuControllerSwift;
+			remoteGlobalIDString = 83B32584FF9AA7F6CF2E8435C9935702;
+			remoteInfo = SwiftyBeaver;
 		};
-		27601A28FBF2E21624A572464C815BD8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D65EE8E65231404C713C5001A9415A5E;
-			remoteInfo = "SwiftIcons-SwiftIcons";
-		};
-		2BF879DE261226F30E7ED7630606C41D /* PBXContainerItemProxy */ = {
+		55435CDE9511DC6EC60A740B9C65616C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = EA2A920A891C4D3535867E5C3EF3D793;
 			remoteInfo = CocoaLumberjack;
 		};
-		51A0EA1505DBAC7F249F994DACE97831 /* PBXContainerItemProxy */ = {
+		81A4E84F31BDA11A9E0136BBF343CE24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 563E618B9A33E719723E861DC5FFD834;
+			remoteInfo = SwiftIcons;
+		};
+		936D49758672B831BA9B754D840D4B80 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 004D845E6E6750B5CEBBEB26920A7FC5;
+			remoteInfo = "SwiftIcons-SwiftIcons";
+		};
+		AC4C4B5752E5018225D66EF6F96C015B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 46C7342B832CF5150686CAD616C488B3;
 			remoteInfo = GCDWebServer;
 		};
-		75ECCE17AE3AC9EF0B4A27800479BCE2 /* PBXContainerItemProxy */ = {
+		E3AD9648652DADA7363A374486D62875 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E61E07E36793DB1F934C1BF40E167910;
-			remoteInfo = SwiftyBeaver;
-		};
-		FDD0779D9BAAF88476D65BEDB666DD79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D852265D3FB0D2F37DDC892C9E870195;
-			remoteInfo = SwiftIcons;
+			remoteGlobalIDString = ACA400141EC942359B4F3B09027D64DF;
+			remoteInfo = SideMenu;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00D917123BC4C6A49F8167277F0F8EC7 /* MaterialIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = MaterialIcons.ttf; path = Source/MaterialIcons.ttf; sourceTree = "<group>"; };
-		010DA29F77792AB423826B6A52A8B722 /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
-		01AB886D10CDD4983633981839068346 /* Icofont.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Icofont.ttf; path = Source/Icofont.ttf; sourceTree = "<group>"; };
-		0515177D229D8D8863C242687E5A9081 /* AES256CBC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AES256CBC.swift; path = Sources/AES256CBC.swift; sourceTree = "<group>"; };
-		05F4535F1347E5E373B3C6E11D39FDF8 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyBeaver.framework; path = SwiftyBeaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		05F5EF01287F3069D3812207F7BB9B3A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		068BB07A0C52733380B03382EE260294 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
-		06C006FD7EDC0F5E9B8993C0CF366151 /* SwiftIcons-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftIcons-umbrella.h"; sourceTree = "<group>"; };
-		0A868F5819CC85292A6D7F836EA1235F /* GCDWebServerMultiPartFormRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerMultiPartFormRequest.m; path = GCDWebServer/Requests/GCDWebServerMultiPartFormRequest.m; sourceTree = "<group>"; };
-		0AF86653DAC4702952532A95C5747FA9 /* GCDWebServer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GCDWebServer-prefix.pch"; sourceTree = "<group>"; };
-		0AFB26F182F5E6312E9879C251F38098 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
+		004E95AB3307B2C099B5BB8D7599EC16 /* DDASLLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogger.m; path = Classes/DDASLLogger.m; sourceTree = "<group>"; };
+		00636AA2C1CF3C584C1DFE1B99927BB5 /* Emoji.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Emoji.ttf; path = Source/Emoji.ttf; sourceTree = "<group>"; };
+		0140732C8759DE73618D0E72D75BBBAA /* GCDWebServer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GCDWebServer-dummy.m"; sourceTree = "<group>"; };
+		0664DFA851C710585258666A88C5D61E /* SwiftIcons.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftIcons.framework; path = SwiftIcons.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		073F639D7B02C7DD013AA876EA77A055 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
+		0A7EED2BE347540E5987F497BDFCD9F9 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Filter.swift; sourceTree = "<group>"; };
+		0ACF2C70765313131DDB77AFE199B746 /* ResourceBundle-SwiftIcons-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-SwiftIcons-Info.plist"; sourceTree = "<group>"; };
 		0B83D360A162650AB55409AB85C29D8C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		0D891AC844AA7957A05AA3892F538E79 /* Pods-MusicPlayer-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MusicPlayer-frameworks.sh"; sourceTree = "<group>"; };
-		0E1FECEF1E0CD5E1DA668BF86991D378 /* CocoaLumberjack-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-umbrella.h"; sourceTree = "<group>"; };
-		0EBC5A7A1AADCC7D46BE86AF8902BE0C /* GCDWebServerErrorResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerErrorResponse.m; path = GCDWebServer/Responses/GCDWebServerErrorResponse.m; sourceTree = "<group>"; };
-		105D1309B9736681261F378BC8E4B622 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
-		11A46F7C768DA78BA196D1639321A78F /* SwiftyBeaver-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyBeaver-prefix.pch"; sourceTree = "<group>"; };
-		12CD24FF87BE392BA25CB5BF8212F918 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
-		150231249A7D7AAC767D35A7234C954A /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
-		15EB29E1B00B80F566965E4D729CD710 /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
-		1725977500CAD4597C4281D87B4293F8 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
-		1A9DCC602F1876665618E7929B506B1C /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
-		1AB812F4EB582E95DD571C5B52EB816A /* SwiftIcons.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SwiftIcons.bundle; path = SwiftIcons.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		1AD044C789B7BD7DA837F776322D2C55 /* SlideMenuControllerSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SlideMenuControllerSwift.modulemap; sourceTree = "<group>"; };
-		1D2AE0A6D817C7B4C515778F088BE870 /* SwiftIcons-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftIcons-dummy.m"; sourceTree = "<group>"; };
-		1E189D178F7A5C50C4D01C2EB9D7A711 /* GCDWebServerRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerRequest.h; path = GCDWebServer/Core/GCDWebServerRequest.h; sourceTree = "<group>"; };
-		1FAE60F876F3866EBDB06869ACD8F136 /* DDLegacyMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLegacyMacros.h; path = Classes/DDLegacyMacros.h; sourceTree = "<group>"; };
+		0DB564E2EA6BB9006B0757B29F72A4F6 /* GCDWebServerFileRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerFileRequest.m; path = GCDWebServer/Requests/GCDWebServerFileRequest.m; sourceTree = "<group>"; };
+		0E5793305E6A57020719D8B9C74C1EEF /* GCDWebServerURLEncodedFormRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerURLEncodedFormRequest.h; path = GCDWebServer/Requests/GCDWebServerURLEncodedFormRequest.h; sourceTree = "<group>"; };
+		0FD71EFCC4A28E9D6ECE63965A313F62 /* WeatherIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = WeatherIcons.ttf; path = Source/WeatherIcons.ttf; sourceTree = "<group>"; };
+		10B1923A3685AE7C8948ABD11549A6D9 /* DDTTYLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Classes/DDTTYLogger.h; sourceTree = "<group>"; };
+		15FD553677E809F5DCC9FE7F4837929A /* SideMenuTransition.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SideMenuTransition.swift; path = Pod/Classes/SideMenuTransition.swift; sourceTree = "<group>"; };
+		1CEAC5169F1042D822A8022752F3A528 /* SideMenu.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SideMenu.modulemap; sourceTree = "<group>"; };
+		1D718AE8451103E6F4BD23BD5BBD031D /* UISideMenuNavigationController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UISideMenuNavigationController.swift; path = Pod/Classes/UISideMenuNavigationController.swift; sourceTree = "<group>"; };
 		205D535DDD9B480F92A9F65F0CFEE2FD /* Pods-MusicPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MusicPlayer.release.xcconfig"; sourceTree = "<group>"; };
-		2475B8484AFCB3BCEE12A764FC379098 /* SwiftyBeaver-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyBeaver-dummy.m"; sourceTree = "<group>"; };
-		29BD3B80D454056CDFF2983AFCE73D69 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2A8D894B676B42EA96C8929D49ADAEE6 /* SBPlatformDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SBPlatformDestination.swift; path = Sources/SBPlatformDestination.swift; sourceTree = "<group>"; };
-		2B05626FEC3258187EEFFA85245BC791 /* SwiftIcons.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftIcons.framework; path = SwiftIcons.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BB2EF9277B6457A492F1D5CA9E2072C /* MapIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = MapIcons.ttf; path = Source/MapIcons.ttf; sourceTree = "<group>"; };
-		2C886F639ED54DEDAABB2BABC01863FC /* GCDWebServerFileRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerFileRequest.h; path = GCDWebServer/Requests/GCDWebServerFileRequest.h; sourceTree = "<group>"; };
+		215E8280746F37883C5A7C39BF067C5F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		257398D1BBB92B763CD080CB3BBD1A76 /* GCDWebServerMultiPartFormRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerMultiPartFormRequest.m; path = GCDWebServer/Requests/GCDWebServerMultiPartFormRequest.m; sourceTree = "<group>"; };
+		25D6E590DBC211675D9F54772705BC17 /* SwiftyBeaver.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftyBeaver.modulemap; sourceTree = "<group>"; };
+		2957AAF906A416421DF634BADFE6287E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AD5474577C0B99ECF382EDCB232F0B5 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
+		2BA6FEA5E756E64DF55E0BB6A0B5996D /* Linearicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Linearicons.ttf; path = Source/Linearicons.ttf; sourceTree = "<group>"; };
+		2BB3360CC5F3F323D258A2B70297EC7F /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
 		2DC1B990C0C0D51CE7B80C97E30C8829 /* Pods-MusicPlayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-MusicPlayer-dummy.m"; sourceTree = "<group>"; };
-		2E18BA027461E4530E4FAA684648CC6B /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
-		352214B3EDBA6DCB5EE1F0350227BC3E /* GCDWebServerResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerResponse.m; path = GCDWebServer/Core/GCDWebServerResponse.m; sourceTree = "<group>"; };
+		37658433EBA019CDB42E3D67F37B0437 /* GCDWebServerStreamedResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerStreamedResponse.h; path = GCDWebServer/Responses/GCDWebServerStreamedResponse.h; sourceTree = "<group>"; };
+		37E7BEFDC2D6452705F02095A28822A2 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
 		381C60E938455CC235C902C44ABC0D74 /* Pods-MusicPlayer-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-MusicPlayer-acknowledgements.plist"; sourceTree = "<group>"; };
-		386D133ACEBCC474A6B91EF5ECC502CE /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
-		395B2DDECAC2B188AA551F3DC6B1B75C /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
-		3E3F5ECE652AD80A4C122577D4C6B4A7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		436FEA78309D3C3698665BD536B1912C /* FontAwesome.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesome.ttf; path = Source/FontAwesome.ttf; sourceTree = "<group>"; };
-		43746200450A8D4E7C58F6F507A67372 /* SwiftyBeaver.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftyBeaver.modulemap; sourceTree = "<group>"; };
-		44091539518D8F66511700C9A222BE8E /* SwiftIcons.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftIcons.swift; path = Source/SwiftIcons.swift; sourceTree = "<group>"; };
+		3CEB77BB9EB76892692476C58B62D064 /* Dripicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Dripicons.ttf; path = Source/Dripicons.ttf; sourceTree = "<group>"; };
+		3D966ACAF5C44D9755090BA881CF54A4 /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MusicPlayer.framework; path = "Pods-MusicPlayer.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		40175A9D25A1A3345649C79B025D5917 /* GCDWebServerDataResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerDataResponse.m; path = GCDWebServer/Responses/GCDWebServerDataResponse.m; sourceTree = "<group>"; };
+		414C02EA0E6D777638E6D2755D8B1BBA /* SwiftIcons.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftIcons.swift; path = Source/SwiftIcons.swift; sourceTree = "<group>"; };
 		4444DD423DE81B64C6700A364DC71EE9 /* Pods-MusicPlayer-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-MusicPlayer-acknowledgements.markdown"; sourceTree = "<group>"; };
-		452F4C89BE2EFC32B162983A32AEBA64 /* GoogleCloudDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GoogleCloudDestination.swift; path = Sources/GoogleCloudDestination.swift; sourceTree = "<group>"; };
-		459AFA91BA36D63352C5E757277AA890 /* CocoaLumberjack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = CocoaLumberjack.modulemap; sourceTree = "<group>"; };
-		47630DC3ADBBB7B211B1552B4C0DAA80 /* GCDWebServerRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerRequest.m; path = GCDWebServer/Core/GCDWebServerRequest.m; sourceTree = "<group>"; };
-		47E7DFC1BE7ABFD4574BF3A9DAD0F416 /* GCDWebServerURLEncodedFormRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerURLEncodedFormRequest.h; path = GCDWebServer/Requests/GCDWebServerURLEncodedFormRequest.h; sourceTree = "<group>"; };
-		4B2AC3D661CDF2C0BD70A5B312429E99 /* GCDWebUploader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebUploader.m; path = GCDWebUploader/GCDWebUploader.m; sourceTree = "<group>"; };
-		4B4B2BD7FAA429879BB57C612D3C7349 /* GCDWebServer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = GCDWebServer.modulemap; sourceTree = "<group>"; };
-		4D1A66413BCF2BECA2C379A3C4264DDF /* GCDWebServerFunctions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerFunctions.m; path = GCDWebServer/Core/GCDWebServerFunctions.m; sourceTree = "<group>"; };
-		4E39359BD5847386E3C7C28BEB68FD7E /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
-		4EF9B52B01D1BF1A773A21B85B9A5E77 /* GCDWebServer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GCDWebServer.xcconfig; sourceTree = "<group>"; };
-		4F12405B38B6007A68D4A85E53790334 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
-		530149A44D0C11935127417F448C6AFC /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
-		543C9690FB20B910670D025E366DC97F /* Linearicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Linearicons.ttf; path = Source/Linearicons.ttf; sourceTree = "<group>"; };
-		54C919AF73554A7FADA14AF174CB4B81 /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_MusicPlayer.framework; path = "Pods-MusicPlayer.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		55D7827B3595007CAC03388522453DA6 /* SwiftIcons.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftIcons.modulemap; sourceTree = "<group>"; };
-		56C22EA846520AF3EA41B713704C428D /* GCDWebServer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "GCDWebServer-dummy.m"; sourceTree = "<group>"; };
-		56D5B9F135BCD20153150FF97858372F /* GCDWebUploader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebUploader.h; path = GCDWebUploader/GCDWebUploader.h; sourceTree = "<group>"; };
-		5ABC6AB4AE4852907313537522F1E446 /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
-		5D41152FD2C01C05611FA2A22422BD62 /* SlideMenuControllerSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SlideMenuControllerSwift-dummy.m"; sourceTree = "<group>"; };
-		66BB759A8C3F8B22BD24E615A42038AE /* SwiftIcons.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftIcons.xcconfig; sourceTree = "<group>"; };
-		6A0BC238D6047FC7E353EC068A986C57 /* ConsoleDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsoleDestination.swift; path = Sources/ConsoleDestination.swift; sourceTree = "<group>"; };
-		6A537CC8C78CFA023BB53E392A715826 /* WeatherIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = WeatherIcons.ttf; path = Source/WeatherIcons.ttf; sourceTree = "<group>"; };
-		6AEF6A97BB8B41455D520D8D57BC40F0 /* GCDWebServerDataRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerDataRequest.h; path = GCDWebServer/Requests/GCDWebServerDataRequest.h; sourceTree = "<group>"; };
-		6D9C8055FDB9A352E7647D79C8F6AA03 /* DDLog+LOGV.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "DDLog+LOGV.h"; path = "Classes/DDLog+LOGV.h"; sourceTree = "<group>"; };
+		45C0DD9F14670991819CF9457D5D3216 /* AES256CBC.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AES256CBC.swift; path = Sources/AES256CBC.swift; sourceTree = "<group>"; };
+		4744D65C4842D7506920C9346E344F4C /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SideMenu.framework; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B5A363F4F25CE65C128D8185D083896 /* GCDWebServerResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerResponse.m; path = GCDWebServer/Core/GCDWebServerResponse.m; sourceTree = "<group>"; };
+		4B5B8713DCFCA74841AA568D8614C381 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		4EB4C864C7A2C2AFFAC064E8E23FF7D2 /* SwiftyBeaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyBeaver.framework; path = SwiftyBeaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		540B26EBBBD8E99E6369B2E83FA574BF /* SwiftyBeaver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyBeaver.swift; path = Sources/SwiftyBeaver.swift; sourceTree = "<group>"; };
+		5590FC5A4CE3EBED03547328A83C2B93 /* GCDWebServerConnection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerConnection.m; path = GCDWebServer/Core/GCDWebServerConnection.m; sourceTree = "<group>"; };
+		564A84481D4E934D183F2FBC86C292FE /* GCDWebServerFunctions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerFunctions.h; path = GCDWebServer/Core/GCDWebServerFunctions.h; sourceTree = "<group>"; };
+		57E90EF7955304428F0A0B7F96483AB3 /* SideMenu.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SideMenu.xcconfig; sourceTree = "<group>"; };
+		59690F78EE4A289BEC08C9E1F59BC187 /* SwiftyBeaver-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyBeaver-dummy.m"; sourceTree = "<group>"; };
+		5A929BCF54C5E021DA83006F03F5B6EC /* GCDWebServerErrorResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerErrorResponse.m; path = GCDWebServer/Responses/GCDWebServerErrorResponse.m; sourceTree = "<group>"; };
+		5C6535FFEF03CDE3FDCCD707069CA3AD /* GCDWebServerDataRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerDataRequest.m; path = GCDWebServer/Requests/GCDWebServerDataRequest.m; sourceTree = "<group>"; };
+		60D3B841C2773486939C0FFD77033846 /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAbstractDatabaseLogger.h; path = Classes/DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		614F745A6728A1878F67DDC6A23757D5 /* SwiftIcons.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftIcons.xcconfig; sourceTree = "<group>"; };
+		671C43BF1CED700E02338CD98E3B50A0 /* DDTTYLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Classes/DDTTYLogger.m; sourceTree = "<group>"; };
+		68E00F7AE9865720B4742159746CA219 /* SwiftIcons.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SwiftIcons.bundle; path = SwiftIcons.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		69D6E2897BB58F624906E018F8A456CE /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CocoaLumberjack.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DE1F369806C0EA76F834F1CBFDA9BD0 /* DDContextFilterLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDContextFilterLogFormatter.m; path = Classes/Extensions/DDContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		6E927B530C0CB16A5DB57F380C3BF8DB /* CocoaLumberjack.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = CocoaLumberjack.modulemap; sourceTree = "<group>"; };
 		6EAFE613D6D03488BDD2830FB5AD31FC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		6EE00B54E9E3D253F37F083B1125D8FB /* GCDWebUploader.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GCDWebUploader.bundle; path = GCDWebUploader/GCDWebUploader.bundle; sourceTree = "<group>"; };
-		702B72C782684C7DF40E8CE59B327462 /* Dripicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Dripicons.ttf; path = Source/Dripicons.ttf; sourceTree = "<group>"; };
+		6EECAD19EFDE28E00941FEB6EB94DADD /* GCDWebServer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GCDWebServer-prefix.pch"; sourceTree = "<group>"; };
+		6F290BE73B888C566E7704B9E5130F5D /* SwiftIcons-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftIcons-prefix.pch"; sourceTree = "<group>"; };
+		6FC874B706150FDEEAEA232C1892E490 /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
 		705AB26147D0F18DD46292CE66DB6F4D /* Pods-MusicPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-MusicPlayer.debug.xcconfig"; sourceTree = "<group>"; };
-		711F61C949D3C1B392BEC2EF4B6AAF3E /* GCDWebServer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GCDWebServer-umbrella.h"; sourceTree = "<group>"; };
+		71B606EB3A03841CE0CDF2BD9FA5F8F9 /* ConsoleDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConsoleDestination.swift; path = Sources/ConsoleDestination.swift; sourceTree = "<group>"; };
+		73E379377313BEAFBE39B6F91F0548C1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		750A4D5FDCF83FDD2510A2651A6CD8E5 /* GCDWebServerFileResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerFileResponse.h; path = GCDWebServer/Responses/GCDWebServerFileResponse.h; sourceTree = "<group>"; };
+		77E2CF6F38101CB20940D80B18CB45F7 /* SideMenu-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SideMenu-umbrella.h"; sourceTree = "<group>"; };
 		7839BC9159F05A6433038F67111007E7 /* Pods-MusicPlayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-MusicPlayer-umbrella.h"; sourceTree = "<group>"; };
-		792E013186F8FE2CFC0615F7DE1CABCB /* GCDWebServerPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerPrivate.h; path = GCDWebServer/Core/GCDWebServerPrivate.h; sourceTree = "<group>"; };
-		87345EB51C79FE80C1277D6813AB94DF /* CocoaLumberjack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CocoaLumberjack.framework; path = CocoaLumberjack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		88B3662A2E45E23ACA0E3ECE8DCC77CC /* BaseDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseDestination.swift; path = Sources/BaseDestination.swift; sourceTree = "<group>"; };
-		8EC225387F8C93929613680235121B50 /* DDFileLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDFileLogger.m; path = Classes/DDFileLogger.m; sourceTree = "<group>"; };
-		91586B38BFE490DDA38DEDB2D97FAB39 /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDDispatchQueueLogFormatter.h; path = Classes/Extensions/DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		7A53A7BD29EE2EAB6DCFFCD318F5CAAB /* CocoaLumberjack-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-umbrella.h"; sourceTree = "<group>"; };
+		7B946AA574FC836FA4964360E951A44A /* GCDWebServer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "GCDWebServer-umbrella.h"; sourceTree = "<group>"; };
+		7D21497128EB9069F4DEB2CE627AA283 /* DDFileLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDFileLogger.h; path = Classes/DDFileLogger.h; sourceTree = "<group>"; };
+		7D8B5D2BC67CC3EC966EACDA60678880 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
+		81C8ADFCC4EE785DCF078C239360B18F /* GCDWebServerPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerPrivate.h; path = GCDWebServer/Core/GCDWebServerPrivate.h; sourceTree = "<group>"; };
+		8615716C4B85CE1C79B779F12A79336D /* GCDWebUploader.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebUploader.h; path = GCDWebUploader/GCDWebUploader.h; sourceTree = "<group>"; };
+		86B82B908DFC8210B47C74EA0A712086 /* GCDWebServerMultiPartFormRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerMultiPartFormRequest.h; path = GCDWebServer/Requests/GCDWebServerMultiPartFormRequest.h; sourceTree = "<group>"; };
+		87CBEF1D1917A79AF16F08280AFAF546 /* DDOSLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDOSLogger.m; path = Classes/DDOSLogger.m; sourceTree = "<group>"; };
+		886C17D9EA9B8E4E7E31BEEA4723EEE1 /* DDAssertMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDAssertMacros.h; path = Classes/DDAssertMacros.h; sourceTree = "<group>"; };
+		8878BC6DEB3D86DD7134982427BA4BF1 /* DDMultiFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDMultiFormatter.m; path = Classes/Extensions/DDMultiFormatter.m; sourceTree = "<group>"; };
+		89E00DA7FAD59A2A784FC55806B69A26 /* OpenIconic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = OpenIconic.ttf; path = Source/OpenIconic.ttf; sourceTree = "<group>"; };
+		8CCDE01794039A28587884F651022DAD /* Stateface.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Stateface.ttf; path = Source/Stateface.ttf; sourceTree = "<group>"; };
+		8CF22AA345ED73CFD9B6EE4523AF42D9 /* BaseDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BaseDestination.swift; path = Sources/BaseDestination.swift; sourceTree = "<group>"; };
+		8D6FCC91F9DD159F4E51B7AB95886BDA /* SwiftyBeaver-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyBeaver-prefix.pch"; sourceTree = "<group>"; };
+		8E5C5BF77A637382C3E3815EC4EBEFA9 /* FileDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileDestination.swift; path = Sources/FileDestination.swift; sourceTree = "<group>"; };
+		90C838B44C0CE85792AB3B6CA7A470AB /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerStreamedResponse.m; path = GCDWebServer/Responses/GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
 		915DFDF33AD8CC026A6227714AA70585 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
-		927BA769008F54AC93F5FB0037939B27 /* DDASLLogCapture.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDASLLogCapture.m; path = Classes/DDASLLogCapture.m; sourceTree = "<group>"; };
-		92ED719A6A9FE36ED0806A9A949830F6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		95EB2CED76779AEEA5D6861B249075F5 /* Filter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Filter.swift; path = Sources/Filter.swift; sourceTree = "<group>"; };
-		965E58CCD02B22FF09BF1466FA4F856C /* GCDWebServerErrorResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerErrorResponse.h; path = GCDWebServer/Responses/GCDWebServerErrorResponse.h; sourceTree = "<group>"; };
-		9A18B0F2B57AAADB3E64640CAF2AF4DD /* SlideMenuControllerSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SlideMenuControllerSwift-prefix.pch"; sourceTree = "<group>"; };
-		9CC06C5C2DA7CB7039F6A92A8EC5B015 /* SlideMenuController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SlideMenuController.swift; path = Source/SlideMenuController.swift; sourceTree = "<group>"; };
-		9DD1858E47AF2D4CA96D16CD076E7ED3 /* GCDWebServerURLEncodedFormRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerURLEncodedFormRequest.m; path = GCDWebServer/Requests/GCDWebServerURLEncodedFormRequest.m; sourceTree = "<group>"; };
-		9F7D30BFCEE6D4220440D077F941C0A4 /* SwiftyBeaver.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyBeaver.swift; path = Sources/SwiftyBeaver.swift; sourceTree = "<group>"; };
-		A229850498C483C5C74F248B9DFA030F /* OpenIconic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = OpenIconic.ttf; path = Source/OpenIconic.ttf; sourceTree = "<group>"; };
-		A2E140300D738C426221CBB81DD44A1A /* ResourceBundle-SwiftIcons-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-SwiftIcons-Info.plist"; sourceTree = "<group>"; };
-		A4176FF722B3602675981DE154EE1901 /* Stateface.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Stateface.ttf; path = Source/Stateface.ttf; sourceTree = "<group>"; };
-		A4A0AF34EAF6CAA5521817ED6BD8B9C8 /* Emoji.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Emoji.ttf; path = Source/Emoji.ttf; sourceTree = "<group>"; };
-		A603E375FEF967502C629D7FC3212D7B /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
-		A66E2F910E8DF40098AEEC7C3CC81471 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A6EE934282931D3DD1D19328189701E7 /* GCDWebServerStreamedResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerStreamedResponse.h; path = GCDWebServer/Responses/GCDWebServerStreamedResponse.h; sourceTree = "<group>"; };
+		94370AC0A6A78369F12A86D9CCC452A2 /* GCDWebUploader.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GCDWebUploader.bundle; path = GCDWebUploader/GCDWebUploader.bundle; sourceTree = "<group>"; };
+		960F055E69B1444F429106F27E03D513 /* DDOSLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDOSLogger.h; path = Classes/DDOSLogger.h; sourceTree = "<group>"; };
+		97E4A5722D3BDE40F8FD2F860C404971 /* GCDWebServerURLEncodedFormRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerURLEncodedFormRequest.m; path = GCDWebServer/Requests/GCDWebServerURLEncodedFormRequest.m; sourceTree = "<group>"; };
+		9C2BAB03DA8CE0AC24E79C4D1A6A4C2D /* SideMenu-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SideMenu-dummy.m"; sourceTree = "<group>"; };
+		9F47D09F5CA70583D736269FCB284C12 /* GCDWebServerConnection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerConnection.h; path = GCDWebServer/Core/GCDWebServerConnection.h; sourceTree = "<group>"; };
+		A018C0C9DCA6C8B6502CCA0733A09496 /* DDLogMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Classes/DDLogMacros.h; sourceTree = "<group>"; };
+		A05641BC712B26B3AF6802D7A809D96C /* MapIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = MapIcons.ttf; path = Source/MapIcons.ttf; sourceTree = "<group>"; };
+		A2B807B682366370A15120609D257CFB /* GCDWebServerHTTPStatusCodes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerHTTPStatusCodes.h; path = GCDWebServer/Core/GCDWebServerHTTPStatusCodes.h; sourceTree = "<group>"; };
+		A311685BB70322FB2ECB5D2F68EF9027 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A34D521383251157AE0FFC9F38898E7E /* GCDWebServer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = GCDWebServer.modulemap; sourceTree = "<group>"; };
 		A7970CBD6974E569925E88C52A701B27 /* Pods-MusicPlayer-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-MusicPlayer-resources.sh"; sourceTree = "<group>"; };
-		A84D4EF49EFD1E68BF3D1B5B0B1E72EB /* SwiftyBeaver-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyBeaver-umbrella.h"; sourceTree = "<group>"; };
-		A8AFC13D33E4701D353F6E06AF9DB71D /* GCDWebServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServer.h; path = GCDWebServer/Core/GCDWebServer.h; sourceTree = "<group>"; };
-		ABCC22ADCFF1275A3CF1E49235953A5A /* DDOSLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDOSLogger.m; path = Classes/DDOSLogger.m; sourceTree = "<group>"; };
-		AC14C8B8DDA5FF2F780DFFAE9D061432 /* CocoaLumberjack.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CocoaLumberjack.h; path = Classes/CocoaLumberjack.h; sourceTree = "<group>"; };
-		ACBCEF17DCA336896319CA5C011FB45D /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SlideMenuControllerSwift.framework; path = SlideMenuControllerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B39814A0D64D942102F5DE8BB7C79910 /* GCDWebServerHTTPStatusCodes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerHTTPStatusCodes.h; path = GCDWebServer/Core/GCDWebServerHTTPStatusCodes.h; sourceTree = "<group>"; };
-		B4579C614E2D8BC8B9B449F83819340A /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
-		B54A3923F25CC14D5FC5DE17C653C3C5 /* GCDWebServerDataRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerDataRequest.m; path = GCDWebServer/Requests/GCDWebServerDataRequest.m; sourceTree = "<group>"; };
-		B7FD94943C459684E1D6504DA28651D7 /* DDOSLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDOSLogger.h; path = Classes/DDOSLogger.h; sourceTree = "<group>"; };
-		BE63CD0038DE1EF184E6ADB63A25BD15 /* GCDWebServerDataResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerDataResponse.m; path = GCDWebServer/Responses/GCDWebServerDataResponse.m; sourceTree = "<group>"; };
-		C2263D7CE73F3347A024198A1DC7C16D /* GCDWebServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GCDWebServer.framework; path = GCDWebServer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3799C0253E2E829DE7DBA9D142855F3 /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		A836343FD687DCA26BE3B5655675C4E3 /* GCDWebServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServer.h; path = GCDWebServer/Core/GCDWebServer.h; sourceTree = "<group>"; };
+		AB4CEC33AD67365B6076AABB918E15CE /* GCDWebUploader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebUploader.m; path = GCDWebUploader/GCDWebUploader.m; sourceTree = "<group>"; };
+		AC763FCEF07A4A938F4C9758C78CB55A /* UITableViewVibrantCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UITableViewVibrantCell.swift; path = Pod/Classes/UITableViewVibrantCell.swift; sourceTree = "<group>"; };
+		ADC3A16C082DCC23864C173B324ADA6E /* Ionicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Ionicons.ttf; path = Source/Ionicons.ttf; sourceTree = "<group>"; };
+		B21742A08E7C3A6DA529F1FF50DFF30F /* SideMenuManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SideMenuManager.swift; path = Pod/Classes/SideMenuManager.swift; sourceTree = "<group>"; };
+		BB09DCF9D9D4D7D63EE97F4222D06D35 /* GCDWebServerFileResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerFileResponse.m; path = GCDWebServer/Responses/GCDWebServerFileResponse.m; sourceTree = "<group>"; };
+		BDD0BB0D6705C6F074F5E61A26B16E00 /* GCDWebServerFunctions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerFunctions.m; path = GCDWebServer/Core/GCDWebServerFunctions.m; sourceTree = "<group>"; };
+		BE822A113B3888ADE5F1FC0B8CD67571 /* GCDWebServerDataRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerDataRequest.h; path = GCDWebServer/Requests/GCDWebServerDataRequest.h; sourceTree = "<group>"; };
+		C0226A64B66D530514F6429902380021 /* SwiftIcons.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftIcons.modulemap; sourceTree = "<group>"; };
+		C089FCFD577F6DE3EF474CF3A9719A04 /* GCDWebServerDataResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerDataResponse.h; path = GCDWebServer/Responses/GCDWebServerDataResponse.h; sourceTree = "<group>"; };
+		C136028B32C3523C1E128E6CEADC8E82 /* SwiftIcons-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftIcons-umbrella.h"; sourceTree = "<group>"; };
+		C15C43804826439C194E1F336AFCDA74 /* GCDWebServer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServer.m; path = GCDWebServer/Core/GCDWebServer.m; sourceTree = "<group>"; };
+		C1E7F6332DAEC8012329BB2FF7836EB0 /* GCDWebServerFileRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerFileRequest.h; path = GCDWebServer/Requests/GCDWebServerFileRequest.h; sourceTree = "<group>"; };
+		C2032A53FF66C9DA7487C61C6767F8B8 /* SwiftyBeaver-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyBeaver-umbrella.h"; sourceTree = "<group>"; };
 		C47DC56B949B89ECD438DD5150F63EF6 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C4D86B1A0CF294F2D34EA7C5B436EAAE /* Ionicons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Ionicons.ttf; path = Source/Ionicons.ttf; sourceTree = "<group>"; };
-		C530F186139B183941958C758DE1FBA5 /* SlideMenuControllerSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SlideMenuControllerSwift-umbrella.h"; sourceTree = "<group>"; };
-		C611D4A81962669A484DBF842E48FA2E /* GCDWebServerStreamedResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerStreamedResponse.m; path = GCDWebServer/Responses/GCDWebServerStreamedResponse.m; sourceTree = "<group>"; };
-		C866C2C85A6475B2EADD4955861A269B /* GCDWebServerFileResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerFileResponse.m; path = GCDWebServer/Responses/GCDWebServerFileResponse.m; sourceTree = "<group>"; };
-		CD258431992AA0D9F9EA1C02C64E8CF7 /* SwiftyBeaver.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyBeaver.xcconfig; sourceTree = "<group>"; };
+		C48491DF4F62F95AC5E235F3FB7B765E /* CocoaLumberjack-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CocoaLumberjack-dummy.m"; sourceTree = "<group>"; };
+		C7369BE76D7035A4CBFD604ABA6F6990 /* CocoaLumberjack.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CocoaLumberjack.xcconfig; sourceTree = "<group>"; };
+		C88F6C39140881BEBC7F916C41DC8064 /* SBPlatformDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SBPlatformDestination.swift; path = Sources/SBPlatformDestination.swift; sourceTree = "<group>"; };
+		C930CFC8372122EEABFED41D1E5E8177 /* GCDWebServerResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerResponse.h; path = GCDWebServer/Core/GCDWebServerResponse.h; sourceTree = "<group>"; };
+		CAD19E1BA87F8D32C94CC44241911D39 /* GoogleCloudDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GoogleCloudDestination.swift; path = Sources/GoogleCloudDestination.swift; sourceTree = "<group>"; };
+		CC7D7ECA8A1D28052E57C138EBBCBD41 /* CocoaLumberjack-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CocoaLumberjack-prefix.pch"; sourceTree = "<group>"; };
 		CE2B94B56A7AF48602E71F7F454503C9 /* Pods-MusicPlayer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-MusicPlayer.modulemap"; sourceTree = "<group>"; };
-		CFEFA4134132F200A6E00FF3E264DE9E /* DDLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDLog.h; path = Classes/DDLog.h; sourceTree = "<group>"; };
-		D10221618899B96041F801D793FC8CAA /* GCDWebServerFileRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerFileRequest.m; path = GCDWebServer/Requests/GCDWebServerFileRequest.m; sourceTree = "<group>"; };
-		D11441C0E0EC563B4FF8DE23EB87934B /* GCDWebServerConnection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerConnection.h; path = GCDWebServer/Core/GCDWebServerConnection.h; sourceTree = "<group>"; };
-		DFD9C05370F71262CB9F2E48E782E409 /* GCDWebServerResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerResponse.h; path = GCDWebServer/Core/GCDWebServerResponse.h; sourceTree = "<group>"; };
-		ECA71A537764E53E02E78CD7D8AD8BDC /* GCDWebServerFunctions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerFunctions.h; path = GCDWebServer/Core/GCDWebServerFunctions.h; sourceTree = "<group>"; };
-		ECC40CA93D592E2C9D779E168ED08D52 /* GCDWebServerDataResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerDataResponse.h; path = GCDWebServer/Responses/GCDWebServerDataResponse.h; sourceTree = "<group>"; };
-		F09B1522803AED7D64E2A06787C18D5B /* SwiftIcons-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftIcons-prefix.pch"; sourceTree = "<group>"; };
-		F3AFE4B0084681CCF484587DD9C6D331 /* GCDWebServerConnection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerConnection.m; path = GCDWebServer/Core/GCDWebServerConnection.m; sourceTree = "<group>"; };
-		F87CB6B5D9B80BB0CFAEF19C26F436F9 /* GCDWebServerMultiPartFormRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerMultiPartFormRequest.h; path = GCDWebServer/Requests/GCDWebServerMultiPartFormRequest.h; sourceTree = "<group>"; };
-		FB7BCB652B3BC2A48DE92EE5D6AB6B1A /* FileDestination.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FileDestination.swift; path = Sources/FileDestination.swift; sourceTree = "<group>"; };
-		FD205AFE735C455205FD5D238823EE4D /* GCDWebServerFileResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerFileResponse.h; path = GCDWebServer/Responses/GCDWebServerFileResponse.h; sourceTree = "<group>"; };
-		FEB3CA0346A1E288502392ED9F4AC187 /* GCDWebServer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServer.m; path = GCDWebServer/Core/GCDWebServer.m; sourceTree = "<group>"; };
-		FF71FB85FC955B6AFDA5E60A2A4DC99A /* SlideMenuControllerSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SlideMenuControllerSwift.xcconfig; sourceTree = "<group>"; };
+		D0AFB05B7689D03A32F8DD53AE54428B /* DDLog.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDLog.m; path = Classes/DDLog.m; sourceTree = "<group>"; };
+		D4F2ED609A65D80E15C26F7934157832 /* DDMultiFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDMultiFormatter.h; path = Classes/Extensions/DDMultiFormatter.h; sourceTree = "<group>"; };
+		D885BD5BCBC259DDF916220E1868ADBF /* DDASLLogCapture.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogCapture.h; path = Classes/DDASLLogCapture.h; sourceTree = "<group>"; };
+		DE0D2E344DB6BB44A68886ADA6990B3F /* GCDWebServer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GCDWebServer.xcconfig; sourceTree = "<group>"; };
+		DF8DDB19606612A82B19463905AAC44D /* DDASLLogger.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDASLLogger.h; path = Classes/DDASLLogger.h; sourceTree = "<group>"; };
+		E0A3DC36399BD46579B75BF3939E07DB /* SwiftyBeaver.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyBeaver.xcconfig; sourceTree = "<group>"; };
+		E33D9631E732E02E7BE4071018B5F6A3 /* GCDWebServerRequest.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerRequest.h; path = GCDWebServer/Core/GCDWebServerRequest.h; sourceTree = "<group>"; };
+		E8037C63F782049A70ED320E27FC198A /* SwiftIcons-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftIcons-dummy.m"; sourceTree = "<group>"; };
+		E8D2B40B7B1ABB1E71C806D9E02D74B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA56836CF020FEC62FC9540983D5FD2D /* GCDWebServerRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GCDWebServerRequest.m; path = GCDWebServer/Core/GCDWebServerRequest.m; sourceTree = "<group>"; };
+		EB2113AA88B5420246B856C3126B2303 /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = DDContextFilterLogFormatter.h; path = Classes/Extensions/DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		EB9435E5ED485B81134A290A9FDC0CE2 /* Icofont.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = Icofont.ttf; path = Source/Icofont.ttf; sourceTree = "<group>"; };
+		EE22F6F4264A451D14678AFCE0E1C55B /* MaterialIcons.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = MaterialIcons.ttf; path = Source/MaterialIcons.ttf; sourceTree = "<group>"; };
+		F1AE5EFE36AC912034C775DDEED190DB /* FontAwesome.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = FontAwesome.ttf; path = Source/FontAwesome.ttf; sourceTree = "<group>"; };
+		F3D1A9DD817360AC5690D50B801FA40B /* GCDWebServerErrorResponse.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GCDWebServerErrorResponse.h; path = GCDWebServer/Responses/GCDWebServerErrorResponse.h; sourceTree = "<group>"; };
+		F6E5C7E20709C8A148203BA3F3B2000A /* DDAbstractDatabaseLogger.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDAbstractDatabaseLogger.m; path = Classes/DDAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		F98E6D9222F7541B13DEA2DBB4DC2F75 /* DDDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DDDispatchQueueLogFormatter.m; path = Classes/Extensions/DDDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		FA4DA07642892C863302574D9E344230 /* GCDWebServer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = GCDWebServer.framework; path = GCDWebServer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB9FA1C5CDD6E59F8A2A0E4C672A60C1 /* SideMenu-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SideMenu-prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		285B0FA9C2DB2BD1AABD9C8B6F985C20 /* Frameworks */ = {
+		00D183B177BF965033CD63F41649A7FD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A2793C3F0451AD8ACFDD5F34FBBD024 /* Foundation.framework in Frameworks */,
+				8671A646B730203B2EE6000948651084 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		33CAD9532CF4E567314A48B284499F9B /* Frameworks */ = {
+		4A259DE23BAFC396F1F1D42F7D5BEF69 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				543E1E55468F79412C6B36F0C5ED839F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,44 +325,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6FE82B19D5A3E346B4124D597FBCC29E /* Frameworks */ = {
+		A63FEFC1E400FC87E433B92A2C03B228 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				351F42CE0E4287ADDA29C608DFA09494 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A7F70D4F88838FE7560B17D77FBB8A2D /* Frameworks */ = {
+		C5DBCEC2673E7F06B1CB7480E2A321FE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF586A3E85ECE4372137A34D069E3B77 /* Foundation.framework in Frameworks */,
+				E35282D58F9AED5C064AAD7336266A15 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E84A4FE5A9FCEEDD97BA1C236B5F4D26 /* Frameworks */ = {
+		C99C1D135807B997E9DC74B23D22FDAE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54649C620FD6FC3BFA039E981314E28D /* Foundation.framework in Frameworks */,
+				61D9C63828CA26A4B94871F65BEB77E0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0077FEC65C9A066C931DA65CD177B602 /* CocoaLumberjack */ = {
-			isa = PBXGroup;
-			children = (
-				122C0DF81B57CFE5236BBD9805DE1250 /* Default */,
-				FE91632927400F2B2C5552DEBA8F605A /* Extensions */,
-				6DB21D8FF1CCF2265A3248B0FBA3DE3C /* Support Files */,
-			);
-			name = CocoaLumberjack;
-			path = CocoaLumberjack;
-			sourceTree = "<group>";
-		};
 		029BB183C4EF772891D345868F4D4477 /* Pods-MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,30 +369,59 @@
 			path = "Target Support Files/Pods-MusicPlayer";
 			sourceTree = "<group>";
 		};
-		122C0DF81B57CFE5236BBD9805DE1250 /* Default */ = {
+		03292B848CFD832E69DCA45233D457C7 /* Default */ = {
 			isa = PBXGroup;
 			children = (
-				AC14C8B8DDA5FF2F780DFFAE9D061432 /* CocoaLumberjack.h */,
-				386D133ACEBCC474A6B91EF5ECC502CE /* DDAbstractDatabaseLogger.h */,
-				C3799C0253E2E829DE7DBA9D142855F3 /* DDAbstractDatabaseLogger.m */,
-				4E39359BD5847386E3C7C28BEB68FD7E /* DDASLLogCapture.h */,
-				927BA769008F54AC93F5FB0037939B27 /* DDASLLogCapture.m */,
-				A603E375FEF967502C629D7FC3212D7B /* DDASLLogger.h */,
-				0AFB26F182F5E6312E9879C251F38098 /* DDASLLogger.m */,
-				1725977500CAD4597C4281D87B4293F8 /* DDAssertMacros.h */,
-				12CD24FF87BE392BA25CB5BF8212F918 /* DDFileLogger.h */,
-				8EC225387F8C93929613680235121B50 /* DDFileLogger.m */,
-				1FAE60F876F3866EBDB06869ACD8F136 /* DDLegacyMacros.h */,
-				CFEFA4134132F200A6E00FF3E264DE9E /* DDLog.h */,
-				15EB29E1B00B80F566965E4D729CD710 /* DDLog.m */,
-				6D9C8055FDB9A352E7647D79C8F6AA03 /* DDLog+LOGV.h */,
-				2E18BA027461E4530E4FAA684648CC6B /* DDLogMacros.h */,
-				B7FD94943C459684E1D6504DA28651D7 /* DDOSLogger.h */,
-				ABCC22ADCFF1275A3CF1E49235953A5A /* DDOSLogger.m */,
-				105D1309B9736681261F378BC8E4B622 /* DDTTYLogger.h */,
-				395B2DDECAC2B188AA551F3DC6B1B75C /* DDTTYLogger.m */,
+				2BB3360CC5F3F323D258A2B70297EC7F /* CocoaLumberjack.h */,
+				60D3B841C2773486939C0FFD77033846 /* DDAbstractDatabaseLogger.h */,
+				F6E5C7E20709C8A148203BA3F3B2000A /* DDAbstractDatabaseLogger.m */,
+				D885BD5BCBC259DDF916220E1868ADBF /* DDASLLogCapture.h */,
+				7D8B5D2BC67CC3EC966EACDA60678880 /* DDASLLogCapture.m */,
+				DF8DDB19606612A82B19463905AAC44D /* DDASLLogger.h */,
+				004E95AB3307B2C099B5BB8D7599EC16 /* DDASLLogger.m */,
+				886C17D9EA9B8E4E7E31BEEA4723EEE1 /* DDAssertMacros.h */,
+				7D21497128EB9069F4DEB2CE627AA283 /* DDFileLogger.h */,
+				2AD5474577C0B99ECF382EDCB232F0B5 /* DDFileLogger.m */,
+				073F639D7B02C7DD013AA876EA77A055 /* DDLegacyMacros.h */,
+				6FC874B706150FDEEAEA232C1892E490 /* DDLog.h */,
+				D0AFB05B7689D03A32F8DD53AE54428B /* DDLog.m */,
+				37E7BEFDC2D6452705F02095A28822A2 /* DDLog+LOGV.h */,
+				A018C0C9DCA6C8B6502CCA0733A09496 /* DDLogMacros.h */,
+				960F055E69B1444F429106F27E03D513 /* DDOSLogger.h */,
+				87CBEF1D1917A79AF16F08280AFAF546 /* DDOSLogger.m */,
+				10B1923A3685AE7C8948ABD11549A6D9 /* DDTTYLogger.h */,
+				671C43BF1CED700E02338CD98E3B50A0 /* DDTTYLogger.m */,
 			);
 			name = Default;
+			sourceTree = "<group>";
+		};
+		07CF27D29CC9314AC59739618902A000 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3CEB77BB9EB76892692476C58B62D064 /* Dripicons.ttf */,
+				00636AA2C1CF3C584C1DFE1B99927BB5 /* Emoji.ttf */,
+				F1AE5EFE36AC912034C775DDEED190DB /* FontAwesome.ttf */,
+				EB9435E5ED485B81134A290A9FDC0CE2 /* Icofont.ttf */,
+				ADC3A16C082DCC23864C173B324ADA6E /* Ionicons.ttf */,
+				2BA6FEA5E756E64DF55E0BB6A0B5996D /* Linearicons.ttf */,
+				A05641BC712B26B3AF6802D7A809D96C /* MapIcons.ttf */,
+				EE22F6F4264A451D14678AFCE0E1C55B /* MaterialIcons.ttf */,
+				89E00DA7FAD59A2A784FC55806B69A26 /* OpenIconic.ttf */,
+				8CCDE01794039A28587884F651022DAD /* Stateface.ttf */,
+				0FD71EFCC4A28E9D6ECE63965A313F62 /* WeatherIcons.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		1209FF72958E16AD96E6E62A82CD3825 /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				03292B848CFD832E69DCA45233D457C7 /* Default */,
+				1B816AF00F8822AC02DA9490F0B95A85 /* Extensions */,
+				CD549D291AC882E0BA0D33BFFDE21E81 /* Support Files */,
+			);
+			name = CocoaLumberjack;
+			path = CocoaLumberjack;
 			sourceTree = "<group>";
 		};
 		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
@@ -408,98 +432,66 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		28ECB96735DDC94197D92E28CF17241C /* GCDWebServer */ = {
+		1B816AF00F8822AC02DA9490F0B95A85 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				DC4E13DE075EB5A23E3798A2591F1694 /* Core */,
-				88AEF696E686B26174F9ED6795D3FB6B /* Support Files */,
-				54AD13D2D61E570DCD7391BF40020301 /* WebUploader */,
+				EB2113AA88B5420246B856C3126B2303 /* DDContextFilterLogFormatter.h */,
+				6DE1F369806C0EA76F834F1CBFDA9BD0 /* DDContextFilterLogFormatter.m */,
+				4B5B8713DCFCA74841AA568D8614C381 /* DDDispatchQueueLogFormatter.h */,
+				F98E6D9222F7541B13DEA2DBB4DC2F75 /* DDDispatchQueueLogFormatter.m */,
+				D4F2ED609A65D80E15C26F7934157832 /* DDMultiFormatter.h */,
+				8878BC6DEB3D86DD7134982427BA4BF1 /* DDMultiFormatter.m */,
 			);
-			name = GCDWebServer;
-			path = GCDWebServer;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
-		4A9615803B3E3028F2C70EA017E5526D /* Core */ = {
+		39D2F15E8DE609636393CBB93F1C2C75 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				56D5B9F135BCD20153150FF97858372F /* GCDWebUploader.h */,
-				4B2AC3D661CDF2C0BD70A5B312429E99 /* GCDWebUploader.m */,
-				6A972610F92AA5E83FE24F3AB881DF63 /* Resources */,
+				8615716C4B85CE1C79B779F12A79336D /* GCDWebUploader.h */,
+				AB4CEC33AD67365B6076AABB918E15CE /* GCDWebUploader.m */,
+				D10939C4BAAE16923FA293741E164C00 /* Resources */,
 			);
 			name = Core;
 			sourceTree = "<group>";
 		};
-		54AD13D2D61E570DCD7391BF40020301 /* WebUploader */ = {
+		3C56E8AA576053ABC3568FD1F1F2FD16 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				4A9615803B3E3028F2C70EA017E5526D /* Core */,
-			);
-			name = WebUploader;
-			sourceTree = "<group>";
-		};
-		54FCC9B4164B42CCFB8FE2EA2537A3D1 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				3E3F5ECE652AD80A4C122577D4C6B4A7 /* Info.plist */,
-				43746200450A8D4E7C58F6F507A67372 /* SwiftyBeaver.modulemap */,
-				CD258431992AA0D9F9EA1C02C64E8CF7 /* SwiftyBeaver.xcconfig */,
-				2475B8484AFCB3BCEE12A764FC379098 /* SwiftyBeaver-dummy.m */,
-				11A46F7C768DA78BA196D1639321A78F /* SwiftyBeaver-prefix.pch */,
-				A84D4EF49EFD1E68BF3D1B5B0B1E72EB /* SwiftyBeaver-umbrella.h */,
+				73E379377313BEAFBE39B6F91F0548C1 /* Info.plist */,
+				1CEAC5169F1042D822A8022752F3A528 /* SideMenu.modulemap */,
+				57E90EF7955304428F0A0B7F96483AB3 /* SideMenu.xcconfig */,
+				9C2BAB03DA8CE0AC24E79C4D1A6A4C2D /* SideMenu-dummy.m */,
+				FB9FA1C5CDD6E59F8A2A0E4C672A60C1 /* SideMenu-prefix.pch */,
+				77E2CF6F38101CB20940D80B18CB45F7 /* SideMenu-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/SwiftyBeaver";
+			path = "../Target Support Files/SideMenu";
 			sourceTree = "<group>";
 		};
-		55AA1A912F14D58E1215E6A667D4AE9F /* Resources */ = {
+		50152C6AF7943B1B51ED18BB49FAF2B2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				702B72C782684C7DF40E8CE59B327462 /* Dripicons.ttf */,
-				A4A0AF34EAF6CAA5521817ED6BD8B9C8 /* Emoji.ttf */,
-				436FEA78309D3C3698665BD536B1912C /* FontAwesome.ttf */,
-				01AB886D10CDD4983633981839068346 /* Icofont.ttf */,
-				C4D86B1A0CF294F2D34EA7C5B436EAAE /* Ionicons.ttf */,
-				543C9690FB20B910670D025E366DC97F /* Linearicons.ttf */,
-				2BB2EF9277B6457A492F1D5CA9E2072C /* MapIcons.ttf */,
-				00D917123BC4C6A49F8167277F0F8EC7 /* MaterialIcons.ttf */,
-				A229850498C483C5C74F248B9DFA030F /* OpenIconic.ttf */,
-				A4176FF722B3602675981DE154EE1901 /* Stateface.ttf */,
-				6A537CC8C78CFA023BB53E392A715826 /* WeatherIcons.ttf */,
+				69D6E2897BB58F624906E018F8A456CE /* CocoaLumberjack.framework */,
+				FA4DA07642892C863302574D9E344230 /* GCDWebServer.framework */,
+				3D966ACAF5C44D9755090BA881CF54A4 /* Pods_MusicPlayer.framework */,
+				4744D65C4842D7506920C9346E344F4C /* SideMenu.framework */,
+				68E00F7AE9865720B4742159746CA219 /* SwiftIcons.bundle */,
+				0664DFA851C710585258666A88C5D61E /* SwiftIcons.framework */,
+				4EB4C864C7A2C2AFFAC064E8E23FF7D2 /* SwiftyBeaver.framework */,
 			);
-			name = Resources;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		6A972610F92AA5E83FE24F3AB881DF63 /* Resources */ = {
+		682B8CB44A3F56760C175C1604AA87E7 /* GCDWebServer */ = {
 			isa = PBXGroup;
 			children = (
-				6EE00B54E9E3D253F37F083B1125D8FB /* GCDWebUploader.bundle */,
+				CC6E542E753E14E62DCF7CF593F07B24 /* Core */,
+				9F037110C97F6C3B9D325E6F281298B7 /* Support Files */,
+				B1C190556D836C0C7FBB5A62935EE228 /* WebUploader */,
 			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		6DB21D8FF1CCF2265A3248B0FBA3DE3C /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				459AFA91BA36D63352C5E757277AA890 /* CocoaLumberjack.modulemap */,
-				B4579C614E2D8BC8B9B449F83819340A /* CocoaLumberjack.xcconfig */,
-				5ABC6AB4AE4852907313537522F1E446 /* CocoaLumberjack-dummy.m */,
-				150231249A7D7AAC767D35A7234C954A /* CocoaLumberjack-prefix.pch */,
-				0E1FECEF1E0CD5E1DA668BF86991D378 /* CocoaLumberjack-umbrella.h */,
-				92ED719A6A9FE36ED0806A9A949830F6 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/CocoaLumberjack";
-			sourceTree = "<group>";
-		};
-		731BC8646178F8C1A3D545A565B05288 /* SwiftIcons */ = {
-			isa = PBXGroup;
-			children = (
-				44091539518D8F66511700C9A222BE8E /* SwiftIcons.swift */,
-				55AA1A912F14D58E1215E6A667D4AE9F /* Resources */,
-				7E665342A0CFA05170C4418E395879A8 /* Support Files */,
-			);
-			name = SwiftIcons;
-			path = SwiftIcons;
+			name = GCDWebServer;
+			path = GCDWebServer;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -507,68 +499,36 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				90019B5F41514959EE897DC3C30665F6 /* Pods */,
-				DC26D6AA99D49B6D7866E88BFD2B31DF /* Products */,
+				9D94E67651D0A97C51ECD55E3C61BF7A /* Pods */,
+				50152C6AF7943B1B51ED18BB49FAF2B2 /* Products */,
 				ED1C26A3EF77B9481535BCE362D34DFB /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		7E665342A0CFA05170C4418E395879A8 /* Support Files */ = {
+		9D94E67651D0A97C51ECD55E3C61BF7A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				29BD3B80D454056CDFF2983AFCE73D69 /* Info.plist */,
-				A2E140300D738C426221CBB81DD44A1A /* ResourceBundle-SwiftIcons-Info.plist */,
-				55D7827B3595007CAC03388522453DA6 /* SwiftIcons.modulemap */,
-				66BB759A8C3F8B22BD24E615A42038AE /* SwiftIcons.xcconfig */,
-				1D2AE0A6D817C7B4C515778F088BE870 /* SwiftIcons-dummy.m */,
-				F09B1522803AED7D64E2A06787C18D5B /* SwiftIcons-prefix.pch */,
-				06C006FD7EDC0F5E9B8993C0CF366151 /* SwiftIcons-umbrella.h */,
+				1209FF72958E16AD96E6E62A82CD3825 /* CocoaLumberjack */,
+				682B8CB44A3F56760C175C1604AA87E7 /* GCDWebServer */,
+				FC67D6959022CA9A6CA9F00B1864A5AB /* SideMenu */,
+				DFC281940FB24132AC7B45A83BB843C4 /* SwiftIcons */,
+				C8492D260DDD237F0FC94DFB6394B0E0 /* SwiftyBeaver */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftIcons";
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		88AEF696E686B26174F9ED6795D3FB6B /* Support Files */ = {
+		9F037110C97F6C3B9D325E6F281298B7 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				4B4B2BD7FAA429879BB57C612D3C7349 /* GCDWebServer.modulemap */,
-				4EF9B52B01D1BF1A773A21B85B9A5E77 /* GCDWebServer.xcconfig */,
-				56C22EA846520AF3EA41B713704C428D /* GCDWebServer-dummy.m */,
-				0AF86653DAC4702952532A95C5747FA9 /* GCDWebServer-prefix.pch */,
-				711F61C949D3C1B392BEC2EF4B6AAF3E /* GCDWebServer-umbrella.h */,
-				05F5EF01287F3069D3812207F7BB9B3A /* Info.plist */,
+				A34D521383251157AE0FFC9F38898E7E /* GCDWebServer.modulemap */,
+				DE0D2E344DB6BB44A68886ADA6990B3F /* GCDWebServer.xcconfig */,
+				0140732C8759DE73618D0E72D75BBBAA /* GCDWebServer-dummy.m */,
+				6EECAD19EFDE28E00941FEB6EB94DADD /* GCDWebServer-prefix.pch */,
+				7B946AA574FC836FA4964360E951A44A /* GCDWebServer-umbrella.h */,
+				2957AAF906A416421DF634BADFE6287E /* Info.plist */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/GCDWebServer";
-			sourceTree = "<group>";
-		};
-		8D68954D2F0ED9366CACDB052890902C /* SwiftyBeaver */ = {
-			isa = PBXGroup;
-			children = (
-				0515177D229D8D8863C242687E5A9081 /* AES256CBC.swift */,
-				88B3662A2E45E23ACA0E3ECE8DCC77CC /* BaseDestination.swift */,
-				6A0BC238D6047FC7E353EC068A986C57 /* ConsoleDestination.swift */,
-				FB7BCB652B3BC2A48DE92EE5D6AB6B1A /* FileDestination.swift */,
-				95EB2CED76779AEEA5D6861B249075F5 /* Filter.swift */,
-				452F4C89BE2EFC32B162983A32AEBA64 /* GoogleCloudDestination.swift */,
-				2A8D894B676B42EA96C8929D49ADAEE6 /* SBPlatformDestination.swift */,
-				9F7D30BFCEE6D4220440D077F941C0A4 /* SwiftyBeaver.swift */,
-				54FCC9B4164B42CCFB8FE2EA2537A3D1 /* Support Files */,
-			);
-			name = SwiftyBeaver;
-			path = SwiftyBeaver;
-			sourceTree = "<group>";
-		};
-		90019B5F41514959EE897DC3C30665F6 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				0077FEC65C9A066C931DA65CD177B602 /* CocoaLumberjack */,
-				28ECB96735DDC94197D92E28CF17241C /* GCDWebServer */,
-				C794DDD4EED407696EE0EAB1F5CBAB81 /* SlideMenuControllerSwift */,
-				731BC8646178F8C1A3D545A565B05288 /* SwiftIcons */,
-				8D68954D2F0ED9366CACDB052890902C /* SwiftyBeaver */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		ADCB15BDF581CC579CFB5E9B75661C0E /* iOS */ = {
@@ -581,77 +541,126 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		C794DDD4EED407696EE0EAB1F5CBAB81 /* SlideMenuControllerSwift */ = {
+		B1C190556D836C0C7FBB5A62935EE228 /* WebUploader */ = {
 			isa = PBXGroup;
 			children = (
-				9CC06C5C2DA7CB7039F6A92A8EC5B015 /* SlideMenuController.swift */,
-				EB8225EE694D6FE2B4D90EBBC1F20E79 /* Support Files */,
+				39D2F15E8DE609636393CBB93F1C2C75 /* Core */,
 			);
-			name = SlideMenuControllerSwift;
-			path = SlideMenuControllerSwift;
+			name = WebUploader;
 			sourceTree = "<group>";
 		};
-		DC26D6AA99D49B6D7866E88BFD2B31DF /* Products */ = {
+		C8492D260DDD237F0FC94DFB6394B0E0 /* SwiftyBeaver */ = {
 			isa = PBXGroup;
 			children = (
-				87345EB51C79FE80C1277D6813AB94DF /* CocoaLumberjack.framework */,
-				C2263D7CE73F3347A024198A1DC7C16D /* GCDWebServer.framework */,
-				54C919AF73554A7FADA14AF174CB4B81 /* Pods_MusicPlayer.framework */,
-				ACBCEF17DCA336896319CA5C011FB45D /* SlideMenuControllerSwift.framework */,
-				1AB812F4EB582E95DD571C5B52EB816A /* SwiftIcons.bundle */,
-				2B05626FEC3258187EEFFA85245BC791 /* SwiftIcons.framework */,
-				05F4535F1347E5E373B3C6E11D39FDF8 /* SwiftyBeaver.framework */,
+				45C0DD9F14670991819CF9457D5D3216 /* AES256CBC.swift */,
+				8CF22AA345ED73CFD9B6EE4523AF42D9 /* BaseDestination.swift */,
+				71B606EB3A03841CE0CDF2BD9FA5F8F9 /* ConsoleDestination.swift */,
+				8E5C5BF77A637382C3E3815EC4EBEFA9 /* FileDestination.swift */,
+				0A7EED2BE347540E5987F497BDFCD9F9 /* Filter.swift */,
+				CAD19E1BA87F8D32C94CC44241911D39 /* GoogleCloudDestination.swift */,
+				C88F6C39140881BEBC7F916C41DC8064 /* SBPlatformDestination.swift */,
+				540B26EBBBD8E99E6369B2E83FA574BF /* SwiftyBeaver.swift */,
+				DD322CC150BA6A4B62B41EAD8CC8F9A8 /* Support Files */,
 			);
-			name = Products;
+			name = SwiftyBeaver;
+			path = SwiftyBeaver;
 			sourceTree = "<group>";
 		};
-		DC4E13DE075EB5A23E3798A2591F1694 /* Core */ = {
+		C88253944496CAE0A157A96137563EB1 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A8AFC13D33E4701D353F6E06AF9DB71D /* GCDWebServer.h */,
-				FEB3CA0346A1E288502392ED9F4AC187 /* GCDWebServer.m */,
-				D11441C0E0EC563B4FF8DE23EB87934B /* GCDWebServerConnection.h */,
-				F3AFE4B0084681CCF484587DD9C6D331 /* GCDWebServerConnection.m */,
-				6AEF6A97BB8B41455D520D8D57BC40F0 /* GCDWebServerDataRequest.h */,
-				B54A3923F25CC14D5FC5DE17C653C3C5 /* GCDWebServerDataRequest.m */,
-				ECC40CA93D592E2C9D779E168ED08D52 /* GCDWebServerDataResponse.h */,
-				BE63CD0038DE1EF184E6ADB63A25BD15 /* GCDWebServerDataResponse.m */,
-				965E58CCD02B22FF09BF1466FA4F856C /* GCDWebServerErrorResponse.h */,
-				0EBC5A7A1AADCC7D46BE86AF8902BE0C /* GCDWebServerErrorResponse.m */,
-				2C886F639ED54DEDAABB2BABC01863FC /* GCDWebServerFileRequest.h */,
-				D10221618899B96041F801D793FC8CAA /* GCDWebServerFileRequest.m */,
-				FD205AFE735C455205FD5D238823EE4D /* GCDWebServerFileResponse.h */,
-				C866C2C85A6475B2EADD4955861A269B /* GCDWebServerFileResponse.m */,
-				ECA71A537764E53E02E78CD7D8AD8BDC /* GCDWebServerFunctions.h */,
-				4D1A66413BCF2BECA2C379A3C4264DDF /* GCDWebServerFunctions.m */,
-				B39814A0D64D942102F5DE8BB7C79910 /* GCDWebServerHTTPStatusCodes.h */,
-				F87CB6B5D9B80BB0CFAEF19C26F436F9 /* GCDWebServerMultiPartFormRequest.h */,
-				0A868F5819CC85292A6D7F836EA1235F /* GCDWebServerMultiPartFormRequest.m */,
-				792E013186F8FE2CFC0615F7DE1CABCB /* GCDWebServerPrivate.h */,
-				1E189D178F7A5C50C4D01C2EB9D7A711 /* GCDWebServerRequest.h */,
-				47630DC3ADBBB7B211B1552B4C0DAA80 /* GCDWebServerRequest.m */,
-				DFD9C05370F71262CB9F2E48E782E409 /* GCDWebServerResponse.h */,
-				352214B3EDBA6DCB5EE1F0350227BC3E /* GCDWebServerResponse.m */,
-				A6EE934282931D3DD1D19328189701E7 /* GCDWebServerStreamedResponse.h */,
-				C611D4A81962669A484DBF842E48FA2E /* GCDWebServerStreamedResponse.m */,
-				47E7DFC1BE7ABFD4574BF3A9DAD0F416 /* GCDWebServerURLEncodedFormRequest.h */,
-				9DD1858E47AF2D4CA96D16CD076E7ED3 /* GCDWebServerURLEncodedFormRequest.m */,
+				A311685BB70322FB2ECB5D2F68EF9027 /* Info.plist */,
+				0ACF2C70765313131DDB77AFE199B746 /* ResourceBundle-SwiftIcons-Info.plist */,
+				C0226A64B66D530514F6429902380021 /* SwiftIcons.modulemap */,
+				614F745A6728A1878F67DDC6A23757D5 /* SwiftIcons.xcconfig */,
+				E8037C63F782049A70ED320E27FC198A /* SwiftIcons-dummy.m */,
+				6F290BE73B888C566E7704B9E5130F5D /* SwiftIcons-prefix.pch */,
+				C136028B32C3523C1E128E6CEADC8E82 /* SwiftIcons-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftIcons";
+			sourceTree = "<group>";
+		};
+		CC6E542E753E14E62DCF7CF593F07B24 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				A836343FD687DCA26BE3B5655675C4E3 /* GCDWebServer.h */,
+				C15C43804826439C194E1F336AFCDA74 /* GCDWebServer.m */,
+				9F47D09F5CA70583D736269FCB284C12 /* GCDWebServerConnection.h */,
+				5590FC5A4CE3EBED03547328A83C2B93 /* GCDWebServerConnection.m */,
+				BE822A113B3888ADE5F1FC0B8CD67571 /* GCDWebServerDataRequest.h */,
+				5C6535FFEF03CDE3FDCCD707069CA3AD /* GCDWebServerDataRequest.m */,
+				C089FCFD577F6DE3EF474CF3A9719A04 /* GCDWebServerDataResponse.h */,
+				40175A9D25A1A3345649C79B025D5917 /* GCDWebServerDataResponse.m */,
+				F3D1A9DD817360AC5690D50B801FA40B /* GCDWebServerErrorResponse.h */,
+				5A929BCF54C5E021DA83006F03F5B6EC /* GCDWebServerErrorResponse.m */,
+				C1E7F6332DAEC8012329BB2FF7836EB0 /* GCDWebServerFileRequest.h */,
+				0DB564E2EA6BB9006B0757B29F72A4F6 /* GCDWebServerFileRequest.m */,
+				750A4D5FDCF83FDD2510A2651A6CD8E5 /* GCDWebServerFileResponse.h */,
+				BB09DCF9D9D4D7D63EE97F4222D06D35 /* GCDWebServerFileResponse.m */,
+				564A84481D4E934D183F2FBC86C292FE /* GCDWebServerFunctions.h */,
+				BDD0BB0D6705C6F074F5E61A26B16E00 /* GCDWebServerFunctions.m */,
+				A2B807B682366370A15120609D257CFB /* GCDWebServerHTTPStatusCodes.h */,
+				86B82B908DFC8210B47C74EA0A712086 /* GCDWebServerMultiPartFormRequest.h */,
+				257398D1BBB92B763CD080CB3BBD1A76 /* GCDWebServerMultiPartFormRequest.m */,
+				81C8ADFCC4EE785DCF078C239360B18F /* GCDWebServerPrivate.h */,
+				E33D9631E732E02E7BE4071018B5F6A3 /* GCDWebServerRequest.h */,
+				EA56836CF020FEC62FC9540983D5FD2D /* GCDWebServerRequest.m */,
+				C930CFC8372122EEABFED41D1E5E8177 /* GCDWebServerResponse.h */,
+				4B5A363F4F25CE65C128D8185D083896 /* GCDWebServerResponse.m */,
+				37658433EBA019CDB42E3D67F37B0437 /* GCDWebServerStreamedResponse.h */,
+				90C838B44C0CE85792AB3B6CA7A470AB /* GCDWebServerStreamedResponse.m */,
+				0E5793305E6A57020719D8B9C74C1EEF /* GCDWebServerURLEncodedFormRequest.h */,
+				97E4A5722D3BDE40F8FD2F860C404971 /* GCDWebServerURLEncodedFormRequest.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
 		};
-		EB8225EE694D6FE2B4D90EBBC1F20E79 /* Support Files */ = {
+		CD549D291AC882E0BA0D33BFFDE21E81 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				A66E2F910E8DF40098AEEC7C3CC81471 /* Info.plist */,
-				1AD044C789B7BD7DA837F776322D2C55 /* SlideMenuControllerSwift.modulemap */,
-				FF71FB85FC955B6AFDA5E60A2A4DC99A /* SlideMenuControllerSwift.xcconfig */,
-				5D41152FD2C01C05611FA2A22422BD62 /* SlideMenuControllerSwift-dummy.m */,
-				9A18B0F2B57AAADB3E64640CAF2AF4DD /* SlideMenuControllerSwift-prefix.pch */,
-				C530F186139B183941958C758DE1FBA5 /* SlideMenuControllerSwift-umbrella.h */,
+				6E927B530C0CB16A5DB57F380C3BF8DB /* CocoaLumberjack.modulemap */,
+				C7369BE76D7035A4CBFD604ABA6F6990 /* CocoaLumberjack.xcconfig */,
+				C48491DF4F62F95AC5E235F3FB7B765E /* CocoaLumberjack-dummy.m */,
+				CC7D7ECA8A1D28052E57C138EBBCBD41 /* CocoaLumberjack-prefix.pch */,
+				7A53A7BD29EE2EAB6DCFFCD318F5CAAB /* CocoaLumberjack-umbrella.h */,
+				E8D2B40B7B1ABB1E71C806D9E02D74B4 /* Info.plist */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/SlideMenuControllerSwift";
+			path = "../Target Support Files/CocoaLumberjack";
+			sourceTree = "<group>";
+		};
+		D10939C4BAAE16923FA293741E164C00 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				94370AC0A6A78369F12A86D9CCC452A2 /* GCDWebUploader.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		DD322CC150BA6A4B62B41EAD8CC8F9A8 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				215E8280746F37883C5A7C39BF067C5F /* Info.plist */,
+				25D6E590DBC211675D9F54772705BC17 /* SwiftyBeaver.modulemap */,
+				E0A3DC36399BD46579B75BF3939E07DB /* SwiftyBeaver.xcconfig */,
+				59690F78EE4A289BEC08C9E1F59BC187 /* SwiftyBeaver-dummy.m */,
+				8D6FCC91F9DD159F4E51B7AB95886BDA /* SwiftyBeaver-prefix.pch */,
+				C2032A53FF66C9DA7487C61C6767F8B8 /* SwiftyBeaver-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyBeaver";
+			sourceTree = "<group>";
+		};
+		DFC281940FB24132AC7B45A83BB843C4 /* SwiftIcons */ = {
+			isa = PBXGroup;
+			children = (
+				414C02EA0E6D777638E6D2755D8B1BBA /* SwiftIcons.swift */,
+				07CF27D29CC9314AC59739618902A000 /* Resources */,
+				C88253944496CAE0A157A96137563EB1 /* Support Files */,
+			);
+			name = SwiftIcons;
+			path = SwiftIcons;
 			sourceTree = "<group>";
 		};
 		ED1C26A3EF77B9481535BCE362D34DFB /* Targets Support Files */ = {
@@ -662,35 +671,27 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		FE91632927400F2B2C5552DEBA8F605A /* Extensions */ = {
+		FC67D6959022CA9A6CA9F00B1864A5AB /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				1A9DCC602F1876665618E7929B506B1C /* DDContextFilterLogFormatter.h */,
-				4F12405B38B6007A68D4A85E53790334 /* DDContextFilterLogFormatter.m */,
-				91586B38BFE490DDA38DEDB2D97FAB39 /* DDDispatchQueueLogFormatter.h */,
-				068BB07A0C52733380B03382EE260294 /* DDDispatchQueueLogFormatter.m */,
-				010DA29F77792AB423826B6A52A8B722 /* DDMultiFormatter.h */,
-				530149A44D0C11935127417F448C6AFC /* DDMultiFormatter.m */,
+				B21742A08E7C3A6DA529F1FF50DFF30F /* SideMenuManager.swift */,
+				15FD553677E809F5DCC9FE7F4837929A /* SideMenuTransition.swift */,
+				1D718AE8451103E6F4BD23BD5BBD031D /* UISideMenuNavigationController.swift */,
+				AC763FCEF07A4A938F4C9758C78CB55A /* UITableViewVibrantCell.swift */,
+				3C56E8AA576053ABC3568FD1F1F2FD16 /* Support Files */,
 			);
-			name = Extensions;
+			name = SideMenu;
+			path = SideMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		0C5D6D0C1A7EB21C31F8E8A98FD95AAC /* Headers */ = {
+		12553F8CFF46206A3ED66C130BFBA280 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A0A20E017C4F2B6443E5D2DC82C2AC2 /* SlideMenuControllerSwift-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2ED42D0955C8A71015826FB3D23AE0AB /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3B8F8F37A45DEFC44192F7072B3ABF03 /* SwiftIcons-umbrella.h in Headers */,
+				534665DD44DBC20FFEBE3F1248667C8F /* SideMenu-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,11 +718,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AD602677F696D91F16121DBEC42B27E5 /* Headers */ = {
+		7256A6C7DBB4C8612192DF53D6EC9E81 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43331D1D7D5CFB8426CC224E85EA27C9 /* Pods-MusicPlayer-umbrella.h in Headers */,
+				1F4DA5195C2BFFE7CC514E057D44860E /* SwiftIcons-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7889CE00DB9D6C34DE9C576DA5F014BD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BA9E1ED1354B264662BB81F8A4D71BD /* Pods-MusicPlayer-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,38 +758,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C85E0446F05239405E4C525E2C5FAFFE /* Headers */ = {
+		E755925F65820C7FE44033A3F879A6F9 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FBEEE1877FB889F85EEE3C252F67762 /* SwiftyBeaver-umbrella.h in Headers */,
+				3918E274BDB8B0158357C3562630E39B /* SwiftyBeaver-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0CB5B3827E2B465873FDB800815E9D00 /* Pods-MusicPlayer */ = {
+		004D845E6E6750B5CEBBEB26920A7FC5 /* SwiftIcons-SwiftIcons */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 30B6F38E6570FD9934404F2005C24D40 /* Build configuration list for PBXNativeTarget "Pods-MusicPlayer" */;
+			buildConfigurationList = DF615909805C3130E08A0959101827AD /* Build configuration list for PBXNativeTarget "SwiftIcons-SwiftIcons" */;
 			buildPhases = (
-				1D11F80FDDFF621947027488D53A5F7B /* Sources */,
-				A7F70D4F88838FE7560B17D77FBB8A2D /* Frameworks */,
-				AD602677F696D91F16121DBEC42B27E5 /* Headers */,
+				5356746296C0A74B4E778EEB8E578796 /* Sources */,
+				A63FEFC1E400FC87E433B92A2C03B228 /* Frameworks */,
+				A4B4CA2583EB665FFE624C36BD667DCA /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BE3741FFFF32933BFE9B87E78893A077 /* PBXTargetDependency */,
-				2FCBD610C12FEF922E2395CF86062B55 /* PBXTargetDependency */,
-				11E4F454C07A8CFD5A0CB33F192FC48D /* PBXTargetDependency */,
-				7C26B28FED9857F100A524475E37325E /* PBXTargetDependency */,
-				818BDC63940505B8A2683A0E10AA479A /* PBXTargetDependency */,
 			);
-			name = "Pods-MusicPlayer";
-			productName = "Pods-MusicPlayer";
-			productReference = 54C919AF73554A7FADA14AF174CB4B81 /* Pods_MusicPlayer.framework */;
-			productType = "com.apple.product-type.framework";
+			name = "SwiftIcons-SwiftIcons";
+			productName = "SwiftIcons-SwiftIcons";
+			productReference = 68E00F7AE9865720B4742159746CA219 /* SwiftIcons.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 		46C7342B832CF5150686CAD616C488B3 /* GCDWebServer */ = {
 			isa = PBXNativeTarget;
@@ -797,69 +801,35 @@
 			);
 			name = GCDWebServer;
 			productName = GCDWebServer;
-			productReference = C2263D7CE73F3347A024198A1DC7C16D /* GCDWebServer.framework */;
+			productReference = FA4DA07642892C863302574D9E344230 /* GCDWebServer.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		6F50BE7A20651876A4D60C2EDFF6CD6E /* SlideMenuControllerSwift */ = {
+		563E618B9A33E719723E861DC5FFD834 /* SwiftIcons */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0C3A5D4639E1CE88C8BA4CD73E788C85 /* Build configuration list for PBXNativeTarget "SlideMenuControllerSwift" */;
+			buildConfigurationList = 0911498086CA1F316E405E1FE8A6EEAA /* Build configuration list for PBXNativeTarget "SwiftIcons" */;
 			buildPhases = (
-				E16CE2B11710027541C476735E99FA4E /* Sources */,
-				E84A4FE5A9FCEEDD97BA1C236B5F4D26 /* Frameworks */,
-				0C5D6D0C1A7EB21C31F8E8A98FD95AAC /* Headers */,
+				D6678E90099D1E4927B45D58915B2F7C /* Sources */,
+				4A259DE23BAFC396F1F1D42F7D5BEF69 /* Frameworks */,
+				3B041D5C2985E677DAF4B7BE474B796D /* Resources */,
+				7256A6C7DBB4C8612192DF53D6EC9E81 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			name = SlideMenuControllerSwift;
-			productName = SlideMenuControllerSwift;
-			productReference = ACBCEF17DCA336896319CA5C011FB45D /* SlideMenuControllerSwift.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		D65EE8E65231404C713C5001A9415A5E /* SwiftIcons-SwiftIcons */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F3D169C9F802DFC80D09BB4F51EDD53B /* Build configuration list for PBXNativeTarget "SwiftIcons-SwiftIcons" */;
-			buildPhases = (
-				4D7DBFFE7CEDEAF04B7DE46197A00D00 /* Sources */,
-				33CAD9532CF4E567314A48B284499F9B /* Frameworks */,
-				9C210FDF32DE73AE910283D6EDC61B6F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "SwiftIcons-SwiftIcons";
-			productName = "SwiftIcons-SwiftIcons";
-			productReference = 1AB812F4EB582E95DD571C5B52EB816A /* SwiftIcons.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
-		D852265D3FB0D2F37DDC892C9E870195 /* SwiftIcons */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E39D603232D53873F7B9BCAEC9200CB7 /* Build configuration list for PBXNativeTarget "SwiftIcons" */;
-			buildPhases = (
-				CBCBA3515A8451EFCC134AB1915C0A42 /* Sources */,
-				6FE82B19D5A3E346B4124D597FBCC29E /* Frameworks */,
-				1144C7C9B414CE64332F7789661EBFA8 /* Resources */,
-				2ED42D0955C8A71015826FB3D23AE0AB /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B2224EB0994ED5BE86B1E4A8D103C312 /* PBXTargetDependency */,
+				5B6BF30A8C76157EDF4DAF77440F14B7 /* PBXTargetDependency */,
 			);
 			name = SwiftIcons;
 			productName = SwiftIcons;
-			productReference = 2B05626FEC3258187EEFFA85245BC791 /* SwiftIcons.framework */;
+			productReference = 0664DFA851C710585258666A88C5D61E /* SwiftIcons.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		E61E07E36793DB1F934C1BF40E167910 /* SwiftyBeaver */ = {
+		83B32584FF9AA7F6CF2E8435C9935702 /* SwiftyBeaver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1C4DFB96555CAA28ED3526AD8B8F2402 /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */;
+			buildConfigurationList = F9F1CCAF3880F07B494A12BAB0C99238 /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */;
 			buildPhases = (
-				C3752C4C0883FC29F57D4EEE27F8D514 /* Sources */,
-				285B0FA9C2DB2BD1AABD9C8B6F985C20 /* Frameworks */,
-				C85E0446F05239405E4C525E2C5FAFFE /* Headers */,
+				3D153959E6FC3DB73FC57E43439B5B1E /* Sources */,
+				00D183B177BF965033CD63F41649A7FD /* Frameworks */,
+				E755925F65820C7FE44033A3F879A6F9 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -867,7 +837,46 @@
 			);
 			name = SwiftyBeaver;
 			productName = SwiftyBeaver;
-			productReference = 05F4535F1347E5E373B3C6E11D39FDF8 /* SwiftyBeaver.framework */;
+			productReference = 4EB4C864C7A2C2AFFAC064E8E23FF7D2 /* SwiftyBeaver.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ACA400141EC942359B4F3B09027D64DF /* SideMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D229355D02D3A3EB0AD7CE2B75AFF5A0 /* Build configuration list for PBXNativeTarget "SideMenu" */;
+			buildPhases = (
+				5777C6928AB78CB1D8DD4B1F58E2568F /* Sources */,
+				C5DBCEC2673E7F06B1CB7480E2A321FE /* Frameworks */,
+				12553F8CFF46206A3ED66C130BFBA280 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SideMenu;
+			productName = SideMenu;
+			productReference = 4744D65C4842D7506920C9346E344F4C /* SideMenu.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C93863ECFB2EAA1F57B82DC15E09C28A /* Pods-MusicPlayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93FC22796206F133A994BFD1A8B36EF6 /* Build configuration list for PBXNativeTarget "Pods-MusicPlayer" */;
+			buildPhases = (
+				3D1869C5BE31E2ACE159A6BE1B4D8335 /* Sources */,
+				C99C1D135807B997E9DC74B23D22FDAE /* Frameworks */,
+				7889CE00DB9D6C34DE9C576DA5F014BD /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6D7C1261F915821809F0EA65160DBCBB /* PBXTargetDependency */,
+				FC3753DE73A73100D81EE5F8E60DC146 /* PBXTargetDependency */,
+				3A79E135F1C269194163BEB42A181B5F /* PBXTargetDependency */,
+				93EE32BE37C5D2992C1EABBE82A28A82 /* PBXTargetDependency */,
+				D0EB0F2FEDA9196977D7762000C89A8D /* PBXTargetDependency */,
+			);
+			name = "Pods-MusicPlayer";
+			productName = "Pods-MusicPlayer";
+			productReference = 3D966ACAF5C44D9755090BA881CF54A4 /* Pods_MusicPlayer.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EA2A920A891C4D3535867E5C3EF3D793 /* CocoaLumberjack */ = {
@@ -884,7 +893,7 @@
 			);
 			name = CocoaLumberjack;
 			productName = CocoaLumberjack;
-			productReference = 87345EB51C79FE80C1277D6813AB94DF /* CocoaLumberjack.framework */;
+			productReference = 69D6E2897BB58F624906E018F8A456CE /* CocoaLumberjack.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -904,27 +913,27 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = DC26D6AA99D49B6D7866E88BFD2B31DF /* Products */;
+			productRefGroup = 50152C6AF7943B1B51ED18BB49FAF2B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				EA2A920A891C4D3535867E5C3EF3D793 /* CocoaLumberjack */,
 				46C7342B832CF5150686CAD616C488B3 /* GCDWebServer */,
-				0CB5B3827E2B465873FDB800815E9D00 /* Pods-MusicPlayer */,
-				6F50BE7A20651876A4D60C2EDFF6CD6E /* SlideMenuControllerSwift */,
-				D852265D3FB0D2F37DDC892C9E870195 /* SwiftIcons */,
-				D65EE8E65231404C713C5001A9415A5E /* SwiftIcons-SwiftIcons */,
-				E61E07E36793DB1F934C1BF40E167910 /* SwiftyBeaver */,
+				C93863ECFB2EAA1F57B82DC15E09C28A /* Pods-MusicPlayer */,
+				ACA400141EC942359B4F3B09027D64DF /* SideMenu */,
+				563E618B9A33E719723E861DC5FFD834 /* SwiftIcons */,
+				004D845E6E6750B5CEBBEB26920A7FC5 /* SwiftIcons-SwiftIcons */,
+				83B32584FF9AA7F6CF2E8435C9935702 /* SwiftyBeaver */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1144C7C9B414CE64332F7789661EBFA8 /* Resources */ = {
+		3B041D5C2985E677DAF4B7BE474B796D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E430623E9C044139BC05DA3E4404988 /* SwiftIcons.bundle in Resources */,
+				46A5A61B7C4E11C377B5BF6336A18C57 /* SwiftIcons.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,21 +945,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9C210FDF32DE73AE910283D6EDC61B6F /* Resources */ = {
+		A4B4CA2583EB665FFE624C36BD667DCA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBA3B097DD9C15B86C3763C374D5FD97 /* Dripicons.ttf in Resources */,
-				B5A9059DE8FD9F87C6927274C4A6C5F8 /* Emoji.ttf in Resources */,
-				AEEA2330772394FAD1DC92504A47919F /* FontAwesome.ttf in Resources */,
-				9D6C64CB8DA1E12B9B735DEE9DF28467 /* Icofont.ttf in Resources */,
-				90BD90B4014CE1DCCA00E2BA0281A1C5 /* Ionicons.ttf in Resources */,
-				BC5BB4F6EE3E015546CBA06F83D96A21 /* Linearicons.ttf in Resources */,
-				81BC46308E536D2AFD13B4D753329BFF /* MapIcons.ttf in Resources */,
-				1D27BD8CAE508AC012491F62D5DAEAA4 /* MaterialIcons.ttf in Resources */,
-				FF39371E234FB0A230F39700A1289EB4 /* OpenIconic.ttf in Resources */,
-				ACE3622DBB471E970BE3E4E53F0B2EA9 /* Stateface.ttf in Resources */,
-				23EDF5CFB408071F8A42EB434BF1DAB8 /* WeatherIcons.ttf in Resources */,
+				B5F41505865990F3B09B9294DDE3024B /* Dripicons.ttf in Resources */,
+				FCC7C08EAF3A65B6E7266C7D61A2DDAE /* Emoji.ttf in Resources */,
+				8FA7C543C57A0CE6920D0DE140F5ACD2 /* FontAwesome.ttf in Resources */,
+				7F46FFB718E0E94F0A1D1CF011E594B2 /* Icofont.ttf in Resources */,
+				76F44929B3A2A57AB8F0076C265F9C48 /* Ionicons.ttf in Resources */,
+				175058FDD3B9BEF0EC0E6C47855C9D3E /* Linearicons.ttf in Resources */,
+				CCD32BFB7A3C673C14879A3D361B9588 /* MapIcons.ttf in Resources */,
+				7917DB7CCFEB0A32FE5C5C6B1464F8D8 /* MaterialIcons.ttf in Resources */,
+				3B9F10BA4D2110C2468A1A85E4703A0C /* OpenIconic.ttf in Resources */,
+				23B998B29E1D1E591EFF34A767B29964 /* Stateface.ttf in Resources */,
+				A2379EFD5E0A40AEE4C6EADBADD10F53 /* WeatherIcons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -979,14 +988,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D11F80FDDFF621947027488D53A5F7B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9D8574458CA7D613DDC01380DBC0152C /* Pods-MusicPlayer-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		374141C071FACD1CB06C808E77341DD9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1005,103 +1006,136 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D7DBFFE7CEDEAF04B7DE46197A00D00 /* Sources */ = {
+		3D153959E6FC3DB73FC57E43439B5B1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C8620615ED095C0BFF5325A61193476 /* AES256CBC.swift in Sources */,
+				267FF877F2E617B2EBC526F14E3FDE5A /* BaseDestination.swift in Sources */,
+				8A4522DA5CC5D3DC32FF881ED9556DD9 /* ConsoleDestination.swift in Sources */,
+				EB7F4D79AD4868835A54B3669C5F2300 /* FileDestination.swift in Sources */,
+				3139C0FB86659F9CEB6B2D189035EB2C /* Filter.swift in Sources */,
+				61EDBCAA17F0A0A8C37BC7B9AEAFCAF7 /* GoogleCloudDestination.swift in Sources */,
+				4B3D814143315233F6DFBCC7441E047B /* SBPlatformDestination.swift in Sources */,
+				BC821394F2903578DBF88E62D596542D /* SwiftyBeaver-dummy.m in Sources */,
+				BA8A5650DA4A1C86BD97A2E79FB3A762 /* SwiftyBeaver.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D1869C5BE31E2ACE159A6BE1B4D8335 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				574FA6E707AC72D9A6E50BF9DD22FF53 /* Pods-MusicPlayer-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5356746296C0A74B4E778EEB8E578796 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C3752C4C0883FC29F57D4EEE27F8D514 /* Sources */ = {
+		5777C6928AB78CB1D8DD4B1F58E2568F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC10B1AE275C62DB2AEA9129114FBC72 /* AES256CBC.swift in Sources */,
-				297AF31D2A932DFA4D46D6CCC649334E /* BaseDestination.swift in Sources */,
-				8A8BAF40EEEB86002DF22FC24BA21627 /* ConsoleDestination.swift in Sources */,
-				EE2B6A6EDA7FA2F2724D438C89F33780 /* FileDestination.swift in Sources */,
-				6642590E6DBD6CBA17CCAB1C8FF640E9 /* Filter.swift in Sources */,
-				4F7315C8A1B700DA743975B0398FF5AC /* GoogleCloudDestination.swift in Sources */,
-				23E52CCB7ED0D5DBDC22F1329FA5EFF3 /* SBPlatformDestination.swift in Sources */,
-				69BF4B126B5D7A8B816780EC645B8EAE /* SwiftyBeaver-dummy.m in Sources */,
-				4C13635F4179CE26B66156F001F44361 /* SwiftyBeaver.swift in Sources */,
+				A9ABD12367BE98E48AAE511247E63C74 /* SideMenu-dummy.m in Sources */,
+				D3E3F8765A1E6B6F2E2E0AC4D906FC75 /* SideMenuManager.swift in Sources */,
+				F2F43F98DC7C368568FC97C41C7D4ACF /* SideMenuTransition.swift in Sources */,
+				3252450655F6EE2057FCAAC046E18D48 /* UISideMenuNavigationController.swift in Sources */,
+				D639F78F403F486A00AF020D03457926 /* UITableViewVibrantCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CBCBA3515A8451EFCC134AB1915C0A42 /* Sources */ = {
+		D6678E90099D1E4927B45D58915B2F7C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EEE9B4782F24B44E17F74129AE2CCD9 /* SwiftIcons-dummy.m in Sources */,
-				2F7F3D3B2C0A0C5DBA773B231A36A297 /* SwiftIcons.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E16CE2B11710027541C476735E99FA4E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BAEF8CCE5E5BB8ACB688BDA5CF101682 /* SlideMenuController.swift in Sources */,
-				25D8ED023642E7806F3064112A1978E2 /* SlideMenuControllerSwift-dummy.m in Sources */,
+				69CF9BD5FB55D024B1DEBFA5F804ED58 /* SwiftIcons-dummy.m in Sources */,
+				13F12CF90EDDA834852BB0140C142A61 /* SwiftIcons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		11E4F454C07A8CFD5A0CB33F192FC48D /* PBXTargetDependency */ = {
+		3A79E135F1C269194163BEB42A181B5F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SlideMenuControllerSwift;
-			target = 6F50BE7A20651876A4D60C2EDFF6CD6E /* SlideMenuControllerSwift */;
-			targetProxy = 1EBCE011ABC35A8F9DECF03F2521D710 /* PBXContainerItemProxy */;
+			name = SideMenu;
+			target = ACA400141EC942359B4F3B09027D64DF /* SideMenu */;
+			targetProxy = E3AD9648652DADA7363A374486D62875 /* PBXContainerItemProxy */;
 		};
-		2FCBD610C12FEF922E2395CF86062B55 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GCDWebServer;
-			target = 46C7342B832CF5150686CAD616C488B3 /* GCDWebServer */;
-			targetProxy = 51A0EA1505DBAC7F249F994DACE97831 /* PBXContainerItemProxy */;
-		};
-		7C26B28FED9857F100A524475E37325E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftIcons;
-			target = D852265D3FB0D2F37DDC892C9E870195 /* SwiftIcons */;
-			targetProxy = FDD0779D9BAAF88476D65BEDB666DD79 /* PBXContainerItemProxy */;
-		};
-		818BDC63940505B8A2683A0E10AA479A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftyBeaver;
-			target = E61E07E36793DB1F934C1BF40E167910 /* SwiftyBeaver */;
-			targetProxy = 75ECCE17AE3AC9EF0B4A27800479BCE2 /* PBXContainerItemProxy */;
-		};
-		B2224EB0994ED5BE86B1E4A8D103C312 /* PBXTargetDependency */ = {
+		5B6BF30A8C76157EDF4DAF77440F14B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "SwiftIcons-SwiftIcons";
-			target = D65EE8E65231404C713C5001A9415A5E /* SwiftIcons-SwiftIcons */;
-			targetProxy = 27601A28FBF2E21624A572464C815BD8 /* PBXContainerItemProxy */;
+			target = 004D845E6E6750B5CEBBEB26920A7FC5 /* SwiftIcons-SwiftIcons */;
+			targetProxy = 936D49758672B831BA9B754D840D4B80 /* PBXContainerItemProxy */;
 		};
-		BE3741FFFF32933BFE9B87E78893A077 /* PBXTargetDependency */ = {
+		6D7C1261F915821809F0EA65160DBCBB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaLumberjack;
 			target = EA2A920A891C4D3535867E5C3EF3D793 /* CocoaLumberjack */;
-			targetProxy = 2BF879DE261226F30E7ED7630606C41D /* PBXContainerItemProxy */;
+			targetProxy = 55435CDE9511DC6EC60A740B9C65616C /* PBXContainerItemProxy */;
+		};
+		93EE32BE37C5D2992C1EABBE82A28A82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftIcons;
+			target = 563E618B9A33E719723E861DC5FFD834 /* SwiftIcons */;
+			targetProxy = 81A4E84F31BDA11A9E0136BBF343CE24 /* PBXContainerItemProxy */;
+		};
+		D0EB0F2FEDA9196977D7762000C89A8D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyBeaver;
+			target = 83B32584FF9AA7F6CF2E8435C9935702 /* SwiftyBeaver */;
+			targetProxy = 17379E2DB16F65B47919B811D8BB0CFF /* PBXContainerItemProxy */;
+		};
+		FC3753DE73A73100D81EE5F8E60DC146 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GCDWebServer;
+			target = 46C7342B832CF5150686CAD616C488B3 /* GCDWebServer */;
+			targetProxy = AC4C4B5752E5018225D66EF6F96C015B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		133634E65D34B04E07994FDED16FE247 /* Debug */ = {
+		14954DFEFBB4085C44CECC2DC936BEE8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66BB759A8C3F8B22BD24E615A42038AE /* SwiftIcons.xcconfig */;
+			baseConfigurationReference = 705AB26147D0F18DD46292CE66DB6F4D /* Pods-MusicPlayer.debug.xcconfig */;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftIcons";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/SwiftIcons/ResourceBundle-SwiftIcons-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = SwiftIcons;
+				INFOPLIST_FILE = "Target Support Files/Pods-MusicPlayer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_MusicPlayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
@@ -1153,43 +1187,9 @@
 			};
 			name = Debug;
 		};
-		1ED510468680AB52C82D3036046845FA /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD258431992AA0D9F9EA1C02C64E8CF7 /* SwiftyBeaver.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyBeaver/SwiftyBeaver-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyBeaver/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyBeaver/SwiftyBeaver.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SwiftyBeaver;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		2EC66FDC4791B8E5ABEB4A46162C3707 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4579C614E2D8BC8B9B449F83819340A /* CocoaLumberjack.xcconfig */;
+			baseConfigurationReference = C7369BE76D7035A4CBFD604ABA6F6990 /* CocoaLumberjack.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1222,7 +1222,7 @@
 		};
 		449827B9B91E4FAEE802FB9C69F7817F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4579C614E2D8BC8B9B449F83819340A /* CocoaLumberjack.xcconfig */;
+			baseConfigurationReference = C7369BE76D7035A4CBFD604ABA6F6990 /* CocoaLumberjack.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1253,9 +1253,44 @@
 			};
 			name = Debug;
 		};
-		515BF4E4EB07AE1B015CE828CDD9BFEC /* Release */ = {
+		5301D279CB8ADD2175573C9B518E559F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66BB759A8C3F8B22BD24E615A42038AE /* SwiftIcons.xcconfig */;
+			baseConfigurationReference = 57E90EF7955304428F0A0B7F96483AB3 /* SideMenu.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SideMenu/SideMenu-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SideMenu/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SideMenu/SideMenu.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SideMenu;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5AD4627EB0B724B6F65ADE9675600EC5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 614F745A6728A1878F67DDC6A23757D5 /* SwiftIcons.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1286,83 +1321,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		54007C57CEE6741DC47858C2233ACF3A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 205D535DDD9B480F92A9F65F0CFEE2FD /* Pods-MusicPlayer.release.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-MusicPlayer/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_MusicPlayer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		5D49BDCBC7155B2216560B38810B9313 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 705AB26147D0F18DD46292CE66DB6F4D /* Pods-MusicPlayer.debug.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-MusicPlayer/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_MusicPlayer;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
 		};
 		707B86CFB21B645E37109F39754D4051 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1408,43 +1366,26 @@
 			};
 			name = Release;
 		};
-		7CF209C2BC8465E584A2362C335294F3 /* Release */ = {
+		729D95164C6A94587BDA5D285A905EDA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF71FB85FC955B6AFDA5E60A2A4DC99A /* SlideMenuControllerSwift.xcconfig */;
+			baseConfigurationReference = 614F745A6728A1878F67DDC6A23757D5 /* SwiftIcons.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftIcons";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SlideMenuControllerSwift/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				INFOPLIST_FILE = "Target Support Files/SwiftIcons/ResourceBundle-SwiftIcons-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SlideMenuControllerSwift;
+				PRODUCT_NAME = SwiftIcons;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
 		7FAAC310CBBA0E4C8FC645A35593C567 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4EF9B52B01D1BF1A773A21B85B9A5E77 /* GCDWebServer.xcconfig */;
+			baseConfigurationReference = DE0D2E344DB6BB44A68886ADA6990B3F /* GCDWebServer.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1477,7 +1418,7 @@
 		};
 		96EAD46D1D1042BCB726CC13DF71A5DA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4EF9B52B01D1BF1A773A21B85B9A5E77 /* GCDWebServer.xcconfig */;
+			baseConfigurationReference = DE0D2E344DB6BB44A68886ADA6990B3F /* GCDWebServer.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1508,44 +1449,9 @@
 			};
 			name = Release;
 		};
-		A78C6FCB0346C5FFC01EAD7C5CF1D3CD /* Debug */ = {
+		C34578E278B49E8A6C95935118127474 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FF71FB85FC955B6AFDA5E60A2A4DC99A /* SlideMenuControllerSwift.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SlideMenuControllerSwift/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SlideMenuControllerSwift/SlideMenuControllerSwift.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SlideMenuControllerSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		E63E61112365E4B5A8EEE8BCB6183F0E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD258431992AA0D9F9EA1C02C64E8CF7 /* SwiftyBeaver.xcconfig */;
+			baseConfigurationReference = E0A3DC36399BD46579B75BF3939E07DB /* SwiftyBeaver.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1578,9 +1484,60 @@
 			};
 			name = Debug;
 		};
-		E73502CB73618E77E9BDB3A7057A69FD /* Debug */ = {
+		C3578B7205C5236CECBD6E09402C76AE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66BB759A8C3F8B22BD24E615A42038AE /* SwiftIcons.xcconfig */;
+			baseConfigurationReference = 614F745A6728A1878F67DDC6A23757D5 /* SwiftIcons.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftIcons";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/SwiftIcons/ResourceBundle-SwiftIcons-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = SwiftIcons;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		C5D735A537625EA6466FB0C9A89EB318 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57E90EF7955304428F0A0B7F96483AB3 /* SideMenu.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SideMenu/SideMenu-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SideMenu/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SideMenu/SideMenu.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SideMenu;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D06996D2B0ADAB8A586B9DDF3BFF2F1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 614F745A6728A1878F67DDC6A23757D5 /* SwiftIcons.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1613,40 +1570,86 @@
 			};
 			name = Debug;
 		};
-		E929728537B5158699BC47E309D9E906 /* Release */ = {
+		ED4663FC3573A99E34A0FE84772F4375 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66BB759A8C3F8B22BD24E615A42038AE /* SwiftIcons.xcconfig */;
+			baseConfigurationReference = 205D535DDD9B480F92A9F65F0CFEE2FD /* Pods-MusicPlayer.release.xcconfig */;
 			buildSettings = {
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SwiftIcons";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/SwiftIcons/ResourceBundle-SwiftIcons-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = SwiftIcons;
+				INFOPLIST_FILE = "Target Support Files/Pods-MusicPlayer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_MusicPlayer;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FF4CE96551E66EA2B6E769512FAD66CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0A3DC36399BD46579B75BF3939E07DB /* SwiftyBeaver.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyBeaver/SwiftyBeaver-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyBeaver/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyBeaver/SwiftyBeaver.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SwiftyBeaver;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0C3A5D4639E1CE88C8BA4CD73E788C85 /* Build configuration list for PBXNativeTarget "SlideMenuControllerSwift" */ = {
+		0911498086CA1F316E405E1FE8A6EEAA /* Build configuration list for PBXNativeTarget "SwiftIcons" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A78C6FCB0346C5FFC01EAD7C5CF1D3CD /* Debug */,
-				7CF209C2BC8465E584A2362C335294F3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1C4DFB96555CAA28ED3526AD8B8F2402 /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E63E61112365E4B5A8EEE8BCB6183F0E /* Debug */,
-				1ED510468680AB52C82D3036046845FA /* Release */,
+				D06996D2B0ADAB8A586B9DDF3BFF2F1D /* Debug */,
+				5AD4627EB0B724B6F65ADE9675600EC5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1660,15 +1663,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		30B6F38E6570FD9934404F2005C24D40 /* Build configuration list for PBXNativeTarget "Pods-MusicPlayer" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5D49BDCBC7155B2216560B38810B9313 /* Debug */,
-				54007C57CEE6741DC47858C2233ACF3A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		60944B9C9F08107B66FEFD2C6ED77168 /* Build configuration list for PBXNativeTarget "CocoaLumberjack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1678,20 +1672,38 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E39D603232D53873F7B9BCAEC9200CB7 /* Build configuration list for PBXNativeTarget "SwiftIcons" */ = {
+		93FC22796206F133A994BFD1A8B36EF6 /* Build configuration list for PBXNativeTarget "Pods-MusicPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E73502CB73618E77E9BDB3A7057A69FD /* Debug */,
-				515BF4E4EB07AE1B015CE828CDD9BFEC /* Release */,
+				14954DFEFBB4085C44CECC2DC936BEE8 /* Debug */,
+				ED4663FC3573A99E34A0FE84772F4375 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F3D169C9F802DFC80D09BB4F51EDD53B /* Build configuration list for PBXNativeTarget "SwiftIcons-SwiftIcons" */ = {
+		D229355D02D3A3EB0AD7CE2B75AFF5A0 /* Build configuration list for PBXNativeTarget "SideMenu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				133634E65D34B04E07994FDED16FE247 /* Debug */,
-				E929728537B5158699BC47E309D9E906 /* Release */,
+				5301D279CB8ADD2175573C9B518E559F /* Debug */,
+				C5D735A537625EA6466FB0C9A89EB318 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DF615909805C3130E08A0959101827AD /* Build configuration list for PBXNativeTarget "SwiftIcons-SwiftIcons" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C3578B7205C5236CECBD6E09402C76AE /* Debug */,
+				729D95164C6A94587BDA5D285A905EDA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9F1CCAF3880F07B494A12BAB0C99238 /* Build configuration list for PBXNativeTarget "SwiftyBeaver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C34578E278B49E8A6C95935118127474 /* Debug */,
+				FF4CE96551E66EA2B6E769512FAD66CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

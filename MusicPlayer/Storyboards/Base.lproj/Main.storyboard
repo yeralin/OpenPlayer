@@ -19,28 +19,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <label key="tableHeaderView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vX9-2B-jFv">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="Ycp-PL-Ufh">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <switch key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="FCo-bK-rxt">
-                            <rect key="frame" x="0.0" y="115" width="375" height="31"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <connections>
-                                <action selector="serverSwitch:" destination="xMS-ad-HRL" eventType="valueChanged" id="M9x-de-3ac"/>
-                            </connections>
-                        </switch>
+                        </imageView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuCell" rowHeight="43" id="Pf2-wc-JQb">
-                                <rect key="frame" x="0.0" y="72" width="375" height="43"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuCell" rowHeight="43" id="Pf2-wc-JQb" customClass="MenuCell" customModule="MusicPlayer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="153" width="375" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pf2-wc-JQb" id="uoY-GF-Z6j">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="42.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="I" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgm-ck-dVJ">
+                                            <rect key="frame" x="5" y="3" width="39" height="37"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nvs-Y5-VLT">
+                                            <rect key="frame" x="47" y="9" width="210" height="24"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="menuIcon" destination="kgm-ck-dVJ" id="yBJ-f9-tFK"/>
+                                    <outlet property="menuLabel" destination="nvs-Y5-VLT" id="rah-t5-hEW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -48,13 +59,39 @@
                             <outlet property="delegate" destination="xMS-ad-HRL" id="sDe-Wf-ON2"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="address" destination="vX9-2B-jFv" id="KWC-VB-CHu"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="L30-Mw-u7r"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="93s-xI-JAc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1933.5999999999999" y="112.89355322338831"/>
+            <point key="canvasLocation" x="1143" y="123"/>
+        </scene>
+        <!--Side Menu Navigation Controller-->
+        <scene sceneID="T62-CA-2np">
+            <objects>
+                <navigationController navigationBarHidden="YES" hidesBarsOnSwipe="YES" hidesBarsOnTap="YES" id="akZ-uC-KLm" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="6Mt-uS-opJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="nbU-ni-HOa">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="xMS-ad-HRL" kind="relationship" relationship="rootViewController" id="5G5-Kw-iHK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4ah-4E-tGv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1962" y="123"/>
         </scene>
         <!--PlaylistTable-->
         <scene sceneID="PlP-HS-LhV">
@@ -106,9 +143,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="AJ0-dD-Ysz">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="Zzz-cU-xWB">
+                        <barButtonItem key="leftBarButtonItem" title="I" width="60" id="Zzz-cU-xWB">
                             <connections>
                                 <action selector="openMenu:" destination="SUh-zq-jCq" id="Xj9-WC-obU"/>
+                                <segue destination="akZ-uC-KLm" kind="presentation" id="PXm-a1-9wm"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
@@ -121,12 +159,13 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="qMx-EK-Nxj">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
                         <outlet property="menuButton" destination="Zzz-cU-xWB" id="gGN-n4-bW1"/>
                         <outlet property="playlistTableView" destination="rVd-EI-0Ge" id="X8i-lc-sv7"/>
-                        <segue destination="VWp-Qd-oOH" kind="show" identifier="showSongs" id="bwu-Cl-gu3"/>
+                        <segue destination="VWp-Qd-oOH" kind="show" identifier="presentSongs" id="bwu-Cl-gu3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d1I-H1-x1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -319,7 +358,7 @@
             <objects>
                 <navigationController storyboardIdentifier="navigationView" automaticallyAdjustsScrollViewInsets="NO" id="ik8-wZ-hWS" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jim-Gy-rlg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Jim-Gy-rlg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -333,4 +372,7 @@
             <point key="canvasLocation" x="2767" y="-660"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo.png" width="400" height="200"/>
+    </resources>
 </document>

@@ -9,8 +9,8 @@
 import UIKit
 import CoreData
 import AVFoundation
-import SlideMenuControllerSwift
 import SwiftyBeaver
+import SideMenu
 let log = SwiftyBeaver.self
 
 @UIApplicationMain
@@ -21,16 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
+        SideMenuManager.menuPresentMode = .viewSlideOut
+        SideMenuManager.menuFadeStatusBar = false
         // Override point for customization after application launch.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let menuViewController = storyboard.instantiateViewController(withIdentifier: "menuView") as UIViewController
-        let playlistViewController = storyboard.instantiateViewController(withIdentifier: "navigationView") as UIViewController
-        SlideMenuOptions.panFromBezel = false
-        SlideMenuOptions.rightPanFromBezel = false
-        let slideMenuController = SlideMenuController(mainViewController: playlistViewController, leftMenuViewController: menuViewController)
-        self.window?.rootViewController = slideMenuController
-        self.window?.makeKeyAndVisible()
         AudioPlayer.sharedInstance.initAudioPlayer()
         do {
             UIApplication.shared.beginReceivingRemoteControlEvents()
