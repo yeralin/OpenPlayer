@@ -91,14 +91,14 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/CocoaLumberjack/CocoaLumberjack.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GCDWebServer/GCDWebServer.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SideMenu/SideMenu.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftIcons/SwiftIcons.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyBeaver/SwiftyBeaver.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/CocoaLumberjack/CocoaLumberjack.framework"
   install_framework "$BUILT_PRODUCTS_DIR/GCDWebServer/GCDWebServer.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SideMenu/SideMenu.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SWRevealViewController/SWRevealViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftIcons/SwiftIcons.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyBeaver/SwiftyBeaver.framework"
 fi

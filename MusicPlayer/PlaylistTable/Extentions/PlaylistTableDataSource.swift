@@ -8,6 +8,12 @@
 
 import UIKit
 
+extension UINavigationController {
+    var rootViewController : UIViewController? {
+        return viewControllers.first
+    }
+}
+
 private typealias PlaylistTableViewDataSource = PlaylistTableViewController
 extension PlaylistTableViewDataSource {
     
@@ -36,6 +42,10 @@ extension PlaylistTableViewDataSource {
             if let playlist = sender as? PlaylistEntity {
                 songsView.prepareSongs(receivedPlaylist: playlist)
             }
+        } else if segue.identifier == "presentMenu" {
+            //let sideNavController = segue.destination as! UISideMenuNavigationController
+            //let menuView = sideNavController.rootViewController as! MenuTableViewController
+            //menuView.currentView = String(describing: type(of: self))
         }
     }
     

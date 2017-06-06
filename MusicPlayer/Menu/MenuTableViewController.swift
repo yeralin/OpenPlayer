@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftIcons
-
 //import GCDWebServer
 
 class MenuCell: UITableViewCell {
@@ -17,15 +16,26 @@ class MenuCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        switch menuLabel.text! {
+        case "Playlists":
+            menuIcon.setIcon(icon: FontType.ionicons(.iosMusicalNotes),
+                             iconSize: 28, color: systemColor, bgColor: .clear)
+        case "Download":
+            menuIcon.setIcon(icon: FontType.ionicons(.iosSearchStrong),
+                             iconSize: 25, color: systemColor, bgColor: .clear)
+        case "Server":
+            menuIcon.setIcon(icon: FontType.ionicons(.iosCloud),
+                             iconSize: 25, color: systemColor, bgColor: .clear)
+        case "Settings":
+            menuIcon.setIcon(icon: FontType.ionicons(.iosGear),
+                             iconSize: 25, color: systemColor, bgColor: .clear)
+        default:
+            menuIcon.text = "???"
+        }
     }
 }
 
 class MenuTableViewController: UITableViewController {
-    
-    let menuLabels = [("Playlists", FontType.ionicons(.iosMusicalNotes), 28),
-                      ("Download", FontType.ionicons(.iosSearchStrong), 25),
-                      ("Server", FontType.ionicons(.iosCloud), 25),
-                      ("Settings", FontType.ionicons(.iosGear), 25)]
     
     //var webUploader: GCDWebUploader? = nil
     
@@ -42,29 +52,19 @@ class MenuTableViewController: UITableViewController {
         
     }*/
     
+    var currentView: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         navigationController?.hidesBarsOnTap = false
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //performSegue(withIdentifier: "presentPlaylistTableView", sender: nil)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuLabels.count
-    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuCell", for: indexPath) as! MenuCell
-        let label = menuLabels[indexPath.row].0
-        let icon = menuLabels[indexPath.row].1
-        let iconSize = CGFloat(menuLabels[indexPath.row].2)
-        cell.menuLabel.text = label
-        cell.menuIcon.setIcon(icon: icon, iconSize: iconSize, color: systemColor, bgColor: .clear)
-        return cell
-    }
     
     
 }

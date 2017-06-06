@@ -5,9 +5,9 @@ workspace 'MusicPlayer'
 target 'MusicPlayer' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  pod 'SWRevealViewController'
   pod 'SwiftyBeaver'
   pod 'SwiftIcons', '~> 1.4.1'
-  pod 'SideMenu'
   pod "GCDWebServer/WebUploader", "~> 3.3"
   pod "CocoaLumberjack", "~> 3.0"
 end

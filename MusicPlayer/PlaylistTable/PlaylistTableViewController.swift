@@ -9,6 +9,7 @@
 import UIKit
 import SwiftIcons
 import CoreData
+import SWRevealViewController
 
 class PlaylistCell: UITableViewCell {
     
@@ -36,7 +37,8 @@ class PlaylistTableViewController: UITableViewController {
         self.title = "Playlists"
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: systemColor)
-        
+        menuButton.target = self.revealViewController()
+        menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
         playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists(cntx: managedObjectContext)
         refreshControl?.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
         //PlaylistPersistancyManager.sharedInstance.wipePlaylistCoreData(cntx: managedObjectContext)
@@ -47,17 +49,6 @@ class PlaylistTableViewController: UITableViewController {
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
-    
-    /*@IBAction func openMenu(_ sender: Any) {
-        if let slideMenuController = self.slideMenuController() {
-            if slideMenuController.isLeftOpen() {
-                slideMenuController.closeLeft()
-            } else {
-                slideMenuController.openLeft()
-            }
-        }
-        
-    }*/
     
     @IBAction func insertNewPlaylist(_ sender: Any) {
         let alert = createInsertPlaylistAlert()

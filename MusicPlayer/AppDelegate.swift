@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 import AVFoundation
 import SwiftyBeaver
-import SideMenu
 let log = SwiftyBeaver.self
 
 @UIApplicationMain
@@ -21,8 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        SideMenuManager.menuPresentMode = .viewSlideOut
-        SideMenuManager.menuFadeStatusBar = false
         // Override point for customization after application launch.
         AudioPlayer.sharedInstance.initAudioPlayer()
         do {
