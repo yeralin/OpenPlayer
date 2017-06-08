@@ -18,7 +18,7 @@ class PlaylistCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        selectIcon.setIcon(icon: .fontAwesome(.angleRight), iconSize: 28, color: systemColor, forState: .normal)
+        selectIcon.setIcon(icon: .fontAwesome(.angleRight), iconSize: 28, color: .systemColor, forState: .normal)
     }
 }
 
@@ -36,9 +36,10 @@ class PlaylistTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "Playlists"
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: systemColor)
-        menuButton.target = self.revealViewController()
-        menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
+                           cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
+                           target: self.revealViewController(),
+                           action: #selector(SWRevealViewController.revealToggle(_:)))
         playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists(cntx: managedObjectContext)
         refreshControl?.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
         //PlaylistPersistancyManager.sharedInstance.wipePlaylistCoreData(cntx: managedObjectContext)

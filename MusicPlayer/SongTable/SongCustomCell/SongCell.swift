@@ -45,10 +45,10 @@ class SongCell: UITableViewCell {
     @IBAction func shuffleButtonTapped(_ sender: UIButton) {
         //TODO: Change logic, don't depend on title
         if shuffleButton.title(for: .normal) == FontType.ionicons(.arrowReturnRight).text {
-            shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26, color: systemColor, forState: .normal)
+            shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26, color: .systemColor, forState: .normal)
             AudioPlayer.sharedInstance.shuffleMode = true
         } else {
-            shuffleButton.setIcon(icon: .ionicons(.arrowReturnRight), iconSize: 26, color: systemColor, forState: .normal)
+            shuffleButton.setIcon(icon: .ionicons(.arrowReturnRight), iconSize: 26, color: .systemColor, forState: .normal)
             AudioPlayer.sharedInstance.shuffleMode = false
         }
     }
