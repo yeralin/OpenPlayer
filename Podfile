@@ -7,7 +7,7 @@ target 'MusicPlayer' do
   use_frameworks!
   pod 'SWRevealViewController'
   pod 'SwiftyBeaver'
-  pod 'SwiftIcons', '~> 1.4.1'
+  pod 'SwiftIcons'
   pod "GCDWebServer/WebUploader", "~> 3.3"
   pod "CocoaLumberjack", "~> 3.0"
 end

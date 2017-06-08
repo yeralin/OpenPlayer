@@ -15,7 +15,7 @@
         <scene sceneID="lOn-WK-Msc">
             <objects>
                 <tableViewController storyboardIdentifier="menuView" id="xMS-ad-HRL" customClass="MenuTableViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="43" sectionHeaderHeight="28" sectionFooterHeight="28" id="4w8-Ll-RZJ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="43" sectionHeaderHeight="28" sectionFooterHeight="28" id="4w8-Ll-RZJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -161,10 +161,10 @@
             </objects>
             <point key="canvasLocation" x="1862" y="515"/>
         </scene>
-        <!--View Controller-->
+        <!--Server View Controller-->
         <scene sceneID="9Gr-ur-1YJ">
             <objects>
-                <viewController id="FO4-g5-kmU" sceneMemberID="viewController">
+                <viewController id="FO4-g5-kmU" customClass="ServerViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U2C-61-Eye"/>
                         <viewControllerLayoutGuide type="bottom" id="2Zc-i1-iVJ"/>
@@ -173,34 +173,75 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Zz-9L-76e">
-                                <rect key="frame" x="16" y="196" width="343" height="233"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <string key="text">To start a web file server, simply toggle switch below. It would print a ip address that you can access from your computer browser and upload/edit/delete/download playlists and songs. Be aware that when server mode is on, player will be stopped</string>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3Z8-dH-B4J">
-                                <rect key="frame" x="163" y="520" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l6O-KK-Eob">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l6O-KK-Eob">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                </textAttributes>
                                 <items>
                                     <navigationItem title="Server" id="gfi-Rb-n7V">
-                                        <barButtonItem key="leftBarButtonItem" title="Menu" id="gz3-o4-eHQ"/>
+                                        <barButtonItem key="leftBarButtonItem" title="I" id="gz3-o4-eHQ"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rFa-QM-nGy">
+                                <rect key="frame" x="16" y="180" width="343" height="228"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="228" id="BGM-tn-v7I"/>
+                                </constraints>
+                                <string key="text">To start a web file server, you must be connected to a Wi-Fi network. Then you can simply toggle a switch below, and it would print an ip address for the server that you can access from your computer's browser and upload/edit/delete/download playlists and songs. Be aware that when server mode is on, you cannot access your player.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Web server is" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQn-ax-IO3">
+                                <rect key="frame" x="118" y="387" width="138" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="138" id="PRB-TF-wys"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inactive" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qu3-3Z-YN2">
+                                <rect key="frame" x="82" y="416" width="212" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3Z8-dH-B4J">
+                                <rect key="frame" x="163" y="462" width="51" height="31"/>
+                                <connections>
+                                    <action selector="serverSwitch:" destination="FO4-g5-kmU" eventType="valueChanged" id="4oo-5p-8kx"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="l6O-KK-Eob" firstAttribute="leading" secondItem="CJX-2q-HvA" secondAttribute="leading" id="3g3-eR-Cej"/>
+                            <constraint firstItem="2Zc-i1-iVJ" firstAttribute="top" secondItem="3Z8-dH-B4J" secondAttribute="bottom" constant="174" id="4TY-G1-B93"/>
+                            <constraint firstAttribute="trailing" secondItem="l6O-KK-Eob" secondAttribute="trailing" id="5Kw-Pe-A9d"/>
+                            <constraint firstItem="l6O-KK-Eob" firstAttribute="centerX" secondItem="fQn-ax-IO3" secondAttribute="centerX" id="JYa-SM-fOd"/>
+                            <constraint firstItem="fQn-ax-IO3" firstAttribute="centerX" secondItem="3Z8-dH-B4J" secondAttribute="centerX" id="KQk-4V-H4w"/>
+                            <constraint firstItem="Qu3-3Z-YN2" firstAttribute="top" secondItem="rFa-QM-nGy" secondAttribute="bottom" constant="8" symbolic="YES" id="Qrc-wu-jZa"/>
+                            <constraint firstItem="Qu3-3Z-YN2" firstAttribute="centerX" secondItem="3Z8-dH-B4J" secondAttribute="centerX" id="Qvl-fe-2Qo"/>
+                            <constraint firstItem="rFa-QM-nGy" firstAttribute="centerX" secondItem="fQn-ax-IO3" secondAttribute="centerX" id="Z1k-eE-HYD"/>
+                            <constraint firstItem="l6O-KK-Eob" firstAttribute="top" secondItem="U2C-61-Eye" secondAttribute="bottom" id="asB-vC-zo6"/>
+                            <constraint firstItem="rFa-QM-nGy" firstAttribute="leading" secondItem="CJX-2q-HvA" secondAttribute="leadingMargin" id="emc-Dm-Ldh"/>
+                            <constraint firstItem="Qu3-3Z-YN2" firstAttribute="top" secondItem="fQn-ax-IO3" secondAttribute="bottom" constant="8" symbolic="YES" id="pWi-zH-kvr"/>
+                            <constraint firstItem="Qu3-3Z-YN2" firstAttribute="leading" secondItem="CJX-2q-HvA" secondAttribute="leadingMargin" constant="66" id="w8P-UF-I1c"/>
+                            <constraint firstItem="3Z8-dH-B4J" firstAttribute="top" secondItem="Qu3-3Z-YN2" secondAttribute="bottom" constant="25" id="zHo-EN-yL1"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="menuButton" destination="gz3-o4-eHQ" id="Kke-3N-Nen"/>
+                        <outlet property="navBar" destination="l6O-KK-Eob" id="DPy-Gg-8b4"/>
+                        <outlet property="serverAddressLabel" destination="Qu3-3Z-YN2" id="1hg-k1-3v7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PFg-DD-eTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2767" y="926"/>
+            <point key="canvasLocation" x="2765.5999999999999" y="925.18740629685169"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="AmG-nL-eV2">
@@ -265,7 +306,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="AJ0-dD-Ysz">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" width="60" id="Zzz-cU-xWB">
+                        <barButtonItem key="leftBarButtonItem" title="I" width="60" id="Zzz-cU-xWB">
                             <connections>
                                 <action selector="openMenu:" destination="SUh-zq-jCq" id="Xj9-WC-obU"/>
                             </connections>

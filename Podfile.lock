@@ -10,24 +10,24 @@ PODS:
     - GCDWebServer/WebUploader/Core (= 3.3.2)
   - GCDWebServer/WebUploader/Core (3.3.2):
     - GCDWebServer/Core
-  - SwiftIcons (1.4.1)
+  - SwiftIcons (1.5.1)
   - SwiftyBeaver (1.2.2)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - CocoaLumberjack (~> 3.0)
   - GCDWebServer/WebUploader (~> 3.3)
-  - SwiftIcons (~> 1.4.1)
+  - SwiftIcons
   - SwiftyBeaver
   - SWRevealViewController
 
 SPEC CHECKSUMS:
   CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   GCDWebServer: 2a375ec42839a41d7187d04e5b688d32fa5c4cd5
-  SwiftIcons: 7a3fb54d2876b5b207a68c5e34dfbde2c4e00296
+  SwiftIcons: 287593643898af5a9ef16be4b1f9cf91a436cbc7
   SwiftyBeaver: 90a39e3dc5136b7285f2e4c870b107e3933b8b84
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: eaf7e4bbb9593175cca95913c93fd4057350698f
+PODFILE CHECKSUM: ed5782d13a6d924b38fed44243b4b7814946e3e5
 
 COCOAPODS: 1.2.0

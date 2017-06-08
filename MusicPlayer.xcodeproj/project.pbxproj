@@ -25,6 +25,8 @@
 		318DB3D31EC21DA700039541 /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318DB3D21EC21DA700039541 /* SongCell.swift */; };
 		31A745011EDDEFEF003FC171 /* InsertPlaylistAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A745001EDDEFEF003FC171 /* InsertPlaylistAlert.swift */; };
 		31A745041EE5B6E7003FC171 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 31A745031EE5B6E7003FC171 /* logo.png */; };
+		31A745071EE72411003FC171 /* ServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A745061EE72411003FC171 /* ServerViewController.swift */; };
+		31A745091EE9A0C8003FC171 /* RemoteControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A745081EE9A0C8003FC171 /* RemoteControl.swift */; };
 		31A7AEE11ECDD7BE00103789 /* MoveToPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7AEE01ECDD7BE00103789 /* MoveToPickerViewController.swift */; };
 		31A7AEE31ECDEB8500103789 /* SongCellDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7AEE21ECDEB8500103789 /* SongCellDelegateImpl.swift */; };
 		31A7AEE51ECDF0CF00103789 /* MoveToPickerViewDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7AEE41ECDF0CF00103789 /* MoveToPickerViewDelegateImpl.swift */; };
@@ -76,6 +78,8 @@
 		318DB3D21EC21DA700039541 /* SongCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 		31A745001EDDEFEF003FC171 /* InsertPlaylistAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertPlaylistAlert.swift; sourceTree = "<group>"; };
 		31A745031EE5B6E7003FC171 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		31A745061EE72411003FC171 /* ServerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerViewController.swift; sourceTree = "<group>"; };
+		31A745081EE9A0C8003FC171 /* RemoteControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteControl.swift; sourceTree = "<group>"; };
 		31A7AEE01ECDD7BE00103789 /* MoveToPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveToPickerViewController.swift; sourceTree = "<group>"; };
 		31A7AEE21ECDEB8500103789 /* SongCellDelegateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCellDelegateImpl.swift; sourceTree = "<group>"; };
 		31A7AEE41ECDF0CF00103789 /* MoveToPickerViewDelegateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveToPickerViewDelegateImpl.swift; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				31F2F0431EC15C5D0072DE30 /* Utils */,
+				31A745061EE72411003FC171 /* ServerViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,14 +188,13 @@
 		317929A31EA84A510076F15F /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				31A745021EE5B6DD003FC171 /* Resources */,
 				31F2F03D1EC15B610072DE30 /* AudioPlayer */,
 				31F2F0311EC14DB30072DE30 /* Models */,
 				31F2F03E1EC15B710072DE30 /* MenuTable */,
 				31F2F03C1EC15B4E0072DE30 /* PlaylistTable */,
 				318DB3CB1EC21C8600039541 /* SongTable */,
-				31F255891EB2CED600E0AD84 /* Storyboards */,
 				313306C11ECA48BF008CCE38 /* Views */,
+				31F255891EB2CED600E0AD84 /* Storyboards */,
 				317929A41EA84A510076F15F /* AppDelegate.swift */,
 				317929AE1EA84A510076F15F /* Assets.xcassets */,
 				317929B31EA84A510076F15F /* Info.plist */,
@@ -235,6 +239,7 @@
 				31A745031EE5B6E7003FC171 /* logo.png */,
 			);
 			name = Resources;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		31B664791ED1FE1500EBCBA6 /* MoveSongPicker */ = {
@@ -306,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				3189DDAB1EAE378A00EBCD03 /* AudioPlayer.swift */,
+				31A745081EE9A0C8003FC171 /* RemoteControl.swift */,
 			);
 			path = AudioPlayer;
 			sourceTree = "<group>";
@@ -313,6 +319,7 @@
 		31F2F03E1EC15B710072DE30 /* MenuTable */ = {
 			isa = PBXGroup;
 			children = (
+				31A745021EE5B6DD003FC171 /* Resources */,
 				311D6A7C1EDBF42400908D16 /* MenuTableViewController.swift */,
 			);
 			name = MenuTable;
@@ -544,6 +551,8 @@
 				31F2F0351EC14DE70072DE30 /* PlaylistTableViewController.swift in Sources */,
 				3189DDAC1EAE378A00EBCD03 /* AudioPlayer.swift in Sources */,
 				3148C2A01EC8C7F2005947CB /* SongTableDataSource.swift in Sources */,
+				31A745091EE9A0C8003FC171 /* RemoteControl.swift in Sources */,
+				31A745071EE72411003FC171 /* ServerViewController.swift in Sources */,
 				317929A51EA84A510076F15F /* AppDelegate.swift in Sources */,
 				3148C2A71EC95920005947CB /* ChangeSongNameAlert.swift in Sources */,
 				31F2F0391EC151CA0072DE30 /* PlaylistPersistanceCntrl.swift in Sources */,

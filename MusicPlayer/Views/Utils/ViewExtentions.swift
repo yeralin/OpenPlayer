@@ -9,4 +9,7 @@
 import Foundation
 import UIKit
 
-let systemColor: UIColor = UIView().tintColor
+private var system: UIColor = UIView().tintColor
+extension UIColor {
+    static var systemColor: UIColor { return system }
+}

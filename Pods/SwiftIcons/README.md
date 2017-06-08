@@ -2,7 +2,7 @@
 
 [![CocoaPods](https://img.shields.io/cocoapods/v/SwiftIcons.svg)](http://cocoadocs.org/docsets/SwiftIcons) [![CocoaPods](https://img.shields.io/cocoapods/dm/SwiftIcons.svg)](http://cocoapods.org/pods/SwiftIcons) [![CocoaPods](https://img.shields.io/cocoapods/dw/SwiftIcons.svg)](http://cocoapods.org/pods/SwiftIcons) [![Platform](https://img.shields.io/cocoapods/p/SwiftIcons.svg)](http://cocoadocs.org/docsets/SwiftIcons) ![Swift](https://img.shields.io/badge/%20in-swift%203.0-orange.svg)
 
-[![Travis](https://img.shields.io/travis/ranesr/SwiftIcons.svg)]()
+[![Travis](https://img.shields.io/travis/ranesr/SwiftIcons.svg)](https://travis-ci.org/ranesr/SwiftIcons/)
 
 ## Swift Library for Font Icons
 
@@ -68,7 +68,7 @@ Add the following lines to your `Podfile`:
 ```ruby
 target 'YourProject' do
     use_frameworks!
-    pod 'SwiftIcons', '~> 1.4.1'
+    pod 'SwiftIcons', '~> 1.5.1'
 end
 ```
 
@@ -277,17 +277,20 @@ barButtonItem.setIcon(icon: .ionicons(.iosFootball), iconSize: 30)
 // Icon with colors
 barButtonItem.setIcon(icon: .ionicons(.iosFootball), iconSize: 30, color: textColor)
 
+// Icon with custom cgRect
+barButtonItem.setIcon(icon: .ionicons(.iosFootball), iconSize: 30, color: textColor, cgRect: CGRect(x: 0, y: 0, width: 30, height: 30), target: self, action: #selector(barButtonItem(sender:)))
+
 // Icon with text around it
-barButtonItem.setIcon(prefixText: "Please ", icon: .ionicons(.iosDownload), postfixText: " download", cgRect: CGRect(x: 0, y: 0, width: 30, height: 30), size: 23)
+barButtonItem.setIcon(prefixText: "Please ", icon: .ionicons(.iosDownload), postfixText: " download", cgRect: CGRect(x: 0, y: 0, width: 30, height: 30), size: 23, target: self, action: #selector(barButtonItem(sender:)))
 
 // Icon with color & colored text around it
-barButtonItem.setIcon(prefixText: "Blue ", prefixTextColor: .red, icon: .ionicons(.iosFootball), iconColor: .blue, postfixText: " football", postfixTextColor: .green, cgRect: CGRect(x: 0, y: 0, width: 30, height: 30), size: 20, iconSize: 30)
+barButtonItem.setIcon(prefixText: "Blue ", prefixTextColor: .red, icon: .ionicons(.iosFootball), iconColor: .blue, postfixText: " football", postfixTextColor: .green, cgRect: CGRect(x: 0, y: 0, width: 30, height: 30), size: 20, iconSize: 30, target: self, action: #selector(barButtonItem(sender:)))
 
 // Icon with text with different fonts around it
-barButtonItem.setIcon(prefixText: "Digit ", prefixTextFont: font1!, icon: .emoji(.digitOne), postfixText: " One", postfixTextFont: font2!, cgRect: CGRect(x: 0, y: 0, width: 30, height: 30))
+barButtonItem.setIcon(prefixText: "Digit ", prefixTextFont: font1!, icon: .emoji(.digitOne), postfixText: " One", postfixTextFont: font2!, cgRect: CGRect(x: 0, y: 0, width: 30, height: 30), target: self, action: #selector(barButtonItem(sender:)))
 
 // Icon with text with different fonts & colors around it
-barButtonItem.setIcon(prefixText: "", prefixTextFont: font1!, prefixTextColor: .red, icon: .ionicons(.iosFootball), iconColor: .blue, postfixText: " football", postfixTextFont: font2!, postfixTextColor: .green, cgRect: CGRect(x: 0, y: 0, width: 30, height: 30), iconSize: 24)
+barButtonItem.setIcon(prefixText: "", prefixTextFont: font1!, prefixTextColor: .red, icon: .ionicons(.iosFootball), iconColor: .blue, postfixText: " football", postfixTextFont: font2!, postfixTextColor: .green, cgRect: CGRect(x: 0, y: 0, width: 30, height: 30), iconSize: 24, target: self, action: #selector(barButtonItem(sender:)))
 
 ```
 
@@ -335,7 +338,14 @@ stepper.setIncrementIcon(icon: .ionicons(.iosPlay), forState: .normal)
 
 ## Examples
 
-Please check out the [SwiftIcons App](https://github.com/ranesr/SwiftIcons/tree/master/SwiftIcons).
+Please check out the [SwiftIcons App](https://github.com/ranesr/SwiftIcons/tree/master/SwiftIcons). In the demo project, if you click on any object, you will see the method description in the logs for the icon of that object.
+
+
+## Apps using SwiftIcons
+
+If you are using SwiftIcons in your app and want to be listed here, simply create a new issue [here](https://github.com/ranesr/SwiftIcons/issues/new).
+ 
+I am always curious who is using my projects &#x1f60a;
 
 
 ## Author
