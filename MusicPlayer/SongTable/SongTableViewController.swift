@@ -10,21 +10,22 @@ import UIKit
 import CoreData
 import MediaPlayer
 
-class SongTableViewController: UITableViewController {
+class SongTableViewController: UITableViewController, UISearchBarDelegate {
     
+    var playlist: PlaylistEntity!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet var songTableView: UITableView!
     lazy var managedObjectContext: NSManagedObjectContext! = {
         (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }()
-    var playlist: PlaylistEntity!
-    
-    
-    @IBOutlet var songTableView: UITableView!
+    var filteredSongs: [SongEntity]?
+    var searching: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        title = playlist.playlistName
+        navigationItem.rightBarButtonItem = self.editButtonItem
         songTableView.allowsSelection = false
-        self.title = playlist.playlistName
         initAudioPlayerDelegateImpl()
     }
     
@@ -39,8 +40,9 @@ class SongTableViewController: UITableViewController {
     
     func prepareSongs(receivedPlaylist: PlaylistEntity) {
         playlist = receivedPlaylist
-        let songsArray = SongPersistancyManager.sharedInstance.populateSongs(forPlaylist: receivedPlaylist,
-                                                                             cntx: managedObjectContext!)
+        let songsArray = SongPersistancyManager.sharedInstance
+                            .populateSongs(forPlaylist: receivedPlaylist,
+                                           cntx: managedObjectContext!)
         AudioPlayer.sharedInstance.songsArray = songsArray
     }
     

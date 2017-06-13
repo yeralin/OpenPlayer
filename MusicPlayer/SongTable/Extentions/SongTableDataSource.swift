@@ -17,18 +17,28 @@ extension SongTableViewDataSource {
     
     //How many SongCells to have
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AudioPlayer.sharedInstance.songsArray.count
+        if searching {
+           return filteredSongs!.count
+        } else {
+            return AudioPlayer.sharedInstance.songsArray.count
+        }
     }
     
     //Fill SongTable with SongCells
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let AudioPlayerInst = AudioPlayer.sharedInstance
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
-        let song = AudioPlayerInst.songsArray[indexPath.row]
+        cell.delegate = self
+        let song: SongEntity
+        if searching {
+            song = filteredSongs![indexPath.row]
+        } else {
+            song = AudioPlayerInst.songsArray[indexPath.row]
+        }
         if !song.isProcessed {
             SongPersistancyManager.sharedInstance.processSong(toProcess: song, cntx: managedObjectContext)
         }
-        cell.delegate = self
+        
         //If there is a song that is playing inside a playlist, restore its view
         if AudioPlayerInst.player != nil
             && AudioPlayerInst.currentSong == song {
