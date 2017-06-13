@@ -22,7 +22,6 @@ class PlaylistCell: UITableViewCell {
     }
 }
 
-
 class PlaylistTableViewController: UITableViewController {
     
     @IBOutlet var playlistTableView: UITableView!
@@ -35,6 +34,7 @@ class PlaylistTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Playlists"
+        setupMenuGestureRecognizer()
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
                            cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),

@@ -23,7 +23,7 @@ class MenuCell: UITableViewCell {
         case "Download":
             menuIcon.setIcon(icon: FontType.ionicons(.iosSearchStrong),
                              iconSize: 25, color: .systemColor, bgColor: .clear)
-        case "Server":
+        case "Web Server":
             menuIcon.setIcon(icon: FontType.ionicons(.iosCloud),
                              iconSize: 25, color: .systemColor, bgColor: .clear)
         case "Settings":
