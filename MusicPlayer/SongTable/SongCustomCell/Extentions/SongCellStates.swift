@@ -77,7 +77,6 @@ extension SongCellStates {
         songProgressSlider.isEnabled = false
         playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24, color: .systemColor, forState: .normal)
         shuffleButton.isHidden = true
-        updateSlider = nil
     }
     
     
@@ -91,7 +90,7 @@ extension SongCellStates {
     }
     
     func updateAudioSlider() {
-        if let player = AudioPlayer.sharedInstance.player {
+        if let player = AudioPlayer.sharedInstance.player, updateSlider != nil {
             songProgressSlider.value = Float(player.currentTime)
         }
     }

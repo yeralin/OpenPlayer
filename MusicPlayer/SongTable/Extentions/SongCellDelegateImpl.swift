@@ -15,6 +15,10 @@ extension SongCellDelegateImpl: SongCellDelegate {
         performSegue(withIdentifier: identifier, sender: sender)
     }
     
+    func presentAlertForCell(alert: UIAlertController) {
+        present(alert, animated: true, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let pickerView = segue.destination as! MoveSongPickerViewController
         pickerView.delegate = self
@@ -26,10 +30,4 @@ extension SongCellDelegateImpl: SongCellDelegate {
             pickerView.playlistArray = playlistArray
         }
     }
-    
-    func presentAlertForCell(alert: UIAlertController) {
-        present(alert, animated: true, completion: nil)
-    }
-
-
 }
