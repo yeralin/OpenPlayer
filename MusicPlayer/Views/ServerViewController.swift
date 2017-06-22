@@ -16,17 +16,23 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var serverAddressLabel: UILabel!
-
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupMenuGestureRecognizer()
+        menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
+                           cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
+                           target: self.revealViewController(),
+                           action: #selector(SWRevealViewController.revealToggle(_:)))
+        navBar.delegate = self
+    }
+    
     @IBAction func serverSwitch(_ sender: UISwitch) {
         if sender.isOn {
             let docsUrl = PlaylistPersistancyManager.sharedInstance.docsUrl.path
             webUploader = GCDWebUploader(uploadDirectory: docsUrl)
-            let backgroundOption = [GCDWebServerOption_AutomaticallySuspendInBackground: false]
-            do {
-                try webUploader!.start(options: backgroundOption)
-            } catch {
-                log.error("Something went wrong while starting a server")
-            }
+            //let backgroundOption = [GCDWebServerOption_AutomaticallySuspendInBackground: false]
+            webUploader!.start()
             if let address = webUploader?.serverURL {
                 AudioPlayer.sharedInstance.stopSong()
                 serverAddressLabel.text = address.absoluteString
@@ -45,15 +51,6 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
             menuButton.isEnabled = true
         }
         
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
-                           cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
-                           target: self.revealViewController(),
-                           action: #selector(SWRevealViewController.revealToggle(_:)))
-        navBar.delegate = self
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {

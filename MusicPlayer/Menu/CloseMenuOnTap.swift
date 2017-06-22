@@ -23,10 +23,12 @@ extension UIViewController: SWRevealViewControllerDelegate {
         if revealController.frontViewPosition == FrontViewPosition.left {
             if let tableViewController = self as? UITableViewController {
                 tableViewController.tableView.alwaysBounceVertical = true
+                tableViewController.tableView.allowsSelection = true
             }
         } else if revealController.frontViewPosition == FrontViewPosition.right {
             if let tableViewController = self as? UITableViewController {
                 tableViewController.tableView.alwaysBounceVertical = false
+                tableViewController.tableView.allowsSelection = false
             }
         }
         
