@@ -7,27 +7,73 @@
 //
 
 import UIKit
+import SwiftOverlays
 import SWRevealViewController
 
-class SettingsViewController: UIViewController, UINavigationBarDelegate {
+class SettingsViewController: UIViewController, UINavigationBarDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var memoryLabel: UILabel!
     
+    @IBOutlet weak var serverAddressField: UITextField!
+    @IBOutlet weak var serverStatusLabel: UILabel!
+    @IBOutlet weak var serverVersionLabel: UILabel!
+    
+    @IBAction func tryConnect(_ sender: UIButton) {
+        if let serverSettings = UserDefaults.standard.object(forKey: "serverSettings") as? [String : String] {
+            let serverAddress = serverSettings["serverAddress"]!
+            serverAddressField.text = serverAddress
+            tryConnectToServer(serverAddress: serverAddress, showErrorAlert: true)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupMenuGestureRecognizer()
         menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
                            cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
                            target: self.revealViewController(),
                            action: #selector(SWRevealViewController.revealToggle(_:)))
         navBar.delegate = self
         memoryLabel.text = reportUsedFreeMem()
+        if let serverSettings = UserDefaults.standard.object(forKey: "serverSettings") as? [String : String] {
+            let serverAddress = serverSettings["serverAddress"]!
+            serverAddressField.text = serverAddress
+            tryConnectToServer(serverAddress: serverAddress, showErrorAlert: false)
+        }
         
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        serverAddressField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if var serverAddress = serverAddressField.text {
+            if !serverAddress.contains("http") {
+                let withScheme = "http://" + serverAddress
+                serverAddress = withScheme
+                serverAddressField.text = withScheme
+            }
+            var serverSettings: [String:String]
+            if let dict = UserDefaults.standard.object(forKey: "serverSettings") as? [String : String] {
+                serverSettings = dict
+                serverSettings["serverAddress"] = serverAddress
+            } else {
+                serverSettings = ["serverAddress": serverAddress]
+            }
+            UserDefaults.standard.set(serverSettings, forKey: "serverSettings")
+            tryConnectToServer(serverAddress: serverAddress, showErrorAlert: true)
+        }
+        
+        textField.resignFirstResponder()
+        return true
     }
     
     func reportUsedFreeMem() -> String {
@@ -55,4 +101,42 @@ class SettingsViewController: UIViewController, UINavigationBarDelegate {
         return used + " / " + free
     }
     
+    func tryConnectToServer(serverAddress: String, showErrorAlert: Bool) {
+        if showErrorAlert == true {
+            let text = "Trying to connect..."
+            self.showTextOverlay(text)
+        }
+        ServerRequests.sharedInstance.getVersion(serverAddress: serverAddress, completion: {
+            version, requestError in
+            self.removeAllOverlays()
+            if let error = requestError {
+                var errorText = ""
+                switch error {
+                case RequestError.ConnectionIssue:
+                    errorText = "Error: Could not connect to a server"
+                case RequestError.FailToParse:
+                    errorText = "Error: Could not parse server response"
+                }
+                DispatchQueue.main.async {
+                    self.serverVersionLabel.text = "Unknown"
+                    self.serverStatusLabel.text = "Not connected"
+                    self.serverStatusLabel.textColor = UIColor.red
+                    if showErrorAlert == true {
+                        let alert = UIAlertController(title: "Error", message: errorText, preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.serverVersionLabel.text = version
+                    self.serverStatusLabel.text = "Connected"
+                    self.serverStatusLabel.textColor = UIColor.green
+                    self.removeAllOverlays()
+                }
+            }
+        })
+        
+    }
 }

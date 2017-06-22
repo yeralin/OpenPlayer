@@ -8,6 +8,8 @@ target 'MusicPlayer' do
   pod 'SWRevealViewController'
   pod 'SwiftyBeaver'
   pod 'SwiftIcons'
+  pod 'SwiftOverlays'
+  pod 'Alamofire'
   pod "GCDWebServer/WebUploader", "~> 3.3"
   pod "CocoaLumberjack", "~> 3.0"
 end
