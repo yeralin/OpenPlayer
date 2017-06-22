@@ -15,8 +15,10 @@ extension SongTableSearchBar {
         if var searchText = searchBar.text, !searchText.isEmpty {
             searchText = searchText.lowercased()
             filteredSongs = AudioPlayer.sharedInstance.songsArray.filter { song in
-                return (song.songName!.lowercased().contains(searchText) ||
-                        song.songArtist!.lowercased().contains(searchText))
+                let normalizedSongName = (song.songName! as NSString)
+                                            .deletingPathExtension
+                                            .lowercased()
+                return (normalizedSongName.contains(searchText))
             }
             searching = true
         } else {
@@ -32,5 +34,11 @@ extension SongTableSearchBar {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
+    
+    func dismissKeyboard() {
+        searchBar.resignFirstResponder()
+    }
+    
+    
     
 }
