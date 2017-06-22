@@ -54,12 +54,10 @@ extension PlaylistTableViewDataSource {
             present(createDeletePlaylistAlert(onComplete: {_ in
                 let playlist = self.playlistArray[indexPath.row]
                 let playlistPerstManager = PlaylistPersistancyManager.sharedInstance
-                playlistPerstManager.deleteEntity(toDelete: playlist,
-                                                  cntx: self.managedObjectContext)
-                self.playlistArray = playlistPerstManager.getPlaylistArray(cntx: self.managedObjectContext)
+                playlistPerstManager.deleteEntity(toDelete: playlist)
+                self.playlistArray = playlistPerstManager.getPlaylistArray()
                 self.playlistTableView.deleteRows(at: [indexPath], with: .fade)
-                playlistPerstManager.resetPlaylistsOrder(playlistArray: self.playlistArray,
-                                                         cntx: self.managedObjectContext)
+                playlistPerstManager.resetPlaylistsOrder(playlistArray: self.playlistArray)
             }), animated: true, completion: nil)
             
         }
@@ -70,7 +68,7 @@ extension PlaylistTableViewDataSource {
         let playlistToMove = playlistArray[fromIndexPath.row]
         playlistArray.remove(at: fromIndexPath.row)
         playlistArray.insert(playlistToMove, at: to.row)
-        PlaylistPersistancyManager.sharedInstance.resetPlaylistsOrder(playlistArray: playlistArray, cntx: managedObjectContext)
+        PlaylistPersistancyManager.sharedInstance.resetPlaylistsOrder(playlistArray: playlistArray)
         
     }
     

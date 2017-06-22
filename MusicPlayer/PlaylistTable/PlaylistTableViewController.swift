@@ -25,9 +25,6 @@ class PlaylistCell: UITableViewCell {
 class PlaylistTableViewController: UITableViewController {
     
     @IBOutlet var playlistTableView: UITableView!
-    lazy var managedObjectContext: NSManagedObjectContext! = {
-        (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    }()
     var playlistArray: [PlaylistEntity]!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
@@ -40,13 +37,13 @@ class PlaylistTableViewController: UITableViewController {
                            cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
                            target: self.revealViewController(),
                            action: #selector(SWRevealViewController.revealToggle(_:)))
-        playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists(cntx: managedObjectContext)
+        playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists()
         refreshControl?.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
         //PlaylistPersistancyManager.sharedInstance.wipePlaylistCoreData(cntx: managedObjectContext)
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {
-        playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists(cntx: managedObjectContext)
+        playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists()
         tableView.reloadData()
         refreshControl.endRefreshing()
     }

@@ -13,7 +13,8 @@ class PlaylistPersistancyManager: PersistanceController {
     
     static let sharedInstance = PlaylistPersistancyManager()
     
-    func getPlaylistArray(cntx: NSManagedObjectContext) -> [PlaylistEntity] {
+    func getPlaylistArray(cntx: NSManagedObjectContext? = nil) -> [PlaylistEntity] {
+        let cntx = cntx ?? self.managedObjectContext!
         return fetchData(entityName: "PlaylistEntity",
                          sortIn: NSSortDescriptor(key: "playlistOrder", ascending: true),
                          predicate: nil,
@@ -25,14 +26,18 @@ class PlaylistPersistancyManager: PersistanceController {
         return docsUrl.appendingPathComponent(playlistName!)
     }
     
-    func resetPlaylistsOrder(playlistArray: [PlaylistEntity], cntx: NSManagedObjectContext) {
+    func resetPlaylistsOrder(playlistArray: [PlaylistEntity],
+                             cntx: NSManagedObjectContext? = nil) {
         for (index, _) in playlistArray.enumerated() {
             playlistArray[index].playlistOrder = Int32(index)
         }
-        saveContext(cntx: cntx)
+        if let cntx = cntx ?? self.managedObjectContext {
+            saveContext(cntx: cntx)
+        }
     }
     
-    func populatePlaylists(cntx: NSManagedObjectContext) -> [PlaylistEntity]{
+    func populatePlaylists(cntx: NSManagedObjectContext? = nil) -> [PlaylistEntity] {
+        let cntx = cntx ?? self.managedObjectContext!
         var playlistArray = getPlaylistArray(cntx: cntx)
         //Go through folders, if new found -> create playlist
         var toMatchWithDirs = playlistArray
@@ -81,7 +86,8 @@ class PlaylistPersistancyManager: PersistanceController {
         return getPlaylistArray(cntx: cntx)
     }
     
-    func createPlaylist(name: String, order: Int32, cntx: NSManagedObjectContext) -> Int {
+    func createPlaylist(name: String, order: Int32, cntx: NSManagedObjectContext? = nil) -> Int {
+        let cntx = cntx ?? self.managedObjectContext!
         let playlistEntity = PlaylistEntity(context: cntx)
         playlistEntity.playlistName = name
         playlistEntity.playlistOrder = order

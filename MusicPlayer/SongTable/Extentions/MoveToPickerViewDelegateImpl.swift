@@ -17,13 +17,13 @@ extension MoveToPickerViewDelegateImpl: MoveToPickerViewDelegate {
             let audioPlayer = AudioPlayer.sharedInstance
             let rowPosition = Int(song.songOrder)
             songPerstManager.moveSong(toMove: song, fromPlaylist: fromPlaylist, toPlaylist: toPlaylist)
-            let songsArray = songPerstManager.getSongArray(cntx: managedObjectContext, playlist: self.playlist)
+            let songsArray = songPerstManager.getSongArray(playlist: self.playlist)
             song.songOrder = -1
             audioPlayer.songsArray = songsArray.enumerated().map { (index, song) in
                 song.songOrder = Int32(index)
                 return song
             }
-            songPerstManager.saveContext(cntx: managedObjectContext)
+            songPerstManager.saveContext()
             songTableView.deleteRows(at: [IndexPath(row: rowPosition, section: 0)], with: .fade)
         }
     }

@@ -8,19 +8,22 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class PersistanceController {
     
-    var fm: FileManager
+    var fm: FileManager = FileManager.default
     var docsUrl: URL
+    lazy var managedObjectContext: NSManagedObjectContext! = {
+        (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    }()
     
     init() {
-        fm = FileManager.default
         docsUrl = try! fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
     }
     
-    func fetchData(entityName: String, sortIn: NSSortDescriptor?, predicate: NSPredicate?, cntx: NSManagedObjectContext) -> [NSManagedObject] {
-        
+    func fetchData(entityName: String, sortIn: NSSortDescriptor?, predicate: NSPredicate?, cntx: NSManagedObjectContext? = nil) -> [NSManagedObject] {
+        let cntx = cntx ?? self.managedObjectContext!
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         if (sortIn != nil) {
             fetchRequest.sortDescriptors = [sortIn!]
@@ -37,7 +40,8 @@ class PersistanceController {
         return fetchedObjects
     }
     
-    func deleteEntity(toDelete: NSManagedObject, cntx: NSManagedObjectContext) {
+    func deleteEntity(toDelete: NSManagedObject, cntx: NSManagedObjectContext? = nil) {
+        let cntx = cntx ?? self.managedObjectContext!
         do {
             if let toDeletePlaylist = toDelete as? PlaylistEntity {
                 let playlistPath = PlaylistPersistancyManager.sharedInstance.getPlaylistPath(playlist: toDeletePlaylist)
@@ -57,7 +61,8 @@ class PersistanceController {
         
     }
     
-    func saveContext(cntx: NSManagedObjectContext) {
+    func saveContext(cntx: NSManagedObjectContext? = nil) {
+        let cntx = cntx ?? self.managedObjectContext!
         do {
             try cntx.save()
         } catch let error as NSError  {

@@ -15,9 +15,6 @@ class SongTableViewController: UITableViewController, UISearchBarDelegate {
     var playlist: PlaylistEntity!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var songTableView: UITableView!
-    lazy var managedObjectContext: NSManagedObjectContext! = {
-        (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    }()
     var filteredSongs: [SongEntity]?
     var searching: Bool = false
     
@@ -26,6 +23,8 @@ class SongTableViewController: UITableViewController, UISearchBarDelegate {
         title = playlist.playlistName
         navigationItem.rightBarButtonItem = self.editButtonItem
         songTableView.allowsSelection = false
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         initAudioPlayerDelegateImpl()
     }
     
@@ -41,8 +40,7 @@ class SongTableViewController: UITableViewController, UISearchBarDelegate {
     func prepareSongs(receivedPlaylist: PlaylistEntity) {
         playlist = receivedPlaylist
         let songsArray = SongPersistancyManager.sharedInstance
-                            .populateSongs(forPlaylist: receivedPlaylist,
-                                           cntx: managedObjectContext!)
+                            .populateSongs(forPlaylist: receivedPlaylist)
         AudioPlayer.sharedInstance.songsArray = songsArray
     }
     

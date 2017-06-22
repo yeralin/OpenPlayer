@@ -30,13 +30,12 @@ extension SongTableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongCell
         cell.delegate = self
         let song: SongEntity
-        if searching {
-            song = filteredSongs![indexPath.row]
-        } else {
-            song = AudioPlayerInst.songsArray[indexPath.row]
-        }
+        
+        if searching { song = filteredSongs![indexPath.row] }
+        else { song = AudioPlayerInst.songsArray[indexPath.row] }
+        
         if !song.isProcessed {
-            SongPersistancyManager.sharedInstance.processSong(toProcess: song, cntx: managedObjectContext)
+            SongPersistancyManager.sharedInstance.processSong(toProcess: song)
         }
         
         //If there is a song that is playing inside a playlist, restore its view
@@ -54,15 +53,14 @@ extension SongTableViewDataSource {
             let songPerstManager = SongPersistancyManager.sharedInstance
             var songsArray = AudioPlayer.sharedInstance.songsArray
             let song = songsArray[indexPath.row]
-            songPerstManager.deleteEntity(toDelete: song,
-                                          cntx: managedObjectContext!)
+            songPerstManager.deleteEntity(toDelete: song)
             songsArray.remove(at: indexPath.row)
             //TODO: Can be optimized (reset order only after deleted song)
             AudioPlayer.sharedInstance.songsArray = songsArray.enumerated().map { (index, song) in
                 song.songOrder = Int32(index)
                 return song
             }
-            songPerstManager.saveContext(cntx: managedObjectContext)
+            songPerstManager.saveContext()
             tableView.deleteRows(at: [indexPath], with: .fade)
             
         }
@@ -80,7 +78,7 @@ extension SongTableViewDataSource {
             song.songOrder = Int32(index)
             return song
         }
-        songPerstManager.saveContext(cntx: managedObjectContext)
+        songPerstManager.saveContext()
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {

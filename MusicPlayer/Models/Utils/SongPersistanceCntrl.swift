@@ -16,7 +16,9 @@ class SongPersistancyManager: PersistanceController {
     
     static let sharedInstance = SongPersistancyManager()
     
-    func getSongArray(cntx: NSManagedObjectContext, playlist: PlaylistEntity) -> [SongEntity] {
+    func getSongArray(playlist: PlaylistEntity,
+                      cntx: NSManagedObjectContext? = nil) -> [SongEntity] {
+        let cntx = cntx ?? self.managedObjectContext!
         return fetchData(entityName: "SongEntity",
                          sortIn: NSSortDescriptor(key: "songOrder", ascending: true),
                          predicate: NSPredicate(format: "%K == %@", "playlist.playlistName", playlist.playlistName!),
@@ -42,9 +44,11 @@ class SongPersistancyManager: PersistanceController {
         }
     }
     
-    func populateSongs(forPlaylist: PlaylistEntity, cntx: NSManagedObjectContext) -> [SongEntity] {
+    func populateSongs(forPlaylist: PlaylistEntity,
+                       cntx: NSManagedObjectContext? = nil) -> [SongEntity] {
+        let cntx = cntx ?? self.managedObjectContext!
         let playlistName = forPlaylist.playlistName!
-        var songsArray = getSongArray(cntx: cntx, playlist: forPlaylist)
+        var songsArray = getSongArray(playlist: forPlaylist, cntx: cntx)
         var toMatchWithAudioFiles = songsArray
         //That's how fm and docsUrl are initialized
         //fm = FileManager.default
@@ -91,7 +95,9 @@ class SongPersistancyManager: PersistanceController {
         return songsArray
     }
     
-    func processSong(toProcess song: SongEntity, cntx: NSManagedObjectContext) {
+    func processSong(toProcess song: SongEntity,
+                     cntx: NSManagedObjectContext? = nil) {
+        let cntx = cntx ?? self.managedObjectContext!
         let songUrl = self.getSongPath(song: song)
         let songAsset = AVAsset.init(url: songUrl)
         if !songAsset.commonMetadata.isEmpty {

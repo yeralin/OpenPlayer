@@ -25,8 +25,7 @@ extension InsertPlaylistAlert {
                     let next: Int32 = 1
                     let playlistArray = playlistPerstManager.fetchData(entityName: "PlaylistEntity",
                                                                        sortIn: NSSortDescriptor(key: "playlistOrder", ascending: true),
-                                                                       predicate: nil,
-                                                                       cntx: self.managedObjectContext) as! [PlaylistEntity]
+                                                                       predicate: nil) as! [PlaylistEntity]
                     if let playlistMaxOrder = playlistArray.max(by: {$0.playlistOrder < $1.playlistOrder})?.playlistOrder {
                         return playlistMaxOrder + next
                     } else {
@@ -34,9 +33,8 @@ extension InsertPlaylistAlert {
                     }
                 }()
                 let newOrder: Int = playlistPerstManager.createPlaylist(name: playlistName,
-                                                                        order: nextOrder,
-                                                                        cntx: self.managedObjectContext)
-                self.playlistArray = playlistPerstManager.getPlaylistArray(cntx: self.managedObjectContext)
+                                                                        order: nextOrder)
+                self.playlistArray = playlistPerstManager.getPlaylistArray()
                 self.playlistTableView.insertRows(at: [IndexPath(row: newOrder, section: 0)],
                                                   with: .fade)
             }

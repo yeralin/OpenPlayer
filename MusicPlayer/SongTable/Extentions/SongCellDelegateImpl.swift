@@ -24,7 +24,7 @@ extension SongCellDelegateImpl: SongCellDelegate {
         pickerView.delegate = self
         if let songToMove = sender as? SongEntity {
             pickerView.songToMove = songToMove
-            var playlistArray = PlaylistPersistancyManager.sharedInstance.getPlaylistArray(cntx: managedObjectContext)
+            var playlistArray = PlaylistPersistancyManager.sharedInstance.getPlaylistArray()
             let currentPlaylistIndex = playlistArray.index(of: playlist)
             playlistArray.remove(at: currentPlaylistIndex!)
             pickerView.playlistArray = playlistArray
