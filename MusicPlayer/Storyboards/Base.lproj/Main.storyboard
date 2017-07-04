@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="Ycp-PL-Ufh">
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ycp-PL-Ufh">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -85,6 +85,7 @@
                                         <connections>
                                             <outlet property="menuIcon" destination="ETm-XS-BKG" id="fr0-lS-mg4"/>
                                             <outlet property="menuLabel" destination="UD6-gJ-bZI" id="5ZJ-VA-wTD"/>
+                                            <segue destination="Dd1-XJ-63i" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="wPM-XR-H4G"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuCell" rowHeight="43" id="Q99-AV-2mQ" customClass="MenuCell" customModule="MusicPlayer" customModuleProvider="target">
@@ -279,7 +280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PFg-DD-eTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2647" y="1440"/>
+            <point key="canvasLocation" x="2767" y="1751"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="uA2-3M-mD9">
@@ -533,7 +534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMj-hS-ilJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1861.5999999999999" y="1589.5052473763119"/>
+            <point key="canvasLocation" x="1862" y="1901"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Hhv-Pk-bjg">
@@ -774,7 +775,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongCell" rowHeight="91" id="2VC-ra-4ci" customClass="SongCell" customModule="MusicPlayer" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongTableCell" rowHeight="91" id="2VC-ra-4ci" customClass="SongTableCell" customModule="MusicPlayer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2VC-ra-4ci" id="kZm-CC-TrE">
@@ -784,7 +785,7 @@
                                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="q21-cc-AgN">
                                             <rect key="frame" x="51" y="51" width="272" height="35"/>
                                             <connections>
-                                                <action selector="changeSongPosition:" destination="2VC-ra-4ci" eventType="valueChanged" id="IdD-ln-qGf"/>
+                                                <action selector="changeSliderPosition:" destination="2VC-ra-4ci" eventType="valueChanged" id="tsE-ou-yoa"/>
                                             </connections>
                                         </slider>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jason Mraz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ti-J9-K2M">
@@ -826,7 +827,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <state key="normal" title="M"/>
                                             <connections>
-                                                <action selector="moveButtonTapped:" destination="2VC-ra-4ci" eventType="touchUpInside" id="JeE-FQ-auV"/>
+                                                <action selector="moveTapped:" destination="2VC-ra-4ci" eventType="touchUpInside" id="nvU-J8-TIP"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3P-iP-hjv">
@@ -863,8 +864,8 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="artistName" destination="0Ti-J9-K2M" id="19R-pF-Gma"/>
-                                    <outlet property="editSongButton" destination="I3P-iP-hjv" id="xnR-L4-5aL"/>
-                                    <outlet property="moveSong" destination="qFI-N6-2xu" id="Obb-M6-77e"/>
+                                    <outlet property="editButton" destination="I3P-iP-hjv" id="jJT-ty-MsP"/>
+                                    <outlet property="moveButton" destination="qFI-N6-2xu" id="5Kl-z6-t2F"/>
                                     <outlet property="playPauseButton" destination="Vlf-hJ-r1x" id="jF8-No-ANV"/>
                                     <outlet property="shuffleButton" destination="Bzj-gT-5iJ" id="c2c-Wv-9qW"/>
                                     <outlet property="songProgressSlider" destination="q21-cc-AgN" id="QNc-66-Yn4"/>
@@ -966,10 +967,10 @@
             </objects>
             <point key="canvasLocation" x="2767" y="-917"/>
         </scene>
-        <!--Song Table View Controller-->
+        <!--Download Table View Controller-->
         <scene sceneID="26z-hA-SEL">
             <objects>
-                <tableViewController id="COM-Ud-2Ft" customClass="SongTableViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="COM-Ud-2Ft" customClass="DownloadTableViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="91" sectionHeaderHeight="28" sectionFooterHeight="28" id="fAN-YS-lbX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -988,7 +989,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongCell" rowHeight="91" id="L6n-uh-qVq" customClass="SongCell" customModule="MusicPlayer" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DownloadSongCell" rowHeight="91" id="L6n-uh-qVq" customClass="DownloadTableCell" customModule="MusicPlayer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="375" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L6n-uh-qVq" id="OZX-ir-TAR">
@@ -998,7 +999,7 @@
                                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="GUM-AD-o6u">
                                             <rect key="frame" x="51" y="51" width="272" height="35"/>
                                             <connections>
-                                                <action selector="changeSongPosition:" destination="L6n-uh-qVq" eventType="valueChanged" id="9Mu-cP-Qkd"/>
+                                                <action selector="changeSliderPosition:" destination="L6n-uh-qVq" eventType="valueChanged" id="71F-ZS-MER"/>
                                             </connections>
                                         </slider>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jason Mraz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4z9-m6-IKG">
@@ -1024,7 +1025,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <state key="normal" title="P"/>
                                             <connections>
-                                                <action selector="playPauseTapped:" destination="L6n-uh-qVq" eventType="touchUpInside" id="CkP-gT-7pJ"/>
+                                                <action selector="playPauseTapped:" destination="L6n-uh-qVq" eventType="touchUpInside" id="YNs-54-xnr"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfh-5b-5cE">
@@ -1032,7 +1033,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <state key="normal" title="S"/>
                                             <connections>
-                                                <action selector="shuffleButtonTapped:" destination="L6n-uh-qVq" eventType="touchUpInside" id="oaR-4W-luF"/>
+                                                <action selector="shuffleButtonTapped:" destination="L6n-uh-qVq" eventType="touchUpInside" id="MXG-xP-hqc"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5D-0m-CBu">
@@ -1040,15 +1041,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <state key="normal" title="M"/>
                                             <connections>
-                                                <action selector="moveButtonTapped:" destination="L6n-uh-qVq" eventType="touchUpInside" id="fyv-bn-iqH"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Go-79-eRf">
-                                            <rect key="frame" x="337" y="10" width="30" height="41"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                            <state key="normal" title="E"/>
-                                            <connections>
-                                                <action selector="changeSongNameTapped:" destination="L6n-uh-qVq" eventType="touchUpInside" id="v1J-Wg-QcR"/>
+                                                <action selector="moveTapped:" destination="L6n-uh-qVq" eventType="touchUpInside" id="F6t-iY-Ija"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -1067,22 +1060,19 @@
                                         <constraint firstItem="C5D-0m-CBu" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="41" id="IV9-JC-XHE"/>
                                         <constraint firstItem="pfh-5b-5cE" firstAttribute="leading" secondItem="X5r-cv-IIu" secondAttribute="leading" id="KlR-fR-GLa"/>
                                         <constraint firstItem="C5D-0m-CBu" firstAttribute="leading" secondItem="GUM-AD-o6u" secondAttribute="trailing" constant="16" id="YRK-E0-91L"/>
-                                        <constraint firstItem="0Go-79-eRf" firstAttribute="leading" secondItem="C5D-0m-CBu" secondAttribute="leading" id="cwi-Dt-ITP"/>
                                         <constraint firstItem="pfh-5b-5cE" firstAttribute="centerY" secondItem="GUM-AD-o6u" secondAttribute="centerY" id="d7d-eh-1F3"/>
                                         <constraint firstItem="ngO-Ax-rkZ" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="22" id="fg2-ik-CUm"/>
                                         <constraint firstItem="ngO-Ax-rkZ" firstAttribute="trailing" secondItem="GUM-AD-o6u" secondAttribute="trailing" id="fni-fc-d6y"/>
                                         <constraint firstItem="C5D-0m-CBu" firstAttribute="centerY" secondItem="GUM-AD-o6u" secondAttribute="centerY" id="hHD-2c-CnR"/>
-                                        <constraint firstItem="0Go-79-eRf" firstAttribute="bottom" secondItem="ngO-Ax-rkZ" secondAttribute="bottom" id="zUe-Sg-mY2"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="artistName" destination="4z9-m6-IKG" id="RuF-jx-hMs"/>
-                                    <outlet property="editSongButton" destination="0Go-79-eRf" id="Cwv-R1-Gey"/>
-                                    <outlet property="moveSong" destination="C5D-0m-CBu" id="Ea8-fk-tTR"/>
-                                    <outlet property="playPauseButton" destination="X5r-cv-IIu" id="mQM-hV-dDU"/>
-                                    <outlet property="shuffleButton" destination="pfh-5b-5cE" id="Vqk-TC-4YO"/>
-                                    <outlet property="songProgressSlider" destination="GUM-AD-o6u" id="hLp-ef-GCj"/>
-                                    <outlet property="songTitle" destination="ngO-Ax-rkZ" id="hYA-nu-4cB"/>
+                                    <outlet property="artistName" destination="4z9-m6-IKG" id="dQw-qS-p93"/>
+                                    <outlet property="downloadButton" destination="C5D-0m-CBu" id="fyT-Sj-I1H"/>
+                                    <outlet property="playPauseButton" destination="X5r-cv-IIu" id="o8R-ay-bUr"/>
+                                    <outlet property="shuffleButton" destination="pfh-5b-5cE" id="7JN-bB-qpf"/>
+                                    <outlet property="songProgressSlider" destination="GUM-AD-o6u" id="AgN-fj-LDX"/>
+                                    <outlet property="songTitle" destination="ngO-Ax-rkZ" id="GcM-8T-bfQ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1091,20 +1081,39 @@
                             <outlet property="delegate" destination="COM-Ud-2Ft" id="OKK-CF-U1K"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="rtT-Sb-mu6">
+                        <barButtonItem key="leftBarButtonItem" title="I" id="fsZ-ly-6B7"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="SongTableView" destination="fAN-YS-lbX" id="0f4-KY-SGq"/>
-                        <outlet property="searchBar" destination="ybV-Pu-krl" id="mFG-2d-36d"/>
-                        <outlet property="songTableView" destination="fAN-YS-lbX" id="d5i-Jh-fiw"/>
+                        <outlet property="downloadTableView" destination="fAN-YS-lbX" id="a5J-ni-vVG"/>
+                        <outlet property="menuButton" destination="fsZ-ly-6B7" id="8bM-Zj-hOl"/>
+                        <outlet property="searchBar" destination="ybV-Pu-krl" id="fmQ-1l-q9N"/>
+                        <outlet property="tableView" destination="fAN-YS-lbX" id="15v-mD-0wc"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xM-yI-2Wc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3582" y="810"/>
+            <point key="canvasLocation" x="3582" y="802"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="L3z-e8-XbG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Dd1-XJ-63i" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="NPY-7D-Jy6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="COM-Ud-2Ft" kind="relationship" relationship="rootViewController" id="rLr-6B-NdP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jg7-Ke-ls8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2767" y="802"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="logo.png" width="400" height="200"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dsd-7R-1Lf"/>
     </inferredMetricsTieBreakers>
