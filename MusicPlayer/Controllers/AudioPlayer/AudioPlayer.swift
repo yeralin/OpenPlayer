@@ -8,14 +8,9 @@
 
 import MediaPlayer
 
-
 class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
     
-    
-    
-    typealias PlayerType = AVAudioPlayer
     var player: AVAudioPlayer!
-    var songsArray: [SongEntity] = []
     var currentSong: SongEntity?
     var shuffleMode: Bool = false
     var rc: RemoteControl!
@@ -86,8 +81,8 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
                 player!.stop()
                 player.currentTime = 0
                 player = nil
-                delegate?.cellState(state: State.stop,song: song)
-                rc.updateMPTime(state: State.stop, player: player)
+                delegate?.cellState(state: .stop,song: song)
+                rc.updateMPTime(state: .stop, player: player)
             }
         }
     }
@@ -95,9 +90,9 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
     func pauseSong() {
         if player != nil && player.isPlaying {
             if let song = currentSong {
-                delegate?.cellState(state: State.pause, song: song)
+                delegate?.cellState(state: .pause, song: song)
                 player.pause()
-                rc.updateMPTime(state: State.pause, player: player)
+                rc.updateMPTime(state: .pause, player: player)
             }
         }
     }
@@ -107,20 +102,21 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
     func seekTo(position: TimeInterval) {
         if player != nil {
             player.currentTime = position
-            rc.updateMPTime(state: State.resume, player: player)
+            rc.updateMPTime(state: .resume, player: player)
         }
     }
     
     func playPreviousSong() {
-        var prevSong = 0
+        var prevSongIndex = 0
         if let song = currentSong {
+            let songsArray = delegate.getSongArray()
             if shuffleMode == true {
-                prevSong = Int(arc4random_uniform(UInt32(songsArray.count)))
+                prevSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
             } else {
-                prevSong = songsArray.index(of: song)! - 1
+                prevSongIndex = songsArray.index(of: song)! - 1
             }
-            if songsArray.indices.contains(prevSong) {
-                self.playSong(song: songsArray[prevSong])
+            if songsArray.indices.contains(prevSongIndex) {
+                self.playSong(song: songsArray[prevSongIndex])
             } else {
                 stopSong()
             }
@@ -128,15 +124,16 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
     }
     
     func playNextSong() {
-        var nextSong = 0
         if let song = currentSong {
+            let songsArray = delegate.getSongArray()
+            var nextSongIndex = 0
             if shuffleMode == true {
-                nextSong = Int(arc4random_uniform(UInt32(songsArray.count)))
+                nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
             } else {
-                nextSong = songsArray.index(of: song)! + 1
+                nextSongIndex = songsArray.index(of: song)! + 1
             }
-            if songsArray.indices.contains(nextSong) {
-                self.playSong(song: songsArray[nextSong])
+            if songsArray.indices.contains(nextSongIndex) {
+                self.playSong(song: songsArray[nextSongIndex])
             } else {
                 stopSong()
             }

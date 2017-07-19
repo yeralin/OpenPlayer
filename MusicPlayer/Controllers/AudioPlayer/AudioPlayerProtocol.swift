@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum State {
+enum PlayerState {
     case prepare
     case play
     case pause
@@ -17,7 +17,13 @@ enum State {
 }
 
 protocol AudioPlayerDelegate : class {
-    func cellState(state: State, song: Any)
+    func cellState(state: PlayerState, song: SongEntity)
+    func getSongArray() -> [SongEntity]
+}
+
+protocol StreamAudioPlayerDelegate : class {
+    func cellState(state: PlayerState, song: DownloadSongEntity)
+    func getSongArray() -> [DownloadSongEntity]
 }
 
 protocol AudioPlayerProtocol {
@@ -25,7 +31,6 @@ protocol AudioPlayerProtocol {
     associatedtype SongEntityType
     associatedtype positionUnit
     var player : PlayerType! { get set }
-    var songsArray: [SongEntityType] { get set }
     var currentSong: SongEntityType? { get set }
     var shuffleMode: Bool { get set }
         

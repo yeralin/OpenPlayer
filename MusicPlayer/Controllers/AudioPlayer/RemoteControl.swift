@@ -45,17 +45,14 @@ class RemoteControl: NSObject {
         var duration: Double = Double.nan
         var songArtist: String = ""
         var songTitle: String = ""
-        if let song = currentSong as? SongEntity {
+        if let song = currentSong as? SongEntity, let player = player as? AVAudioPlayer {
             songArtist = song.songArtist!
             songTitle = song.songTitle!
-        } else if let song = currentSong as? DownloadSongEntity {
-            songArtist = song.songArtist!
-            songTitle = song.songTitle!
-        }
-        if let player = player as? AVPlayer {
-            duration = player.currentItem!.duration.seconds
-        } else if let player = player as? AVAudioPlayer {
             duration = player.duration
+        } else if let song = currentSong as? DownloadSongEntity, let player = player as? AVPlayer {
+            songArtist = song.songArtist!
+            songTitle = song.songTitle!
+            duration = player.currentItem!.duration.seconds
         }
         mpic.nowPlayingInfo = [
             MPMediaItemPropertyArtist: songArtist,
@@ -65,7 +62,7 @@ class RemoteControl: NSObject {
         ]
     }
     
-    func updateMPTime(state: State, player: Any) {
+    func updateMPTime(state: PlayerState, player: Any) {
         let mpic = MPNowPlayingInfoCenter.default()
         var currentTime: Double = Double.nan
         if let player = player as? AVPlayer {

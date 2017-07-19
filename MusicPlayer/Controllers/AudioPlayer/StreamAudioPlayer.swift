@@ -21,6 +21,8 @@ extension AVPlayer {
     }
 }
 
+let UPDATE_DURATION = Notification.Name("updateDuration")
+
 class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegate {
     
     typealias PlayerType = AVPlayer
@@ -29,7 +31,7 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
     var currentSong: DownloadSongEntity?
     var shuffleMode: Bool = false
     var rc: RemoteControl!
-    weak var delegate: AudioPlayerDelegate!
+    weak var delegate: StreamAudioPlayerDelegate!
     
     static let sharedInstance = StreamAudioPlayer()
     
@@ -59,8 +61,7 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
             self.stopSong()
             AudioPlayer.sharedInstance.stopSong()
             currentSong = song
-            let songUrl = song.songUrl!
-            let playerItem = CachingPlayerItem(url: songUrl)
+            let playerItem = CachingPlayerItem(url: song.songUrl!)
             playerItem.addObserver(self,
                                    forKeyPath: #keyPath(AVPlayerItem.duration),
                                    options: [.old, .new],
@@ -71,7 +72,7 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
                                                    object: playerItem)
             playerItem.delegate = self
             player = AVPlayer(playerItem: playerItem)
-            delegate.cellState(state: State.prepare, song: currentSong!)
+            delegate.cellState(state: .prepare, song: currentSong!)
             rc.updateMPControls(player: player, currentSong: currentSong!)
         }
     }
@@ -88,13 +89,14 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
             let validDuration = newDuration.isNumeric && newDuration.value != 0
             let duration = validDuration ? CMTimeGetSeconds(newDuration) : 0.0
             if duration != 0 {
-                delegate.cellState(state: .play, song: currentSong!)
                 rc.updateMPDuration(duration: duration)
+                NotificationCenter.default.post(name: UPDATE_DURATION, object: duration)
             }
         }
     }
     
     func playerItemReadyToPlay(playerItem: CachingPlayerItem) {
+        delegate.cellState(state: .play, song: currentSong!)
         player.play()
         playerItem.download()
     }
@@ -102,41 +104,48 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
     
     func playerItemDidStopPlayback(playerItem: CachingPlayerItem) {
         print("Not enough data for playback. Probably because of the poor network. Wait a bit and try to play later.")
+        delegate.cellState(state: .prepare, song: currentSong!)
     }
     
     func playerItem(playerItem: CachingPlayerItem, didFinishDownloadingData data: NSData) {
         do {
             print("Finished")
             if let songName = currentSong?.songName {
-                let tempDirectory = FileManager.default.temporaryDirectory
-                let audioFile = tempDirectory.appendingPathComponent(songName).appendingPathExtension("mp3")
+                //let tempDirectory = FileManager.default.temporaryDirectory
+                
+                let downloadDir = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("Downloads")
+                let audioFile = downloadDir.appendingPathComponent(songName).appendingPathExtension("mp3")
                 try data.write(to: audioFile, options: .atomic)
                 let durationFlags = player.currentItem?.asset.duration.flags
                 if durationFlags!.contains(.indefinite) {
-                    //If streamed song did not provide Content-Length header
-                    //duration is unknown, replacing stream with downloaded song
-                    NotificationCenter.default.removeObserver(self,
-                                                              name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-                                                              object: playerItem)
-                    playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration))
-                    let currentTime = player.currentTime()
-                    let replaceItem = AVPlayerItem(url: audioFile)
-                    replaceItem.addObserver(self,
-                                           forKeyPath: #keyPath(AVPlayerItem.duration),
-                                           options: [.old, .new],
-                                           context: nil)
-                    NotificationCenter.default.addObserver(self,
-                                                           selector: #selector(playNextSong),
-                                                           name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-                                                           object: replaceItem)
-                    player.replaceCurrentItem(with: replaceItem)
-                    player.seek(to: currentTime)
-                    rc.updateMPTime(state: State.resume, player: player)
+                    replaceStreamWithLocal(playerItem, audioFile)
                 }
             }
         } catch {
             log.error(error)
         }
+    }
+    
+    func replaceStreamWithLocal(_ playerItem: CachingPlayerItem, _ audioFile: URL) {
+        //If streamed song did not provide Content-Length header
+        //duration is unknown, replacing stream with downloaded song
+        NotificationCenter.default.removeObserver(self,
+                                                  name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                                                  object: playerItem)
+        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration))
+        let currentTime = player.currentTime()
+        let replaceItem = AVPlayerItem(url: audioFile)
+        replaceItem.addObserver(self,
+                                forKeyPath: #keyPath(AVPlayerItem.duration),
+                                options: [.old, .new],
+                                context: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(playNextSong),
+                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+                                               object: replaceItem)
+        player.replaceCurrentItem(with: replaceItem)
+        player.seek(to: currentTime)
+        rc.updateMPTime(state: .resume, player: player)
     }
     
     func resumeSong() {
@@ -145,8 +154,8 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
                 playSong(song: song)
             }
             player.play()
-            delegate?.cellState(state: State.resume,song: song)
-            rc.updateMPTime(state: State.resume, player: player)
+            delegate?.cellState(state: .resume,song: song)
+            rc.updateMPTime(state: .resume, player: player)
         }
         
     }
@@ -158,8 +167,8 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
                 player.pause()
                 player.currentItem?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
                 player = nil
-                delegate?.cellState(state: State.stop,song: song)
-                rc.updateMPTime(state: State.stop, player: player)
+                delegate?.cellState(state: .stop,song: song)
+                rc.updateMPTime(state: .stop, player: player)
             }
         }
     }
@@ -167,9 +176,9 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
     func pauseSong() {
         if player != nil && player.isPlaying {
             if let song = currentSong {
-                delegate?.cellState(state: State.pause, song: song)
+                delegate?.cellState(state: .pause, song: song)
                 player.pause()
-                rc.updateMPTime(state: State.pause, player: player)
+                rc.updateMPTime(state: .pause, player: player)
             }
         }
     }
@@ -179,7 +188,7 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
     func seekTo(position: CMTime) {
         if player != nil {
             player.currentItem?.seek(to: position)
-            rc.updateMPTime(state: State.resume, player: player)
+            rc.updateMPTime(state: .resume, player: player)
         }
     }
     

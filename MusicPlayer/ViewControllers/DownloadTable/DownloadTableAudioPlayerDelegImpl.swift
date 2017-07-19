@@ -9,27 +9,29 @@
 import Foundation
 
 private typealias DownloadTableAudioPlayerDelegImpl = DownloadTableViewController
-extension DownloadTableAudioPlayerDelegImpl: AudioPlayerDelegate {
+extension DownloadTableAudioPlayerDelegImpl: StreamAudioPlayerDelegate {
     
     func initAudioPlayerDelegateImpl() {
         StreamAudioPlayer.sharedInstance.delegate = self
     }
     
-    func cellState(state: State, song: Any) {
-        if let song = song as? DownloadSongEntity {
-            if let cell = getCell(withSong: song) {
-                if state == .prepare {
-                   cell.prepareSongCellState()
-                } else if state == .play {
-                    cell.playSongCellState()
-                } else if state == .resume {
-                    cell.resumeSongCellState()
-                } else if state == .pause {
-                    cell.pauseSongCellState()
-                } else if state == .stop {
-                    cell.resetSongCellState()
-                }
+    func cellState(state: PlayerState, song: DownloadSongEntity) {
+        if let cell = getCell(withSong: song) {
+            if state == .prepare {
+                cell.prepareSongCellState()
+            } else if state == .play {
+                cell.playSongCellState()
+            } else if state == .resume {
+                cell.resumeSongCellState()
+            } else if state == .pause {
+                cell.pauseSongCellState()
+            } else if state == .stop {
+                cell.stopSongCellState()
             }
         }
+    }
+    
+    func getSongArray() -> [DownloadSongEntity] {
+        return searchSongs
     }
 }
