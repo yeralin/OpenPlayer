@@ -18,6 +18,10 @@ protocol SongCell {
     
     associatedtype SongEntityType
     
+    func initCell(initSong: SongEntityType)
+    func restorePlayingCell(song: SongEntityType)
+    func setupSliderCAD()
+    
     //Tap actions
     func actionOnPlayPauseTap()
     func actionOnShuffleTap()
@@ -25,12 +29,10 @@ protocol SongCell {
     func actionOnChangeSongNameTap()
     func actionOnChangeSliderPosition(_ sender: UISlider)
     
+    
     //States
-    func initCell(initSong: SongEntityType)
-    func restorePlayingCell(song: SongEntityType)
     func playSongCellState()
     func pauseSongCellState()
-    func resetSongCellState()
-    func setupUpdateSlider()
+    func stopSongCellState()
 }
 
