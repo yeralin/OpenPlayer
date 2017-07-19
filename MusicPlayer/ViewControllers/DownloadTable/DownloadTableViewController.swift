@@ -34,6 +34,7 @@ class DownloadTableViewController: UITableViewController {
         title = "Download"
         setupMenuGestureRecognizer()
         initAudioPlayerDelegateImpl()
+        downloadTableView.allowsSelection = false
         menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
                            cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
                            target: self.revealViewController(),

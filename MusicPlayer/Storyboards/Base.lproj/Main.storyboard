@@ -996,17 +996,28 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="GUM-AD-o6u">
-                                            <rect key="frame" x="51" y="51" width="272" height="35"/>
+                                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="100" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GUM-AD-o6u" customClass="BufferSlider" customModule="MusicPlayer" customModuleProvider="target">
+                                            <rect key="frame" x="51" y="51" width="272" height="36"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bufferColor">
+                                                    <color key="value" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="progressColor">
+                                                    <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="bufferStartValue">
+                                                    <real key="value" value="50"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="bufferEndValue">
+                                                    <real key="value" value="100"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="changeSliderPosition:" destination="L6n-uh-qVq" eventType="valueChanged" id="71F-ZS-MER"/>
                                             </connections>
                                         </slider>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jason Mraz" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4z9-m6-IKG">
                                             <rect key="frame" x="53" y="11" width="268" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="DaS-Kv-ukS"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -1019,9 +1030,6 @@
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5r-cv-IIu">
                                             <rect key="frame" x="14" y="15" width="31" height="41"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="31" id="A61-B2-HRS"/>
-                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <state key="normal" title="P"/>
                                             <connections>
@@ -1029,7 +1037,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfh-5b-5cE">
-                                            <rect key="frame" x="14" y="47" width="31" height="41"/>
+                                            <rect key="frame" x="14" y="48" width="31" height="41"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <state key="normal" title="S"/>
                                             <connections>
@@ -1037,7 +1045,10 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C5D-0m-CBu">
-                                            <rect key="frame" x="337" y="49" width="30" height="39"/>
+                                            <rect key="frame" x="337" y="26" width="30" height="39"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="44v-kz-Q26"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <state key="normal" title="M"/>
                                             <connections>
@@ -1046,24 +1057,26 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="4z9-m6-IKG" firstAttribute="leading" secondItem="X5r-cv-IIu" secondAttribute="trailing" constant="8" symbolic="YES" id="2jR-1g-Drw"/>
-                                        <constraint firstItem="GUM-AD-o6u" firstAttribute="top" secondItem="4z9-m6-IKG" secondAttribute="bottom" constant="19" id="59S-pW-4UQ"/>
-                                        <constraint firstItem="GUM-AD-o6u" firstAttribute="centerX" secondItem="OZX-ir-TAR" secondAttribute="centerX" id="69M-Dy-WUh"/>
-                                        <constraint firstItem="4z9-m6-IKG" firstAttribute="trailing" secondItem="ngO-Ax-rkZ" secondAttribute="trailing" id="6hL-n4-BYh"/>
-                                        <constraint firstItem="4z9-m6-IKG" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="3" id="6tA-z3-mHM"/>
-                                        <constraint firstItem="X5r-cv-IIu" firstAttribute="leading" secondItem="OZX-ir-TAR" secondAttribute="leadingMargin" constant="6" id="7cI-tc-UjJ"/>
-                                        <constraint firstItem="GUM-AD-o6u" firstAttribute="top" secondItem="ngO-Ax-rkZ" secondAttribute="bottom" id="8da-3o-7qF"/>
-                                        <constraint firstItem="ngO-Ax-rkZ" firstAttribute="leading" secondItem="GUM-AD-o6u" secondAttribute="leading" id="9cP-Lm-ai1"/>
-                                        <constraint firstItem="X5r-cv-IIu" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="7" id="FH0-fC-qDh"/>
-                                        <constraint firstItem="ngO-Ax-rkZ" firstAttribute="leading" secondItem="pfh-5b-5cE" secondAttribute="trailing" constant="8" symbolic="YES" id="I9n-it-Dry"/>
-                                        <constraint firstItem="4z9-m6-IKG" firstAttribute="leading" secondItem="ngO-Ax-rkZ" secondAttribute="leading" id="IOM-5s-ZFq"/>
-                                        <constraint firstItem="C5D-0m-CBu" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="41" id="IV9-JC-XHE"/>
-                                        <constraint firstItem="pfh-5b-5cE" firstAttribute="leading" secondItem="X5r-cv-IIu" secondAttribute="leading" id="KlR-fR-GLa"/>
-                                        <constraint firstItem="C5D-0m-CBu" firstAttribute="leading" secondItem="GUM-AD-o6u" secondAttribute="trailing" constant="16" id="YRK-E0-91L"/>
-                                        <constraint firstItem="pfh-5b-5cE" firstAttribute="centerY" secondItem="GUM-AD-o6u" secondAttribute="centerY" id="d7d-eh-1F3"/>
-                                        <constraint firstItem="ngO-Ax-rkZ" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="22" id="fg2-ik-CUm"/>
-                                        <constraint firstItem="ngO-Ax-rkZ" firstAttribute="trailing" secondItem="GUM-AD-o6u" secondAttribute="trailing" id="fni-fc-d6y"/>
-                                        <constraint firstItem="C5D-0m-CBu" firstAttribute="centerY" secondItem="GUM-AD-o6u" secondAttribute="centerY" id="hHD-2c-CnR"/>
+                                        <constraint firstItem="ngO-Ax-rkZ" firstAttribute="leading" secondItem="pfh-5b-5cE" secondAttribute="trailing" constant="8" symbolic="YES" id="1zx-KT-gQT"/>
+                                        <constraint firstItem="ngO-Ax-rkZ" firstAttribute="trailing" secondItem="GUM-AD-o6u" secondAttribute="trailing" id="29Q-fA-9nK"/>
+                                        <constraint firstItem="C5D-0m-CBu" firstAttribute="leading" secondItem="4z9-m6-IKG" secondAttribute="trailing" constant="16" id="COW-B5-cTq"/>
+                                        <constraint firstItem="pfh-5b-5cE" firstAttribute="centerY" secondItem="GUM-AD-o6u" secondAttribute="centerY" id="CxU-zV-Z3y"/>
+                                        <constraint firstItem="pfh-5b-5cE" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="40" id="EDz-LJ-Hfe"/>
+                                        <constraint firstItem="4z9-m6-IKG" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="3" id="GqA-ud-AB9"/>
+                                        <constraint firstItem="GUM-AD-o6u" firstAttribute="top" secondItem="ngO-Ax-rkZ" secondAttribute="bottom" id="I6I-My-njy"/>
+                                        <constraint firstItem="4z9-m6-IKG" firstAttribute="leading" secondItem="X5r-cv-IIu" secondAttribute="trailing" constant="8" symbolic="YES" id="NI2-AK-5xa"/>
+                                        <constraint firstItem="C5D-0m-CBu" firstAttribute="trailing" secondItem="OZX-ir-TAR" secondAttribute="trailingMargin" id="Tce-UV-2MX"/>
+                                        <constraint firstItem="X5r-cv-IIu" firstAttribute="leading" secondItem="pfh-5b-5cE" secondAttribute="leading" id="TsW-cM-0GR"/>
+                                        <constraint firstItem="GUM-AD-o6u" firstAttribute="top" secondItem="4z9-m6-IKG" secondAttribute="bottom" constant="19" id="XY1-xd-uyc"/>
+                                        <constraint firstItem="C5D-0m-CBu" firstAttribute="centerY" secondItem="OZX-ir-TAR" secondAttribute="centerY" id="dU0-WU-aR8"/>
+                                        <constraint firstItem="X5r-cv-IIu" firstAttribute="leading" secondItem="OZX-ir-TAR" secondAttribute="leadingMargin" constant="6" id="dV3-qA-tPO"/>
+                                        <constraint firstItem="ngO-Ax-rkZ" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="22" id="giC-Yh-FXF"/>
+                                        <constraint firstItem="X5r-cv-IIu" firstAttribute="top" secondItem="OZX-ir-TAR" secondAttribute="topMargin" constant="7" id="lA3-tX-Otp"/>
+                                        <constraint firstItem="ngO-Ax-rkZ" firstAttribute="leading" secondItem="GUM-AD-o6u" secondAttribute="leading" id="mFr-hQ-XzB"/>
+                                        <constraint firstItem="4z9-m6-IKG" firstAttribute="leading" secondItem="ngO-Ax-rkZ" secondAttribute="leading" id="ovR-Zh-9eM"/>
+                                        <constraint firstItem="4z9-m6-IKG" firstAttribute="centerX" secondItem="OZX-ir-TAR" secondAttribute="centerX" id="tE4-Yz-7dJ"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="GUM-AD-o6u" secondAttribute="bottom" constant="-3.5" id="yra-yE-eFv"/>
+                                        <constraint firstItem="4z9-m6-IKG" firstAttribute="trailing" secondItem="ngO-Ax-rkZ" secondAttribute="trailing" id="zdR-MR-kUR"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

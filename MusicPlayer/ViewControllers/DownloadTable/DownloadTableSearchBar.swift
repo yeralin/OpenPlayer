@@ -43,6 +43,7 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
                 
             }
             searchSongs.append(song)
+            StreamAudioPlayer.sharedInstance.songsArray = searchSongs
         }
     }
     

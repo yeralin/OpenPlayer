@@ -18,9 +18,9 @@ extension SongTableViewDataSource {
     //How many SongCells to have
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
-           return filteredSongs!.count
+            return filteredSongs!.count
         } else {
-            return AudioPlayer.sharedInstance.songsArray.count
+            return songsArray!.count
         }
     }
     
@@ -34,7 +34,7 @@ extension SongTableViewDataSource {
         
         //If user is searching, get song from filtered list
         if searching { song = filteredSongs![indexPath.row] }
-        else { song = AudioPlayerInst.songsArray[indexPath.row] }
+        else { song = songsArray![indexPath.row] }
         
         //If song is not processed (parsed metadata)
         if !song.isProcessed {
@@ -54,17 +54,12 @@ extension SongTableViewDataSource {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let songPerstManager = SongPersistancyManager.sharedInstance
-            var songsArray = AudioPlayer.sharedInstance.songsArray
-            let song = songsArray[indexPath.row]
-            songPerstManager.deleteEntity(toDelete: song)
-            songsArray.remove(at: indexPath.row)
-            //TODO: Can be optimized (reset order only after deleted song)
-            AudioPlayer.sharedInstance.songsArray = songsArray.enumerated().map { (index, song) in
-                song.songOrder = Int32(index)
-                return song
+            if let song = songsArray?[indexPath.row] {
+                songPerstManager.deleteEntity(toDelete: song)
+                songsArray!.remove(at: indexPath.row)
+                songPerstManager.saveContext()
+                tableView.deleteRows(at: [indexPath], with: .fade)
             }
-            songPerstManager.saveContext()
-            tableView.deleteRows(at: [indexPath], with: .fade)
             
         }
     }
@@ -72,14 +67,14 @@ extension SongTableViewDataSource {
     //  to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let songPerstManager = SongPersistancyManager.sharedInstance
-        var songsArray = AudioPlayer.sharedInstance.songsArray
-        let songToMove = songsArray[fromIndexPath.row]
-        songsArray.remove(at: fromIndexPath.row)
-        songsArray.insert(songToMove, at: to.row)
-        //TODO: Can be optimized (reset order only after deleted song)
-        AudioPlayer.sharedInstance.songsArray = songsArray.enumerated().map { (index, song) in
-            song.songOrder = Int32(index)
-            return song
+        if let songToMove = songsArray?[fromIndexPath.row] {
+            songsArray?.remove(at: fromIndexPath.row)
+            songsArray?.insert(songToMove, at: to.row)
+            //TODO: Can be optimized (reset order only after deleted song)
+            songsArray = songsArray?.enumerated().map { (index, song) -> SongEntity in
+                song.songOrder = Int32(index)
+                return song
+            }
         }
         songPerstManager.saveContext()
     }

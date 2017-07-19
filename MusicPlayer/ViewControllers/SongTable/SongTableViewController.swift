@@ -15,6 +15,7 @@ class SongTableViewController: UITableViewController {
     var playlist: PlaylistEntity!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var songTableView: UITableView!
+    var songsArray: [SongEntity]?
     var filteredSongs: [SongEntity]?
     var searching: Bool = false
     
@@ -39,9 +40,8 @@ class SongTableViewController: UITableViewController {
     
     func prepareSongs(receivedPlaylist: PlaylistEntity) {
         playlist = receivedPlaylist
-        let songsArray = SongPersistancyManager.sharedInstance
+        songsArray = SongPersistancyManager.sharedInstance
                             .populateSongs(forPlaylist: receivedPlaylist)
-        AudioPlayer.sharedInstance.songsArray = songsArray
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

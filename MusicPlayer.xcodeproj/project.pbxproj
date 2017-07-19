@@ -15,6 +15,8 @@
 		31017CA51F047EF9008C4A87 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017CA41F047EF9008C4A87 /* AudioPlayer.swift */; };
 		31017CA71F06FDB2008C4A87 /* CacheStreamAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017CA61F06FDB2008C4A87 /* CacheStreamAudio.swift */; };
 		311221B11EF42E9500C94244 /* ServerRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311221B01EF42E9500C94244 /* ServerRequests.swift */; };
+		311609D21F1E45DA0071C291 /* DownloadTableCellSliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311609D11F1E45DA0071C291 /* DownloadTableCellSliderController.swift */; };
+		311609D41F1FCF9D0071C291 /* SongTableCellSliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311609D31F1FCF9D0071C291 /* SongTableCellSliderController.swift */; };
 		311D6A7B1EDBDD1200908D16 /* Test - Test.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 311D6A7A1EDBDD1200908D16 /* Test - Test.mp3 */; };
 		311D6A7D1EDBF42400908D16 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311D6A7C1EDBF42400908D16 /* MenuTableViewController.swift */; };
 		313306C41ECA4918008CCE38 /* PlaylistTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313306C31ECA4918008CCE38 /* PlaylistTableDataSource.swift */; };
@@ -83,6 +85,8 @@
 		31017CA41F047EF9008C4A87 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		31017CA61F06FDB2008C4A87 /* CacheStreamAudio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheStreamAudio.swift; sourceTree = "<group>"; };
 		311221B01EF42E9500C94244 /* ServerRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequests.swift; sourceTree = "<group>"; };
+		311609D11F1E45DA0071C291 /* DownloadTableCellSliderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableCellSliderController.swift; sourceTree = "<group>"; };
+		311609D31F1FCF9D0071C291 /* SongTableCellSliderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableCellSliderController.swift; sourceTree = "<group>"; };
 		311D6A7A1EDBDD1200908D16 /* Test - Test.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Test - Test.mp3"; sourceTree = "<group>"; };
 		311D6A7C1EDBF42400908D16 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		313306C31ECA4918008CCE38 /* PlaylistTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableDataSource.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 			children = (
 				31017C9B1F018A35008C4A87 /* DownloadTableCellStates.swift */,
 				31017C9D1F018A3E008C4A87 /* DownloadTableCellActions.swift */,
+				311609D11F1E45DA0071C291 /* DownloadTableCellSliderController.swift */,
 			);
 			name = DownloadTableCellExtentions;
 			path = ../SongCustomCell;
@@ -225,6 +230,7 @@
 				3148C2A61EC95920005947CB /* SongTableCellAlerts.swift */,
 				3148C2A21EC8D049005947CB /* SongTableCellStates.swift */,
 				31017C981F018787008C4A87 /* SongTableCellActions.swift */,
+				311609D31F1FCF9D0071C291 /* SongTableCellSliderController.swift */,
 			);
 			name = SongTableCellExtentions;
 			path = ../SongCustomCell/Extentions;
@@ -685,7 +691,9 @@
 				31F2F0391EC151CA0072DE30 /* PlaylistPersistanceCntrl.swift in Sources */,
 				3185A37E1F016479008E2D21 /* SongTableCell.swift in Sources */,
 				311D6A7D1EDBF42400908D16 /* MenuTableViewController.swift in Sources */,
+				311609D21F1E45DA0071C291 /* DownloadTableCellSliderController.swift in Sources */,
 				31017C991F018787008C4A87 /* SongTableCellActions.swift in Sources */,
+				311609D41F1FCF9D0071C291 /* SongTableCellSliderController.swift in Sources */,
 				31A7AEE11ECDD7BE00103789 /* MoveToPickerViewController.swift in Sources */,
 				31A7AEE51ECDF0CF00103789 /* MoveToPickerViewDelegateImpl.swift in Sources */,
 				31017C9C1F018A35008C4A87 /* DownloadTableCellStates.swift in Sources */,

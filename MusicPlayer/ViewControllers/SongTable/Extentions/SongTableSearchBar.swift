@@ -14,7 +14,7 @@ extension SongTableSearchBar: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if var searchText = searchBar.text, !searchText.isEmpty {
             searchText = searchText.lowercased()
-            filteredSongs = AudioPlayer.sharedInstance.songsArray.filter { song in
+            filteredSongs = songsArray?.filter { song in
                 let normalizedSongName = (song.songName! as NSString)
                                             .deletingPathExtension
                                             .lowercased()
