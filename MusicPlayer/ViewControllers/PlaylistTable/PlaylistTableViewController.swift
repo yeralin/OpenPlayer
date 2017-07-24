@@ -33,14 +33,23 @@ class PlaylistTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "Playlists"
         setupMenuGestureRecognizer()
+        setupMenuButton(button: menuButton)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
-                           cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
-                           target: self.revealViewController(),
-                           action: #selector(SWRevealViewController.revealToggle(_:)))
         playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists()
         refreshControl?.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
         //PlaylistPersistancyManager.sharedInstance.wipePlaylistCoreData(cntx: managedObjectContext)
+    }
+    
+    public func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
+        if revealController.frontViewPosition == FrontViewPosition.left {
+            self.tableView.alwaysBounceVertical = true
+            self.tableView.allowsSelection = true
+            
+        } else if revealController.frontViewPosition == FrontViewPosition.right {
+            self.tableView.alwaysBounceVertical = false
+            self.tableView.allowsSelection = false
+        }
+        
     }
     
     func handleRefresh(refreshControl: UIRefreshControl) {

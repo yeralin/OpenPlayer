@@ -39,6 +39,11 @@ class RemoteControl: NSObject {
         scc.seekForwardCommand.addTarget(self, action: #selector(handleSeekForwardCommandEvent(event:)))
     }
     
+    func resetMPControls() {
+        let mpic = MPNowPlayingInfoCenter.default()
+        mpic.nowPlayingInfo = nil
+    }
+    
     
     func updateMPControls(player: Any, currentSong: Any) {
         let mpic = MPNowPlayingInfoCenter.default()
@@ -77,9 +82,6 @@ class RemoteControl: NSObject {
             } else if state == .resume {
                 meta[MPNowPlayingInfoPropertyPlaybackRate] = 1
                 meta[MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentTime
-            } else if state == .stop {
-                meta[MPNowPlayingInfoPropertyPlaybackRate] = 0
-                meta[MPNowPlayingInfoPropertyElapsedPlaybackTime] = 0
             }
             mpic.nowPlayingInfo = meta
         }

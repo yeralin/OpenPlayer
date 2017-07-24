@@ -15,9 +15,10 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" {
+            StreamAudioPlayer.sharedInstance.stopSong()
             searchSongs.removeAll()
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
     
     func parseSearchRequestResponse(_ songListResponse: [[String:String]]) {
@@ -48,6 +49,7 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        StreamAudioPlayer.sharedInstance.stopSong()
         if var searchText = searchBar.text, !searchText.isEmpty {
             searchText = searchText.lowercased()
             self.showWaitOverlay()

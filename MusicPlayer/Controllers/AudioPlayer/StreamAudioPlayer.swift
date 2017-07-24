@@ -168,7 +168,7 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
                 player.currentItem?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
                 player = nil
                 delegate?.cellState(state: .stop,song: song)
-                rc.updateMPTime(state: .stop, player: player)
+                rc.resetMPControls()
             }
         }
     }

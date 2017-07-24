@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DownloadTableCell: UITableViewCell, SongCell {
+class DownloadTableCell: UITableViewCell, CustomSongCell {
     
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var songTitle: UILabel!
@@ -26,6 +26,10 @@ class DownloadTableCell: UITableViewCell, SongCell {
             artistName.text = song?.songArtist
             songTitle.text = song?.songTitle
         }
+    }
+    
+    override func awakeFromNib() {
+        self.selectionStyle = .none
     }
     
     func initCell(initSong: DownloadSongEntity) {
@@ -93,6 +97,9 @@ class DownloadTableCell: UITableViewCell, SongCell {
         actionOnChangeSliderPosition(sender)
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     
 }

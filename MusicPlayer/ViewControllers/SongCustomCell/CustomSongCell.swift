@@ -1,5 +1,5 @@
 //
-//  SongCell.swift
+//  CustomSongCell.swift
 //  MusicPlayer
 //
 //  Created by Daniyar Yeralin on 5/9/17.
@@ -14,7 +14,7 @@ protocol SongCellDelegate : class {
     func performSegueForCell(sender: Any?, identifier: String)
 }
 
-protocol SongCell {
+protocol CustomSongCell {
     
     associatedtype SongEntityType
     
