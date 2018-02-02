@@ -7,10 +7,15 @@
 //
 
 import Foundation
+
 import UIKit
 
 private typealias DownloadTableViewDataSource = DownloadTableViewController
 extension DownloadTableViewDataSource {
+    
+    func pullSongsFromServer(module: String, query: String) {
+        
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -21,18 +26,18 @@ extension DownloadTableViewDataSource {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let streamAudioPlayerInst = StreamAudioPlayer.sharedInstance
         let song: DownloadSongEntity = searchSongs[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "DownloadSongCell",
                                                  for: indexPath) as! DownloadTableCell
-        cell.delegate = self
-        //If there is a song that's playing inside current playlist, restore its state view
-        if streamAudioPlayerInst.player != nil
-            && streamAudioPlayerInst.currentSong! == song {
-            cell.restorePlayingCell(song: song)
-        } else {
+        
+        //cell.delegate = self
+        //If there is a song that's playing inside current view, restore its state view
+        /*if AudioPlayerInst.player != nil
+            && AudioPlayerInst.currentSong == song {
+            cell.restorePlayingCell(song: AudioPlayerInst.currentSong!)
+        } else {*/
             cell.initCell(initSong: song)
-        }
+        //}
         return cell
     }
 }
