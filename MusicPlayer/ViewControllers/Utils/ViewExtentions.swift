@@ -64,6 +64,7 @@ public enum VerticalPosition:Int{
 /// - *@IBInspectable* property *borderWidth* (*Swift.Double*)
 /// - *@IBInspectable* property *sliderHeight* (*Swift.Double*)
 @IBDesignable open class BufferSlider: UISlider {
+    
     ///0.0 ~ 1.0. @IBInspectable
     @IBInspectable open var bufferStartValue:Double = 0{
         didSet{
@@ -89,6 +90,12 @@ public enum VerticalPosition:Int{
         }
     }
     
+    override open var value: Float {
+        didSet{
+            self.setNeedsDisplay()
+        }
+    }
+    
     ///baseColor property. @IBInspectable
     @IBInspectable open var baseColor:UIColor = UIColor.lightGray
     
@@ -99,7 +106,7 @@ public enum VerticalPosition:Int{
     @IBInspectable open var bufferColor:UIColor? = nil
     
     ///BorderWidth property. @IBInspectable
-    @IBInspectable open var borderWidth: Double = 0.5{
+    @IBInspectable open var borderWidth: Double = 0.5 {
         didSet{
             if borderWidth < 0.1 {
                 borderWidth = 0.1

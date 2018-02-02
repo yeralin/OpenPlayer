@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol MoveToPickerViewDelegate : class {
+protocol PlaylistPickerDelegate : class {
     func moveSong(song: SongEntity, toPlaylist: PlaylistEntity)
 }
 
 
-class MoveSongPickerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class PlaylistPickerViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    weak var delegate: MoveToPickerViewDelegate!
+    weak var delegate: PlaylistPickerDelegate!
     @IBOutlet weak var playlistPicker: UIPickerView!
     @IBOutlet weak var pickerToolbar: UIToolbar!
     var playlistArray = [PlaylistEntity]()
-    var songToMove: SongEntity!
+    var songToMove: Any! //Create a super song class
     
     @IBAction func cancelTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -29,7 +29,7 @@ class MoveSongPickerViewController: UIViewController, UIPickerViewDataSource, UI
         if playlistArray.count != 0 {
             let selectedPlaylistIndex = playlistPicker.selectedRow(inComponent: 0)
             let toPlaylist = playlistArray[selectedPlaylistIndex]
-            delegate.moveSong(song: songToMove, toPlaylist: toPlaylist)
+            delegate.moveSong(song: songToMove as! SongEntity, toPlaylist: toPlaylist)
         }
         self.dismiss(animated: true, completion: nil)
         

@@ -13,31 +13,37 @@ private typealias SongTableCellActions = SongTableCell
 extension SongTableCellActions {
     
     func actionOnPlayPauseTap() {
+        let audioPlayerInst = AudioPlayer.sharedInstance
         //TODO: Change logic, don't depend on title
         if playPauseButton.title(for: .normal) == FontType.ionicons(.play).text {
-            AudioPlayer.sharedInstance.playSong(song: song)
+            if songProgressSlider.value != 0 && songProgressSlider.isEnabled == true {
+                audioPlayerInst.resumeSong()
+            } else {
+                audioPlayerInst.playSong(song: song)
+            }
         } else {
-            AudioPlayer.sharedInstance.pauseSong()
+            audioPlayerInst.pauseSong()
         }
     }
     
     func actionOnShuffleTap() {
+        let audioPlayerInst = AudioPlayer.sharedInstance
         //TODO: Change logic, don't depend on title
         if shuffleButton.title(for: .normal) == FontType.ionicons(.arrowReturnRight).text {
             shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26, color: .systemColor, forState: .normal)
-            AudioPlayer.sharedInstance.shuffleMode = true
+            audioPlayerInst.shuffleMode = true
         } else {
             shuffleButton.setIcon(icon: .ionicons(.arrowReturnRight), iconSize: 26, color: .systemColor, forState: .normal)
-            AudioPlayer.sharedInstance.shuffleMode = false
+            audioPlayerInst.shuffleMode = false
         }
     }
     
     func actionOnMoveTap() {
-        delegate.performSegueForCell(sender: song, identifier: "showPlaylistPicker")
+        delegate.performSegueForCell(sender: song, identifier: PRESENT_PLAYLIST_PICKER)
     }
     
     func actionOnChangeSongNameTap() {
-        delegate.presentAlertForCell(alert: changeSongNameAlert(), alertName: "presentChangeSongNameAlert")
+        delegate.presentAlertForCell(alert: changeSongNameAlert(), alertName: PRESENT_CHANGE_SONG_NAME_ALERT)
     }
     
     func actionOnChangeSliderPosition(_ sender: UISlider) {

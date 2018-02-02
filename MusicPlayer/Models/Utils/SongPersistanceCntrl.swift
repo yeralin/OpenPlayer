@@ -78,7 +78,7 @@ class SongPersistancyManager: PersistanceController {
         }
         if !toMatchWithAudioFiles.isEmpty {
             //There are songs w/o corresponding audio file
-            //Probably was removed manually
+            //Probably were removed manually
             for redundantSongEntity in toMatchWithAudioFiles {
                 if let index = songsArray.index(where: {el in el == redundantSongEntity}) {
                     cntx.delete(redundantSongEntity)
@@ -102,10 +102,10 @@ class SongPersistancyManager: PersistanceController {
         let songAsset = AVAsset.init(url: songUrl)
         if !songAsset.commonMetadata.isEmpty {
             let meta = songAsset.commonMetadata
-            if let title = meta.index(where: { el in el.commonKey == "title"}) {
+            if let title = meta.index(where: { el in el.commonKey?.rawValue == "title"}) {
                 song.songTitle = meta[title].value as? String
             }
-            if let artist = meta.index(where: { el in el.commonKey == "artist"}) {
+            if let artist = meta.index(where: { el in el.commonKey?.rawValue == "artist"}) {
                 song.songTitle = meta[artist].value as? String
             }
             //if let artwork = meta.index(where: { el in el.commonKey == "artwork"}) {
@@ -116,7 +116,7 @@ class SongPersistancyManager: PersistanceController {
         if song.songArtist == nil || song.songTitle == nil {
             song.songArtist = songUrl.deletingPathExtension().lastPathComponent
             song.songTitle = ""
-            if let tokSongName = song.songArtist?.characters.split(separator: "-")
+            if let tokSongName = song.songArtist?.split(separator: "-")
             {
                 if tokSongName.count == 2 {
                     song.songArtist = String(tokSongName[0]).trimmingCharacters(in: .whitespacesAndNewlines)

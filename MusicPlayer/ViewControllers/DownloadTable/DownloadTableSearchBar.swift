@@ -21,41 +21,35 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
         }
     }
     
-    func parseSearchRequestResponse(_ songListResponse: [[String:String]]) {
+    func parseSearchRequest(_ songListResponse: [[String:String]]) {
         let songUrlBase = ServerRequests.sharedInstance.serverAddress!
-            .appendingPathComponent("youtube/stream")
+            .appendingPathComponent("youtube/stream").absoluteString
         for entry in songListResponse {
-            var song: DownloadSongEntity = DownloadSongEntity()
-            if let videoId = entry["videoId"] {
-                let queryItem = [URLQueryItem(name: "videoId", value: videoId)]
-                let urlBuild = NSURLComponents(string: songUrlBase.absoluteString)
-                urlBuild?.queryItems = queryItem
-                song.songUrl = urlBuild?.url
-            }
-            if let songName = entry["title"] {
-                song.songName = songName
-                song.songTitle = songName
-                song.songArtist = ""
-                let tokSongName = songName.characters.split(separator: "-")
+            if let songName = entry["title"], let videoId = entry["videoId"] {
+                let urlBuild = NSURLComponents(string: songUrlBase)!
+                urlBuild.queryItems = [URLQueryItem(name: "videoId", value: videoId)]
+                let songUrl = urlBuild.url!
+                var song = DownloadSongEntity(songTitle: songName, songArtist: "", songName: songName, songUrl: songUrl)
+                
+                let tokSongName = songName.split(separator: "-")
                 if tokSongName.count == 2 {
                     song.songArtist = String(tokSongName[0]).trimmingCharacters(in: .whitespacesAndNewlines)
                     song.songTitle = String(tokSongName[1]).trimmingCharacters(in: .whitespacesAndNewlines)
                 }
-                
+                searchSongs.append(song)
             }
-            searchSongs.append(song)
-            StreamAudioPlayer.sharedInstance.songsArray = searchSongs
         }
+        StreamAudioPlayer.sharedInstance.songsArray = searchSongs
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchSongs.removeAll()
         StreamAudioPlayer.sharedInstance.stopSong()
         if var searchText = searchBar.text, !searchText.isEmpty {
             searchText = searchText.lowercased()
             self.showWaitOverlay()
-            ServerRequests.sharedInstance.getSongs(query: searchText, endpoint: "youtube/search",
+            ServerRequests.sharedInstance.getSongs(query: searchText, endpoint: "/youtube/search",
                     completion: { songListResponse, requestError in
-                        self.removeAllOverlays()
                         if let error = requestError {
                             var errorText = ""
                             switch error {
@@ -65,13 +59,18 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
                                 errorText = "Error: Could not parse server response"
                             }
                             DispatchQueue.main.async {
+                                self.removeAllOverlays()
                                 let alert = UIAlertController(title: "Error", message: errorText, preferredStyle: UIAlertControllerStyle.alert)
                                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                                 self.present(alert, animated: true, completion: nil)
                             }
                         } else {
-                            self.parseSearchRequestResponse(songListResponse!)
-                            self.tableView.reloadData()
+                            DispatchQueue.main.async {
+                                self.removeAllOverlays()
+                                self.parseSearchRequest(songListResponse!)
+                                self.tableView.reloadData()
+                            }
+                            
                         }
                         
                 })
@@ -83,7 +82,7 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
-    func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         searchBar.resignFirstResponder()
     }
 }

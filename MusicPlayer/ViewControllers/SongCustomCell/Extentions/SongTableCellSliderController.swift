@@ -21,7 +21,7 @@ extension SongTableCellSliderController {
         sliderCAD.add(to: .current, forMode: .defaultRunLoopMode)
     }
     
-    func updateSliderCAD() {
+    @objc func updateSliderCAD() {
         if let player = AudioPlayer.sharedInstance.player, sliderCAD != nil {
             songProgressSlider.value = Float(player.currentTime)
         }

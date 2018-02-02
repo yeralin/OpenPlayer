@@ -49,6 +49,8 @@ class ServerRequests {
                         return completion("Unknown", RequestError.ConnectionIssue)
                     }
             }
+        } else {
+            return completion("Unknown", RequestError.ConnectionIssue)
         }
     }
     

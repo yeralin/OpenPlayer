@@ -22,30 +22,21 @@ extension DownloadTableCellSliderController {
     }
     
     func setupSliderCAD() {
-        if let player = StreamAudioPlayer.sharedInstance.player {
-            songProgressSlider.minimumValue = 0
-            let duration = player.duration.seconds
-            if duration.isNaN {
-                songProgressSlider.maximumValue = Float(300)
-                songProgressSlider.isEnabled = false
-            } else {
-                songProgressSlider.maximumValue = Float(duration)
-                songProgressSlider.isEnabled = true
-            }
-            sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
-            sliderCAD.preferredFramesPerSecond = 60
-            sliderCAD.add(to: .current, forMode: .defaultRunLoopMode)
+        songProgressSlider.minimumValue = 0
+        if let duration = StreamAudioPlayer.sharedInstance.duration {
+            songProgressSlider.maximumValue = duration
         }
-    }
-    
-    func enableSliderCAD(duration: Float64) {
-        songProgressSlider.maximumValue = Float(duration)
         songProgressSlider.isEnabled = true
+        sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
+        sliderCAD.preferredFramesPerSecond = 60
+        sliderCAD.add(to: .current, forMode: .defaultRunLoopMode)
     }
     
-    func updateSliderCAD() {
-        if let player = StreamAudioPlayer.sharedInstance.player, sliderCAD != nil {
-            songProgressSlider.value = Float(player.currentTime().seconds)
+    @objc func updateSliderCAD() {
+        if sliderCAD != nil {
+            let player = StreamAudioPlayer.sharedInstance
+            songProgressSlider.value = player.currentTime
+            songProgressSlider.bufferEndValue = player.currentBufferValue
         }
     }
 }

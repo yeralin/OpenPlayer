@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DownloadTableCell: UITableViewCell, CustomSongCell {
+class DownloadTableCell: UITableViewCell {
     
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var songTitle: UILabel!
@@ -44,14 +44,12 @@ class DownloadTableCell: UITableViewCell, CustomSongCell {
                                color: .systemColor, forState: .normal)
         setShuffleButton()
         shuffleButton.isHidden = true
-        songProgressSlider.value = 0
-        songProgressSlider.isEnabled = false
         
-        NotificationCenter.default.addObserver(forName: UPDATE_DURATION, object: nil, queue: nil, using: { notification in
-            if let duration = notification.object as? Float64 {
-                self.enableSliderCAD(duration: duration)
-            }
-        })
+        songProgressSlider.value = 0
+        songProgressSlider.bufferStartValue = 0
+        songProgressSlider.bufferEndValue = 0
+        songProgressSlider.maximumValue = 300 //temp value while not known duration
+        songProgressSlider.isEnabled = false
     }
     
     func restorePlayingCell(song: DownloadSongEntity) {
@@ -90,8 +88,8 @@ class DownloadTableCell: UITableViewCell, CustomSongCell {
         actionOnShuffleTap()
     }
     
-    @IBAction func moveTapped(_ sender: UIButton) {
-        actionOnMoveTap()
+    @IBAction func downloadTapped(_ sender: UIButton) {
+        actionOnDownloadTap()
     }
     @IBAction func changeSliderPosition(_ sender: UISlider) {
         actionOnChangeSliderPosition(sender)

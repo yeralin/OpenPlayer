@@ -9,6 +9,7 @@
 import Foundation
 import MediaPlayer
 
+@objcMembers
 class RemoteControl: NSObject {
     
     var _resumeSong: () -> ()
@@ -41,24 +42,19 @@ class RemoteControl: NSObject {
     
     func resetMPControls() {
         let mpic = MPNowPlayingInfoCenter.default()
+        let scc = MPRemoteCommandCenter.shared()
         mpic.nowPlayingInfo = nil
+        scc.pauseCommand.removeTarget(self)
+        scc.nextTrackCommand.removeTarget(self)
+        scc.previousTrackCommand.removeTarget(self)
+        scc.seekBackwardCommand.removeTarget(self)
+        scc.seekForwardCommand.removeTarget(self)
+
     }
     
     
-    func updateMPControls(player: Any, currentSong: Any) {
+    func updateMPControls(songArtist: String, songTitle: String, duration: Double = .nan) {
         let mpic = MPNowPlayingInfoCenter.default()
-        var duration: Double = Double.nan
-        var songArtist: String = ""
-        var songTitle: String = ""
-        if let song = currentSong as? SongEntity, let player = player as? AVAudioPlayer {
-            songArtist = song.songArtist!
-            songTitle = song.songTitle!
-            duration = player.duration
-        } else if let song = currentSong as? DownloadSongEntity, let player = player as? AVPlayer {
-            songArtist = song.songArtist!
-            songTitle = song.songTitle!
-            duration = player.currentItem!.duration.seconds
-        }
         mpic.nowPlayingInfo = [
             MPMediaItemPropertyArtist: songArtist,
             MPMediaItemPropertyTitle: songTitle,
@@ -67,14 +63,8 @@ class RemoteControl: NSObject {
         ]
     }
     
-    func updateMPTime(state: PlayerState, player: Any) {
+    func updateMP(state: PlayerState, currentTime: Double = .nan) {
         let mpic = MPNowPlayingInfoCenter.default()
-        var currentTime: Double = Double.nan
-        if let player = player as? AVPlayer {
-            currentTime = player.currentTime().seconds
-        } else if let player = player as? AVAudioPlayer {
-            currentTime = player.currentTime
-        }
         if var meta = mpic.nowPlayingInfo {
             if state == .pause {
                 meta[MPNowPlayingInfoPropertyPlaybackRate] = 0
@@ -82,6 +72,12 @@ class RemoteControl: NSObject {
             } else if state == .resume {
                 meta[MPNowPlayingInfoPropertyPlaybackRate] = 1
                 meta[MPNowPlayingInfoPropertyElapsedPlaybackTime] = currentTime
+            } else if state == .stop {
+                meta[MPMediaItemPropertyArtist] = nil
+                meta[MPMediaItemPropertyTitle] = nil
+                meta[MPMediaItemPropertyPlaybackDuration] = 0
+                meta[MPNowPlayingInfoPropertyPlaybackRate] = 0
+                meta[MPNowPlayingInfoPropertyElapsedPlaybackTime] = 0
             }
             mpic.nowPlayingInfo = meta
         }

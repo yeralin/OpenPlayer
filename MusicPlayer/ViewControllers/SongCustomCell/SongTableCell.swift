@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SongTableCell: UITableViewCell, CustomSongCell {
+class SongTableCell: UITableViewCell {
     
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var songTitle: UILabel!
@@ -45,17 +45,18 @@ class SongTableCell: UITableViewCell, CustomSongCell {
     
     func restorePlayingCell(song: SongEntity) {
         self.song = song
-        let audioPlayer = AudioPlayer.sharedInstance
-        if audioPlayer.player.isPlaying {
-            playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 23, color: .systemColor, forState: .normal)
-        } else {
-            playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24, color: .systemColor, forState: .normal)
+        if let player = AudioPlayer.sharedInstance.player {
+            if player.isPlaying {
+                playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 23, color: .systemColor, forState: .normal)
+            } else {
+                playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24, color: .systemColor, forState: .normal)
+            }
+            editButton.setIcon(icon: .ionicons(.edit), iconSize: 24, color: .systemColor, forState: .normal)
+            moveButton.setIcon(icon: .ionicons(.folder), iconSize: 24, color: .systemColor, forState: .normal)
+            setShuffleButton()
+            shuffleButton.isHidden = false
+            setupSliderCAD()
         }
-        editButton.setIcon(icon: .ionicons(.edit), iconSize: 24, color: .systemColor, forState: .normal)
-        moveButton.setIcon(icon: .ionicons(.folder), iconSize: 24, color: .systemColor, forState: .normal)
-        setShuffleButton()
-        shuffleButton.isHidden = false
-        setupSliderCAD()
     }
     
     func setShuffleButton() {

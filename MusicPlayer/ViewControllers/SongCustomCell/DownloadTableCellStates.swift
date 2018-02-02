@@ -25,9 +25,7 @@ extension DownloadTableCellStates {
         playPauseButton.stopRotating()
         playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 26,
                                 color: .systemColor, forState: .normal)
-        if sliderCAD == nil {
-            setupSliderCAD()
-        }
+        setupSliderCAD()
         
     }
     
@@ -35,7 +33,7 @@ extension DownloadTableCellStates {
         playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24,
                                 color: .systemColor, forState: .normal)
         if sliderCAD != nil {
-            sliderCAD.isPaused = true
+            //sliderCAD.isPaused = true
         }
     }
     
@@ -43,7 +41,7 @@ extension DownloadTableCellStates {
         playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 26,
                                 color: .systemColor, forState: .normal)
         if sliderCAD != nil {
-            sliderCAD.isPaused = false
+            //sliderCAD.isPaused = false
         }
     }
     
@@ -58,10 +56,9 @@ extension DownloadTableCellStates {
     func refreshSongCellState() {
         
         if let player = StreamAudioPlayer.sharedInstance.player,
-           let duration = player.currentItem?.asset.duration.seconds,
-            !duration.isNaN {
+           player.duration.seconds != .nan {
             DispatchQueue.main.async() {
-                self.songProgressSlider.maximumValue = Float(duration)
+                self.songProgressSlider.maximumValue = Float(player.duration.seconds)
             }
         }
     }

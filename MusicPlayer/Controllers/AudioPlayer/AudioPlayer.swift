@@ -8,7 +8,8 @@
 
 import MediaPlayer
 
-class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
+
+class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     
     var player: AVAudioPlayer!
     var currentSong: SongEntity?
@@ -57,9 +58,12 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
             self.player.prepareToPlay()
             self.player.delegate = self
             currentSong = song
+            
             delegate.cellState(state: .play, song: song)
+            rc.updateMPControls(songArtist: song.songArtist!,
+                                songTitle: song.songTitle!,
+                                duration: player.duration)
             self.player.play()
-            rc.updateMPControls(player: player, currentSong: currentSong!)
         }
     }
     
@@ -70,7 +74,7 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
             }
             player.play()
             delegate?.cellState(state: .resume,song: song)
-            rc.updateMPTime(state: .resume, player: player)
+            rc.updateMP(state: .resume, currentTime: player.currentTime)
         }
         
     }
@@ -82,7 +86,7 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
                 player.currentTime = 0
                 player = nil
                 delegate?.cellState(state: .stop,song: song)
-                rc.updateMPTime(state: .stop, player: player)
+                rc.updateMP(state: .stop)
             }
         }
     }
@@ -92,7 +96,7 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
             if let song = currentSong {
                 delegate?.cellState(state: .pause, song: song)
                 player.pause()
-                rc.updateMPTime(state: .pause, player: player)
+                rc.updateMP(state: .pause, currentTime: player.currentTime)
             }
         }
     }
@@ -102,14 +106,14 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
     func seekTo(position: TimeInterval) {
         if player != nil {
             player.currentTime = position
-            rc.updateMPTime(state: .resume, player: player)
+            rc.updateMP(state: .resume, currentTime: player.currentTime)
         }
     }
     
     func playPreviousSong() {
         var prevSongIndex = 0
         if let song = currentSong {
-            let songsArray = delegate.getSongArray()
+            let songsArray = SongPersistancyManager.sharedInstance.getSongArray(playlist: song.playlist!)
             if shuffleMode == true {
                 prevSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
             } else {
@@ -125,7 +129,7 @@ class AudioPlayer: NSObject, AudioPlayerProtocol, AVAudioPlayerDelegate {
     
     func playNextSong() {
         if let song = currentSong {
-            let songsArray = delegate.getSongArray()
+            let songsArray = SongPersistancyManager.sharedInstance.getSongArray(playlist: song.playlist!)
             var nextSongIndex = 0
             if shuffleMode == true {
                 nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))

@@ -38,10 +38,9 @@ class DownloadTableViewController: UITableViewController {
         downloadTableView.allowsSelection = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
-    }
-    
-    deinit {
-        StreamAudioPlayer.sharedInstance.stopSong()
+        if let songsArray = StreamAudioPlayer.sharedInstance.songsArray {
+            self.searchSongs = songsArray
+        }
     }
     
     public func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
@@ -64,6 +63,20 @@ class DownloadTableViewController: UITableViewController {
             return visibleSongCells[index]
         } else {
             return nil
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == PRESENT_PLAYLIST_PICKER {
+            let pickerView = segue.destination as! PlaylistPickerViewController
+            pickerView.delegate = self
+            if let songToDownload = sender as? DownloadSongEntity {
+                pickerView.songToMove = songToDownload
+                let playlistArray = PlaylistPersistancyManager.sharedInstance.getPlaylistArray()
+                //let currentPlaylistIndex = playlistArray.index(of: playlist)
+                //playlistArray.remove(at: currentPlaylistIndex!)
+                pickerView.playlistArray = playlistArray
+            }
         }
     }
     

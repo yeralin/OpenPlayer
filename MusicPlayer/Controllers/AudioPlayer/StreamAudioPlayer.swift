@@ -5,38 +5,49 @@
 //  Created by Daniyar Yeralin on 6/28/17.
 //  Copyright © 2017 Daniyar Yeralin. All rights reserved.
 //
-
 import MediaPlayer
 
-extension AVPlayer {
-    var isPlaying: Bool {
-        get {
-            return rate != 0 && error == nil
-        }
-    }
-    var duration: CMTime {
-        get {
-            return self.currentItem!.duration
-        }
-    }
+protocol StreamAudioPlayerDelegate : class {
+    func cellState(state: PlayerState, song: DownloadSongEntity)
+    func getSongArray() -> [DownloadSongEntity]
 }
 
-let UPDATE_DURATION = Notification.Name("updateDuration")
-
-class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegate {
+class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
     
-    typealias PlayerType = AVPlayer
     var player: AVPlayer!
-    var songsArray: [DownloadSongEntity] = []
+    var songsArray: [DownloadSongEntity]?
     var currentSong: DownloadSongEntity?
     var shuffleMode: Bool = false
     var rc: RemoteControl!
+    var currentBufferValue: Double = 0
     weak var delegate: StreamAudioPlayerDelegate!
+    var duration: Float? {
+        get {
+            if let duration = self.player.currentItem?.asset.duration.seconds {
+                return Float(duration)
+            } else {
+                return nil
+            }
+        }
+    }
+    var currentTime: Float {
+        get {
+            if self.player != nil {
+                return Float(self.player.currentTime().seconds)
+            } else {
+                return Float(-1)
+            }
+        }
+    }
     
     static let sharedInstance = StreamAudioPlayer()
     
     override init() {
         super.init()
+        if rc != nil {
+            rc.resetMPControls()
+        }
+        
         rc = RemoteControl.init(resumeSongClosure: resumeSong,
                                 pauseSongClosure: pauseSong,
                                 playNextSongClosure: playNextSong,
@@ -62,91 +73,52 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
             AudioPlayer.sharedInstance.stopSong()
             currentSong = song
             let playerItem = CachingPlayerItem(url: song.songUrl!)
-            playerItem.addObserver(self,
-                                   forKeyPath: #keyPath(AVPlayerItem.duration),
-                                   options: [.old, .new],
-                                   context: nil)
-            NotificationCenter.default.addObserver(self,
+            /*NotificationCenter.default.addObserver(self,
                                                    selector: #selector(playNextSong),
                                                    name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-                                                   object: playerItem)
+                                                   object: playerItem)*/
             playerItem.delegate = self
             player = AVPlayer(playerItem: playerItem)
+            player.automaticallyWaitsToMinimizeStalling = false
+            player.play()
             delegate.cellState(state: .prepare, song: currentSong!)
-            rc.updateMPControls(player: player, currentSong: currentSong!)
+            rc.updateMPControls(songArtist: song.songArtist!, songTitle: song.songTitle!)
         }
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(AVPlayerItem.duration) {
-            let newDuration: CMTime
-            if let newDurationAsValue = change?[NSKeyValueChangeKey.newKey] as? NSValue {
-                newDuration = newDurationAsValue.timeValue
-            }
-            else {
-                newDuration = kCMTimeZero
-            }
-            let validDuration = newDuration.isNumeric && newDuration.value != 0
-            let duration = validDuration ? CMTimeGetSeconds(newDuration) : 0.0
-            if duration != 0 {
-                rc.updateMPDuration(duration: duration)
-                NotificationCenter.default.post(name: UPDATE_DURATION, object: duration)
-            }
-        }
+    func playerItem(_ playerItem: CachingPlayerItem, didDownloadBytesSoFar bytesDownloaded: Int, outOf bytesExpected: Int) {
+        print("Loaded so far: \(bytesDownloaded) out of \(bytesExpected)")
+        currentBufferValue = Double(bytesDownloaded/(bytesExpected/100))/100
     }
     
-    func playerItemReadyToPlay(playerItem: CachingPlayerItem) {
+    func playerItemReadyToPlay(_ playerItem: CachingPlayerItem) {
+        print("Ready to play...")
+        let duration = playerItem.asset.duration.seconds
+        rc.updateMPDuration(duration: duration)
         delegate.cellState(state: .play, song: currentSong!)
         player.play()
-        playerItem.download()
     }
-    
     
     func playerItemDidStopPlayback(playerItem: CachingPlayerItem) {
         print("Not enough data for playback. Probably because of the poor network. Wait a bit and try to play later.")
         delegate.cellState(state: .prepare, song: currentSong!)
     }
     
-    func playerItem(playerItem: CachingPlayerItem, didFinishDownloadingData data: NSData) {
-        do {
-            print("Finished")
-            if let songName = currentSong?.songName {
-                //let tempDirectory = FileManager.default.temporaryDirectory
-                
-                let downloadDir = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("Downloads")
-                let audioFile = downloadDir.appendingPathComponent(songName).appendingPathExtension("mp3")
-                try data.write(to: audioFile, options: .atomic)
-                let durationFlags = player.currentItem?.asset.duration.flags
-                if durationFlags!.contains(.indefinite) {
-                    replaceStreamWithLocal(playerItem, audioFile)
-                }
+    func playerItem(_ playerItem: CachingPlayerItem, didFinishDownloadingData data: Data) {
+        print("Finished")
+        if let songName = currentSong?.songName {
+            let docsUrl = SongPersistancyManager.sharedInstance.docsUrl
+            let downloadsDir = docsUrl.appendingPathComponent("Downloads")
+            let dest = downloadsDir.appendingPathComponent(songName).appendingPathExtension("mp3")
+            do {
+                try data.write(to: dest, options: .atomic)
+            } catch {
+                log.error("Failed writing file to \(dest)\nError: " + error.localizedDescription)
             }
-        } catch {
-            log.error(error)
         }
     }
     
-    func replaceStreamWithLocal(_ playerItem: CachingPlayerItem, _ audioFile: URL) {
-        //If streamed song did not provide Content-Length header
-        //duration is unknown, replacing stream with downloaded song
-        NotificationCenter.default.removeObserver(self,
-                                                  name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-                                                  object: playerItem)
-        playerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration))
-        let currentTime = player.currentTime()
-        let replaceItem = AVPlayerItem(url: audioFile)
-        replaceItem.addObserver(self,
-                                forKeyPath: #keyPath(AVPlayerItem.duration),
-                                options: [.old, .new],
-                                context: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(playNextSong),
-                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-                                               object: replaceItem)
-        player.replaceCurrentItem(with: replaceItem)
-        player.seek(to: currentTime)
-        rc.updateMPTime(state: .resume, player: player)
-    }
+    
     
     func resumeSong() {
         if let song = currentSong {
@@ -155,7 +127,7 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
             }
             player.play()
             delegate?.cellState(state: .resume,song: song)
-            rc.updateMPTime(state: .resume, player: player)
+            rc.updateMP(state: .resume, currentTime: player.currentTime().seconds)
         }
         
     }
@@ -163,7 +135,7 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
     func stopSong() {
         if player != nil {
             if let song = currentSong {
-                player.currentItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration))
+                //player.currentItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration))
                 player.pause()
                 player.currentItem?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
                 player = nil
@@ -178,23 +150,21 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
             if let song = currentSong {
                 delegate?.cellState(state: .pause, song: song)
                 player.pause()
-                rc.updateMPTime(state: .pause, player: player)
+                rc.updateMP(state: .pause)
             }
         }
     }
     
-    
-    
     func seekTo(position: CMTime) {
         if player != nil {
             player.currentItem?.seek(to: position)
-            rc.updateMPTime(state: .resume, player: player)
+            rc.updateMP(state: .resume, currentTime: player.currentTime().seconds)
         }
     }
     
     func playPreviousSong() {
         var prevSong = 0
-        if let song = currentSong {
+        if  let song = currentSong, let songsArray = self.songsArray {
             if shuffleMode == true {
                 prevSong = Int(arc4random_uniform(UInt32(songsArray.count)))
             } else {
@@ -210,7 +180,7 @@ class StreamAudioPlayer: NSObject, AudioPlayerProtocol, CachingPlayerItemDelegat
     
     func playNextSong() {
         var nextSong = 0
-        if let song = currentSong {
+        if let song = currentSong, let songsArray = self.songsArray {
             if shuffleMode == true {
                 nextSong = Int(arc4random_uniform(UInt32(songsArray.count)))
             } else {

@@ -52,7 +52,7 @@ class PlaylistTableViewController: UITableViewController {
         
     }
     
-    func handleRefresh(refreshControl: UIRefreshControl) {
+    @objc func handleRefresh(refreshControl: UIRefreshControl) {
         playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists()
         tableView.reloadData()
         refreshControl.endRefreshing()
