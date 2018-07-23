@@ -32,7 +32,7 @@ extension SongTableViewDataSource {
                                                  for: indexPath) as! SongTableCell
         cell.delegate = self //For SongCellDelegate
         
-        //If user is searching, get song from the filtered list
+        //If user is searching, get song from filtered list
         if searching { song = filteredSongs![indexPath.row] }
         else { song = songsArray![indexPath.row] }
         

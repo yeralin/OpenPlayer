@@ -1,18 +1,15 @@
 //
-//  SongTableCellDelegImpl.swift
+//  DownloadTableCellDelegImpl
 //  MusicPlayer
 //
-//  Created by Daniyar Yeralin on 5/18/17.
+//  Created by Daniyar Yeralin on 12/2/17.
 //  Copyright © 2017 Daniyar Yeralin. All rights reserved.
 //
 
 import UIKit
 
-let PRESENT_PLAYLIST_PICKER = "presentPlaylistPicker"
-let PRESENT_CHANGE_SONG_NAME_ALERT = "presentChangeSongNameAlert"
-
-private typealias SongTableCellDelegImpl = SongTableViewController
-extension SongTableCellDelegImpl: SongCellDelegate {
+private typealias DownloadTableCellDelegImpl = DownloadTableViewController
+extension DownloadTableCellDelegImpl: SongCellDelegate {
     
     func performSegueForCell(sender: Any?, identifier: String) {
         if identifier == PRESENT_PLAYLIST_PICKER {
@@ -26,3 +23,4 @@ extension SongTableCellDelegImpl: SongCellDelegate {
         }
     }
 }
+

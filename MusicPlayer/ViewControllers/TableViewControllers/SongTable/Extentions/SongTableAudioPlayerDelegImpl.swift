@@ -31,4 +31,8 @@ extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
             }
         }
     }
+    
+    func getSongArray() -> [SongEntity] {
+        return self.songsArray!
+    }
 }

@@ -24,6 +24,8 @@ class SongTableViewController: UITableViewController {
         title = playlist.playlistName
         navigationItem.rightBarButtonItem = self.editButtonItem
         songTableView.allowsSelection = false
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         initAudioPlayerDelegateImpl()
     }
     
@@ -43,8 +45,8 @@ class SongTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == PRESENT_PLAYLIST_PICKER {
-            let pickerView = segue.destination as! PlaylistPickerViewController
+        if segue.identifier == "showPlaylistPicker" {
+            let pickerView = segue.destination as! MoveSongPickerViewController
             pickerView.delegate = self
             if let songToMove = sender as? SongEntity {
                 pickerView.songToMove = songToMove
