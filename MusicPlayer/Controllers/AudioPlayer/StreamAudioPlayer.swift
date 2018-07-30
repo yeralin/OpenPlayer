@@ -86,40 +86,6 @@ class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
         }
     }
     
-    func playerItem(_ playerItem: CachingPlayerItem, didDownloadBytesSoFar bytesDownloaded: Int, outOf bytesExpected: Int) {
-        print("Loaded so far: \(bytesDownloaded) out of \(bytesExpected)")
-        currentBufferValue = Double(bytesDownloaded/(bytesExpected/100))/100
-    }
-    
-    func playerItemReadyToPlay(_ playerItem: CachingPlayerItem) {
-        print("Ready to play...")
-        let duration = playerItem.asset.duration.seconds
-        rc.updateMPDuration(duration: duration)
-        delegate.cellState(state: .play, song: currentSong!)
-        player.play()
-    }
-    
-    func playerItemDidStopPlayback(playerItem: CachingPlayerItem) {
-        print("Not enough data for playback. Probably because of the poor network. Wait a bit and try to play later.")
-        delegate.cellState(state: .prepare, song: currentSong!)
-    }
-    
-    func playerItem(_ playerItem: CachingPlayerItem, didFinishDownloadingData data: Data) {
-        print("Finished")
-        if let songName = currentSong?.songName {
-            let docsUrl = SongPersistancyManager.sharedInstance.docsUrl
-            let downloadsDir = docsUrl.appendingPathComponent("Downloads")
-            let dest = downloadsDir.appendingPathComponent(songName).appendingPathExtension("mp3")
-            do {
-                try data.write(to: dest, options: .atomic)
-            } catch {
-                log.error("Failed writing file to \(dest)\nError: " + error.localizedDescription)
-            }
-        }
-    }
-    
-    
-    
     func resumeSong() {
         if let song = currentSong {
             if player == nil {
@@ -197,4 +163,45 @@ class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
     func getCurrentTimeAsString() -> String {
         return ""
     }
+    
+    //Delegate methods
+    
+    func playerItem(_ playerItem: CachingPlayerItem, didFinishDownloadingData data: Data) {
+        log.info("Finished downloading")
+        if let songName = currentSong?.songName {
+            let docsUrl = SongPersistancyManager.sharedInstance.docsUrl
+            let downloadsDir = docsUrl.appendingPathComponent("Downloads")
+            let dest = downloadsDir.appendingPathComponent(songName).appendingPathExtension("mp3")
+            do {
+                log.info("Writing to a file: \(dest)")
+                try data.write(to: dest, options: .atomic)
+            } catch {
+                log.error("Failed writing file to \(dest)\nError: " + error.localizedDescription)
+            }
+        }
+    }
+    
+    func playerItem(_ playerItem: CachingPlayerItem, didDownloadBytesSoFar bytesDownloaded: Int, outOf bytesExpected: Int) {
+        log.info("Loaded so far: \(bytesDownloaded) out of \(bytesExpected)")
+        currentBufferValue = Double(bytesDownloaded/(bytesExpected/100))/100
+    }
+    
+    func playerItemReadyToPlay(_ playerItem: CachingPlayerItem) {
+        log.info("Ready to play...")
+        let duration = playerItem.asset.duration.seconds
+        rc.updateMPDuration(duration: duration)
+        delegate.cellState(state: .play, song: currentSong!)
+        player.play()
+    }
+    
+    func playerItemDidStopPlayback(playerItem: CachingPlayerItem) {
+        log.info("Not enough data for playback. Probably because of the poor network. Wait a bit and try to play later.")
+        delegate.cellState(state: .prepare, song: currentSong!)
+    }
+    
+    func playerItem(_ playerItem: CachingPlayerItem, downloadingFailedWith error: Error) {
+        log.error("The streaming has failed due to: \(error)")
+        delegate.cellState(state: .stop, song: currentSong!)
+    }
+    
 }

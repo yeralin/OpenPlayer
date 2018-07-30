@@ -13,7 +13,6 @@
 		31017CA11F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */; };
 		31017CA31F047E8E008C4A87 /* StreamAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017CA21F047E8E008C4A87 /* StreamAudioPlayer.swift */; };
 		31017CA51F047EF9008C4A87 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017CA41F047EF9008C4A87 /* AudioPlayer.swift */; };
-		310B4F821FD27E4700C237A3 /* DownloadTableCellDelegImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B4F811FD27E4700C237A3 /* DownloadTableCellDelegImpl.swift */; };
 		310B4F841FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B4F831FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift */; };
 		310B4F871FD2927600C237A3 /* BaseAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B4F861FD2927600C237A3 /* BaseAudioPlayer.swift */; };
 		311221B11EF42E9500C94244 /* ServerRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311221B01EF42E9500C94244 /* ServerRequests.swift */; };
@@ -48,6 +47,7 @@
 		31A7AEE11ECDD7BE00103789 /* PlaylistPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7AEE01ECDD7BE00103789 /* PlaylistPickerViewController.swift */; };
 		31A7AEE31ECDEB8500103789 /* SongTableCellDelegImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7AEE21ECDEB8500103789 /* SongTableCellDelegImpl.swift */; };
 		31A7AEE51ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A7AEE41ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift */; };
+		31BDC8902028D919006BA7BB /* DownloadTableCellDelegImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BDC88F2028D919006BA7BB /* DownloadTableCellDelegImpl.swift */; };
 		31CA1AAC1EDB74EF00285EB9 /* MusicPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA1AAB1EDB74EF00285EB9 /* MusicPlayerTests.swift */; };
 		31CA1ABA1EDB770300285EB9 /* MusicPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA1AB91EDB770300285EB9 /* MusicPlayerUITests.swift */; };
 		31F255841EAF86FC00E0AD84 /* MusicPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31F255821EAF86FC00E0AD84 /* MusicPlayer.xcdatamodeld */; };
@@ -84,7 +84,6 @@
 		31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableAudioPlayerDelegImpl.swift; sourceTree = "<group>"; };
 		31017CA21F047E8E008C4A87 /* StreamAudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamAudioPlayer.swift; sourceTree = "<group>"; };
 		31017CA41F047EF9008C4A87 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
-		310B4F811FD27E4700C237A3 /* DownloadTableCellDelegImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTableCellDelegImpl.swift; sourceTree = "<group>"; };
 		310B4F831FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTablePlaylistPickerImpl.swift; sourceTree = "<group>"; };
 		310B4F861FD2927600C237A3 /* BaseAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAudioPlayer.swift; sourceTree = "<group>"; };
 		311221B01EF42E9500C94244 /* ServerRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequests.swift; sourceTree = "<group>"; };
@@ -107,8 +106,8 @@
 		3185A3741F00840B008E2D21 /* DownloadTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewController.swift; sourceTree = "<group>"; };
 		3185A3771F0086A2008E2D21 /* DownloadTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableDataSource.swift; sourceTree = "<group>"; };
 		3185A3791F0086E4008E2D21 /* DownloadTableSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableSearchBar.swift; sourceTree = "<group>"; };
-		3185A37D1F016479008E2D21 /* SongTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongTableCell.swift; path = SongTableCell.swift; sourceTree = "<group>"; };
-		3185A37F1F016769008E2D21 /* DownloadTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadTableCell.swift; path = DownloadTableCell.swift; sourceTree = "<group>"; };
+		3185A37D1F016479008E2D21 /* SongTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongTableCell.swift; path = ../SongCustomCell/SongTableCell.swift; sourceTree = "<group>"; };
+		3185A37F1F016769008E2D21 /* DownloadTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadTableCell.swift; path = ../SongCustomCell/DownloadTableCell.swift; sourceTree = "<group>"; };
 		31863F981EEDAF0B00F59F74 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		31863F9B1EEF266A00F59F74 /* MenuSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettings.swift; sourceTree = "<group>"; };
 		31863F9D1EF03FB300F59F74 /* SongTableSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableSearchBar.swift; sourceTree = "<group>"; };
@@ -121,6 +120,7 @@
 		31A7AEE21ECDEB8500103789 /* SongTableCellDelegImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableCellDelegImpl.swift; sourceTree = "<group>"; };
 		31A7AEE41ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTablePlaylistPickerImpl.swift; sourceTree = "<group>"; };
 		31B6648A1ED3714900EBCBA6 /* TestUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
+		31BDC88F2028D919006BA7BB /* DownloadTableCellDelegImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTableCellDelegImpl.swift; sourceTree = "<group>"; };
 		31CA1AA91EDB74EF00285EB9 /* MusicPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		31CA1AAB1EDB74EF00285EB9 /* MusicPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerTests.swift; sourceTree = "<group>"; };
 		31CA1AAD1EDB74EF00285EB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -168,25 +168,24 @@
 		31017C9A1F018844008C4A87 /* DownloadTableCellExtentions */ = {
 			isa = PBXGroup;
 			children = (
+				31017C9B1F018A35008C4A87 /* DownloadTableCellStates.swift */,
 				31017C9D1F018A3E008C4A87 /* DownloadTableCellActions.swift */,
 				311609D11F1E45DA0071C291 /* DownloadTableCellSliderController.swift */,
-				31017C9B1F018A35008C4A87 /* DownloadTableCellStates.swift */,
 			);
 			name = DownloadTableCellExtentions;
-			path = DownloadTableCellExtentions;
+			path = ../SongCustomCell;
 			sourceTree = "<group>";
 		};
 		31017CA81F09AAB7008C4A87 /* TableViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				310B4F851FD2813B00C237A3 /* AbstractSongCell */,
-				31863F9F1EF1871000F59F74 /* DownloadTable */,
 				31F2F03E1EC15B710072DE30 /* MenuTable */,
 				31F2F03C1EC15B4E0072DE30 /* PlaylistTable */,
 				318DB3CB1EC21C8600039541 /* SongTable */,
+				31863F9F1EF1871000F59F74 /* DownloadTable */,
 			);
 			name = TableViewControllers;
-			path = TableViewControllers;
 			sourceTree = "<group>";
 		};
 		310B4F851FD2813B00C237A3 /* AbstractSongCell */ = {
@@ -218,9 +217,9 @@
 			isa = PBXGroup;
 			children = (
 				31B664791ED1FE1500EBCBA6 /* PlaylistPickerController */,
+				31017CA81F09AAB7008C4A87 /* TableViewControllers */,
 				31863F961EECE4F300F59F74 /* ServerViewController */,
 				31863F971EEDAEFF00F59F74 /* SettingsViewController */,
-				31017CA81F09AAB7008C4A87 /* TableViewControllers */,
 				31F2F0431EC15C5D0072DE30 /* Utils */,
 			);
 			path = ViewControllers;
@@ -238,13 +237,13 @@
 		3148C2A11EC8D01C005947CB /* SongTableCellExtentions */ = {
 			isa = PBXGroup;
 			children = (
-				31017C981F018787008C4A87 /* SongTableCellActions.swift */,
 				3148C2A61EC95920005947CB /* SongTableCellAlerts.swift */,
-				311609D31F1FCF9D0071C291 /* SongTableCellSliderController.swift */,
 				3148C2A21EC8D049005947CB /* SongTableCellStates.swift */,
+				31017C981F018787008C4A87 /* SongTableCellActions.swift */,
+				311609D31F1FCF9D0071C291 /* SongTableCellSliderController.swift */,
 			);
 			name = SongTableCellExtentions;
-			path = SongTableCellExtentions;
+			path = ../SongCustomCell/Extentions;
 			sourceTree = "<group>";
 		};
 		3159F7431EDB7B080060B187 /* TestData */ = {
@@ -280,11 +279,11 @@
 		317929A31EA84A510076F15F /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				317929A41EA84A510076F15F /* AppDelegate.swift */,
+				31F255891EB2CED600E0AD84 /* Storyboards */,
 				311221AB1EF42DCF00C94244 /* Controllers */,
 				31F2F0311EC14DB30072DE30 /* Models */,
-				31F255891EB2CED600E0AD84 /* Storyboards */,
 				313306C11ECA48BF008CCE38 /* ViewControllers */,
-				317929A41EA84A510076F15F /* AppDelegate.swift */,
 				317929AE1EA84A510076F15F /* Assets.xcassets */,
 				317929B31EA84A510076F15F /* Info.plist */,
 			);
@@ -295,13 +294,12 @@
 			isa = PBXGroup;
 			children = (
 				31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */,
-				310B4F811FD27E4700C237A3 /* DownloadTableCellDelegImpl.swift */,
 				3185A3771F0086A2008E2D21 /* DownloadTableDataSource.swift */,
-				310B4F831FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift */,
 				3185A3791F0086E4008E2D21 /* DownloadTableSearchBar.swift */,
+				31BDC88F2028D919006BA7BB /* DownloadTableCellDelegImpl.swift */,
+				310B4F831FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift */,
 			);
 			name = Extentions;
-			path = Extentions;
 			sourceTree = "<group>";
 		};
 		31863F961EECE4F300F59F74 /* ServerViewController */ = {
@@ -310,7 +308,7 @@
 				31A745061EE72411003FC171 /* ServerViewController.swift */,
 			);
 			name = ServerViewController;
-			path = ServerViewController;
+			path = ServerView;
 			sourceTree = "<group>";
 		};
 		31863F971EEDAEFF00F59F74 /* SettingsViewController */ = {
@@ -319,7 +317,7 @@
 				31863F981EEDAF0B00F59F74 /* SettingsViewController.swift */,
 			);
 			name = SettingsViewController;
-			path = SettingsViewController;
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		31863F9A1EEF265B00F59F74 /* Extentions */ = {
@@ -343,8 +341,8 @@
 		318DB3CB1EC21C8600039541 /* SongTable */ = {
 			isa = PBXGroup;
 			children = (
-				318DB3CC1EC21CF000039541 /* Extentions */,
 				31A3C4421F4293E700CBFAC7 /* SongTableCell */,
+				318DB3CC1EC21CF000039541 /* Extentions */,
 				3189DDA91EADA5C800EBCD03 /* SongTableViewController.swift */,
 			);
 			path = SongTable;
@@ -354,9 +352,9 @@
 			isa = PBXGroup;
 			children = (
 				3148C2A41EC8D107005947CB /* SongTableAudioPlayerDelegImpl.swift */,
+				31A7AEE41ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift */,
 				31A7AEE21ECDEB8500103789 /* SongTableCellDelegImpl.swift */,
 				3148C29F1EC8C7F2005947CB /* SongTableDataSource.swift */,
-				31A7AEE41ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift */,
 				31863F9D1EF03FB300F59F74 /* SongTableSearchBar.swift */,
 			);
 			path = Extentions;
@@ -369,7 +367,6 @@
 				3185A37D1F016479008E2D21 /* SongTableCell.swift */,
 			);
 			name = SongTableCell;
-			path = SongTableCell;
 			sourceTree = "<group>";
 		};
 		31A3C4431F4293FB00CBFAC7 /* DownloadTableCell */ = {
@@ -379,7 +376,6 @@
 				3185A37F1F016769008E2D21 /* DownloadTableCell.swift */,
 			);
 			name = DownloadTableCell;
-			path = DownloadTableCell;
 			sourceTree = "<group>";
 		};
 		31A745021EE5B6DD003FC171 /* Resources */ = {
@@ -425,7 +421,6 @@
 				31A745081EE9A0C8003FC171 /* RemoteControl.swift */,
 			);
 			name = Utils;
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		31F255891EB2CED600E0AD84 /* Storyboards */ = {
@@ -469,8 +464,8 @@
 			isa = PBXGroup;
 			children = (
 				31CD993B1F2791EE000D8EA4 /* Utils */,
-				31017CA41F047EF9008C4A87 /* AudioPlayer.swift */,
 				310B4F861FD2927600C237A3 /* BaseAudioPlayer.swift */,
+				31017CA41F047EF9008C4A87 /* AudioPlayer.swift */,
 				31017CA21F047E8E008C4A87 /* StreamAudioPlayer.swift */,
 			);
 			path = AudioPlayer;
@@ -577,7 +572,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Daniyar Yeralin";
 				TargetAttributes = {
 					317929A01EA84A510076F15F = {
@@ -728,7 +723,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				31863F9C1EEF266A00F59F74 /* MenuSettings.swift in Sources */,
-				310B4F821FD27E4700C237A3 /* DownloadTableCellDelegImpl.swift in Sources */,
 				3185A3751F00840B008E2D21 /* DownloadTableViewController.swift in Sources */,
 				3189DDAA1EADA5C800EBCD03 /* SongTableViewController.swift in Sources */,
 				31A745011EDDEFEF003FC171 /* PlaylistTableAlerts.swift in Sources */,
@@ -736,6 +730,7 @@
 				3148C2A01EC8C7F2005947CB /* SongTableDataSource.swift in Sources */,
 				31017CA51F047EF9008C4A87 /* AudioPlayer.swift in Sources */,
 				31A745091EE9A0C8003FC171 /* RemoteControl.swift in Sources */,
+				31BDC8902028D919006BA7BB /* DownloadTableCellDelegImpl.swift in Sources */,
 				31017CA11F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift in Sources */,
 				31A745071EE72411003FC171 /* ServerViewController.swift in Sources */,
 				317929A51EA84A510076F15F /* AppDelegate.swift in Sources */,
@@ -840,6 +835,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -847,6 +843,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -899,6 +896,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -906,6 +904,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -1,0 +1,38 @@
+//
+//  CustomSongCell.swift
+//  MusicPlayer
+//
+//  Created by Daniyar Yeralin on 5/9/17.
+//  Copyright © 2017 Daniyar Yeralin. All rights reserved.
+//
+
+import UIKit
+import SwiftIcons
+
+protocol SongCellDelegate : class {
+    func presentAlertForCell(alert: UIAlertController, alertName: String)
+    func performSegueForCell(sender: Any?, identifier: String)
+}
+
+protocol CustomSongCell {
+    
+    associatedtype SongEntityType
+    
+    func initCell(initSong: SongEntityType)
+    func restorePlayingCell(song: SongEntityType)
+    func setupSliderCAD()
+    
+    //Tap actions
+    func actionOnPlayPauseTap()
+    func actionOnShuffleTap()
+    func actionOnMoveTap()
+    func actionOnChangeSongNameTap()
+    func actionOnChangeSliderPosition(_ sender: UISlider)
+    
+    
+    //States
+    func playSongCellState()
+    func pauseSongCellState()
+    func stopSongCellState()
+}
+
