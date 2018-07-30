@@ -106,8 +106,8 @@
 		3185A3741F00840B008E2D21 /* DownloadTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewController.swift; sourceTree = "<group>"; };
 		3185A3771F0086A2008E2D21 /* DownloadTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableDataSource.swift; sourceTree = "<group>"; };
 		3185A3791F0086E4008E2D21 /* DownloadTableSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableSearchBar.swift; sourceTree = "<group>"; };
-		3185A37D1F016479008E2D21 /* SongTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongTableCell.swift; path = ../SongCustomCell/SongTableCell.swift; sourceTree = "<group>"; };
-		3185A37F1F016769008E2D21 /* DownloadTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadTableCell.swift; path = ../SongCustomCell/DownloadTableCell.swift; sourceTree = "<group>"; };
+		3185A37D1F016479008E2D21 /* SongTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableCell.swift; sourceTree = "<group>"; };
+		3185A37F1F016769008E2D21 /* DownloadTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableCell.swift; sourceTree = "<group>"; };
 		31863F981EEDAF0B00F59F74 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		31863F9B1EEF266A00F59F74 /* MenuSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettings.swift; sourceTree = "<group>"; };
 		31863F9D1EF03FB300F59F74 /* SongTableSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableSearchBar.swift; sourceTree = "<group>"; };
@@ -168,24 +168,23 @@
 		31017C9A1F018844008C4A87 /* DownloadTableCellExtentions */ = {
 			isa = PBXGroup;
 			children = (
-				31017C9B1F018A35008C4A87 /* DownloadTableCellStates.swift */,
 				31017C9D1F018A3E008C4A87 /* DownloadTableCellActions.swift */,
 				311609D11F1E45DA0071C291 /* DownloadTableCellSliderController.swift */,
+				31017C9B1F018A35008C4A87 /* DownloadTableCellStates.swift */,
 			);
-			name = DownloadTableCellExtentions;
-			path = ../SongCustomCell;
+			path = DownloadTableCellExtentions;
 			sourceTree = "<group>";
 		};
 		31017CA81F09AAB7008C4A87 /* TableViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				310B4F851FD2813B00C237A3 /* AbstractSongCell */,
+				31863F9F1EF1871000F59F74 /* DownloadTable */,
 				31F2F03E1EC15B710072DE30 /* MenuTable */,
 				31F2F03C1EC15B4E0072DE30 /* PlaylistTable */,
 				318DB3CB1EC21C8600039541 /* SongTable */,
-				31863F9F1EF1871000F59F74 /* DownloadTable */,
 			);
-			name = TableViewControllers;
+			path = TableViewControllers;
 			sourceTree = "<group>";
 		};
 		310B4F851FD2813B00C237A3 /* AbstractSongCell */ = {
@@ -216,10 +215,9 @@
 		313306C11ECA48BF008CCE38 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				31B664791ED1FE1500EBCBA6 /* PlaylistPickerController */,
-				31017CA81F09AAB7008C4A87 /* TableViewControllers */,
 				31863F961EECE4F300F59F74 /* ServerViewController */,
 				31863F971EEDAEFF00F59F74 /* SettingsViewController */,
+				31017CA81F09AAB7008C4A87 /* TableViewControllers */,
 				31F2F0431EC15C5D0072DE30 /* Utils */,
 			);
 			path = ViewControllers;
@@ -237,13 +235,12 @@
 		3148C2A11EC8D01C005947CB /* SongTableCellExtentions */ = {
 			isa = PBXGroup;
 			children = (
-				3148C2A61EC95920005947CB /* SongTableCellAlerts.swift */,
-				3148C2A21EC8D049005947CB /* SongTableCellStates.swift */,
 				31017C981F018787008C4A87 /* SongTableCellActions.swift */,
+				3148C2A61EC95920005947CB /* SongTableCellAlerts.swift */,
 				311609D31F1FCF9D0071C291 /* SongTableCellSliderController.swift */,
+				3148C2A21EC8D049005947CB /* SongTableCellStates.swift */,
 			);
-			name = SongTableCellExtentions;
-			path = ../SongCustomCell/Extentions;
+			path = SongTableCellExtentions;
 			sourceTree = "<group>";
 		};
 		3159F7431EDB7B080060B187 /* TestData */ = {
@@ -279,11 +276,11 @@
 		317929A31EA84A510076F15F /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				317929A41EA84A510076F15F /* AppDelegate.swift */,
-				31F255891EB2CED600E0AD84 /* Storyboards */,
 				311221AB1EF42DCF00C94244 /* Controllers */,
 				31F2F0311EC14DB30072DE30 /* Models */,
+				31F255891EB2CED600E0AD84 /* Storyboards */,
 				313306C11ECA48BF008CCE38 /* ViewControllers */,
+				317929A41EA84A510076F15F /* AppDelegate.swift */,
 				317929AE1EA84A510076F15F /* Assets.xcassets */,
 				317929B31EA84A510076F15F /* Info.plist */,
 			);
@@ -293,13 +290,14 @@
 		3185A3761F008696008E2D21 /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				31B664791ED1FE1500EBCBA6 /* PlaylistPickerController */,
 				31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */,
-				3185A3771F0086A2008E2D21 /* DownloadTableDataSource.swift */,
-				3185A3791F0086E4008E2D21 /* DownloadTableSearchBar.swift */,
 				31BDC88F2028D919006BA7BB /* DownloadTableCellDelegImpl.swift */,
+				3185A3771F0086A2008E2D21 /* DownloadTableDataSource.swift */,
 				310B4F831FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift */,
+				3185A3791F0086E4008E2D21 /* DownloadTableSearchBar.swift */,
 			);
-			name = Extentions;
+			path = Extentions;
 			sourceTree = "<group>";
 		};
 		31863F961EECE4F300F59F74 /* ServerViewController */ = {
@@ -307,8 +305,7 @@
 			children = (
 				31A745061EE72411003FC171 /* ServerViewController.swift */,
 			);
-			name = ServerViewController;
-			path = ServerView;
+			path = ServerViewController;
 			sourceTree = "<group>";
 		};
 		31863F971EEDAEFF00F59F74 /* SettingsViewController */ = {
@@ -316,8 +313,7 @@
 			children = (
 				31863F981EEDAF0B00F59F74 /* SettingsViewController.swift */,
 			);
-			name = SettingsViewController;
-			path = SettingsView;
+			path = SettingsViewController;
 			sourceTree = "<group>";
 		};
 		31863F9A1EEF265B00F59F74 /* Extentions */ = {
@@ -341,8 +337,8 @@
 		318DB3CB1EC21C8600039541 /* SongTable */ = {
 			isa = PBXGroup;
 			children = (
-				31A3C4421F4293E700CBFAC7 /* SongTableCell */,
 				318DB3CC1EC21CF000039541 /* Extentions */,
+				31A3C4421F4293E700CBFAC7 /* SongTableCell */,
 				3189DDA91EADA5C800EBCD03 /* SongTableViewController.swift */,
 			);
 			path = SongTable;
@@ -352,9 +348,9 @@
 			isa = PBXGroup;
 			children = (
 				3148C2A41EC8D107005947CB /* SongTableAudioPlayerDelegImpl.swift */,
-				31A7AEE41ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift */,
 				31A7AEE21ECDEB8500103789 /* SongTableCellDelegImpl.swift */,
 				3148C29F1EC8C7F2005947CB /* SongTableDataSource.swift */,
+				31A7AEE41ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift */,
 				31863F9D1EF03FB300F59F74 /* SongTableSearchBar.swift */,
 			);
 			path = Extentions;
@@ -366,7 +362,7 @@
 				3148C2A11EC8D01C005947CB /* SongTableCellExtentions */,
 				3185A37D1F016479008E2D21 /* SongTableCell.swift */,
 			);
-			name = SongTableCell;
+			path = SongTableCell;
 			sourceTree = "<group>";
 		};
 		31A3C4431F4293FB00CBFAC7 /* DownloadTableCell */ = {
@@ -375,7 +371,7 @@
 				31017C9A1F018844008C4A87 /* DownloadTableCellExtentions */,
 				3185A37F1F016769008E2D21 /* DownloadTableCell.swift */,
 			);
-			name = DownloadTableCell;
+			path = DownloadTableCell;
 			sourceTree = "<group>";
 		};
 		31A745021EE5B6DD003FC171 /* Resources */ = {
@@ -420,7 +416,7 @@
 				31FE97011F533CB200D34953 /* CachingPlayerItem.swift */,
 				31A745081EE9A0C8003FC171 /* RemoteControl.swift */,
 			);
-			name = Utils;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		31F255891EB2CED600E0AD84 /* Storyboards */ = {
@@ -464,8 +460,8 @@
 			isa = PBXGroup;
 			children = (
 				31CD993B1F2791EE000D8EA4 /* Utils */,
-				310B4F861FD2927600C237A3 /* BaseAudioPlayer.swift */,
 				31017CA41F047EF9008C4A87 /* AudioPlayer.swift */,
+				310B4F861FD2927600C237A3 /* BaseAudioPlayer.swift */,
 				31017CA21F047E8E008C4A87 /* StreamAudioPlayer.swift */,
 			);
 			path = AudioPlayer;

@@ -20,10 +20,7 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMenuGestureRecognizer()
-        menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
-                           cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
-                           target: self.revealViewController(),
-                           action: #selector(SWRevealViewController.revealToggle(_:)))
+        setupMenuButton(button: menuButton)
         navBar.delegate = self
     }
     
@@ -36,7 +33,7 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
             if let address = webUploader?.serverURL {
                 AudioPlayer.sharedInstance.stopSong()
                 serverAddressLabel.text = address.absoluteString
-                menuButton.isEnabled = false
+                menuButton.disableButton()
                 UIApplication.shared.isIdleTimerDisabled = true
             } else {
                 let alert = UIAlertController(title: "Failure", message: "Is your Wi-Fi on and \n connected to a network?", preferredStyle: UIAlertControllerStyle.alert)
@@ -48,7 +45,7 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
             UIApplication.shared.isIdleTimerDisabled = false
             webUploader?.stop()
             serverAddressLabel.text = "Inactive"
-            menuButton.isEnabled = true
+            menuButton.enableButton()
         }
         
     }

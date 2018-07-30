@@ -28,20 +28,33 @@ class DownloadTableViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var downloadTableView: UITableView!
     var searchSongs: [DownloadSongEntity]! = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Download"
         setupMenuGestureRecognizer()
         initAudioPlayerDelegateImpl()
-        downloadTableView.allowsSelection = false
-        menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
-                           cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
-                           target: self.revealViewController(),
-                           action: #selector(SWRevealViewController.revealToggle(_:)))
+        setupMenuButton(button: menuButton)
         downloadTableView.allowsSelection = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        if let songsArray = StreamAudioPlayer.sharedInstance.songsArray {
+            self.searchSongs = songsArray
+        }
+    }
+    
+    public func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
+        if revealController.frontViewPosition == FrontViewPosition.left {
+            self.tableView.alwaysBounceVertical = true
+            self.tableView.isScrollEnabled = true
+            self.searchBar.isUserInteractionEnabled = true
+            
+        } else if revealController.frontViewPosition == FrontViewPosition.right {
+            self.tableView.alwaysBounceVertical = false
+            self.tableView.isScrollEnabled = false
+            self.searchBar.isUserInteractionEnabled = false
+        }
+        
     }
     
     func getCell(withSong song: DownloadSongEntity!) -> DownloadTableCell? {
@@ -50,6 +63,20 @@ class DownloadTableViewController: UITableViewController {
             return visibleSongCells[index]
         } else {
             return nil
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == PRESENT_PLAYLIST_PICKER {
+            let pickerView = segue.destination as! PlaylistPickerViewController
+            pickerView.delegate = self
+            if let songToDownload = sender as? DownloadSongEntity {
+                pickerView.songToMove = songToDownload
+                let playlistArray = PlaylistPersistancyManager.sharedInstance.getPlaylistArray()
+                //let currentPlaylistIndex = playlistArray.index(of: playlist)
+                //playlistArray.remove(at: currentPlaylistIndex!)
+                pickerView.playlistArray = playlistArray
+            }
         }
     }
     

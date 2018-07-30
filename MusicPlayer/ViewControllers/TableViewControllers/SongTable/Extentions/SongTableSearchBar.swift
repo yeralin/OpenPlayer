@@ -27,6 +27,10 @@ extension SongTableSearchBar: UISearchBarDelegate {
         tableView.reloadData()
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        searchBar.resignFirstResponder()
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }

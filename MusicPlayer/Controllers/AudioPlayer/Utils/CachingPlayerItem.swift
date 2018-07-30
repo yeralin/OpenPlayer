@@ -71,6 +71,7 @@ open class CachingPlayerItem: AVPlayerItem {
         }
         
         func startDataRequest(with url: URL) {
+            mediaData = Data()
             let configuration = URLSessionConfiguration.background(withIdentifier: "bgSessionConfiguration")
             configuration.sessionSendsLaunchEvents = true
             configuration.isDiscretionary = false
@@ -93,15 +94,13 @@ open class CachingPlayerItem: AVPlayerItem {
         
         func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
             completionHandler(Foundation.URLSession.ResponseDisposition.allow)
-            mediaData = Data()
             self.response = response
             processPendingRequests()
         }
         
         func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-            if let errorUnwrapped = error {
-                owner?.delegate?.playerItem?(owner!, downloadingFailedWith: errorUnwrapped)
-                return
+            if let error = error {
+                owner?.delegate?.playerItem?(owner!, downloadingFailedWith: error)
             }
             processPendingRequests()
             owner?.delegate?.playerItem?(owner!, didFinishDownloadingData: mediaData!)
@@ -112,7 +111,7 @@ open class CachingPlayerItem: AVPlayerItem {
         func processPendingRequests() {
             
             // get all fullfilled requests
-            let requestsFulfilled = Set<AVAssetResourceLoadingRequest>(pendingRequests.flatMap {
+            let requestsFulfilled = Set<AVAssetResourceLoadingRequest>(pendingRequests.compactMap {
                 self.fillInContentInformationRequest($0.contentInformationRequest)
                 if self.haveEnoughDataToFulfillRequest($0.dataRequest!) {
                     $0.finishLoading()

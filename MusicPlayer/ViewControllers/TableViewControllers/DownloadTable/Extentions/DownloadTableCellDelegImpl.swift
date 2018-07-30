@@ -5,7 +5,6 @@
 //  Created by Daniyar Yeralin on 12/2/17.
 //  Copyright © 2017 Daniyar Yeralin. All rights reserved.
 //
-
 import UIKit
 
 private typealias DownloadTableCellDelegImpl = DownloadTableViewController
@@ -23,4 +22,3 @@ extension DownloadTableCellDelegImpl: SongCellDelegate {
         }
     }
 }
-
