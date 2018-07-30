@@ -8,7 +8,7 @@
 
 import UIKit
 
-let PRESENT_PLAYLIST_PICKER = "presentPlaylistPicker"
+let PRESENT_PLAYLIST_PICKER = "presentPlaylistPicker
 let PRESENT_CHANGE_SONG_NAME_ALERT = "presentChangeSongNameAlert"
 
 private typealias SongTableCellDelegImpl = SongTableViewController
