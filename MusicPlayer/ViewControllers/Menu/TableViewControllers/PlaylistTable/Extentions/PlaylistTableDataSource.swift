@@ -15,7 +15,7 @@ extension UINavigationController {
 }
 
 private typealias PlaylistTableViewDataSource = PlaylistTableViewController
-extension PlaylistTableViewDataSource {
+extension PlaylistTableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

@@ -59,7 +59,7 @@ class PlaylistTableViewController: UITableViewController {
     }
     
     @IBAction func insertNewPlaylist(_ sender: Any) {
-        let alert = createInsertPlaylistAlert()
+        let alert = popCreatePlaylistAlert()
         self.present(alert, animated: true, completion: nil)
     }
     

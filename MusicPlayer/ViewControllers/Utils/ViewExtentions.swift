@@ -14,6 +14,10 @@ extension UIColor {
     static var systemColor: UIColor { return system }
 }
 
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}
+
 extension UIView {
     
     //Start Rotating view
