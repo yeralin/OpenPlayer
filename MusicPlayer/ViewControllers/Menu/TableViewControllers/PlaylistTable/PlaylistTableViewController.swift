@@ -59,8 +59,12 @@ class PlaylistTableViewController: UITableViewController {
     }
     
     @IBAction func insertNewPlaylist(_ sender: Any) {
-        let alert = popCreatePlaylistAlert()
-        self.present(alert, animated: true, completion: nil)
+        do {
+            let alert = try popCreatePlaylistAlert()
+            self.present(alert, animated: true, completion: nil)
+        } catch let error {
+            log.error("Could not construct playlist creation alert: \(error)")
+        }
     }
     
 }
