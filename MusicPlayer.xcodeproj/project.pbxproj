@@ -195,15 +195,6 @@
 			path = AbstractSongCell;
 			sourceTree = "<group>";
 		};
-		311221AB1EF42DCF00C94244 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				31F2F03D1EC15B610072DE30 /* AudioPlayer */,
-				311221AC1EF42DDE00C94244 /* ServerRequests */,
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
 		311221AC1EF42DDE00C94244 /* ServerRequests */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,9 +206,9 @@
 		313306C11ECA48BF008CCE38 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				31863F961EECE4F300F59F74 /* ServerViewController */,
-				31863F971EEDAEFF00F59F74 /* SettingsViewController */,
-				31017CA81F09AAB7008C4A87 /* TableViewControllers */,
+				3188A90B2285126C008F43F1 /* Persistence */,
+				3188A90A22851259008F43F1 /* Audio */,
+				3188A9092285123A008F43F1 /* Menu */,
 				31F2F0431EC15C5D0072DE30 /* Utils */,
 			);
 			path = ViewControllers;
@@ -276,7 +267,6 @@
 		317929A31EA84A510076F15F /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				311221AB1EF42DCF00C94244 /* Controllers */,
 				31F2F0311EC14DB30072DE30 /* Models */,
 				31F255891EB2CED600E0AD84 /* Storyboards */,
 				313306C11ECA48BF008CCE38 /* ViewControllers */,
@@ -332,6 +322,35 @@
 				3185A3741F00840B008E2D21 /* DownloadTableViewController.swift */,
 			);
 			path = DownloadTable;
+			sourceTree = "<group>";
+		};
+		3188A9092285123A008F43F1 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				31017CA81F09AAB7008C4A87 /* TableViewControllers */,
+				31863F961EECE4F300F59F74 /* ServerViewController */,
+				31863F971EEDAEFF00F59F74 /* SettingsViewController */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		3188A90A22851259008F43F1 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				31F2F03D1EC15B610072DE30 /* AudioPlayer */,
+				311221AC1EF42DDE00C94244 /* ServerRequests */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		3188A90B2285126C008F43F1 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				31F255851EB186C000E0AD84 /* PersistanceController.swift */,
+				31F2F0381EC151CA0072DE30 /* PlaylistPersistanceCntrl.swift */,
+				31F2F0361EC14FE50072DE30 /* SongPersistanceCntrl.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 		318DB3CB1EC21C8600039541 /* SongTable */ = {
@@ -431,20 +450,9 @@
 		31F2F0311EC14DB30072DE30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				31F2F0321EC14DBB0072DE30 /* Utils */,
 				31F255821EAF86FC00E0AD84 /* MusicPlayer.xcdatamodeld */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		31F2F0321EC14DBB0072DE30 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				31F255851EB186C000E0AD84 /* PersistanceController.swift */,
-				31F2F0381EC151CA0072DE30 /* PlaylistPersistanceCntrl.swift */,
-				31F2F0361EC14FE50072DE30 /* SongPersistanceCntrl.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		31F2F03C1EC15B4E0072DE30 /* PlaylistTable */ = {
@@ -568,12 +576,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Daniyar Yeralin";
 				TargetAttributes = {
 					317929A01EA84A510076F15F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 926229A273;
+						DevelopmentTeam = Q7W47GFKL3;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -600,7 +608,7 @@
 			};
 			buildConfigurationList = 3179299C1EA84A510076F15F /* Build configuration list for PBXProject "MusicPlayer" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -821,6 +829,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -882,6 +891,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -936,10 +946,10 @@
 			baseConfigurationReference = 7D2DF99FE7F46112B161997B /* Pods-MusicPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 926229A273;
+				DEVELOPMENT_TEAM = Q7W47GFKL3;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Yeralin.MusicPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.MusicPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -952,10 +962,10 @@
 			baseConfigurationReference = 95E293939B668052A02317BD /* Pods-MusicPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 926229A273;
+				DEVELOPMENT_TEAM = Q7W47GFKL3;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Yeralin.MusicPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.MusicPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

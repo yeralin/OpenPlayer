@@ -237,6 +237,9 @@ open class CachingPlayerItem: AVPlayerItem {
     // MARK: KVO
     
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        
+        
+        
         delegate?.playerItemReadyToPlay?(self)
     }
     
@@ -245,8 +248,6 @@ open class CachingPlayerItem: AVPlayerItem {
     @objc func playbackStalledHandler() {
         delegate?.playerItemPlaybackStalled?(self)
     }
-    
-    // MARK: -
     
     override init(asset: AVAsset, automaticallyLoadedAssetKeys: [String]?) {
         fatalError("not implemented")
