@@ -47,13 +47,17 @@ extension PlaylistTableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            present(createDeletePlaylistAlert(onComplete: {_ in
+            present(createDeletePlaylistAlert(onComplete: { _ in
                 let playlist = self.playlistArray[indexPath.row]
-                let playlistPerstManager = PlaylistPersistancyManager.sharedInstance
-                playlistPerstManager.deleteEntity(toDelete: playlist)
-                self.playlistArray = playlistPerstManager.getPlaylistArray()
-                self.playlistTableView.deleteRows(at: [indexPath], with: .fade)
-                playlistPerstManager.resetPlaylistsOrder(playlistArray: self.playlistArray)
+                do {
+                    let playlistPerstManager = PlaylistPersistencyManager.sharedInstance
+                    try playlistPerstManager.deletePlaylist(playlist: playlist)
+                    self.playlistArray = try playlistPerstManager.getPlaylistArray()
+                    self.playlistTableView.deleteRows(at: [indexPath], with: .fade)
+                    self.playlistArray = try playlistPerstManager.resetPlaylistsOrder(playlistArray: self.playlistArray)
+                } catch let err {
+                    log.error("Could not delete playlist \"\(playlist.playlistName ?? "unknown")\": \(err)")
+                }
             }), animated: true, completion: nil)
             
         }
@@ -62,10 +66,14 @@ extension PlaylistTableViewController {
     // Support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let playlistToMove = playlistArray[fromIndexPath.row]
-        playlistArray.remove(at: fromIndexPath.row)
-        playlistArray.insert(playlistToMove, at: to.row)
-        PlaylistPersistancyManager.sharedInstance.resetPlaylistsOrder(playlistArray: playlistArray)
-        
+        do {
+            let playlistPerstManager = PlaylistPersistencyManager.sharedInstance
+            playlistArray.remove(at: fromIndexPath.row)
+            playlistArray.insert(playlistToMove, at: to.row)
+            self.playlistArray = try playlistPerstManager.resetPlaylistsOrder(playlistArray: playlistArray)
+        } catch let err {
+            log.error("Could not rearrange \"\(playlistToMove.playlistName ?? "unknown") playlist: \(err)")
+        }
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {

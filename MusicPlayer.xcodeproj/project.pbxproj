@@ -51,10 +51,10 @@
 		31CA1AAC1EDB74EF00285EB9 /* MusicPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA1AAB1EDB74EF00285EB9 /* MusicPlayerTests.swift */; };
 		31CA1ABA1EDB770300285EB9 /* MusicPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CA1AB91EDB770300285EB9 /* MusicPlayerUITests.swift */; };
 		31F255841EAF86FC00E0AD84 /* MusicPlayer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 31F255821EAF86FC00E0AD84 /* MusicPlayer.xcdatamodeld */; };
-		31F255861EB186C000E0AD84 /* PersistanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F255851EB186C000E0AD84 /* PersistanceController.swift */; };
+		31F255861EB186C000E0AD84 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F255851EB186C000E0AD84 /* PersistenceController.swift */; };
 		31F2F0351EC14DE70072DE30 /* PlaylistTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2F0341EC14DE70072DE30 /* PlaylistTableViewController.swift */; };
-		31F2F0371EC14FE50072DE30 /* SongPersistanceCntrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2F0361EC14FE50072DE30 /* SongPersistanceCntrl.swift */; };
-		31F2F0391EC151CA0072DE30 /* PlaylistPersistanceCntrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2F0381EC151CA0072DE30 /* PlaylistPersistanceCntrl.swift */; };
+		31F2F0371EC14FE50072DE30 /* SongPersistenceCntrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2F0361EC14FE50072DE30 /* SongPersistenceCntrl.swift */; };
+		31F2F0391EC151CA0072DE30 /* PlaylistPersistenceCntrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2F0381EC151CA0072DE30 /* PlaylistPersistenceCntrl.swift */; };
 		31F2F0451EC15C700072DE30 /* ViewExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2F0441EC15C700072DE30 /* ViewExtentions.swift */; };
 		31FE97021F533CB300D34953 /* CachingPlayerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FE97011F533CB200D34953 /* CachingPlayerItem.swift */; };
 		680C5F4B458AA440DC57BBD7 /* Pods_MusicPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */; };
@@ -128,10 +128,10 @@
 		31CA1AB91EDB770300285EB9 /* MusicPlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerUITests.swift; sourceTree = "<group>"; };
 		31CA1ABB1EDB770300285EB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31F255831EAF86FC00E0AD84 /* MusicPlayer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MusicPlayer.xcdatamodel; sourceTree = "<group>"; };
-		31F255851EB186C000E0AD84 /* PersistanceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistanceController.swift; sourceTree = "<group>"; };
+		31F255851EB186C000E0AD84 /* PersistenceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		31F2F0341EC14DE70072DE30 /* PlaylistTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewController.swift; sourceTree = "<group>"; };
-		31F2F0361EC14FE50072DE30 /* SongPersistanceCntrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongPersistanceCntrl.swift; sourceTree = "<group>"; };
-		31F2F0381EC151CA0072DE30 /* PlaylistPersistanceCntrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistPersistanceCntrl.swift; sourceTree = "<group>"; };
+		31F2F0361EC14FE50072DE30 /* SongPersistenceCntrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongPersistenceCntrl.swift; sourceTree = "<group>"; };
+		31F2F0381EC151CA0072DE30 /* PlaylistPersistenceCntrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistPersistenceCntrl.swift; sourceTree = "<group>"; };
 		31F2F0441EC15C700072DE30 /* ViewExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtentions.swift; sourceTree = "<group>"; };
 		31FE97011F533CB200D34953 /* CachingPlayerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingPlayerItem.swift; sourceTree = "<group>"; };
 		7D2DF99FE7F46112B161997B /* Pods-MusicPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -346,9 +346,9 @@
 		3188A90B2285126C008F43F1 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				31F255851EB186C000E0AD84 /* PersistanceController.swift */,
-				31F2F0381EC151CA0072DE30 /* PlaylistPersistanceCntrl.swift */,
-				31F2F0361EC14FE50072DE30 /* SongPersistanceCntrl.swift */,
+				31F255851EB186C000E0AD84 /* PersistenceController.swift */,
+				31F2F0381EC151CA0072DE30 /* PlaylistPersistenceCntrl.swift */,
+				31F2F0361EC14FE50072DE30 /* SongPersistenceCntrl.swift */,
 			);
 			path = Persistence;
 			sourceTree = "<group>";
@@ -740,7 +740,7 @@
 				317929A51EA84A510076F15F /* AppDelegate.swift in Sources */,
 				310B4F871FD2927600C237A3 /* BaseAudioPlayer.swift in Sources */,
 				3148C2A71EC95920005947CB /* SongTableCellAlerts.swift in Sources */,
-				31F2F0391EC151CA0072DE30 /* PlaylistPersistanceCntrl.swift in Sources */,
+				31F2F0391EC151CA0072DE30 /* PlaylistPersistenceCntrl.swift in Sources */,
 				3185A37E1F016479008E2D21 /* SongTableCell.swift in Sources */,
 				311D6A7D1EDBF42400908D16 /* MenuTableViewController.swift in Sources */,
 				311609D21F1E45DA0071C291 /* DownloadTableCellSliderController.swift in Sources */,
@@ -750,7 +750,7 @@
 				31A7AEE11ECDD7BE00103789 /* PlaylistPickerViewController.swift in Sources */,
 				31A7AEE51ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift in Sources */,
 				31017C9C1F018A35008C4A87 /* DownloadTableCellStates.swift in Sources */,
-				31F2F0371EC14FE50072DE30 /* SongPersistanceCntrl.swift in Sources */,
+				31F2F0371EC14FE50072DE30 /* SongPersistenceCntrl.swift in Sources */,
 				31F2F0451EC15C700072DE30 /* ViewExtentions.swift in Sources */,
 				3185A3801F016769008E2D21 /* DownloadTableCell.swift in Sources */,
 				31F255841EAF86FC00E0AD84 /* MusicPlayer.xcdatamodeld in Sources */,
@@ -760,7 +760,7 @@
 				3148C2A51EC8D107005947CB /* SongTableAudioPlayerDelegImpl.swift in Sources */,
 				3185A3781F0086A2008E2D21 /* DownloadTableDataSource.swift in Sources */,
 				3148C2A31EC8D049005947CB /* SongTableCellStates.swift in Sources */,
-				31F255861EB186C000E0AD84 /* PersistanceController.swift in Sources */,
+				31F255861EB186C000E0AD84 /* PersistenceController.swift in Sources */,
 				31705B141FD25F0D00999125 /* SongCellDelegate.swift in Sources */,
 				31017C9E1F018A3E008C4A87 /* DownloadTableCellActions.swift in Sources */,
 				31FE97021F533CB300D34953 /* CachingPlayerItem.swift in Sources */,

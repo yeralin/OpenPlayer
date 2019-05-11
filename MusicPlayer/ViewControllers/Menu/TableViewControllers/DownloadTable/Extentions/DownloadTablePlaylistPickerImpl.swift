@@ -13,7 +13,7 @@ extension DownloadTablePlaylistPickerImpl: PlaylistPickerDelegate {
     
     func moveSong(song: SongEntity, toPlaylist: PlaylistEntity) {
         /*if let fromPlaylist = self.playlist {
-            let songPerstManager = SongPersistancyManager.sharedInstance
+            let songPerstManager = SongPersistencyManager.sharedInstance
             let rowPosition = Int(song.songOrder)
             songPerstManager.moveSong(toMove: song, fromPlaylist: fromPlaylist, toPlaylist: toPlaylist)
             let songsArray = songPerstManager.getSongArray(playlist: self.playlist)

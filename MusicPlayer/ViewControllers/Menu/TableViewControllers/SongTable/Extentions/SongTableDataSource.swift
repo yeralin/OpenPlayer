@@ -36,9 +36,12 @@ extension SongTableViewDataSource {
         if searching { song = filteredSongs![indexPath.row] }
         else { song = songsArray![indexPath.row] }
         
-        //If song is not processed (parsed metadata)
         if !song.isProcessed {
-            SongPersistancyManager.sharedInstance.processSong(toProcess: song)
+            do {
+                try SongPersistencyManager.sharedInstance.processSong(toProcess: song)
+            } catch let err {
+                log.error("Could not rename \"\(song.songName ?? "unknown")\" song: \(err)")
+            }
         }
         
         //If there is a song that's playing inside current playlist, restore its state view
@@ -53,12 +56,16 @@ extension SongTableViewDataSource {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let songPerstManager = SongPersistancyManager.sharedInstance
+            let songPerstManager = SongPersistencyManager.sharedInstance
             if let song = songsArray?[indexPath.row] {
-                songPerstManager.deleteEntity(toDelete: song)
-                songsArray!.remove(at: indexPath.row)
-                songPerstManager.saveContext()
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                do {
+                    try songPerstManager.deleteSong(song: song)
+                    songsArray?.remove(at: indexPath.row)
+                    try songPerstManager.saveContext()
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                } catch let err {
+                    log.error("Could not delete \"\(song.songName ?? "unknown")\" song: \(err)")
+                }
             }
             
         }
@@ -66,17 +73,21 @@ extension SongTableViewDataSource {
     
     //  to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        let songPerstManager = SongPersistancyManager.sharedInstance
+        let songPerstManager = SongPersistencyManager.sharedInstance
         if let songToMove = songsArray?[fromIndexPath.row] {
-            songsArray?.remove(at: fromIndexPath.row)
-            songsArray?.insert(songToMove, at: to.row)
-            //TODO: Can be optimized (reset order only after deleted song)
-            songsArray = songsArray?.enumerated().map { (index, song) -> SongEntity in
-                song.songOrder = Int32(index)
-                return song
+            do {
+                songsArray?.remove(at: fromIndexPath.row)
+                songsArray?.insert(songToMove, at: to.row)
+                // TODO: Can be optimized (reset order only after deleted song)
+                songsArray = songsArray?.enumerated().map { (index, song) -> SongEntity in
+                    song.songOrder = Int32(index)
+                    return song
+                }
+                try songPerstManager.saveContext()
+            } catch let err {
+                log.error("Could not rearrange \"\(songToMove.songName ?? "unknown")\" song: \(err)")
             }
         }
-        songPerstManager.saveContext()
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {

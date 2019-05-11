@@ -37,9 +37,13 @@ class SongTableViewController: UITableViewController {
     }
     
     func prepareSongs(receivedPlaylist: PlaylistEntity) {
-        playlist = receivedPlaylist
-        songsArray = SongPersistancyManager.sharedInstance
-                            .populateSongs(forPlaylist: receivedPlaylist)
+        do {
+            playlist = receivedPlaylist
+            songsArray = try SongPersistencyManager.sharedInstance
+                                .populateSongs(forPlaylist: receivedPlaylist)
+        } catch let err {
+            log.error("Could not prepare songs: \(err)")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -47,11 +51,15 @@ class SongTableViewController: UITableViewController {
             let pickerView = segue.destination as! PlaylistPickerViewController
             pickerView.delegate = self
             if let songToMove = sender as? SongEntity {
-                pickerView.songToMove = songToMove
-                var playlistArray = PlaylistPersistancyManager.sharedInstance.getPlaylistArray()
-                let currentPlaylistIndex = playlistArray.index(of: playlist)
-                playlistArray.remove(at: currentPlaylistIndex!)
-                pickerView.playlistArray = playlistArray
+                do {
+                    pickerView.songToMove = songToMove
+                    var playlistArray = try PlaylistPersistencyManager.sharedInstance.getPlaylistArray()
+                    let currentPlaylistIndex = playlistArray.index(of: playlist)
+                    playlistArray.remove(at: currentPlaylistIndex!)
+                    pickerView.playlistArray = playlistArray
+                } catch let err {
+                    log.error("Could not move \"\(songToMove.songName ?? "unknown")\" song: \(err)")
+                }
             }
         }
     }

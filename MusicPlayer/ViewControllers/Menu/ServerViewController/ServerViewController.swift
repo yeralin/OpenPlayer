@@ -26,7 +26,7 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
     
     @IBAction func serverSwitch(_ sender: UISwitch) {
         if sender.isOn {
-            let docsUrl = PlaylistPersistancyManager.sharedInstance.docsUrl.path
+            let docsUrl = PlaylistPersistencyManager.sharedInstance.docsUrl.path
             webUploader = GCDWebUploader(uploadDirectory: docsUrl)
             //let backgroundOption = [GCDWebServerOption_AutomaticallySuspendInBackground: false]
             webUploader!.start(withPort: 80, bonjourName: nil)

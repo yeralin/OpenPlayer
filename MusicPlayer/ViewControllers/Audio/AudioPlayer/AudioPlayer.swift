@@ -49,21 +49,22 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             self.stopSong()
             StreamAudioPlayer.sharedInstance.stopSong()
             self.player?.delegate = nil
-            let songPath = SongPersistancyManager.sharedInstance.getSongPath(song: song)
-            guard let p = try? AVAudioPlayer(contentsOf: songPath) else {
-                log.error("Could not resolve song path \(songPath.absoluteString)")
+            do {
+                let songPath = try SongPersistencyManager.sharedInstance.getSongPath(song: song)
+                let loadedPlayer = try AVAudioPlayer(contentsOf: songPath)
+                self.player = loadedPlayer
+                self.player.prepareToPlay()
+                self.player.delegate = self
+                currentSong = song
+                delegate.cellState(state: .play, song: song)
+                rc.updateMPControls(songArtist: song.songArtist!,
+                                    songTitle: song.songTitle!,
+                                    duration: player.duration)
+                self.player.play()
+            } catch let err {
+                log.error("Could not play \"\(song.songName ?? "unknown")\" song: \(err)")
                 return
             }
-            self.player = p
-            self.player.prepareToPlay()
-            self.player.delegate = self
-            currentSong = song
-            
-            delegate.cellState(state: .play, song: song)
-            rc.updateMPControls(songArtist: song.songArtist!,
-                                songTitle: song.songTitle!,
-                                duration: player.duration)
-            self.player.play()
         }
     }
     
@@ -113,33 +114,44 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     func playPreviousSong() {
         var prevSongIndex = 0
         if let song = currentSong {
-            let songsArray = SongPersistancyManager.sharedInstance.getSongArray(playlist: song.playlist!)
-            if shuffleMode == true {
-                prevSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
-            } else {
-                prevSongIndex = songsArray.index(of: song)! - 1
-            }
-            if songsArray.indices.contains(prevSongIndex) {
-                self.playSong(song: songsArray[prevSongIndex])
-            } else {
-                stopSong()
+            do {
+                let songsArray = try SongPersistencyManager.sharedInstance.getSongArray(playlist: song.playlist!)
+                if shuffleMode == true {
+                    prevSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
+                } else {
+                    prevSongIndex = songsArray.index(of: song)! - 1
+                }
+                if songsArray.indices.contains(prevSongIndex) {
+                    self.playSong(song: songsArray[prevSongIndex])
+                } else {
+                    stopSong()
+                }
+            } catch let err {
+                log.error("Could not play previous song: \(err)")
             }
         }
     }
     
     func playNextSong() {
         if let song = currentSong {
-            let songsArray = SongPersistancyManager.sharedInstance.getSongArray(playlist: song.playlist!)
-            var nextSongIndex = 0
-            if shuffleMode == true {
-                nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
-            } else {
-                nextSongIndex = songsArray.index(of: song)! + 1
-            }
-            if songsArray.indices.contains(nextSongIndex) {
-                self.playSong(song: songsArray[nextSongIndex])
-            } else {
-                stopSong()
+            do {
+                if let playlist = song.playlist {
+                    let songsArray = try SongPersistencyManager.sharedInstance.getSongArray(playlist: playlist)
+                    guard let currSongIndex = songsArray.index(of: song) else {
+                        throw "Could not get current song index for \"\(song.songName ?? "unknown")\""
+                    }
+                    var nextSongIndex = currSongIndex + 1
+                    if shuffleMode == true {
+                        nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
+                    }
+                    if songsArray.indices.contains(nextSongIndex) {
+                        self.playSong(song: songsArray[nextSongIndex])
+                    } else {
+                        self.stopSong()
+                    }
+                }
+            } catch let err {
+                log.error("Could not play next song: \(err)")
             }
         }
     }

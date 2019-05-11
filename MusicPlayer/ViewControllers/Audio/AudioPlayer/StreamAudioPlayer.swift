@@ -169,7 +169,7 @@ class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
     func playerItem(_ playerItem: CachingPlayerItem, didFinishDownloadingData data: Data) {
         log.info("Finished downloading")
         if let songName = currentSong?.songName {
-            let docsUrl = SongPersistancyManager.sharedInstance.docsUrl
+            let docsUrl = SongPersistencyManager.sharedInstance.docsUrl
             let downloadsDir = docsUrl.appendingPathComponent("Downloads")
             let dest = downloadsDir.appendingPathComponent(songName).appendingPathExtension("mp3")
             do {

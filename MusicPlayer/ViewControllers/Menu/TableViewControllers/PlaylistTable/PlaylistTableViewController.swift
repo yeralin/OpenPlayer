@@ -35,9 +35,12 @@ class PlaylistTableViewController: UITableViewController {
         setupMenuGestureRecognizer()
         setupMenuButton(button: menuButton)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists()
+        do {
+            playlistArray = try PlaylistPersistencyManager.sharedInstance.populatePlaylists()
+        } catch let err {
+            fatalError("Could not populate playlists: \(err))")
+        }
         refreshControl?.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
-        //PlaylistPersistancyManager.sharedInstance.wipePlaylistCoreData(cntx: managedObjectContext)
     }
     
     public func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
@@ -53,9 +56,13 @@ class PlaylistTableViewController: UITableViewController {
     }
     
     @objc func handleRefresh(refreshControl: UIRefreshControl) {
-        playlistArray = PlaylistPersistancyManager.sharedInstance.populatePlaylists()
-        tableView.reloadData()
-        refreshControl.endRefreshing()
+        do {
+            playlistArray = try PlaylistPersistencyManager.sharedInstance.populatePlaylists()
+            tableView.reloadData()
+            refreshControl.endRefreshing()
+        } catch let err {
+            fatalError("Could not populate playlists: \(err))")
+        }
     }
     
     @IBAction func insertNewPlaylist(_ sender: Any) {

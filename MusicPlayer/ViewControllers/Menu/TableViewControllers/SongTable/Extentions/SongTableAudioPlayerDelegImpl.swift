@@ -17,7 +17,11 @@ extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
     
     func cellState(state: PlayerState, song: SongEntity) {
         if !song.isProcessed {
-            SongPersistancyManager.sharedInstance.processSong(toProcess: song)
+            do {
+                try SongPersistencyManager.sharedInstance.processSong(toProcess: song)
+            } catch let err {
+                log.error("Could not process \"\(song.songName ?? "unknown")\" song: \(err)")
+            }
         }
         if let cell = getCell(withSong: song) {
             if state == .play || state == .resume {

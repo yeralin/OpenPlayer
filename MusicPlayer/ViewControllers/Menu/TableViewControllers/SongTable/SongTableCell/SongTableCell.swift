@@ -10,6 +10,9 @@ import UIKit
 
 class SongTableCell: UITableViewCell {
     
+    internal let ARTIST_TF_INDEX: Int = 0
+    internal let TITLE_TF_INDEX: Int = 1
+    
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var songTitle: UILabel!
     

@@ -13,17 +13,18 @@ extension SongTablePlaylistPickerImpl: PlaylistPickerDelegate {
     
     func moveSong(song: SongEntity, toPlaylist: PlaylistEntity) {
         if let fromPlaylist = self.playlist {
-            let songPerstManager = SongPersistancyManager.sharedInstance
-            let rowPosition = Int(song.songOrder)
-            songPerstManager.moveSong(toMove: song, fromPlaylist: fromPlaylist, toPlaylist: toPlaylist)
-            let songsArray = songPerstManager.getSongArray(playlist: self.playlist)
-            song.songOrder = -1
-            self.songsArray = songsArray.enumerated().map { (index, song) in
-                song.songOrder = Int32(index)
-                return song
+            do {
+                let songPerstManager = SongPersistencyManager.sharedInstance
+                let rowPosition = Int(song.songOrder)
+                try songPerstManager.moveSong(toMoveSong: song, fromPlaylist: fromPlaylist, toPlaylist: toPlaylist)
+                var songsArray = try songPerstManager.getSongArray(playlist: self.playlist)
+                song.songOrder = -1
+                songsArray = try songPerstManager.resetSongOrder(songArray: songsArray)
+                try songPerstManager.saveContext()
+                songTableView.deleteRows(at: [IndexPath(row: rowPosition, section: 0)], with: .fade)
+            } catch let err {
+                log.error(err)
             }
-            songPerstManager.saveContext()
-            songTableView.deleteRows(at: [IndexPath(row: rowPosition, section: 0)], with: .fade)
         }
     }
     

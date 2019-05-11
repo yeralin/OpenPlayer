@@ -68,14 +68,14 @@ class DownloadTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == PRESENT_PLAYLIST_PICKER {
-            let pickerView = segue.destination as! PlaylistPickerViewController
-            pickerView.delegate = self
-            if let songToDownload = sender as? DownloadSongEntity {
-                pickerView.songToMove = songToDownload
-                let playlistArray = PlaylistPersistancyManager.sharedInstance.getPlaylistArray()
-                //let currentPlaylistIndex = playlistArray.index(of: playlist)
-                //playlistArray.remove(at: currentPlaylistIndex!)
-                pickerView.playlistArray = playlistArray
+            if let pickerView = segue.destination as? PlaylistPickerViewController {
+                pickerView.delegate = self
+                if let songToDownload = sender as? DownloadSongEntity {
+                    pickerView.songToMove = songToDownload
+                    if let playlistArray = try? PlaylistPersistencyManager.sharedInstance.getPlaylistArray() {
+                        pickerView.playlistArray = playlistArray
+                    }
+                }
             }
         }
     }

@@ -21,15 +21,19 @@ extension SongTableCellAlerts {
         })
         alertChangeSongName.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertChangeSongName.addAction(UIAlertAction(title: "Done", style: .default, handler: { (action) -> Void in
-            let songArtist = alertChangeSongName.textFields![0].text!
-            let songTitle = alertChangeSongName.textFields![1].text!
-            if !songArtist.isEmpty && !songTitle.isEmpty {
-                self.song.songArtist = songArtist
-                self.song.songTitle = songTitle
-                self.artistName.text = self.song.songArtist
-                self.songTitle.text = self.song.songTitle
-                SongPersistancyManager.sharedInstance.saveContext(cntx:
-                    (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+            if let textFields = alertChangeSongName.textFields {
+                if let typedArtist = textFields[self.ARTIST_TF_INDEX].text,
+                   let typedTitle = textFields[self.TITLE_TF_INDEX].text {
+                    do {
+                        try SongPersistencyManager.sharedInstance.renameSong(song: self.song,
+                                                                             newArtist: typedArtist,
+                                                                             newTitle: typedTitle)
+                        self.artistName.text = typedArtist
+                        self.songTitle.text = typedTitle
+                    } catch let err {
+                        log.error("Could not rename \"\(self.song.songName ?? "unknown")\" song: \(err)")
+                    }
+                }
             }
             
         }))
