@@ -15,8 +15,8 @@ class PlaylistPersistencyManager: PersistenceController {
     
     func createPlaylist(name: String, cntxt: NSManagedObjectContext? = nil) throws -> Int {
         let cntxt = try validateContext(context: cntxt)
+        let playlistPosition = fetchPlaylistSize()
         let playlistEntity = PlaylistEntity(context: cntxt)
-        let playlistPosition = fetchPlaylistSize() + 1
         playlistEntity.playlistName = name
         playlistEntity.playlistOrder = Int32(playlistPosition)
         let newPlaylist = docsUrl.appendingPathComponent(name)
@@ -26,7 +26,7 @@ class PlaylistPersistencyManager: PersistenceController {
             throw "Could not save playlist: \(String(describing: playlistEntity.playlistName))"
         }
         try saveContext(cntxt: cntxt)
-        return Int(playlistEntity.playlistOrder)
+        return playlistPosition
     }
     
     func getPlaylistArray(cntxt: NSManagedObjectContext? = nil) throws -> [PlaylistEntity] {

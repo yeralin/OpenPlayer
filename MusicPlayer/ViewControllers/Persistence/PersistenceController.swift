@@ -27,10 +27,11 @@ class PersistenceController {
     }
     
     internal func _fetchCount(entityName: String, cntxt: NSManagedObjectContext? = nil) -> Int {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         var count = -1
         do {
-            count = try cntxt?.count(for: fetchRequest) ?? -1
+            let cntxt = try validateContext(context: cntxt)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+            count = try cntxt.count(for: fetchRequest)
         } catch {
             log.error("Could not get count for \(entityName) entity")
         }
