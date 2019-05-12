@@ -20,6 +20,8 @@ extension PlaylistTableAlerts {
             self.playlistArray = try playlistPerstManager.getPlaylistArray()
             self.playlistTableView.insertRows(at: [IndexPath(row: newPosition, section: 0)],
                                               with: .fade)
+        } catch UIError.AlreadyExists(let err) {
+            present(popUIErrorAlert(reason: err), animated: true)
         } catch let err {
             log.error("Could not insert a playlist \"\(playlistName)\": \(err)")
         }

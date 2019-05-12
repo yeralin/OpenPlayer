@@ -239,3 +239,9 @@ extension Double{
         return CGFloat(self)
     }
 }
+
+func popUIErrorAlert(reason: String) -> UIAlertController {
+    let uiErrorAlert = UIAlertController(title: "Error", message: reason, preferredStyle: .alert)
+    uiErrorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    return uiErrorAlert
+}

@@ -15,6 +15,11 @@ class PlaylistPersistencyManager: PersistenceController {
     
     func createPlaylist(name: String, cntxt: NSManagedObjectContext? = nil) throws -> Int {
         let cntxt = try validateContext(context: cntxt)
+        if !_fetchData(entityName: "PlaylistEntity",
+                       sortIn: nil,
+                       predicate: NSPredicate(format: "playlistName = %@", name)).isEmpty {
+            throw UIError.AlreadyExists(reason: "Playlist \"\(name)\" already exists")
+        }
         let playlistPosition = fetchPlaylistSize()
         let playlistEntity = PlaylistEntity(context: cntxt)
         playlistEntity.playlistName = name
@@ -23,7 +28,7 @@ class PlaylistPersistencyManager: PersistenceController {
         do {
             try fm.createDirectory(at:newPlaylist, withIntermediateDirectories: true)
         } catch {
-            throw "Could not save playlist: \(String(describing: playlistEntity.playlistName))"
+            throw "Could not save a playlist: \(String(describing: playlistEntity.playlistName))"
         }
         try saveContext(cntxt: cntxt)
         return playlistPosition
@@ -110,7 +115,7 @@ class PlaylistPersistencyManager: PersistenceController {
             throw "Could not extract playlistName from playlist entity"
         }
         let playlistUrl = docsUrl.appendingPathComponent(playlistName)
-        if !fm.fileExists(atPath: playlistUrl.absoluteString) {
+        if !fm.fileExists(atPath: playlistUrl.path) {
             throw "Playlist does not exist at path: \(playlistUrl)"
         }
         return playlistUrl

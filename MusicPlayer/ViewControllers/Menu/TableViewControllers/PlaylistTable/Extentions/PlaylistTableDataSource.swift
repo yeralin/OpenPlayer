@@ -25,7 +25,6 @@ extension PlaylistTableViewController {
         return playlistArray.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = playlistTableView.dequeueReusableCell(withIdentifier: "PlaylistCell", for: indexPath) as! PlaylistCell
         cell.playlistName.text = playlistArray[indexPath.row].playlistName
