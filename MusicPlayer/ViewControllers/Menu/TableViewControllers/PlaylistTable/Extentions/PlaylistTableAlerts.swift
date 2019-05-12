@@ -30,11 +30,14 @@ extension PlaylistTableAlerts {
         alertNewPlaylist.addTextField(configurationHandler: { textField in
             textField.placeholder = "Playlist Name"
         })
-        guard let playListName = alertNewPlaylist.textFields?[0].text else {
-            throw "Could not unwrap playlist name"
-        }
         alertNewPlaylist.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alertNewPlaylist.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_:UIAlertAction) in self.insertPlaylist(playListName: playListName)}))
+        alertNewPlaylist.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_:UIAlertAction) in
+            if let playListName = alertNewPlaylist.textFields?[0].text {
+                self.insertPlaylist(playListName: playListName)
+            } else {
+                log.error("Could not unwrap playlist name")
+            }
+        }))
         return alertNewPlaylist
     }
     
