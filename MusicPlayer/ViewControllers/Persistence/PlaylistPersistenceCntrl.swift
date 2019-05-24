@@ -17,7 +17,7 @@ class PlaylistPersistencyManager: PersistenceController {
         let cntxt = try validateContext(context: cntxt)
         if !_fetchData(entityName: "PlaylistEntity",
                        sortIn: nil,
-                       predicate: NSPredicate(format: "playlistName = %@", name)).isEmpty {
+                       predicate: NSPredicate(format: "playlistName CONTAINS[cd] %@", name)).isEmpty {
             throw UIError.AlreadyExists(reason: "Playlist \"\(name)\" already exists")
         }
         let playlistPosition = fetchPlaylistSize()
@@ -37,10 +37,10 @@ class PlaylistPersistencyManager: PersistenceController {
     func getPlaylistArray(cntxt: NSManagedObjectContext? = nil) throws -> [PlaylistEntity] {
         let cntxt = try validateContext(context: cntxt)
         guard let playlistArray = _fetchData(entityName: "PlaylistEntity",
-                                        sortIn: NSSortDescriptor(key: "playlistOrder", ascending: true),
-                                        predicate: nil,
-                                        cntxt: cntxt) as? [PlaylistEntity] else {
-            throw "Could not cast data to [PlaylistEntity]"
+                                             sortIn: NSSortDescriptor(key: "playlistOrder", ascending: true),
+                                             predicate: nil,
+                                             cntxt: cntxt) as? [PlaylistEntity] else {
+                                                throw "Could not cast data to [PlaylistEntity]"
         }
         return playlistArray
     }
@@ -97,7 +97,7 @@ class PlaylistPersistencyManager: PersistenceController {
     }
     
     public func resetPlaylistsOrder(playlistArray: [PlaylistEntity],
-                               cntxt: NSManagedObjectContext? = nil) throws -> [PlaylistEntity] {
+                                    cntxt: NSManagedObjectContext? = nil) throws -> [PlaylistEntity] {
         let cntxt = try validateContext(context: cntxt)
         for (index, _) in playlistArray.enumerated() {
             playlistArray[index].playlistOrder = Int32(index)
