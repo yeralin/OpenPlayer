@@ -74,7 +74,7 @@ class PlaylistPersistencyManager: PersistenceController {
         for entryPath in playlistDirectories {
             let directoryName = entryPath.lastPathComponent
             if fm.fileExists(atPath: entryPath.path, isDirectory: &isDir) && isDir.boolValue {
-                let index = playlistsToMatchWithDirs.index(where: {el in el.playlistName == directoryName })
+                let index = playlistsToMatchWithDirs.firstIndex(where: {el in el.playlistName == directoryName })
                 // playlist got matched, remove from array
                 if index != nil {
                     playlistsToMatchWithDirs.remove(at: index!)

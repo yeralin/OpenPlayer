@@ -134,7 +134,7 @@ class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
             if shuffleMode == true {
                 prevSong = Int(arc4random_uniform(UInt32(songsArray.count)))
             } else {
-                prevSong = songsArray.index(where: {$0 == song})! - 1
+                prevSong = songsArray.firstIndex(where: {$0 == song})! - 1
             }
             if songsArray.indices.contains(prevSong) {
                 self.playSong(song: songsArray[prevSong])
@@ -150,7 +150,7 @@ class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
             if shuffleMode == true {
                 nextSong = Int(arc4random_uniform(UInt32(songsArray.count)))
             } else {
-                nextSong = songsArray.index(where: {$0 == song})! + 1
+                nextSong = songsArray.firstIndex(where: {$0 == song})! + 1
             }
             if songsArray.indices.contains(nextSong) {
                 self.playSong(song: songsArray[nextSong])

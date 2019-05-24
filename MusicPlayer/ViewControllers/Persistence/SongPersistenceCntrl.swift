@@ -92,7 +92,7 @@ class SongPersistencyManager: PersistenceController {
                 let isAudioFile = UTTypeConformsTo(fileUTI, kUTTypeAudio)
                 if isAudioFile {
                     let audioFileName = filePath.lastPathComponent
-                    if let index = songsToMatchWithAudioFiles.index(where: { el in el.songName == audioFileName }) {
+                    if let index = songsToMatchWithAudioFiles.firstIndex(where: { el in el.songName == audioFileName }) {
                         songsToMatchWithAudioFiles.remove(at: index)
                     } else {
                         // New audio file is found, create corresponding SongEntity
@@ -110,7 +110,7 @@ class SongPersistencyManager: PersistenceController {
             // There are songs w/o corresponding audio file
             // Probably were removed from FS, perform a cleanup
             for redundantSongEntity in songsToMatchWithAudioFiles {
-                if let index = songsArray.index(where: { el in el == redundantSongEntity}) {
+                if let index = songsArray.firstIndex(where: { el in el == redundantSongEntity}) {
                     cntxt.delete(redundantSongEntity)
                     songsArray.remove(at: index)
                 }
@@ -139,10 +139,10 @@ class SongPersistencyManager: PersistenceController {
         let songAsset = AVAsset.init(url: songPath)
         if !songAsset.commonMetadata.isEmpty {
             let meta = songAsset.commonMetadata
-            if let title = meta.index(where: { el in el.commonKey?.rawValue == "title"}) {
+            if let title = meta.firstIndex(where: { el in el.commonKey?.rawValue == "title"}) {
                 song.songTitle = meta[title].value as? String
             }
-            if let artist = meta.index(where: { el in el.commonKey?.rawValue == "artist"}) {
+            if let artist = meta.firstIndex(where: { el in el.commonKey?.rawValue == "artist"}) {
                 song.songTitle = meta[artist].value as? String
             }
             //if let artwork = meta.index(where: { el in el.commonKey == "artwork"}) {

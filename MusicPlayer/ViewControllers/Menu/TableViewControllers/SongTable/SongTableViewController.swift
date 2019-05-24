@@ -29,7 +29,7 @@ class SongTableViewController: UITableViewController {
     
     func getCell(withSong song: SongEntity) -> SongTableCell? {
         let visibleSongCells = tableView.visibleCells as! [SongTableCell]
-        if let index = visibleSongCells.index(where: { $0.song == song }) {
+        if let index = visibleSongCells.firstIndex(where: { $0.song == song }) {
             return visibleSongCells[index]
         } else {
             return nil
@@ -54,7 +54,7 @@ class SongTableViewController: UITableViewController {
                 do {
                     pickerView.songToMove = songToMove
                     var playlistArray = try PlaylistPersistencyManager.sharedInstance.getPlaylistArray()
-                    let currentPlaylistIndex = playlistArray.index(of: playlist)
+                    let currentPlaylistIndex = playlistArray.firstIndex(of: playlist)
                     playlistArray.remove(at: currentPlaylistIndex!)
                     pickerView.playlistArray = playlistArray
                 } catch let err {

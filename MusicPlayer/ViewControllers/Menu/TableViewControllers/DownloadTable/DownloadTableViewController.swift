@@ -59,7 +59,7 @@ class DownloadTableViewController: UITableViewController {
     
     func getCell(withSong song: DownloadSongEntity!) -> DownloadTableCell? {
         let visibleSongCells = tableView.visibleCells as! [DownloadTableCell]
-        if let index = visibleSongCells.index(where: { $0.song == song }) {
+        if let index = visibleSongCells.firstIndex(where: { $0.song == song }) {
             return visibleSongCells[index]
         } else {
             return nil

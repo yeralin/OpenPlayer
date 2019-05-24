@@ -1,5 +1,5 @@
 #define a global platform for your project
-#platform :ios
+platform :ios, '9.0'
 workspace 'MusicPlayer'
 inhibit_all_warnings!
 
@@ -11,6 +11,6 @@ target 'MusicPlayer' do
   pod 'SwiftIcons'
   pod 'SwiftOverlays'
   pod 'Alamofire'
-  pod "GCDWebServer/WebUploader"#, "~> 3.3"
-  pod "CocoaLumberjack"#, "~> 3.0"
+  pod "GCDWebServer/WebUploader"
+  pod "CocoaLumberjack"
 end

@@ -38,7 +38,7 @@ extension DownloadTableCellActions {
     }
     
     func actionOnChangeSliderPosition(_ sender: UISlider) {
-        let songNewPosition: CMTime = CMTimeMakeWithSeconds(Float64(sender.value), 1)
+        let songNewPosition: CMTime = CMTimeMakeWithSeconds(Float64(sender.value), preferredTimescale: 1)
         StreamAudioPlayer.sharedInstance.seekTo(position: songNewPosition)
     }
 }

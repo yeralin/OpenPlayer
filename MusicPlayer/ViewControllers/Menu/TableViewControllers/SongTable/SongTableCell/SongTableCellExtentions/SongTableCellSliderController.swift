@@ -18,7 +18,7 @@ extension SongTableCellSliderController {
         songProgressSlider.maximumValue = Float(AudioPlayer.sharedInstance.player.duration)
         sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
         sliderCAD.preferredFramesPerSecond = 60
-        sliderCAD.add(to: .current, forMode: .defaultRunLoopMode)
+        sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
     }
     
     @objc func updateSliderCAD() {

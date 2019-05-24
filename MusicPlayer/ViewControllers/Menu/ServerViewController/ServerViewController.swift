@@ -36,8 +36,8 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
                 menuButton.disableButton()
                 UIApplication.shared.isIdleTimerDisabled = true
             } else {
-                let alert = UIAlertController(title: "Failure", message: "Is your Wi-Fi on and \n connected to a network?", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Let me fix this!", style: UIAlertActionStyle.default, handler: nil))
+                let alert = UIAlertController(title: "Failure", message: "Is your Wi-Fi on and \n connected to a network?", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Let me fix this!", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 sender.isOn = false
             }

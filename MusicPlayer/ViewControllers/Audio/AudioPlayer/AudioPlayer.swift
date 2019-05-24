@@ -119,7 +119,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
                 if shuffleMode == true {
                     prevSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
                 } else {
-                    prevSongIndex = songsArray.index(of: song)! - 1
+                    prevSongIndex = songsArray.firstIndex(of: song)! - 1
                 }
                 if songsArray.indices.contains(prevSongIndex) {
                     self.playSong(song: songsArray[prevSongIndex])
@@ -137,7 +137,7 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             do {
                 if let playlist = song.playlist {
                     let songsArray = try SongPersistencyManager.sharedInstance.getSongArray(playlist: playlist)
-                    guard let currSongIndex = songsArray.index(of: song) else {
+                    guard let currSongIndex = songsArray.firstIndex(of: song) else {
                         throw "Could not get current song index for \"\(song.songName ?? "unknown")\""
                     }
                     var nextSongIndex = currSongIndex + 1

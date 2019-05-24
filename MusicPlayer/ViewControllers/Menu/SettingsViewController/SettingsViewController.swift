@@ -80,7 +80,7 @@ class SettingsViewController: UIViewController, UINavigationBarDelegate, UITextF
             if FileManager.default.fileExists(atPath: documentsDirectoryURL.path, isDirectory: &bool), bool.boolValue {
                 var folderSize = 0
                 FileManager.default.enumerator(at: documentsDirectoryURL, includingPropertiesForKeys: [.fileSizeKey], options: [])?.forEach {
-                    folderSize += (try? ($0 as? URL)?.resourceValues(forKeys: [.fileSizeKey]))??.fileSize ?? 0
+                    folderSize += (((try? ($0 as? URL)?.resourceValues(forKeys: [.fileSizeKey])) as URLResourceValues??))??.fileSize ?? 0
                 }
                 usedSpace = ByteCountFormatter.string(fromByteCount: Int64(folderSize), countStyle: .file)
             }
@@ -118,8 +118,8 @@ class SettingsViewController: UIViewController, UINavigationBarDelegate, UITextF
                     self.serverStatusLabel.text = "Not connected"
                     self.serverStatusLabel.textColor = UIColor.red
                     if showErrorAlert == true {
-                        let alert = UIAlertController(title: "Error", message: errorText, preferredStyle: UIAlertControllerStyle.alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        let alert = UIAlertController(title: "Error", message: errorText, preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     }
                 }

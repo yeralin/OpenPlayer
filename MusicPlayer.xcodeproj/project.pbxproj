@@ -31,6 +31,7 @@
 		317929AA1EA84A510076F15F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 317929A81EA84A510076F15F /* Main.storyboard */; };
 		317929AF1EA84A510076F15F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 317929AE1EA84A510076F15F /* Assets.xcassets */; };
 		317929B21EA84A510076F15F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 317929B01EA84A510076F15F /* LaunchScreen.storyboard */; };
+		317D94FC22987B60009A029D /* UIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D94FB22987B60009A029D /* UIError.swift */; };
 		3185A3751F00840B008E2D21 /* DownloadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185A3741F00840B008E2D21 /* DownloadTableViewController.swift */; };
 		3185A3781F0086A2008E2D21 /* DownloadTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185A3771F0086A2008E2D21 /* DownloadTableDataSource.swift */; };
 		3185A37A1F0086E4008E2D21 /* DownloadTableSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3185A3791F0086E4008E2D21 /* DownloadTableSearchBar.swift */; };
@@ -103,6 +104,7 @@
 		317929AE1EA84A510076F15F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		317929B11EA84A510076F15F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		317929B31EA84A510076F15F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		317D94FB22987B60009A029D /* UIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIError.swift; sourceTree = "<group>"; };
 		3185A3741F00840B008E2D21 /* DownloadTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableViewController.swift; sourceTree = "<group>"; };
 		3185A3771F0086A2008E2D21 /* DownloadTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableDataSource.swift; sourceTree = "<group>"; };
 		3185A3791F0086E4008E2D21 /* DownloadTableSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableSearchBar.swift; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 		31F2F0431EC15C5D0072DE30 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				317D94FB22987B60009A029D /* UIError.swift */,
 				31F2F0441EC15C700072DE30 /* ViewExtentions.swift */,
 			);
 			path = Utils;
@@ -522,7 +525,6 @@
 				3179299E1EA84A510076F15F /* Frameworks */,
 				3179299F1EA84A510076F15F /* Resources */,
 				2ACE1FEDBAF424CA177407BD /* [CP] Embed Pods Frameworks */,
-				CB77D35285E1FA1C23D9F227 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -582,7 +584,7 @@
 					317929A01EA84A510076F15F = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = Q7W47GFKL3;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -593,14 +595,14 @@
 					31CA1AA81EDB74EF00285EB9 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 926229A273;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 317929A01EA84A510076F15F;
 					};
 					31CA1AB61EDB770300285EB9 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 926229A273;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 317929A01EA84A510076F15F;
 					};
@@ -662,7 +664,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
@@ -683,7 +685,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C1ECFFB57BDAB0B4C9650269 /* [CP] Check Pods Manifest.lock */ = {
@@ -702,21 +704,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CB77D35285E1FA1C23D9F227 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -754,6 +741,7 @@
 				31F2F0451EC15C700072DE30 /* ViewExtentions.swift in Sources */,
 				3185A3801F016769008E2D21 /* DownloadTableCell.swift in Sources */,
 				31F255841EAF86FC00E0AD84 /* MusicPlayer.xcdatamodeld in Sources */,
+				317D94FC22987B60009A029D /* UIError.swift in Sources */,
 				311221B11EF42E9500C94244 /* ServerRequests.swift in Sources */,
 				31863F9E1EF03FB300F59F74 /* SongTableSearchBar.swift in Sources */,
 				3185A37A1F0086E4008E2D21 /* DownloadTableSearchBar.swift in Sources */,
@@ -951,8 +939,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.MusicPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -967,8 +954,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.MusicPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -982,8 +968,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Yeralin.MusicPlayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicPlayer.app/MusicPlayer";
 			};
 			name = Debug;
@@ -997,8 +982,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Yeralin.MusicPlayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MusicPlayer.app/MusicPlayer";
 			};
 			name = Release;
@@ -1011,8 +995,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Yeralin.MusicPlayerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = MusicPlayer;
 			};
 			name = Debug;
@@ -1025,8 +1008,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Yeralin.MusicPlayerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_TARGET_NAME = MusicPlayer;
 			};
 			name = Release;

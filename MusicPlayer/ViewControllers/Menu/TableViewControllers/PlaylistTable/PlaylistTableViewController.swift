@@ -18,7 +18,7 @@ class PlaylistCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        selectIcon.setIcon(icon: .fontAwesome(.angleRight), iconSize: 28, color: .systemColor, forState: .normal)
+        selectIcon.setIcon(icon: .ionicons(.iosArrowForward), iconSize: 28, color: .systemColor, backgroundColor: .white, forState: .normal)
     }
 }
 
