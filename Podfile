@@ -14,3 +14,8 @@ target 'MusicPlayer' do
   pod "GCDWebServer/WebUploader"
   pod "CocoaLumberjack"
 end
+
+target 'MusicPlayerUITests' do
+  use_frameworks!
+  pod 'SwiftIcons'
+end

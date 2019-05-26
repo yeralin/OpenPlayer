@@ -14,68 +14,57 @@ class TestUtils {
     
     let fm: FileManager
     let docsUrl: URL
-
+    
     
     static let sharedInstance = TestUtils()
     
     init() {
-        fm = FileManager.default
-        docsUrl = try! fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        do {
+            fm = FileManager.default
+            docsUrl = try fm.url(for:.documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        } catch let err {
+            fatalError("Could not initialize TestUtils: \(err)")
+        }
     }
     
     /*func setUpInMemoryManagedObjectContext() -> NSManagedObjectContext {
-        let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
-        
-        let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
-        
-        do {
-            try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
-        } catch {
-            print("Adding in-memory persistent store failed")
-        }
-        
-        let managedObjectContext = NSManagedObjectContext()
-        managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
-        
-        return managedObjectContext
-    }*/
+     let managedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])!
+     
+     let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+     
+     do {
+     try persistentStoreCoordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+     } catch {
+     print("Adding in-memory persistent store failed")
+     }
+     
+     let managedObjectContext = NSManagedObjectContext()
+     managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator
+     
+     return managedObjectContext
+     }*/
     
-    func wipeDocumentDir(){
-        let contentsArray = try! fm.contentsOfDirectory(at: docsUrl, includingPropertiesForKeys: nil)
-        for entry in contentsArray {
-            do {
-                try fm.removeItem(at: entry)
-            } catch {
-                print("Could not delete \(entry)")
-            }
-        }
-    }
-    
-    func copyTestData()
+    func createPlaylistWithTestData(playlistName: String, testEntires: Int)
     {
-        let testPlaylist1 = docsUrl.appendingPathComponent("Test 1")
-        let testPlaylist2 = docsUrl.appendingPathComponent("Test 2")
+        
+        let testPlaylist = docsUrl.appendingPathComponent(playlistName)
         do {
-            try fm.createDirectory(at:testPlaylist2, withIntermediateDirectories: true)
-            try fm.createDirectory(at:testPlaylist1, withIntermediateDirectories: true)
+            try fm.createDirectory(at:testPlaylist, withIntermediateDirectories: true)
         } catch {
-            print("Could not save test playlists")
+            print("Could not save test playlist: \(playlistName)")
         }
         let bundle = Bundle(for: type(of: self))
-        if let testFile = bundle.path(forResource: "Test - Test", ofType: "mp3") {
-            for i in 1...32 {
-                do {
-                    if (i % 2 == 1) {
-                        try fm.copyItem(atPath: testFile, toPath: testPlaylist1.appendingPathComponent("Test - Test \(i).mp3").path)
-                    } else {
-                        try fm.copyItem(atPath: testFile, toPath: testPlaylist2.appendingPathComponent("Test - Test \(i).mp3").path)
-                    }
-                }
-                catch let error as NSError {
-                    print("Ooops! Something went wrong: \(error)")
-                }
-                
+        guard let testFile = bundle.path(forResource: "test - test", ofType: "mp3") else {
+            fatalError("Could not locate test data")
+        }
+        for i in 1...testEntires {
+            do {
+                try fm.copyItem(atPath: testFile, toPath: testPlaylist.appendingPathComponent("test - test_\(i).mp3").path)
+            } catch let error {
+                print("Something went wrong: \(error)")
             }
         }
     }
+    
+    
 }

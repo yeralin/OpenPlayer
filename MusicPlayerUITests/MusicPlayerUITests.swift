@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SwiftIcons
 @testable import MusicPlayer
 
 extension XCUIElement {
@@ -15,9 +16,13 @@ extension XCUIElement {
      - Parameter text: the text to enter into the field
      */
     func clearAndEnterText(text: String) {
-        
+        guard let stringValue = self.value as? String else {
+            XCTFail("Tried to clear and enter text into a non string value")
+            return
+        }
         self.tap()
-        
+        let deleteString = stringValue.map { _ in "\u{8}" }.joined(separator: "")
+        self.typeText(deleteString)
         self.typeText(text)
     }
     
@@ -35,14 +40,16 @@ extension XCUIElement {
 
 class MusicPlayerUITests: XCTestCase {
     
+    private var launcher: XCUIApplication? = nil;
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
+        Springboard.deleteMyApp()
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
+        launcher = XCUIApplication()
         
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
@@ -52,128 +59,127 @@ class MusicPlayerUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testCreateAndDeletePlaylist(){
-        
+    func testCreatePlaylist() {
+        launcher?.launch()
         let app = XCUIApplication()
+        let tablesQuery = app.tables
         let playlistsNavigationBar = app.navigationBars["Playlists"]
         playlistsNavigationBar.buttons["Add"].tap()
-        
         let createNewPlaylistAlert = app.alerts["Create new playlist"]
-        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test 3")
+        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test")
         createNewPlaylistAlert.buttons["OK"].tap()
-        app.tables.staticTexts["Test 3"].tap()
-        app.navigationBars["Test 3"].buttons["Playlists"].tap()
+        tablesQuery.staticTexts["Test"].tap()
+        app.navigationBars["Test"].buttons["Playlists"].tap()
         playlistsNavigationBar.buttons["Edit"].tap()
-        let tablesQuery = app.tables
-        tablesQuery.buttons["Delete Test 3"].tap()
+        tablesQuery.buttons["Delete Test"].tap()
         tablesQuery.buttons["Delete"].tap()
         app.alerts["Warning"].buttons["Delete"].tap()
         app.navigationBars["Playlists"].buttons["Done"].tap()
-        
+        XCTAssertTrue(tablesQuery.cells.count == 0)
     }
     
-    //Add Seek test
-    func testPlayPauseRenameSong() {
-        let FIRST_CELL = 0
-        let PLAY_BUTTON = 0
-        let EDIT_BUTTON = 2
+    func testFailDuplicatePlaylist() {
+        launcher?.launch()
         let app = XCUIApplication()
-        let tablesQuery = app.tables
-        let test1StaticText = tablesQuery.staticTexts["Test 1"]
-        test1StaticText.tap()
-        let testingCell = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[FIRST_CELL]
-        
-        testingCell.buttons.allElementsBoundByIndex[PLAY_BUTTON].tap()
-        
-        let playlistsButton = app.navigationBars["Test 1"].buttons["Playlists"]
-        playlistsButton.tap()
-        test1StaticText.tap()
-        testingCell.buttons.allElementsBoundByIndex[PLAY_BUTTON].tap()
-        testingCell.buttons.allElementsBoundByIndex[EDIT_BUTTON].tap()
-        let changeTheSongNameAlert = app.alerts["Change the song name"]
-        let textField = changeTheSongNameAlert.collectionViews.children(matching: .other).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .textField).element
-        let doneButton = changeTheSongNameAlert.buttons["Done"]
-        textField.typeText(" Test")
-        
-        doneButton.tap()
-        testingCell.buttons.allElementsBoundByIndex[PLAY_BUTTON].tap()
-        playlistsButton.tap()
-        test1StaticText.tap()
-        testingCell.buttons.allElementsBoundByIndex[PLAY_BUTTON].tap()
-        testingCell.buttons.allElementsBoundByIndex[EDIT_BUTTON].tap()
-        textField.clearAndEnterText(text: "Test")
-        doneButton.tap()
-        playlistsButton.tap()
-        
-    }
-    
-    func testMoveSongBetweenPlaylist() {
-        let FIRST_CELL = 0
-        let MOVE_BUTTON = 2
-        let SONG_LABLE = 1
-        let ARTIST_LABLE = 0
-        let app = XCUIApplication()
-        let tablesQuery = app.tables
-        tablesQuery.staticTexts["Test 1"].tap()
-        let testingCell = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[FIRST_CELL]
-        let toTestSongName = testingCell.staticTexts.allElementsBoundByAccessibilityElement[SONG_LABLE].label
-        let toTestArtistName = testingCell.staticTexts.allElementsBoundByAccessibilityElement[ARTIST_LABLE].label
-        testingCell.buttons.allElementsBoundByIndex[MOVE_BUTTON].tap()
-        app.toolbars.buttons["Done"].tap()
-        app.navigationBars["Test 1"].buttons["Playlists"].tap()
-        tablesQuery.staticTexts["Test 2"].tap()
-        let songName = testingCell.staticTexts.allElementsBoundByAccessibilityElement[SONG_LABLE].label
-        let artistName = testingCell.staticTexts.allElementsBoundByAccessibilityElement[ARTIST_LABLE].label
-        assert((songName == toTestSongName) && (artistName == toTestArtistName), "Moved song does not match original")
+        let playlistsNavigationBar = app.navigationBars["Playlists"]
+        playlistsNavigationBar.buttons["Add"].tap()
+        let createNewPlaylistAlert = app.alerts["Create new playlist"]
+        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test")
+        createNewPlaylistAlert.buttons["OK"].tap()
+        playlistsNavigationBar.buttons["Add"].tap()
+        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test")
+        createNewPlaylistAlert.buttons["OK"].tap()
+        XCTAssertTrue(app.alerts["Error"].visible())
+        app.alerts["Error"].buttons["OK"].tap()
     }
     
     func testChangePlaylistRowPositions() {
-        let SONG_LABLE = 1
-        let CELL_REORDER_BUTTON = 4
-        let app = XCUIApplication()
-        app.navigationBars["Playlists"].buttons["Edit"].tap()
-        let test1 = app.tables.buttons["Reorder Test 1"]
-        let test2 = app.tables.buttons["Reorder Test 2"]
-        test1.press(forDuration: 1.5, thenDragTo: test2)
-        app.navigationBars["Playlists"].buttons["Done"].tap()
-        //
-        let tablesQuery = app.tables
-        tablesQuery.staticTexts["Test 2"].tap()
-        
-        let test2NavigationBar = app.navigationBars["Test 2"]
-        test2NavigationBar.buttons["Edit"].tap()
-        let cell1 = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[0]
-        let cell2 = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[1]
-        let reorderCellButton = cell1.buttons.allElementsBoundByIndex[CELL_REORDER_BUTTON]
-        let toTestSongName = cell1.staticTexts.allElementsBoundByIndex[SONG_LABLE].label
-        reorderCellButton.press(forDuration: 1.5, thenDragTo: cell2)
-        test2NavigationBar.buttons["Done"].tap()
-        app.navigationBars["Test 2"].buttons["Playlists"].tap()
-        
-        app.navigationBars["Playlists"].buttons["Edit"].tap()
-        test2.press(forDuration: 1.5, thenDragTo: test1)
-        app.navigationBars["Playlists"].buttons["Done"].tap()
-        tablesQuery.staticTexts["Test 2"].tap()
-        let cell2SongName = tablesQuery.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[1].staticTexts.allElementsBoundByIndex[SONG_LABLE].label
-        assert(cell2SongName == toTestSongName, "SongName does not match before changing its position")
-    }
-    
-    func testReusableCells() {
+        launcher?.launchArguments.append("TestFirst:1")
+        launcher?.launchArguments.append("TestSecond:0")
+        launcher?.launch()
         let FIRST_CELL = 0
-        let NEXT_REUSABLE_CELL = 10
-        let PLAY_BUTTON = 0
+        let SECOND_ROW = 1
         let app = XCUIApplication()
-        let tablesQuery = app.tables.allElementsBoundByIndex[0]
-        let test1StaticText = app.tables.staticTexts["Test 1"]
-        test1StaticText.tap()
-        let testingCell = app.tables.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[FIRST_CELL]
-        testingCell.buttons.allElementsBoundByIndex[PLAY_BUTTON].tap()
-        for _ in 1...3 {
-            tablesQuery.swipeUp()
-        }
-        let nextReusableCell = app.tables.allElementsBoundByIndex[1].cells.allElementsBoundByIndex[NEXT_REUSABLE_CELL]
-        nextReusableCell.buttons.allElementsBoundByIndex[PLAY_BUTTON].tap()
-        
+        let tablesQuery = app.tables
+        app.navigationBars["Playlists"].buttons["Edit"].tap()
+        let testFirstPlaylist = tablesQuery.buttons["Reorder TestFirst"]
+        let testSecondPlaylist = tablesQuery.buttons["Reorder TestSecond"]
+        let posOfFirst = testFirstPlaylist.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        let posToMove = testSecondPlaylist.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 6))
+        posOfFirst.press(forDuration: 0.5, thenDragTo: posToMove)
+        app.navigationBars["Playlists"].buttons["Done"].tap()
+        tablesQuery.staticTexts.element(boundBy: SECOND_ROW).tap()
+        let testingCell = tablesQuery.cells.element(boundBy: FIRST_CELL)
+        XCTAssertTrue(testingCell.exists)
     }
     
+    func testPlayPauseSong() {
+        launcher?.launchArguments.append("Test:1")
+        launcher?.launch()
+        let FIRST_CELL = 0
+        let app = XCUIApplication()
+        let tablesQuery = app.tables
+        tablesQuery.staticTexts["Test"].tap()
+        let testingCell = tablesQuery.cells.element(boundBy: FIRST_CELL)
+        let playPauseButton = testingCell.buttons["play"]
+        playPauseButton.tap()
+        sleep(2)
+        playPauseButton.tap()
+        XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.play).text)
+    }
+    
+    func testRenameSong() {
+        launcher?.launchArguments.append("Test:1")
+        launcher?.launch()
+        let FIRST_CELL = 0
+        let app = XCUIApplication()
+        let tablesQuery = app.tables
+        tablesQuery.staticTexts["Test"].tap()
+        let testingCell = tablesQuery.cells.element(boundBy: FIRST_CELL)
+        testingCell.buttons["edit"].tap()
+        let changeTheSongNameAlert = app.alerts["Change the song name"]
+        let artistTextField = changeTheSongNameAlert.textFields.element(boundBy: 0)
+        let titleTextField = changeTheSongNameAlert.textFields.element(boundBy: 1)
+        let doneButton = changeTheSongNameAlert.buttons["Done"]
+        artistTextField.clearAndEnterText(text: "Hello")
+        titleTextField.clearAndEnterText(text: "World")
+        doneButton.tap()
+        XCTAssertTrue(testingCell.staticTexts["artist"].label == "Hello")
+        XCTAssertTrue(testingCell.staticTexts["title"].label == "World")
+    }
+    
+    func testPlayTwoSongsConsecutively() {
+        launcher?.launchArguments.append("Test:2")
+        launcher?.launch()
+        let FIRST_CELL = 0
+        let SECOND_CELL = 1
+        let app = XCUIApplication()
+        let tablesQuery = app.tables
+        tablesQuery.staticTexts["Test"].tap()
+        let firstTestingCell = tablesQuery.cells.element(boundBy: FIRST_CELL)
+        let secondTestingCell = tablesQuery.cells.element(boundBy: SECOND_CELL)
+        firstTestingCell.buttons["play"].tap()
+        sleep(2)
+        secondTestingCell.buttons["play"].tap()
+        XCTAssertTrue(firstTestingCell.buttons["play"].label == FontType.ionicons(.play).text)
+        XCTAssertTrue(secondTestingCell.buttons["play"].label == FontType.ionicons(.iosPause).text)
+    }
+    
+    func testMoveSongFromOnePlaylistToAnother() {
+        launcher?.launchArguments.append("TestFirst:1")
+        launcher?.launchArguments.append("TestSecond:0")
+        launcher?.launch()
+        let FIRST_CELL = 0
+        let app = XCUIApplication()
+        let tablesQuery = app.tables
+        tablesQuery.staticTexts["TestFirst"].tap()
+        let testingCell = tablesQuery.cells.element(boundBy: FIRST_CELL)
+        testingCell.buttons["move"].tap()
+        app/*@START_MENU_TOKEN@*/.pickerWheels["TestSecond"]/*[[".pickers.pickerWheels[\"TestSecond\"]",".pickerWheels[\"TestSecond\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.toolbars["Toolbar"].buttons["Done"].tap()
+        app.navigationBars["TestFirst"].buttons["Playlists"].tap()
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["TestSecond"]/*[[".cells.staticTexts[\"TestSecond\"]",".staticTexts[\"TestSecond\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        sleep(1) // Let Song Table to fully load
+        XCTAssertTrue(tablesQuery.cells.count == 1)
+    }
 }

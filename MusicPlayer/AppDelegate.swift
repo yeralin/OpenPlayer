@@ -19,6 +19,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundSessionCompletionHandler: (() -> Void)?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        var launchArgs = ProcessInfo.processInfo.arguments
+        if launchArgs.count > 1 {
+            launchArgs.removeFirst()
+            for arg in launchArgs {
+                // @param <playlistName>:<numberOfTestSongsInIt> - String
+                // Used by UI tests to pre-populate playlists with test songs
+                let testArg = arg.split(separator: ":")
+                let testPlaylist = String(testArg[0])
+                let countSongs = Int(testArg[1])!
+                PlaylistPersistencyManager.sharedInstance
+                    .createPlaylistWithTestData(playlistName: testPlaylist, testEntires: countSongs)
+            }
+        }
         // Override point for customization after application launch.
         do {
             UIApplication.shared.beginReceivingRemoteControlEvents()
@@ -116,8 +129,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
-	return input.rawValue
-}

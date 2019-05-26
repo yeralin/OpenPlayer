@@ -13,7 +13,24 @@ class PlaylistPersistencyManager: PersistenceController {
     
     static let sharedInstance = PlaylistPersistencyManager()
     
-    func createPlaylist(name: String, cntxt: NSManagedObjectContext? = nil) throws -> Int {
+    // Used only for UI Tests
+    internal func createPlaylistWithTestData(playlistName: String, testEntires: Int) {
+        do {
+            let bundle = Bundle(for: type(of: self))
+            guard let testFile = bundle.path(forResource: "test - test", ofType: "mp3") else {
+                throw "Could not fetch test payload"
+            }
+            let playlist = try createPlaylist(name: playlistName)
+            let playlistPath = try getPlaylistPath(playlist: playlist)
+            for i in 0..<testEntires {
+                try fm.copyItem(atPath: testFile, toPath: playlistPath.appendingPathComponent("test - test \(i+1).mp3").path)
+            }
+        } catch let err {
+            fatalError("Failed to populate test data: \(err)")
+        }
+    }
+    
+    func createPlaylist(name: String, cntxt: NSManagedObjectContext? = nil) throws -> PlaylistEntity {
         let cntxt = try validateContext(context: cntxt)
         if !_fetchData(entityName: "PlaylistEntity",
                        sortIn: nil,
@@ -31,7 +48,7 @@ class PlaylistPersistencyManager: PersistenceController {
             throw "Could not save a playlist: \(String(describing: playlistEntity.playlistName))"
         }
         try saveContext(cntxt: cntxt)
-        return playlistPosition
+        return playlistEntity
     }
     
     func getPlaylistArray(cntxt: NSManagedObjectContext? = nil) throws -> [PlaylistEntity] {

@@ -13,8 +13,6 @@ import CoreData
 class MusicPlayerTests: XCTestCase {
     
     override func setUp() {
-        TestUtils.sharedInstance.wipeDocumentDir()
-        TestUtils.sharedInstance.copyTestData()
         super.setUp()
     }
     
