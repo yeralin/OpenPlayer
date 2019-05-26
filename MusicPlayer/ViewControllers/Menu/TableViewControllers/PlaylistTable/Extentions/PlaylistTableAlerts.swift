@@ -16,9 +16,9 @@ extension PlaylistTableAlerts {
         if playlistName.isEmpty {return}
         do {
             let playlistPerstManager = PlaylistPersistencyManager.sharedInstance
-            let newPosition: Int = try playlistPerstManager.createPlaylist(name: playlistName)
+            let newPosition = try playlistPerstManager.createPlaylist(name: playlistName).playlistOrder
             self.playlistArray = try playlistPerstManager.getPlaylistArray()
-            self.playlistTableView.insertRows(at: [IndexPath(row: newPosition, section: 0)],
+            self.playlistTableView.insertRows(at: [IndexPath(row: Int(newPosition), section: 0)],
                                               with: .fade)
         } catch UIError.AlreadyExists(let err) {
             present(popUIErrorAlert(reason: err), animated: true)

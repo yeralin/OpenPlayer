@@ -40,7 +40,7 @@ class SongTableViewController: UITableViewController {
         do {
             playlist = receivedPlaylist
             songsArray = try SongPersistencyManager.sharedInstance
-                                .populateSongs(forPlaylist: receivedPlaylist)
+                .populateSongs(forPlaylist: receivedPlaylist)
         } catch let err {
             log.error("Could not prepare songs: \(err)")
         }
@@ -50,18 +50,22 @@ class SongTableViewController: UITableViewController {
         if segue.identifier == PRESENT_PLAYLIST_PICKER {
             let pickerView = segue.destination as! PlaylistPickerViewController
             pickerView.delegate = self
-            if let songToMove = sender as? SongEntity {
-                do {
-                    pickerView.songToMove = songToMove
-                    var playlistArray = try PlaylistPersistencyManager.sharedInstance.getPlaylistArray()
-                    let currentPlaylistIndex = playlistArray.firstIndex(of: playlist)
-                    playlistArray.remove(at: currentPlaylistIndex!)
-                    pickerView.playlistArray = playlistArray
-                } catch let err {
-                    log.error("Could not move \"\(songToMove.songName ?? "unknown")\" song: \(err)")
+            do {
+                guard let songToMove = sender as? SongEntity else {
+                    throw "Could not unwrap sender as SongEntity"
                 }
+                guard let index = songsArray?.firstIndex(of: songToMove) else {
+                    throw "Could not locate songToMove in songsArray"
+                }
+                pickerView.songToMove = songToMove
+                var playlistArray = try PlaylistPersistencyManager.sharedInstance.getPlaylistArray()
+                let currentPlaylistIndex = playlistArray.firstIndex(of: playlist)
+                playlistArray.remove(at: currentPlaylistIndex!)
+                pickerView.playlistArray = playlistArray
+                songsArray?.remove(at: index)
+            } catch let err {
+                log.error("Could not move \"\((sender as? SongEntity)?.songName ?? "unknown")\" song: \(err)")
             }
         }
     }
-    
 }

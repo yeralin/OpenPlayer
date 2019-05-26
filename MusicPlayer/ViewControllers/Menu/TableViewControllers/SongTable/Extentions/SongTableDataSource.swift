@@ -15,7 +15,7 @@ extension SongTableViewDataSource {
         return 1
     }
     
-    //How many SongCells to have
+    // How many SongCells to have
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
             return filteredSongs!.count
