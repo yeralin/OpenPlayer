@@ -353,9 +353,9 @@
 		318DB3CB1EC21C8600039541 /* SongTable */ = {
 			isa = PBXGroup;
 			children = (
+				3148C29F1EC8C7F2005947CB /* SongTableDataSource.swift */,
 				3148C2A41EC8D107005947CB /* SongTableAudioPlayerDelegImpl.swift */,
 				31A7AEE21ECDEB8500103789 /* SongCellDelegImpl.swift */,
-				3148C29F1EC8C7F2005947CB /* SongTableDataSource.swift */,
 				31A7AEE41ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift */,
 				31863F9D1EF03FB300F59F74 /* SongTableSearchBar.swift */,
 				31A3C4421F4293E700CBFAC7 /* SongTableCell */,

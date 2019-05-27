@@ -17,9 +17,6 @@ extension PlaylistTableViewDataSource {
         } catch let err {
             fatalError("Could not populate playlists: \(err))")
         }
-        refreshControl?.addTarget(self,
-                                  action: #selector(self.handleRefresh(refreshControl:)),
-                                  for: .valueChanged)
     }
 
     @objc func handleRefresh(refreshControl: UIRefreshControl) {
