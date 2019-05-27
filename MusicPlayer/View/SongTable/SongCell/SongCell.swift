@@ -8,8 +8,9 @@
 
 import UIKit
 
-class SongTableCell: UITableViewCell {
+class SongCell: UITableViewCell {
     
+    // Internal constants
     internal let ARTIST_TF_INDEX: Int = 0
     internal let TITLE_TF_INDEX: Int = 1
     
@@ -24,7 +25,7 @@ class SongTableCell: UITableViewCell {
     internal var sliderCAD: CADisplayLink!
     weak var delegate: SongCellDelegate!
     
-    var song: SongEntity! {
+    internal var song: SongEntity! {
         didSet {
             artistName.text = song.songArtist
             songTitle.text = song.songTitle
@@ -70,25 +71,24 @@ class SongTableCell: UITableViewCell {
         }
     }
     
-    
     @IBAction func playPauseTapped(_ sender: UIButton) {
-        actionOnPlayPauseTap()
+        actionOnPlayPauseTapUI()
     }
     
     @IBAction func shuffleButtonTapped(_ sender: UIButton) {
-        actionOnShuffleTap()
+        actionOnShuffleTapUI()
     }
     
     @IBAction func moveTapped(_ sender: UIButton) {
-        actionOnMoveTap()
+        actionOnMoveTapUI()
     }
     
     @IBAction func changeSongNameTapped(_ sender: UIButton) {
-        actionOnChangeSongNameTap()
+        actionOnChangeSongNameTapUI()
     }
     
     @IBAction func changeSliderPosition(_ sender: UISlider) {
-        actionOnChangeSliderPosition(sender)
+        actionOnChangeSliderPositionUI(sender)
     }
     
 }

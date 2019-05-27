@@ -9,15 +9,15 @@
 import Foundation
 import MediaPlayer
 
-private typealias SongTableCellSliderController = SongTableCell
-extension SongTableCellSliderController {
+private typealias SongCellSliderUIController = SongCell
+extension SongCellSliderUIController {
     
     func setupSliderCAD() {
         songProgressSlider.isEnabled = true
         songProgressSlider.minimumValue = 0
         songProgressSlider.maximumValue = Float(AudioPlayer.sharedInstance.player.duration)
         sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
-        sliderCAD.preferredFramesPerSecond = 60
+        sliderCAD.preferredFramesPerSecond = 30
         sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
     }
     

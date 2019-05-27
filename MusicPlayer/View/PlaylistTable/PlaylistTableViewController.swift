@@ -11,14 +11,9 @@ import SwiftIcons
 import CoreData
 import SWRevealViewController
 
-class PlaylistCell: UITableViewCell {
-    
-    @IBOutlet weak var playlistName: UILabel!
-    @IBOutlet weak var selectIcon: UIButton!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        selectIcon.setIcon(icon: .ionicons(.iosArrowForward), iconSize: 28, color: .systemColor, backgroundColor: .white, forState: .normal)
+extension UINavigationController {
+    var rootViewController : UIViewController? {
+        return viewControllers.first
     }
 }
 
@@ -27,7 +22,7 @@ class PlaylistTableViewController: UITableViewController {
     @IBOutlet var playlistTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
     
-    var playlistArray: [PlaylistEntity]!
+    var playlistArray: [PlaylistEntity] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +30,7 @@ class PlaylistTableViewController: UITableViewController {
         setupMenuGestureRecognizer()
         setupMenuButton(button: menuButton)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        do {
-            playlistArray = try PlaylistPersistencyManager.sharedInstance.populatePlaylists()
-        } catch let err {
-            fatalError("Could not populate playlists: \(err))")
-        }
-        refreshControl?.addTarget(self, action: #selector(handleRefresh(refreshControl:)), for: .valueChanged)
+        self.initDataSource()
     }
     
     public func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
@@ -53,16 +43,6 @@ class PlaylistTableViewController: UITableViewController {
             self.tableView.allowsSelection = false
         }
         
-    }
-    
-    @objc func handleRefresh(refreshControl: UIRefreshControl) {
-        do {
-            playlistArray = try PlaylistPersistencyManager.sharedInstance.populatePlaylists()
-            tableView.reloadData()
-            refreshControl.endRefreshing()
-        } catch let err {
-            fatalError("Could not populate playlists: \(err))")
-        }
     }
     
     @IBAction func insertNewPlaylist(_ sender: Any) {

@@ -10,9 +10,8 @@ import Foundation
 import SwiftIcons
 
 //AudioPlayerDelegate Callees
-private typealias SongTableCellStates = SongTableCell
-extension SongTableCellStates {
-    
+private typealias SongCellStates = SongCell
+extension SongCellStates {
     
     func playSongCellState() {
         //TODO: Replace/Test with one playPauseButton.setIcon(icon: .ionicons(.pause), iconSize: 26)

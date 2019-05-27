@@ -124,6 +124,7 @@ class MusicPlayerUITests: XCTestCase {
         let playPauseButton = testingCell.buttons["play"]
         playPauseButton.tap()
         sleep(2)
+        XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.iosPause).text)
         playPauseButton.tap()
         XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.play).text)
     }

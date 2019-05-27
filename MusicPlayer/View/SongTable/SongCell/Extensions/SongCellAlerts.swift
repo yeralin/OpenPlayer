@@ -8,8 +8,8 @@
 
 import UIKit
 
-private typealias SongTableCellAlerts = SongTableCell
-extension SongTableCellAlerts {
+private typealias SongCellAlerts = SongCell
+extension SongCellAlerts {
     
     func changeSongNameAlert() -> UIAlertController {
         let alertChangeSongName = UIAlertController(title: "Change the song name", message: nil, preferredStyle: .alert)
@@ -24,18 +24,9 @@ extension SongTableCellAlerts {
             if let textFields = alertChangeSongName.textFields {
                 if let typedArtist = textFields[self.ARTIST_TF_INDEX].text,
                    let typedTitle = textFields[self.TITLE_TF_INDEX].text {
-                    do {
-                        try SongPersistencyManager.sharedInstance.renameSong(song: self.song,
-                                                                             newArtist: typedArtist,
-                                                                             newTitle: typedTitle)
-                        self.artistName.text = typedArtist
-                        self.songTitle.text = typedTitle
-                    } catch let err {
-                        log.error("Could not rename \"\(self.song.songName ?? "unknown")\" song: \(err)")
-                    }
+                    self.handleChangeSongNameAlert(newArtist: typedArtist, newTitle: typedTitle)
                 }
             }
-            
         }))
         return alertChangeSongName
     }
