@@ -21,15 +21,7 @@ extension PlaylistTableViewDataSource {
                                   action: #selector(self.handleRefresh(refreshControl:)),
                                   for: .valueChanged)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "presentSongs" {
-            if let songsView = segue.destination as? SongTableViewController, let playlist = sender as? PlaylistEntity {
-                songsView.prepareSongs(receivedPlaylist: playlist)
-            }
-        }
-    }
-    
+
     @objc func handleRefresh(refreshControl: UIRefreshControl) {
         do {
             playlistArray = try PlaylistPersistencyManager.sharedInstance.populatePlaylists()
@@ -40,8 +32,37 @@ extension PlaylistTableViewDataSource {
         }
     }
     
+    internal func insertPlaylist(playListName: String) {
+        let playlistName = playListName
+        if playlistName.isEmpty {return}
+        do {
+            let playlistPerstManager = PlaylistPersistencyManager.sharedInstance
+            let newPosition = try playlistPerstManager.createPlaylist(name: playlistName).playlistOrder
+            self.playlistArray = try playlistPerstManager.getPlaylistArray()
+            self.playlistTableView.insertRows(at: [IndexPath(row: Int(newPosition), section: 0)],
+                                              with: .fade)
+        } catch UIError.AlreadyExists(let err) {
+            present(popUIErrorAlert(reason: err), animated: true)
+        } catch let err {
+            log.error("Could not insert a playlist \"\(playlistName)\": \(err)")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "presentSongs" {
+            if let songsView = segue.destination as? SongTableViewController,
+                let playlist = sender as? PlaylistEntity {
+                songsView.prepareSongs(receivedPlaylist: playlist)
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "presentSongs", sender: playlistArray[indexPath.row])
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return Constants.ONE_SECTION
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -54,18 +75,14 @@ extension PlaylistTableViewDataSource {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "presentSongs", sender: playlistArray[indexPath.row])
-    }
-    
     // Support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+        let playlistPerstManager = PlaylistPersistencyManager.sharedInstance
         let playlistToMove = playlistArray[fromIndexPath.row]
         do {
-            let playlistPerstManager = PlaylistPersistencyManager.sharedInstance
             playlistArray.remove(at: fromIndexPath.row)
             playlistArray.insert(playlistToMove, at: to.row)
-            self.playlistArray = try playlistPerstManager.resetPlaylistsOrder(playlistArray: playlistArray)
+            playlistArray = try playlistPerstManager.resetPlaylistsOrder(playlistArray: playlistArray)
         } catch let err {
             log.error("Could not rearrange \"\(playlistToMove.playlistName ?? "unknown") playlist: \(err)")
         }
@@ -87,9 +104,9 @@ extension PlaylistTableViewDataSource {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             present(popDeletePlaylistAlert(onComplete: { _ in
+                let playlistPerstManager = PlaylistPersistencyManager.sharedInstance
                 let playlist = self.playlistArray[indexPath.row]
                 do {
-                    let playlistPerstManager = PlaylistPersistencyManager.sharedInstance
                     try playlistPerstManager.deletePlaylist(playlist: playlist)
                     self.playlistArray = try playlistPerstManager.getPlaylistArray()
                     self.playlistTableView.deleteRows(at: [indexPath], with: .fade)

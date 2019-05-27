@@ -21,8 +21,17 @@ class PlaylistTableViewController: UITableViewController {
     
     @IBOutlet var playlistTableView: UITableView!
     @IBOutlet weak var menuButton: UIBarButtonItem!
+    var playlistArray: [PlaylistEntity]!
     
-    var playlistArray: [PlaylistEntity] = []
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initDataSource()
+    }
+    
+    override init(style: UITableView.Style) {
+        super.init(style: style)
+        self.initDataSource()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,14 +39,12 @@ class PlaylistTableViewController: UITableViewController {
         setupMenuGestureRecognizer()
         setupMenuButton(button: menuButton)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        self.initDataSource()
     }
     
     public func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
         if revealController.frontViewPosition == FrontViewPosition.left {
             self.tableView.alwaysBounceVertical = true
             self.tableView.allowsSelection = true
-            
         } else if revealController.frontViewPosition == FrontViewPosition.right {
             self.tableView.alwaysBounceVertical = false
             self.tableView.allowsSelection = false
