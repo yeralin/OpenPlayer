@@ -1,5 +1,5 @@
 //
-//  SongTableCell.swift
+//  SongCell.swift
 //  MusicPlayer
 //
 //  Created by Daniyar Yeralin on 6/26/17.

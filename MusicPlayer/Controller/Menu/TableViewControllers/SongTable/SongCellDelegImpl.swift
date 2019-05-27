@@ -1,5 +1,5 @@
 //
-//  SongTableCellDelegImpl.swift
+//  SongCellDelegImpl.swift
 //  MusicPlayer
 //
 //  Created by Daniyar Yeralin on 5/18/17.
@@ -11,8 +11,8 @@ import UIKit
 let PRESENT_PLAYLIST_PICKER = "presentPlaylistPicker"
 let PRESENT_CHANGE_SONG_NAME_ALERT = "presentChangeSongNameAlert"
 
-private typealias SongTableCellDelegImpl = SongTableViewController
-extension SongTableCellDelegImpl: SongCellDelegate {
+private typealias SongCellDelegImpl = SongTableViewController
+extension SongCellDelegImpl: SongCellDelegate {
     
     func performSegueForCell(sender: Any?, identifier: String) {
         if identifier == PRESENT_PLAYLIST_PICKER {

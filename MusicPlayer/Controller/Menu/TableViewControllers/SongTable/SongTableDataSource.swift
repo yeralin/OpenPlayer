@@ -63,7 +63,7 @@ extension SongTableViewDataSource {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let AudioPlayerInst = AudioPlayer.sharedInstance
         let song: SongEntity
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SongTableCell",
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell",
                                                  for: indexPath) as! SongCell
         cell.delegate = self // For SongCellDelegate
         // If user is searching, get song from the filtered list

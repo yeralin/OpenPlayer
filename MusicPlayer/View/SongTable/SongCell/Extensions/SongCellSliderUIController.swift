@@ -1,5 +1,5 @@
 //
-//  SongTableCellSliderController.swift
+//  SongCellSliderController.swift
 //  MusicPlayer
 //
 //  Created by Daniyar Yeralin on 7/19/17.
