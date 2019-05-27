@@ -34,7 +34,7 @@ class PlaylistPersistencyManager: PersistenceController {
         let cntxt = try validateContext(context: cntxt)
         if !_fetchData(entityName: "PlaylistEntity",
                        sortIn: nil,
-                       predicate: NSPredicate(format: "playlistName CONTAINS[cd] %@", name)).isEmpty {
+                       predicate: NSPredicate(format: "playlistName MATCHES[cd] %@", name)).isEmpty {
             throw UIError.AlreadyExists(reason: "Playlist \"\(name)\" already exists")
         }
         let playlistPosition = fetchPlaylistSize()
