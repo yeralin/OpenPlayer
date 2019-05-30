@@ -10,23 +10,28 @@ import UIKit
 
 private typealias SongTableSearchBar = SongTableViewController
 extension SongTableSearchBar: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+    internal func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if var searchText = searchBar.text, !searchText.isEmpty {
             searchText = searchText.lowercased()
-            filteredSongs = songsArray.filter { song in
-                let normalizedSongName = (song.songName! as NSString)
-                                            .deletingPathExtension
-                                            .lowercased()
-                return (normalizedSongName.contains(searchText))
+            self.matchedSongs = songsArray.filter { song in
+                if let songName = song.songName {
+                    let normalizedSongName = (songName as NSString)
+                            .deletingPathExtension
+                            .lowercased()
+                    return (normalizedSongName.contains(searchText))
+                }
+                return false
             }
-            searching = true
+            self.searching = true
         } else {
-            searching = false
+            self.searching = false
         }
         tableView.reloadData()
     }
-    
+
+    /* Remove keyboard whevener following actions happen */
+
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         searchBar.resignFirstResponder()
     }
@@ -42,7 +47,5 @@ extension SongTableSearchBar: UISearchBarDelegate {
     func dismissKeyboard() {
         searchBar.resignFirstResponder()
     }
-    
-    
-    
+
 }

@@ -10,50 +10,53 @@ import UIKit
 
 private typealias SongTableViewDataSource = SongTableViewController
 extension SongTableViewDataSource {
-    
-    func initDataSource() {
+
+    internal func initDataSource() {
         initAudioPlayerDelegateImpl()
     }
-    
-    func prepareSongs(receivedPlaylist: PlaylistEntity) {
+
+    func prepareSongs(targetPlaylist: PlaylistEntity) {
         do {
-            playlist = receivedPlaylist
+            playlist = targetPlaylist
             songsArray = try SongPersistencyManager.sharedInstance
-                .populateSongs(forPlaylist: receivedPlaylist)
+                    .populateSongs(forPlaylist: playlist)
         } catch let err {
             log.error("Could not prepare songs: \(err)")
         }
     }
-    
-    func constructPicker(segue: UIStoryboardSegue, sender: Any?) {
+
+    internal func constructPicker(segue: UIStoryboardSegue, sender: Any?) {
         do {
             guard let pickerView = segue.destination as? PlaylistPickerViewController else {
                 throw "Could not cast sender as SongEntity"
             }
-            pickerView.delegate = self
             guard let songToMove = sender as? SongEntity else {
                 throw "Could not cast sender as SongEntity"
             }
-            pickerView.songToMove = songToMove
             var playlistArray = try PlaylistPersistencyManager.sharedInstance.getPlaylistArray()
             guard let currentPlaylistIndex = playlistArray.firstIndex(of: playlist) else {
                 throw "Could not locate playlist in playlistArray"
             }
+            pickerView.delegate = self
+            pickerView.songToMove = songToMove
             playlistArray.remove(at: currentPlaylistIndex)
             pickerView.playlistArray = playlistArray
         } catch let err {
-            log.error("Could not move \"\((sender as? SongEntity)?.songName ?? "unknown")\" song: \(err)")
+            log.error("""
+                      Could not construct \"moveSong\" picker for 
+                      \"\((sender as? SongEntity)?.songName ?? "unknown")\" song: \(err)
+                      """)
         }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return Constants.ONE_SECTION
     }
     
     // How many SongCells to have
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searching {
-            return filteredSongs.count
+            return matchedSongs.count
         } else {
             return songsArray.count
         }
@@ -63,23 +66,28 @@ extension SongTableViewDataSource {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let AudioPlayerInst = AudioPlayer.sharedInstance
         let song: SongEntity
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell",
-                                                 for: indexPath) as! SongCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell",
+                for: indexPath) as? SongCell else {
+            fatalError("Could not dequeue SongCell")
+        }
         cell.delegate = self // For SongCellDelegate
         // If user is searching, get song from the filtered list
-        if searching { song = filteredSongs[indexPath.row] }
+        if searching {
+            song = matchedSongs[indexPath.row]
+        }
         else { song = songsArray[indexPath.row] }
         if !song.isProcessed {
             do {
                 try SongPersistencyManager.sharedInstance.processSong(toProcess: song)
             } catch let err {
-                log.error("Could not rename \"\(song.songName ?? "unknown")\" song: \(err)")
+                fatalError("Could not process \"\(song.songName ?? "unknown")\" song: \(err)")
             }
         }
-        // If there is a song that's playing inside current playlist, restore its state view
-        if AudioPlayerInst.player != nil
-            && AudioPlayerInst.currentSong == song {
-            cell.restorePlayingCell(song: AudioPlayerInst.currentSong!)
+        // If there is a song that's playing inside a current playlist, restore its state view
+        if AudioPlayerInst.player != nil,
+           let currentSong = AudioPlayerInst.currentSong,
+           currentSong == song {
+            cell.restorePlayingCell(song: currentSong)
         } else {
             cell.initCell(initSong: song)
         }
@@ -89,6 +97,10 @@ extension SongTableViewDataSource {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let song = songsArray[indexPath.row]
+            if let currentSong = AudioPlayer.sharedInstance.currentSong,
+               song == currentSong {
+                // TODO: Stop song
+            }
             do {
                 let songPerstManager = SongPersistencyManager.sharedInstance
                 try songPerstManager.deleteSong(song: song)
@@ -103,8 +115,8 @@ extension SongTableViewDataSource {
             
         }
     }
-    
-    // support rearranging the table view.
+
+    // Support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let songPerstManager = SongPersistencyManager.sharedInstance
         let songToMove = songsArray[fromIndexPath.row]

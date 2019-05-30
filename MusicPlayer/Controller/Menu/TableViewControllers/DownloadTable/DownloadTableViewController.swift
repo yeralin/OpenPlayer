@@ -67,7 +67,7 @@ class DownloadTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == PRESENT_PLAYLIST_PICKER {
+        if segue.identifier == Constants.PRESENT_PLAYLIST_PICKER {
             if let pickerView = segue.destination as? PlaylistPickerViewController {
                 pickerView.delegate = self
                 if let songToDownload = sender as? DownloadSongEntity {

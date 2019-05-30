@@ -31,11 +31,11 @@ extension SongCellUIActions {
     }
     
     func actionOnMoveTapUI() {
-        delegate.performSegueForCell(sender: song, identifier: PRESENT_PLAYLIST_PICKER)
+        delegate.performSegueForCell(sender: song, identifier: Constants.PRESENT_PLAYLIST_PICKER)
     }
     
     func actionOnChangeSongNameTapUI() {
-        delegate.presentAlertForCell(alert: changeSongNameAlert(), alertName: PRESENT_CHANGE_SONG_NAME_ALERT)
+        delegate.presentAlertForCell(alert: changeSongNameAlert(), alertName: Constants.PRESENT_CHANGE_SONG_NAME_ALERT)
     }
     
     func actionOnChangeSliderPositionUI(_ sender: UISlider) {

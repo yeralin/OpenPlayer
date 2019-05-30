@@ -46,16 +46,16 @@ extension PlaylistTableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "presentSongs" {
+        if segue.identifier == Constants.PRESENT_SONGS {
             if let songsView = segue.destination as? SongTableViewController,
                 let playlist = sender as? PlaylistEntity {
-                songsView.prepareSongs(receivedPlaylist: playlist)
+                songsView.prepareSongs(targetPlaylist: playlist)
             }
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "presentSongs", sender: playlistArray[indexPath.row])
+        self.performSegue(withIdentifier: Constants.PRESENT_SONGS, sender: playlistArray[indexPath.row])
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

@@ -34,7 +34,7 @@ extension DownloadTableCellActions {
     }
     
     func actionOnDownloadTap() {
-        delegate.performSegueForCell(sender: song, identifier: PRESENT_PLAYLIST_PICKER)
+        delegate.performSegueForCell(sender: song, identifier: Constants.PRESENT_PLAYLIST_PICKER)
     }
     
     func actionOnChangeSliderPosition(_ sender: UISlider) {

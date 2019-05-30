@@ -128,6 +128,22 @@ class MusicPlayerUITests: XCTestCase {
         playPauseButton.tap()
         XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.play).text)
     }
+
+    func testRestoreSongState() {
+        launcher?.launchArguments.append("Test:1")
+        launcher?.launch()
+        let FIRST_CELL = 0
+        let app = XCUIApplication()
+        let tablesQuery = app.tables
+        tablesQuery.staticTexts["Test"].tap()
+        let testingCell = tablesQuery.cells.element(boundBy: FIRST_CELL)
+        let playPauseButton = testingCell.buttons["play"]
+        playPauseButton.tap()
+        app.navigationBars["Test"].buttons["Playlists"].tap()
+        sleep(2)
+        tablesQuery.staticTexts["Test"].tap()
+        XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.iosPause).text)
+    }
     
     func testRenameSong() {
         launcher?.launchArguments.append("Test:1")

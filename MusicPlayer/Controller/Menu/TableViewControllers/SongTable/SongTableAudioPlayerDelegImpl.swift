@@ -11,11 +11,11 @@ import Foundation
 private typealias SongTableAudioPlayerDelegImpl = SongTableViewController
 extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
 
-    func initAudioPlayerDelegateImpl() {
+    internal func initAudioPlayerDelegateImpl() {
         AudioPlayer.sharedInstance.delegate = self
     }
-    
-    func cellState(state: PlayerState, song: SongEntity) {
+
+    internal func cellState(state: PlayerState, song: SongEntity) {
         if !song.isProcessed {
             do {
                 try SongPersistencyManager.sharedInstance.processSong(toProcess: song)
@@ -23,16 +23,18 @@ extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
                 log.error("Could not process \"\(song.songName ?? "unknown")\" song: \(err)")
             }
         }
-        if let cell = getCell(withSong: song) {
-            if state == .play || state == .resume {
-                cell.playSongCellState()
-            } else if state == .pause {
-                cell.pauseSongCellState()
-            } else if state == .stop {
-                cell.stopSongCellState()
-            } else {
-                log.error("State is not supported")
-            }
+        guard let cell = self.getCell(withSong: song) else {
+            fatalError("Could not get SongCell for \"\(song.songName ?? "unknown")\" song")
+        }
+        switch state {
+        case .play, .resume:
+            cell.playSongCellState()
+        case .pause:
+            cell.pauseSongCellState()
+        case .stop:
+            cell.stopSongCellState()
+        default:
+            fatalError("State is not supported")
         }
     }
 }

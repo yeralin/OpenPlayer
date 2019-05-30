@@ -10,8 +10,8 @@ import Foundation
 
 private typealias SongTablePlaylistPickerImpl = SongTableViewController
 extension SongTablePlaylistPickerImpl: PlaylistPickerDelegate {
-    
-    func moveSong(song: SongEntity, toPlaylist: PlaylistEntity) {
+
+    internal func moveSong(song: SongEntity, toPlaylist: PlaylistEntity) {
         if let fromPlaylist = self.playlist {
             do {
                 let songPerstManager = SongPersistencyManager.sharedInstance
@@ -22,7 +22,10 @@ extension SongTablePlaylistPickerImpl: PlaylistPickerDelegate {
                 self.songsArray = songsArray
                 songTableView.deleteRows(at: [IndexPath(row: Int(song.songOrder), section: 0)], with: .fade)
             } catch let err {
-                log.error(err)
+                log.error("""
+                          Could not move \"\(song.songName ?? "unknown")\" song 
+                          to \"\(toPlaylist)\" playlist: \(err)
+                          """)
             }
         }
     }

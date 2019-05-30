@@ -39,7 +39,6 @@ class PlaylistTableViewController: UITableViewController {
         setupMenuGestureRecognizer()
         setupMenuButton(button: menuButton)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
         refreshControl?.addTarget(self,
                                   action: #selector(self.handleRefresh(refreshControl:)),
                                   for: .valueChanged)

@@ -15,29 +15,37 @@ class SongTableViewController: UITableViewController {
     var playlist: PlaylistEntity!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var songTableView: UITableView!
-    var songsArray: [SongEntity] = []
-    var filteredSongs: [SongEntity] = []
+    var songsArray: [SongEntity]!
+    var matchedSongs: [SongEntity]!
     var searching: Bool = false
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initDataSource()
+    }
+
+    override init(style: UITableView.Style) {
+        super.init(style: style)
+        self.initDataSource()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = playlist.playlistName
         navigationItem.rightBarButtonItem = self.editButtonItem
         songTableView.allowsSelection = false
-        initDataSource()
     }
-    
-    func getCell(withSong song: SongEntity) -> SongCell? {
-        let visibleSongCells = tableView.visibleCells as! [SongCell]
-        if let index = visibleSongCells.firstIndex(where: { $0.song == song }) {
+
+    internal func getCell(withSong song: SongEntity) -> SongCell? {
+        if let visibleSongCells = tableView.visibleCells as? [SongCell],
+           let index = visibleSongCells.firstIndex(where: { $0.song == song }) {
             return visibleSongCells[index]
-        } else {
-            return nil
         }
+        fatalError("Could not extract visible songCell")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == PRESENT_PLAYLIST_PICKER {
+        if segue.identifier == Constants.PRESENT_PLAYLIST_PICKER {
             constructPicker(segue: segue, sender: sender)
         }
     }

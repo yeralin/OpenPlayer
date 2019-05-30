@@ -8,20 +8,17 @@
 
 import UIKit
 
-let PRESENT_PLAYLIST_PICKER = "presentPlaylistPicker"
-let PRESENT_CHANGE_SONG_NAME_ALERT = "presentChangeSongNameAlert"
-
 private typealias SongCellDelegImpl = SongTableViewController
 extension SongCellDelegImpl: SongCellDelegate {
     
     func performSegueForCell(sender: Any?, identifier: String) {
-        if identifier == PRESENT_PLAYLIST_PICKER {
+        if identifier == Constants.PRESENT_PLAYLIST_PICKER {
             self.performSegue(withIdentifier: identifier, sender: sender)
         }
     }
     
     func presentAlertForCell(alert: UIAlertController, alertName: String) {
-        if alertName == PRESENT_CHANGE_SONG_NAME_ALERT {
+        if alertName == Constants.PRESENT_CHANGE_SONG_NAME_ALERT {
             present(alert, animated: true, completion: nil)
         }
     }
