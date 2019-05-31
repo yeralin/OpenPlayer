@@ -10,11 +10,11 @@ import Foundation
 
 private typealias SongCellActions = SongCell
 extension SongCellActions {
-    
-    func actionOnPlayPauseTap(isStopped: Bool, isInProgress: Bool) {
+
+    internal func actionOnPlayPauseTap(isPlaying: Bool, isInProgress: Bool) {
         let audioPlayerInst = AudioPlayer.sharedInstance
         //TODO: Change logic, don't depend on title
-        if isStopped {
+        if !isPlaying {
             if isInProgress {
                 audioPlayerInst.resumeSong()
             } else {
@@ -24,13 +24,13 @@ extension SongCellActions {
             audioPlayerInst.pauseSong()
         }
     }
-    
-    func actionOnShuffleTap(isShuffleMode: Bool) {
+
+    internal func actionOnShuffleTap(isShuffleMode: Bool) {
         let audioPlayerInst = AudioPlayer.sharedInstance
         audioPlayerInst.shuffleMode = isShuffleMode
     }
-    
-    func actionOnChangeSliderPosition(songNewPosition: TimeInterval) {
+
+    internal func actionOnChangeSliderPosition(songNewPosition: TimeInterval) {
         AudioPlayer.sharedInstance.seekTo(position: songNewPosition)
     }
 }

@@ -112,7 +112,6 @@ extension SongTableViewDataSource {
             } catch let err {
                 log.error("Could not delete \"\(song.songName ?? "unknown")\" song: \(err)")
             }
-            
         }
     }
 

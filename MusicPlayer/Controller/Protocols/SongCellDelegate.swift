@@ -9,7 +9,7 @@
 import UIKit
 import SwiftIcons
 
-protocol SongCellDelegate : class {
+protocol CellToTableDelegate: class {
     func presentAlertForCell(alert: UIAlertController, alertName: String)
     func performSegueForCell(sender: Any?, identifier: String)
 }

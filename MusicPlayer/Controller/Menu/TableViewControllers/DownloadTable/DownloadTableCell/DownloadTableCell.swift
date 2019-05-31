@@ -18,7 +18,7 @@ class DownloadTableCell: UITableViewCell {
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var songProgressSlider: BufferSlider!
     internal var sliderCAD: CADisplayLink!
-    weak var delegate: SongCellDelegate!
+    weak var delegate: CellToTableDelegate!
     
     var song: DownloadSongEntity!
     {

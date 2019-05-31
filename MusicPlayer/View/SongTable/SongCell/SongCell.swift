@@ -11,8 +11,8 @@ import UIKit
 class SongCell: UITableViewCell {
     
     // Internal constants
-    internal let ARTIST_TF_INDEX: Int = 0
-    internal let TITLE_TF_INDEX: Int = 1
+    internal let ARTIST_TEXT_FIELD_INDEX: Int = 0
+    internal let TITLE_TEXT_FIELD_INDEX: Int = 1
     
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var songTitle: UILabel!
@@ -23,12 +23,20 @@ class SongCell: UITableViewCell {
     @IBOutlet weak var moveButton: UIButton!
     @IBOutlet weak var songProgressSlider: UISlider!
     internal var sliderCAD: CADisplayLink!
-    weak var delegate: SongCellDelegate!
+    weak var delegate: CellToTableDelegate!
     
     internal var song: SongEntity! {
         didSet {
             artistName.text = song.songArtist
             songTitle.text = song.songTitle
+        }
+    }
+
+    internal func setShuffleButton() {
+        if AudioPlayer.sharedInstance.shuffleMode {
+            shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26, color: .systemColor, forState: .normal)
+        } else {
+            shuffleButton.setIcon(icon: .ionicons(.arrowReturnRight), iconSize: 26, color: .systemColor, forState: .normal)
         }
     }
     
@@ -60,14 +68,6 @@ class SongCell: UITableViewCell {
             setShuffleButton()
             shuffleButton.isHidden = false
             setupSliderCAD()
-        }
-    }
-    
-    func setShuffleButton() {
-        if AudioPlayer.sharedInstance.shuffleMode {
-            shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26, color: .systemColor, forState: .normal)
-        } else {
-            shuffleButton.setIcon(icon: .ionicons(.arrowReturnRight), iconSize: 26, color: .systemColor, forState: .normal)
         }
     }
     

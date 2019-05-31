@@ -9,7 +9,7 @@
 import Foundation
 import SwiftIcons
 
-//AudioPlayerDelegate Callees
+// AudioPlayerDelegate Callees
 private typealias SongCellStates = SongCell
 extension SongCellStates {
     

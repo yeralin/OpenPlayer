@@ -8,7 +8,8 @@
 import UIKit
 
 private typealias DownloadTableCellDelegImpl = DownloadTableViewController
-extension DownloadTableCellDelegImpl: SongCellDelegate {
+
+extension DownloadTableCellDelegImpl: CellToTableDelegate {
     
     func performSegueForCell(sender: Any?, identifier: String) {
         if identifier == Constants.PRESENT_PLAYLIST_PICKER {

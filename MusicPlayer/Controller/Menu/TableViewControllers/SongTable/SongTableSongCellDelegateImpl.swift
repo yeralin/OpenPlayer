@@ -1,5 +1,5 @@
 //
-//  SongCellDelegImpl.swift
+//  SongTableCellToTableDelegateImpl.swift
 //  MusicPlayer
 //
 //  Created by Daniyar Yeralin on 5/18/17.
@@ -8,8 +8,9 @@
 
 import UIKit
 
-private typealias SongCellDelegImpl = SongTableViewController
-extension SongCellDelegImpl: SongCellDelegate {
+private typealias SongTableCellToTableDelegateImpl = SongTableViewController
+
+extension SongTableCellToTableDelegateImpl: CellToTableDelegate {
     
     func performSegueForCell(sender: Any?, identifier: String) {
         if identifier == Constants.PRESENT_PLAYLIST_PICKER {

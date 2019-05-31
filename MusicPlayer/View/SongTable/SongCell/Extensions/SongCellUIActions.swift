@@ -13,14 +13,14 @@ private typealias SongCellUIActions = SongCell
 extension SongCellUIActions {
     
     //TODO: Change logic, don't depend on title
-    
-    func actionOnPlayPauseTapUI() {
-        let isStopped = playPauseButton.title(for: .normal) == FontType.ionicons(.play).text
+
+    internal func actionOnPlayPauseTapUI() {
+        let isPlaying = playPauseButton.title(for: .normal) != FontType.ionicons(.play).text
         let isInProgress = songProgressSlider.value != 0 && songProgressSlider.isEnabled == true
-        self.actionOnPlayPauseTap(isStopped: isStopped, isInProgress: isInProgress)
+        self.actionOnPlayPauseTap(isPlaying: isPlaying, isInProgress: isInProgress)
     }
-    
-    func actionOnShuffleTapUI() {
+
+    internal func actionOnShuffleTapUI() {
         let isShuffleMode = shuffleButton.title(for: .normal) == FontType.ionicons(.arrowReturnRight).text
         if isShuffleMode {
             shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26, color: .systemColor, forState: .normal)
@@ -29,16 +29,16 @@ extension SongCellUIActions {
         }
         actionOnShuffleTap(isShuffleMode: isShuffleMode)
     }
-    
-    func actionOnMoveTapUI() {
+
+    internal func actionOnMoveTapUI() {
         delegate.performSegueForCell(sender: song, identifier: Constants.PRESENT_PLAYLIST_PICKER)
     }
-    
-    func actionOnChangeSongNameTapUI() {
+
+    internal func actionOnChangeSongNameTapUI() {
         delegate.presentAlertForCell(alert: changeSongNameAlert(), alertName: Constants.PRESENT_CHANGE_SONG_NAME_ALERT)
     }
-    
-    func actionOnChangeSliderPositionUI(_ sender: UISlider) {
+
+    internal func actionOnChangeSliderPositionUI(_ sender: UISlider) {
         let songNewPosition = TimeInterval(sender.value)
         actionOnChangeSliderPosition(songNewPosition: songNewPosition)
     }

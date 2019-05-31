@@ -11,8 +11,8 @@ import MediaPlayer
 
 private typealias SongCellSliderUIController = SongCell
 extension SongCellSliderUIController {
-    
-    func setupSliderCAD() {
+
+    internal func setupSliderCAD() {
         songProgressSlider.isEnabled = true
         songProgressSlider.minimumValue = 0
         songProgressSlider.maximumValue = Float(AudioPlayer.sharedInstance.player.duration)
@@ -20,7 +20,9 @@ extension SongCellSliderUIController {
         sliderCAD.preferredFramesPerSecond = 30
         sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
     }
-    
+
+    internal
+
     @objc func updateSliderCAD() {
         if let player = AudioPlayer.sharedInstance.player, sliderCAD != nil {
             songProgressSlider.value = Float(player.currentTime)

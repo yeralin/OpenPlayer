@@ -10,8 +10,8 @@ import Foundation
 
 private typealias SongCellAlertsHandling = SongCell
 extension SongCellAlertsHandling {
-    
-    func handleChangeSongNameAlert(newArtist: String, newTitle: String) {
+
+    internal func handleChangeSongNameAlert(newArtist: String, newTitle: String) {
         do {
             let songPerstManager = SongPersistencyManager.sharedInstance
             try songPerstManager.renameSong(song: self.song,
