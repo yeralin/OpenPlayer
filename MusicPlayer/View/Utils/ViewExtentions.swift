@@ -18,6 +18,19 @@ extension String: LocalizedError {
     public var errorDescription: String? { return self }
 }
 
+extension UIBarButtonItem {
+
+    func disableButton() {
+        self.isEnabled = false
+        (self.customView as! UIButton).setTitleColor(.gray, for: .normal)
+    }
+
+    func enableButton() {
+        self.isEnabled = true
+        (self.customView as! UIButton).setTitleColor(.systemColor, for: .normal)
+    }
+}
+
 extension UIView {
     
     //Start Rotating view
