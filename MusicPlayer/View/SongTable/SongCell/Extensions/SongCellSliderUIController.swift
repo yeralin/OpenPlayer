@@ -13,17 +13,18 @@ private typealias SongCellSliderUIController = SongCell
 extension SongCellSliderUIController {
 
     internal func setupSliderCAD() {
+        guard let audioPlayer = AudioPlayer.sharedInstance.player else {
+            fatalError("Could not retrieve AudioPlayer instance")
+        }
         songProgressSlider.isEnabled = true
         songProgressSlider.minimumValue = 0
-        songProgressSlider.maximumValue = Float(AudioPlayer.sharedInstance.player.duration)
+        songProgressSlider.maximumValue = Float(audioPlayer.duration)
         sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
         sliderCAD.preferredFramesPerSecond = 30
         sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
     }
 
-    internal
-
-    @objc func updateSliderCAD() {
+    @objc internal func updateSliderCAD() {
         if let player = AudioPlayer.sharedInstance.player, sliderCAD != nil {
             songProgressSlider.value = Float(player.currentTime)
         }

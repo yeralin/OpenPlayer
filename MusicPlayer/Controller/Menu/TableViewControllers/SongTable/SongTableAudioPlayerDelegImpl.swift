@@ -15,7 +15,7 @@ extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
         AudioPlayer.sharedInstance.delegate = self
     }
 
-    internal func cellState(state: PlayerState, song: SongEntity) {
+    internal func cellState(state: PlayerState, song: LocalSongEntity) {
         if !song.isProcessed {
             do {
                 try SongPersistencyManager.sharedInstance.processSong(toProcess: song)
@@ -24,7 +24,8 @@ extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
             }
         }
         guard let cell = self.getCell(withSong: song) else {
-            fatalError("Could not get SongCell for \"\(song.songName ?? "unknown")\" song")
+            log.info("SongCell is not visible, nothing to do")
+            return
         }
         switch state {
         case .play, .resume:

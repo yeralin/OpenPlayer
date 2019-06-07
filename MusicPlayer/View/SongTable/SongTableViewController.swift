@@ -15,8 +15,8 @@ class SongTableViewController: UITableViewController {
     var playlist: PlaylistEntity!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var songTableView: UITableView!
-    var songsArray: [SongEntity]!
-    var matchedSongs: [SongEntity]!
+    var songsArray: [LocalSongEntity]!
+    var matchedSongs: [LocalSongEntity]!
     var searching: Bool = false
 
     required init?(coder aDecoder: NSCoder) {
@@ -36,17 +36,17 @@ class SongTableViewController: UITableViewController {
         songTableView.allowsSelection = false
     }
 
-    internal func getCell(withSong song: SongEntity) -> SongCell? {
+    internal func getCell(withSong song: LocalSongEntity) -> SongCell? {
         if let visibleSongCells = tableView.visibleCells as? [SongCell],
            let index = visibleSongCells.firstIndex(where: { $0.song == song }) {
             return visibleSongCells[index]
         }
-        fatalError("Could not extract visible songCell")
+        return nil
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.PRESENT_PLAYLIST_PICKER {
-            constructPicker(segue: segue, sender: sender)
+            constructPlaylistPicker(segue: segue, sender: sender)
         }
     }
 }

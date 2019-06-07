@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PlaylistPickerDelegate : class {
-    func moveSong(song: SongEntity, toPlaylist: PlaylistEntity)
+    func moveSong(song: LocalSongEntity, toPlaylist: PlaylistEntity)
 }
 
 
@@ -29,7 +29,7 @@ class PlaylistPickerViewController: UIViewController, UIPickerViewDataSource, UI
         if playlistArray.count != 0 {
             let selectedPlaylistIndex = playlistPicker.selectedRow(inComponent: 0)
             let toPlaylist = playlistArray[selectedPlaylistIndex]
-            delegate.moveSong(song: songToMove as! SongEntity, toPlaylist: toPlaylist)
+            delegate.moveSong(song: songToMove as! LocalSongEntity, toPlaylist: toPlaylist)
         }
         self.dismiss(animated: true, completion: nil)
         

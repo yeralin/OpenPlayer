@@ -11,31 +11,29 @@ import MediaPlayer
 
 @objcMembers
 class RemoteControl: NSObject {
-    
-    var _resumeSong: () -> ()
-    var _pauseSong: () -> ()
-    var _playNextSong: () -> ()
-    var _playPreviousSong: () -> ()
-    
-    func resumeSong() { _resumeSong() }
-    func pauseSong() { _pauseSong() }
-    func playNextSong() { _playNextSong() }
-    func playPreviousSing() { _playPreviousSong() }
-    
-    init(resumeSongClosure: @escaping () -> (),
-         pauseSongClosure: @escaping () -> (),
-         playNextSongClosure: @escaping () -> (),
-         playPreviousSongClosure: @escaping () -> ()) {
-        _resumeSong = resumeSongClosure
-        _pauseSong = pauseSongClosure
-        _playNextSong = playNextSongClosure
-        _playPreviousSong = playPreviousSongClosure
+
+    init(resumeSong: @escaping () -> (),
+         pauseSong: @escaping () -> (),
+         playNextSong: @escaping () -> (),
+         playPreviousSong: @escaping () -> ()) {
         super.init()
         let scc = MPRemoteCommandCenter.shared()
-        scc.playCommand.addTarget(self, action: #selector(resumeSong))
-        scc.pauseCommand.addTarget(self, action: #selector(pauseSong))
-        scc.nextTrackCommand.addTarget(self, action: #selector(playNextSong))
-        scc.previousTrackCommand.addTarget(self, action: #selector(playPreviousSing))
+        scc.playCommand.addTarget(handler: { _ in
+            resumeSong()
+            return .success
+        })
+        scc.pauseCommand.addTarget(handler: { _ in
+            pauseSong()
+            return .success
+        })
+        scc.nextTrackCommand.addTarget(handler: { _ in
+            playNextSong()
+            return .success
+        })
+        scc.previousTrackCommand.addTarget(handler: { _ in
+            playPreviousSong()
+            return .success
+        })
         scc.seekBackwardCommand.addTarget(self, action: #selector(handleSeekBackwardCommandEvent(event:)))
         scc.seekForwardCommand.addTarget(self, action: #selector(handleSeekForwardCommandEvent(event:)))
     }
@@ -51,7 +49,6 @@ class RemoteControl: NSObject {
         scc.seekForwardCommand.removeTarget(self)
 
     }
-    
     
     func updateMPControls(songArtist: String, songTitle: String, duration: Double = .nan) {
         let mpic = MPNowPlayingInfoCenter.default()
@@ -87,7 +84,8 @@ class RemoteControl: NSObject {
         let mpic = MPNowPlayingInfoCenter.default()
         mpic.nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = duration
     }
-    
+
+    // TODO: Implement seeking capability for RemoteControl
     func handleSeekForwardCommandEvent(event: MPSeekCommandEvent) -> MPRemoteCommandHandlerStatus {
         /*switch event.type {
          case .beginSeeking:

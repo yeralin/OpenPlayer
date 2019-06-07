@@ -47,11 +47,11 @@ class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
         if rc != nil {
             rc.resetMPControls()
         }
-        
-        rc = RemoteControl.init(resumeSongClosure: resumeSong,
-                                pauseSongClosure: pauseSong,
-                                playNextSongClosure: playNextSong,
-                                playPreviousSongClosure: playPreviousSong)
+
+        rc = RemoteControl.init(resumeSong: resumeSong,
+                pauseSong: pauseSong,
+                playNextSong: playNextSong,
+                playPreviousSong: playPreviousSong)
     }
     
     deinit {

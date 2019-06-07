@@ -11,7 +11,7 @@ import Foundation
 private typealias SongTablePlaylistPickerImpl = SongTableViewController
 extension SongTablePlaylistPickerImpl: PlaylistPickerDelegate {
 
-    internal func moveSong(song: SongEntity, toPlaylist: PlaylistEntity) {
+    internal func moveSong(song: LocalSongEntity, toPlaylist: PlaylistEntity) {
         if let fromPlaylist = self.playlist {
             do {
                 let songPerstManager = SongPersistencyManager.sharedInstance
