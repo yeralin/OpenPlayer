@@ -63,14 +63,19 @@ class PlaylistPersistencyManager: PersistenceController {
     }
     
     func deletePlaylist(playlist: PlaylistEntity, cntxt: NSManagedObjectContext? = nil) throws {
-        let cntxt = try validateContext(context: cntxt)
         do {
             let playlistPath = try getPlaylistPath(playlist: playlist)
             try fm.removeItem(at: playlistPath)
+        } catch let error {
+            log.warning("Could not delete \"\(playlist.playlistName ?? "unknown")\" directory: \(error)")
+            log.warning("Possibly removed manually. Safe to ignore")
+        }
+        do {
+            let cntxt = try validateContext(context: cntxt)
             cntxt.delete(playlist)
             try saveContext(cntxt: cntxt)
         } catch let error {
-            log.error("Could not delete playlist \(playlist.playlistName ?? "unknown"): \(error)")
+            log.error("Could not delete playlist \"\(playlist.playlistName ?? "unknown")\" entity: \(error)")
         }
     }
     
