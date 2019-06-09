@@ -11,6 +11,7 @@ import GCDWebServer
 import SWRevealViewController
 
 class ServerViewController: UIViewController, UINavigationBarDelegate {
+    
     var webUploader: GCDWebUploader? = nil
     
     @IBOutlet weak var navBar: UINavigationBar!
@@ -24,34 +25,37 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
         navBar.delegate = self
     }
     
+    internal func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
+    }
+    
+    internal func presentErrorAlert() {
+        let alert = UIAlertController(title: "Failure",
+                                      message: "Is your Wi-Fi on and \n connected to a network?",
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Let me fix this!",
+                                      style: UIAlertAction.Style.default,
+                                      handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func serverSwitch(_ sender: UISwitch) {
-        if sender.isOn {
-            let docsUrl = PlaylistPersistencyManager.sharedInstance.docsUrl.path
-            webUploader = GCDWebUploader(uploadDirectory: docsUrl)
-            //let backgroundOption = [GCDWebServerOption_AutomaticallySuspendInBackground: false]
-            webUploader!.start(withPort: 80, bonjourName: nil)
-            if let address = webUploader?.serverURL {
-                AudioPlayer.sharedInstance.stopSong()
+        let switchedOn = sender.isOn
+        if switchedOn {
+            if let address = self.deployServer() {
                 serverAddressLabel.text = address.absoluteString
                 menuButton.disableButton()
                 UIApplication.shared.isIdleTimerDisabled = true
             } else {
-                let alert = UIAlertController(title: "Failure", message: "Is your Wi-Fi on and \n connected to a network?", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Let me fix this!", style: UIAlertAction.Style.default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
+                presentErrorAlert()
                 sender.isOn = false
             }
         } else {
-            UIApplication.shared.isIdleTimerDisabled = false
-            webUploader?.stop()
+            self.stopServer()
             serverAddressLabel.text = "Inactive"
+            UIApplication.shared.isIdleTimerDisabled = false
             menuButton.enableButton()
         }
-        
-    }
-    
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
     }
     
 }
