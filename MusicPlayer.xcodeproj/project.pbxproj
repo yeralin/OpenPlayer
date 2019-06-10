@@ -16,6 +16,7 @@
 		311609D21F1E45DA0071C291 /* DownloadTableCellSliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311609D11F1E45DA0071C291 /* DownloadTableCellSliderController.swift */; };
 		311609D41F1FCF9D0071C291 /* SongCellSliderUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311609D31F1FCF9D0071C291 /* SongCellSliderUIController.swift */; };
 		3127DC9322AD5E9600A972AF /* ServerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127DC9222AD5E9600A972AF /* ServerController.swift */; };
+		3127DC9622AD67D000A972AF /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3127DC9522AD67D000A972AF /* SettingsController.swift */; };
 		313306C41ECA4918008CCE38 /* PlaylistTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 313306C31ECA4918008CCE38 /* PlaylistTableDataSource.swift */; };
 		3148C2A01EC8C7F2005947CB /* SongTableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3148C29F1EC8C7F2005947CB /* SongTableDataSource.swift */; };
 		3148C2A31EC8D049005947CB /* SongCellStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3148C2A21EC8D049005947CB /* SongCellStates.swift */; };
@@ -95,6 +96,7 @@
 		311609D11F1E45DA0071C291 /* DownloadTableCellSliderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableCellSliderController.swift; sourceTree = "<group>"; };
 		311609D31F1FCF9D0071C291 /* SongCellSliderUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCellSliderUIController.swift; sourceTree = "<group>"; };
 		3127DC9222AD5E9600A972AF /* ServerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerController.swift; sourceTree = "<group>"; };
+		3127DC9522AD67D000A972AF /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		313306C31ECA4918008CCE38 /* PlaylistTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistTableDataSource.swift; sourceTree = "<group>"; };
 		3148C29F1EC8C7F2005947CB /* SongTableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableDataSource.swift; sourceTree = "<group>"; };
 		3148C2A21EC8D049005947CB /* SongCellStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCellStates.swift; sourceTree = "<group>"; };
@@ -216,6 +218,14 @@
 			path = ServerView;
 			sourceTree = "<group>";
 		};
+		3127DC9422AD653900A972AF /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				31863F981EEDAF0B00F59F74 /* SettingsViewController.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
 		313306C11ECA48BF008CCE38 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,7 +307,7 @@
 		31863F971EEDAEFF00F59F74 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
-				31863F981EEDAF0B00F59F74 /* SettingsViewController.swift */,
+				3127DC9522AD67D000A972AF /* SettingsController.swift */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -360,6 +370,7 @@
 		3198BB0A229B331F00DC21C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3127DC9422AD653900A972AF /* SettingsView */,
 				3127DC9122AD5E7A00A972AF /* ServerView */,
 				3198BB0B229B409300DC21C7 /* PlaylistTable */,
 				31A2E04A229B428E00EFB0B1 /* SongTable */,
@@ -781,6 +792,7 @@
 				3185A3751F00840B008E2D21 /* DownloadTableViewController.swift in Sources */,
 				3189DDAA1EADA5C800EBCD03 /* SongTableViewController.swift in Sources */,
 				31A745011EDDEFEF003FC171 /* PlaylistTableAlerts.swift in Sources */,
+				3127DC9622AD67D000A972AF /* SettingsController.swift in Sources */,
 				31F2F0351EC14DE70072DE30 /* PlaylistTableViewController.swift in Sources */,
 				3148C2A01EC8C7F2005947CB /* SongTableDataSource.swift in Sources */,
 				31BDC8902028D919006BA7BB /* DownloadTableCellDelegImpl.swift in Sources */,
