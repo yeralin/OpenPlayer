@@ -17,13 +17,13 @@ enum RequestError: Error {
 class ServerRequests {
     
     static let sharedInstance = ServerRequests()
-    var serverAddress: URL? = nil
+    var serverAddress: URL?
     
     init() {
         fetchSettings()
     }
     
-    func fetchSettings() {
+    internal func fetchSettings() {
         if let serverSettings = UserDefaults.standard.object(forKey: "serverSettings") as? [String : String] {
             if let storedServerAddress = serverSettings["serverAddress"] {
                 serverAddress = URL(string: storedServerAddress)
