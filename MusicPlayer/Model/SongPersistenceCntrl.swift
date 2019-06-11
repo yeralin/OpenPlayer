@@ -153,7 +153,7 @@ class SongPersistencyManager: PersistenceController {
         if song.songArtist == nil || song.songTitle == nil {
             song.songArtist = songPath.deletingPathExtension().lastPathComponent
             song.songTitle = ""
-            if let tokSongName = song.songArtist?.split(separator: "-", maxSplits: 1) {
+            if let tokSongName = song.songArtist?.split(separator: "-", maxSplits: 1), tokSongName.count == 2 {
                 song.songArtist = String(tokSongName[0]).trimmingCharacters(in: .whitespacesAndNewlines)
                 song.songTitle = String(tokSongName[1]).trimmingCharacters(in: .whitespacesAndNewlines)
             }
