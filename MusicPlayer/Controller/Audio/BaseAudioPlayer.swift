@@ -44,11 +44,13 @@ class BaseAudioPlayer: NSObject {
             resumeSong: @escaping () -> (),
             pauseSong: @escaping () -> (),
             playNextSong: @escaping () -> (),
-            playPreviousSong: @escaping () -> ()) {
+            playPreviousSong: @escaping () -> (),
+            seekFor: @escaping (_ seconds: Double, _ forward: Bool) -> ()) {
         rc = RemoteControl.init(resumeSong: resumeSong,
                 pauseSong: pauseSong,
                 playNextSong: playNextSong,
-                playPreviousSong: playPreviousSong)
+                playPreviousSong: playPreviousSong,
+                seekFor: seekFor)
     }
 
     deinit {

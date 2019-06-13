@@ -20,10 +20,8 @@ class AudioPlayer: BaseAudioPlayer, AVAudioPlayerDelegate {
         super.initRemoteControl(resumeSong: resumeSong,
                    pauseSong: pauseSong,
                    playNextSong: {() -> () in self.playNextSong(forward: true)},
-                   playPreviousSong: {() -> () in self.playNextSong(forward: false)})
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(handleInterruption(notification:)),
-                                               name: AVAudioSession.interruptionNotification, object: nil)
+                   playPreviousSong: {() -> () in self.playNextSong(forward: false)},
+                   seekFor: seekFor(seconds:forward:))
     }
     
     func playSong(song: SongEntity) {
@@ -48,8 +46,11 @@ class AudioPlayer: BaseAudioPlayer, AVAudioPlayerDelegate {
             currentSong = song
             loadedPlayer.play()
             self.player = loadedPlayer
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(handleInterruption(notification:)),
+                                                   name: AVAudioSession.interruptionNotification, object: nil)
             delegate?.cellState(state: .play, song: song)
-            rc?.updateMPControls(songArtist: song.songArtist!,
+            rc?.setMPControls(songArtist: song.songArtist!,
                                  songTitle: song.songTitle!,
                                  duration: loadedPlayer.duration)
         } catch let err {
@@ -82,15 +83,18 @@ class AudioPlayer: BaseAudioPlayer, AVAudioPlayerDelegate {
         player.currentTime = 0
         delegate?.cellState(state: .stop,song: song)
         rc?.updateMP(state: .stop)
+        NotificationCenter.default.removeObserver(self, name: AVAudioSession.interruptionNotification, object: nil)
         self.player = nil
     }
     
     func pauseSong() {
         guard let player = self.player else {
-            fatalError("Could not retrieve a player instance")
+            log.info("Player is not initialized, nothing to do")
+            return
         }
         if !player.isPlaying {
             log.warning("Player is not playing, nothing to do")
+            return
         }
         guard let song = currentSong as? LocalSongEntity else {
             fatalError("Failed to pause the player: could not get currentSong")
@@ -100,9 +104,25 @@ class AudioPlayer: BaseAudioPlayer, AVAudioPlayerDelegate {
         rc?.updateMP(state: .pause, currentTime: player.currentTime)
     }
     
+    func seekFor(seconds: Double, forward: Bool) {
+        guard let player = self.player else {
+            log.info("Player is not initialized, nothing to do")
+            return
+        }
+        let currentTime = player.currentTime
+        let seekFor = forward ? currentTime + seconds : currentTime - seconds
+        if seekFor < 0 || seekFor >= player.duration {
+            stopSong()
+        } else {
+            player.currentTime = forward ? player.currentTime + seconds : player.currentTime - seconds
+        }
+        rc?.updateMP(state: .resume, currentTime: player.currentTime)
+    }
+    
     func seekTo(position: TimeInterval) {
         guard let player = self.player else {
-            fatalError("Could not retrieve a player instance")
+            log.info("Player is not initialized, nothing to do")
+            return
         }
         player.currentTime = position
         rc?.updateMP(state: .resume, currentTime: player.currentTime)

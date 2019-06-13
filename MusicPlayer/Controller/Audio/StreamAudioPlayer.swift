@@ -51,7 +51,8 @@ class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
         rc = RemoteControl.init(resumeSong: resumeSong,
                 pauseSong: pauseSong,
                 playNextSong: playNextSong,
-                playPreviousSong: playPreviousSong)
+                playPreviousSong: playPreviousSong,
+                seekFor: seekFor(seconds:forward:))
     }
     
     deinit {
@@ -82,7 +83,7 @@ class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
             player.automaticallyWaitsToMinimizeStalling = false
             player.play()
             delegate.cellState(state: .prepare, song: currentSong!)
-            rc.updateMPControls(songArtist: song.songArtist!, songTitle: song.songTitle!)
+            rc.setMPControls(songArtist: song.songArtist!, songTitle: song.songTitle!)
         }
     }
     
@@ -121,9 +122,19 @@ class StreamAudioPlayer: NSObject, CachingPlayerItemDelegate {
         }
     }
     
-    func seekTo(position: CMTime) {
+    func seekFor(seconds: Double, forward: Bool) {
+        if player != nil, let currentTime = player.currentItem?.currentTime() {
+            let cmTime = CMTime(seconds: seconds, preferredTimescale: 1000000)
+            let seekTo = forward ? currentTime + cmTime : currentTime - cmTime
+            player.currentItem?.seek(to: seekTo)
+            rc.updateMP(state: .resume, currentTime: player.currentTime().seconds)
+        }
+    }
+    
+    func seekTo(position: TimeInterval) {
         if player != nil {
-            player.currentItem?.seek(to: position)
+            let cmTime = CMTime(seconds: position, preferredTimescale: 1000000)
+            player.currentItem?.seek(to: cmTime)
             rc.updateMP(state: .resume, currentTime: player.currentTime().seconds)
         }
     }
