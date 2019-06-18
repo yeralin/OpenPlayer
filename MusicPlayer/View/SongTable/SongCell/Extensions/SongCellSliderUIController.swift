@@ -9,8 +9,20 @@
 import Foundation
 import MediaPlayer
 
+// TODO: Refactor SliderUI controller
 private typealias SongCellSliderUIController = SongCell
 extension SongCellSliderUIController {
+    
+    internal func resetSliderCAD() {
+        if sliderCAD == nil {
+            log.warning("sliderCAD is already nil, nothing to do")
+            return
+        }
+        sliderCAD.invalidate()
+        sliderCAD = nil
+        songProgressSlider.value = 0
+        songProgressSlider.isEnabled = false
+    }
 
     internal func setupSliderCAD() {
         guard let audioPlayer = AudioPlayer.sharedInstance.player else {

@@ -11,7 +11,7 @@ import Foundation
 private typealias DownloadTableAudioPlayerDelegImpl = DownloadTableViewController
 extension DownloadTableAudioPlayerDelegImpl: StreamAudioPlayerDelegate {
     
-    func initAudioPlayerDelegateImpl() {
+    internal func initAudioPlayerDelegateImpl() {
         StreamAudioPlayer.sharedInstance.delegate = self
     }
     

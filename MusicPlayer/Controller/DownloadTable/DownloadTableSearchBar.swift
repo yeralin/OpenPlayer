@@ -22,16 +22,10 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
     }
     
     func parseSearchRequest(_ songListResponse: [[String:String]]) {
-        let songUrlBase = ServerRequests.sharedInstance.serverAddress!
-            .appendingPathComponent("youtube/stream").absoluteString
         for entry in songListResponse {
-            if let songName = entry["title"], let videoId = entry["videoId"] {
-                let urlBuild = NSURLComponents(string: songUrlBase)!
-                urlBuild.queryItems = [URLQueryItem(name: "videoId", value: videoId)]
-                let songUrl = urlBuild.url!
-                var song = DownloadSongEntity(songTitle: songName, songArtist: "", songName: songName, songUrl: songUrl)
-                
-                let tokSongName = songName.split(separator: "-")
+            if let songName = entry["title"], let url = entry["url"], let songUrl = URL(string: url) {
+                let song = DownloadSongEntity(songTitle: songName, songArtist: "", songName: songName, songUrl: songUrl)
+                let tokSongName = songName.split(separator: "-", maxSplits: 1)
                 if tokSongName.count == 2 {
                     song.songArtist = String(tokSongName[0]).trimmingCharacters(in: .whitespacesAndNewlines)
                     song.songTitle = String(tokSongName[1]).trimmingCharacters(in: .whitespacesAndNewlines)
@@ -65,14 +59,14 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
                                 self.present(alert, animated: true, completion: nil)
                             }
                         } else {
-                            DispatchQueue.main.async {
-                                self.removeAllOverlays()
-                                self.parseSearchRequest(songListResponse!)
-                                self.tableView.reloadData()
+                            if let songListResponse = songListResponse {
+                                DispatchQueue.main.async {
+                                    self.removeAllOverlays()
+                                    self.parseSearchRequest(songListResponse)
+                                    self.tableView.reloadData()
+                                }
                             }
-                            
                         }
-                        
                 })
         }
         searchBar.resignFirstResponder()

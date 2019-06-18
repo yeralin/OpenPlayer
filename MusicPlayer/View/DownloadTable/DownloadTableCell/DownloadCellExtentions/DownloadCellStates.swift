@@ -10,8 +10,8 @@ import Foundation
 import SwiftIcons
 
 //AudioPlayerDelegate Callees
-private typealias DownloadTableCellStates = DownloadTableCell
-extension DownloadTableCellStates {
+private typealias DownloadCellStates = DownloadCell
+extension DownloadCellStates {
     
     func prepareSongCellState() {
         playPauseButton.setIcon(icon: .ionicons(.loadC), iconSize: 26,
@@ -54,7 +54,6 @@ extension DownloadTableCellStates {
     }
     
     func refreshSongCellState() {
-        
         if let player = StreamAudioPlayer.sharedInstance.player,
            player.duration.seconds != .nan {
             DispatchQueue.main.async() {

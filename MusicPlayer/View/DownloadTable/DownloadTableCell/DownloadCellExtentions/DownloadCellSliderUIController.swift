@@ -1,5 +1,5 @@
 //
-//  DownloadTableCellSliderController.swift
+//  DownloadCellSliderUIController.swift
 //  MusicPlayer
 //
 //  Created by Daniyar Yeralin on 7/18/17.
@@ -9,19 +9,21 @@
 import Foundation
 import MediaPlayer
 
-private typealias DownloadTableCellSliderController = DownloadTableCell
-extension DownloadTableCellSliderController {
+private typealias DownloadCellSliderUIController = DownloadCell
+extension DownloadCellSliderUIController {
     
-    func resetSliderCAD() {
-        if sliderCAD != nil {
-            sliderCAD.invalidate()
-            sliderCAD = nil
-            songProgressSlider.value = 0
-            songProgressSlider.isEnabled = false
+    internal func resetSliderCAD() {
+        if sliderCAD == nil {
+            log.warning("sliderCAD is already nil, nothing to do")
+            return
         }
+        sliderCAD.invalidate()
+        sliderCAD = nil
+        songProgressSlider.value = 0
+        songProgressSlider.isEnabled = false
     }
     
-    func setupSliderCAD() {
+    internal func setupSliderCAD() {
         songProgressSlider.minimumValue = 0
         if let duration = StreamAudioPlayer.sharedInstance.duration {
             songProgressSlider.maximumValue = duration
@@ -32,11 +34,13 @@ extension DownloadTableCellSliderController {
         sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
     }
     
-    @objc func updateSliderCAD() {
+    @objc internal  func updateSliderCAD() {
         if sliderCAD != nil {
             let player = StreamAudioPlayer.sharedInstance
             songProgressSlider.value = player.currentTime
             songProgressSlider.bufferEndValue = player.currentBufferValue
+        } else {
+            log.error("Could not update slider CAD")
         }
     }
 }

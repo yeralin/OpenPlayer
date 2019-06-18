@@ -42,10 +42,8 @@ extension SongTableViewDataSource {
             playlistArray.remove(at: currentPlaylistIndex)
             pickerView.playlistArray = playlistArray
         } catch let err {
-            log.error("""
-                      Could not construct \"moveSong\" picker for 
-                      \"\((sender as? LocalSongEntity)?.songName ?? "unknown")\" song: \(err)
-                      """)
+            log.error("Could not construct \"moveSong\" picker for "
+                      + "\"\((sender as? LocalSongEntity)?.songName ?? "unknown")\" song: \(err)")
         }
     }
     

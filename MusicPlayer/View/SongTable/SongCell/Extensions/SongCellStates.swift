@@ -24,7 +24,6 @@ extension SongCellStates {
             sliderCAD.isPaused = false
             playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 26, color: .systemColor, forState: .normal)
         }
-        
     }
     
     func pauseSongCellState() {
@@ -33,10 +32,7 @@ extension SongCellStates {
     }
     
     func stopSongCellState() {
-        sliderCAD.invalidate()
-        sliderCAD = nil
-        songProgressSlider.value = 0
-        songProgressSlider.isEnabled = false
+        self.resetSliderCAD()
         playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24, color: .systemColor, forState: .normal)
         shuffleButton.isHidden = true
     }

@@ -9,19 +9,6 @@
 import UIKit
 import SWRevealViewController
 
-struct DownloadSongEntity {
-    var songTitle: String?
-    var songArtist: String?
-    var songName: String?
-    var songUrl: URL?
-    static func == (left: DownloadSongEntity, right: DownloadSongEntity) -> Bool {
-        let titleEq = (left.songTitle == right.songTitle)
-        let artistEq = (left.songArtist == right.songArtist)
-        let urlEq = (left.songUrl == right.songUrl)
-        return titleEq && artistEq && urlEq
-    }
-}
-
 class DownloadTableViewController: UITableViewController {
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
@@ -29,18 +16,24 @@ class DownloadTableViewController: UITableViewController {
     @IBOutlet var downloadTableView: UITableView!
     var searchSongs: [DownloadSongEntity]! = []
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.initDataSource()
+    }
+    
+    override init(style: UITableView.Style) {
+        super.init(style: style)
+        self.initDataSource()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Download"
         setupMenuGestureRecognizer()
-        initAudioPlayerDelegateImpl()
         setupMenuButton(button: menuButton)
         downloadTableView.allowsSelection = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        if let songsArray = StreamAudioPlayer.sharedInstance.songsArray {
-            self.searchSongs = songsArray
-        }
     }
     
     public func revealController(_ revealController: SWRevealViewController!, didMoveTo position: FrontViewPosition) {
@@ -48,7 +41,6 @@ class DownloadTableViewController: UITableViewController {
             self.tableView.alwaysBounceVertical = true
             self.tableView.isScrollEnabled = true
             self.searchBar.isUserInteractionEnabled = true
-            
         } else if revealController.frontViewPosition == FrontViewPosition.right {
             self.tableView.alwaysBounceVertical = false
             self.tableView.isScrollEnabled = false
@@ -57,26 +49,9 @@ class DownloadTableViewController: UITableViewController {
         
     }
     
-    func getCell(withSong song: DownloadSongEntity!) -> DownloadTableCell? {
-        let visibleSongCells = tableView.visibleCells as! [DownloadTableCell]
-        if let index = visibleSongCells.firstIndex(where: { $0.song == song }) {
-            return visibleSongCells[index]
-        } else {
-            return nil
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.PRESENT_PLAYLIST_PICKER {
-            if let pickerView = segue.destination as? PlaylistPickerViewController {
-                pickerView.delegate = self
-                if let songToDownload = sender as? DownloadSongEntity {
-                    pickerView.songToMove = songToDownload
-                    if let playlistArray = try? PlaylistPersistencyManager.sharedInstance.getPlaylistArray() {
-                        pickerView.playlistArray = playlistArray
-                    }
-                }
-            }
+            self.constructPlaylistPicker(segue: segue, sender: sender)
         }
     }
     

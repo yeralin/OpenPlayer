@@ -1,0 +1,71 @@
+//
+//  DownloadTableDataSource.swift
+//  MusicPlayer
+//
+//  Created by Daniyar Yeralin on 6/25/17.
+//  Copyright © 2017 Daniyar Yeralin. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+private typealias DownloadTableViewDataSource = DownloadTableViewController
+extension DownloadTableViewDataSource {
+    
+    internal func initDataSource() {
+        initAudioPlayerDelegateImpl()
+        if let songsArray = StreamAudioPlayer.sharedInstance.songsArray {
+            self.searchSongs = songsArray
+        }
+    }
+    
+    internal func getCell(withSong song: DownloadSongEntity!) -> DownloadCell? {
+        let visibleSongCells = tableView.visibleCells as! [DownloadCell]
+        if let index = visibleSongCells.firstIndex(where: { $0.song == song }) {
+            return visibleSongCells[index]
+        }
+        return nil
+    }
+    
+    internal func constructPlaylistPicker(segue: UIStoryboardSegue, sender: Any?) {
+        do {
+            guard let pickerView = segue.destination as? PlaylistPickerViewController else {
+                throw "Could not cast sender as PlaylistPickerViewController"
+            }
+            guard let songToDownload = sender as? DownloadSongEntity else {
+                throw "Could not cast sender as DownloadSongEntity"
+            }
+            let playlistArray = try PlaylistPersistencyManager.sharedInstance.getPlaylistArray()
+            pickerView.delegate = self
+            pickerView.songToMove = songToDownload
+            pickerView.playlistArray = playlistArray
+        } catch let err {
+            log.error("Could not construct \"moveSong\" picker for "
+                + "\((sender as? LocalSongEntity)?.songName ?? "unknown")\" song: \(err)")
+        }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchSongs.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let streamAudioPlayerInst = StreamAudioPlayer.sharedInstance
+        let song: DownloadSongEntity = searchSongs[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DownloadSongCell",
+                                                 for: indexPath) as! DownloadCell
+        cell.delegate = self
+        //If there is a song that's playing inside current playlist, restore its state view
+        if streamAudioPlayerInst.player != nil
+            && streamAudioPlayerInst.currentSong! == song {
+            cell.restorePlayingCell(song: song)
+        } else {
+            cell.initCell(initSong: song)
+        }
+        return cell
+    }
+}

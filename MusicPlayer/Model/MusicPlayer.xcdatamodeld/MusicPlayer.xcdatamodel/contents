@@ -1,32 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99"
-       systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift"
-       userDefinedModelVersionIdentifier="">
-    <entity name="LocalSongEntity" representedClassName="LocalSongEntity" parentEntity="SongEntity" syncable="YES"
-            codeGenerationType="class">
-        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify"
-                      destinationEntity="PlaylistEntity" inverseName="songs" inverseEntity="PlaylistEntity"
-                      syncable="YES"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Xcode 9.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LocalSongEntity" representedClassName="LocalSongEntity" parentEntity="SongEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="isProcessed" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="songOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlaylistEntity" inverseName="songs" inverseEntity="PlaylistEntity" syncable="YES"/>
     </entity>
     <entity name="PlaylistEntity" representedClassName="PlaylistEntity" syncable="YES" codeGenerationType="class">
         <attribute name="playlistName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="playlistOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Cascade"
-                      destinationEntity="LocalSongEntity" inverseName="playlist" inverseEntity="LocalSongEntity"
-                      syncable="YES"/>
+        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LocalSongEntity" inverseName="playlist" inverseEntity="LocalSongEntity" syncable="YES"/>
     </entity>
-    <entity name="SongEntity" representedClassName="SongEntity" isAbstract="YES" syncable="YES"
-            codeGenerationType="class">
-        <attribute name="isProcessed" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+    <entity name="SongEntity" representedClassName="SongEntity" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="songArtist" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="songArtwork" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="songName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="songOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="songTitle" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="LocalSongEntity" positionX="113.5" positionY="-138.5" width="128" height="60"/>
+        <element name="LocalSongEntity" positionX="113.5" positionY="-138.5" width="128" height="30"/>
         <element name="PlaylistEntity" positionX="-27" positionY="24" width="128" height="90"/>
-        <element name="SongEntity" positionX="277" positionY="-36" width="128" height="133"/>
+        <element name="SongEntity" positionX="277" positionY="-36" width="128" height="105"/>
     </elements>
 </model>
