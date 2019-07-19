@@ -20,25 +20,27 @@ extension DownloadCellSliderUIController {
         sliderCAD.invalidate()
         sliderCAD = nil
         songProgressSlider.value = 0
+        songProgressSlider.bufferEndValue = 0
         songProgressSlider.isEnabled = false
     }
     
     internal func setupSliderCAD() {
-        songProgressSlider.minimumValue = 0
-        if let duration = StreamAudioPlayer.sharedInstance.duration {
-            songProgressSlider.maximumValue = duration
+        if let duration = AudioPlayer.instance.player?.duration {
+            songProgressSlider.minimumValue = 0
+            songProgressSlider.maximumValue = Float(duration)
+            songProgressSlider.isEnabled = true
+            sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
+            sliderCAD.preferredFramesPerSecond = 60
+            sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
+        } else {
+            log.warning("Could not setup slider because duration is not yet known")
         }
-        songProgressSlider.isEnabled = true
-        sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
-        sliderCAD.preferredFramesPerSecond = 60
-        sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
     }
     
     @objc internal  func updateSliderCAD() {
-        if sliderCAD != nil {
-            let player = StreamAudioPlayer.sharedInstance
-            songProgressSlider.value = player.currentTime
-            songProgressSlider.bufferEndValue = player.currentBufferValue
+        if sliderCAD != nil, let currentTime = AudioPlayer.instance.player?.currentTime {
+            songProgressSlider.value = currentTime
+            songProgressSlider.bufferEndValue = AudioPlayer.instance.currentBufferValue
         } else {
             log.error("Could not update slider CAD")
         }

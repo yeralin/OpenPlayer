@@ -11,7 +11,7 @@ import Foundation
 private typealias DownloadTablePlaylistPickerImpl = DownloadTableViewController
 extension DownloadTablePlaylistPickerImpl: PlaylistPickerDelegate {
 
-    func moveSong(song: LocalSongEntity, toPlaylist: PlaylistEntity) {
+    func moveSong(song: SongEntity, toPlaylist: PlaylistEntity) {
         /*if let fromPlaylist = self.playlist {
             let songPerstManager = SongPersistencyManager.sharedInstance
             let rowPosition = Int(song.songOrder)

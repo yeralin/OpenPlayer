@@ -12,25 +12,25 @@ private typealias SongCellActions = SongCell
 extension SongCellActions {
 
     internal func actionOnPlayPauseTap(isPlaying: Bool, isInProgress: Bool) {
-        let audioPlayerInst = AudioPlayer.sharedInstance
+        let audioPlayerInst = AudioPlayer.instance
         //TODO: Change logic, don't depend on title
         if !isPlaying {
             if isInProgress {
-                audioPlayerInst.resumeSong()
+                audioPlayerInst.resume()
             } else {
-                audioPlayerInst.playSong(song: song)
+                audioPlayerInst.play(song: song)
             }
         } else {
-            audioPlayerInst.pauseSong()
+            audioPlayerInst.pause()
         }
     }
 
     internal func actionOnShuffleTap(isShuffleMode: Bool) {
-        let audioPlayerInst = AudioPlayer.sharedInstance
+        let audioPlayerInst = AudioPlayer.instance
         audioPlayerInst.shuffleMode = isShuffleMode
     }
 
     internal func actionOnChangeSliderPosition(songNewPosition: TimeInterval) {
-        AudioPlayer.sharedInstance.seekTo(position: songNewPosition)
+        AudioPlayer.instance.seekTo(position: songNewPosition)
     }
 }

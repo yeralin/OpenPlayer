@@ -25,7 +25,7 @@ extension SongCellSliderUIController {
     }
 
     internal func setupSliderCAD() {
-        guard let audioPlayer = AudioPlayer.sharedInstance.player else {
+        guard let audioPlayer = AudioPlayer.instance.player else {
             fatalError("Could not retrieve AudioPlayer instance")
         }
         songProgressSlider.isEnabled = true
@@ -37,7 +37,7 @@ extension SongCellSliderUIController {
     }
 
     @objc internal func updateSliderCAD() {
-        if let player = AudioPlayer.sharedInstance.player, sliderCAD != nil {
+        if let player = AudioPlayer.instance.player, sliderCAD != nil {
             songProgressSlider.value = Float(player.currentTime)
         }
     }

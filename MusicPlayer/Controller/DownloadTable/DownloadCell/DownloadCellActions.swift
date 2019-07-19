@@ -13,14 +13,14 @@ extension DownloadCellActions {
     
     internal func actionOnPlayPauseTap(isPlaying: Bool, isInProgress: Bool) {
         if !isPlaying {
-            StreamAudioPlayer.sharedInstance.playSong(song: song)
+            AudioPlayer.instance.play(song: song)
         } else {
-            StreamAudioPlayer.sharedInstance.pauseSong()
+            AudioPlayer.instance.pause()
         }
     }
     
     internal func actionOnShuffleTap(isShuffleMode: Bool) {
-        StreamAudioPlayer.sharedInstance.shuffleMode = isShuffleMode
+        AudioPlayer.instance.shuffleMode = isShuffleMode
     }
     
     internal func actionOnDownloadTap() {
@@ -28,6 +28,6 @@ extension DownloadCellActions {
     }
     
     internal func actionOnChangeSliderPosition(position: TimeInterval) {
-        StreamAudioPlayer.sharedInstance.seekTo(position: position)
+        AudioPlayer.instance.seekTo(position: position)
     }
 }

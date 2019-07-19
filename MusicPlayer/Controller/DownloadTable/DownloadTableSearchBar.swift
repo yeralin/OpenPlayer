@@ -15,16 +15,23 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" {
-            StreamAudioPlayer.sharedInstance.stopSong()
+            AudioPlayer.instance.stop()
             searchSongs.removeAll()
             tableView.reloadData()
         }
     }
     
     func parseSearchRequest(_ songListResponse: [[String:String]]) {
+        guard let context = try? SongPersistencyManager.sharedInstance.validateContext(context: nil) else {
+            fatalError("Could not fetch context")
+        }
         for entry in songListResponse {
             if let songName = entry["title"], let url = entry["url"], let songUrl = URL(string: url) {
-                let song = DownloadSongEntity(songTitle: songName, songArtist: "", songName: songName, songUrl: songUrl)
+                let song = SongEntity(context: context)
+                song.songTitle = songName
+                song.songArtist = ""
+                song.songName = songName
+                song.songUrl = songUrl
                 let tokSongName = songName.split(separator: "-", maxSplits: 1)
                 if tokSongName.count == 2 {
                     song.songArtist = String(tokSongName[0]).trimmingCharacters(in: .whitespacesAndNewlines)
@@ -33,12 +40,11 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
                 searchSongs.append(song)
             }
         }
-        StreamAudioPlayer.sharedInstance.songsArray = searchSongs
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchSongs.removeAll()
-        StreamAudioPlayer.sharedInstance.stopSong()
+        AudioPlayer.instance.stop()
         if var searchText = searchBar.text, !searchText.isEmpty {
             searchText = searchText.lowercased()
             self.showWaitOverlay()

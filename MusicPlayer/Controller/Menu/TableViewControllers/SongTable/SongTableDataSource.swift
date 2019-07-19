@@ -30,8 +30,8 @@ extension SongTableViewDataSource {
             guard let pickerView = segue.destination as? PlaylistPickerViewController else {
                 throw "Could not cast sender as PlaylistPickerViewController"
             }
-            guard let songToMove = sender as? LocalSongEntity else {
-                throw "Could not cast sender as LocalSongEntity"
+            guard let songToMove = sender as? SongEntity else {
+                throw "Could not cast sender as SongEntity"
             }
             var playlistArray = try PlaylistPersistencyManager.sharedInstance.getPlaylistArray()
             guard let currentPlaylistIndex = playlistArray.firstIndex(of: playlist) else {
@@ -43,7 +43,7 @@ extension SongTableViewDataSource {
             pickerView.playlistArray = playlistArray
         } catch let err {
             log.error("Could not construct \"moveSong\" picker for "
-                      + "\"\((sender as? LocalSongEntity)?.songName ?? "unknown")\" song: \(err)")
+                      + "\"\((sender as? SongEntity)?.songName ?? "unknown")\" song: \(err)")
         }
     }
     
@@ -62,8 +62,7 @@ extension SongTableViewDataSource {
     
     // Fill SongTable with SongCells
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let AudioPlayerInst = AudioPlayer.sharedInstance
-        let song: LocalSongEntity
+        let song: SongEntity
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell",
                 for: indexPath) as? SongCell else {
             fatalError("Could not dequeue SongCell")
@@ -83,10 +82,8 @@ extension SongTableViewDataSource {
             }
         }
         // If there is a song that's playing inside a current playlist, restore its state view
-        if AudioPlayerInst.player != nil,
-           let currentSong = AudioPlayerInst.currentSong as? LocalSongEntity,
-           currentSong == song {
-            cell.restorePlayingCell(song: currentSong)
+        if AudioPlayer.instance.isPlaying(song: song){
+            cell.restorePlayingCell(song: song)
         } else {
             cell.initCell(initSong: song)
         }
@@ -96,7 +93,7 @@ extension SongTableViewDataSource {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let song = songsArray[indexPath.row]
-            if let currentSong = AudioPlayer.sharedInstance.currentSong,
+            if let currentSong = AudioPlayer.instance.currentSong,
                song == currentSong {
                 // TODO: Stop song
             }
@@ -122,7 +119,7 @@ extension SongTableViewDataSource {
             songsArray.remove(at: fromIndexPath.row)
             songsArray.insert(songToMove, at: to.row)
             // TODO: Can be optimized (reset order only after deleted song)
-            songsArray = songsArray.enumerated().map { (index, song) -> LocalSongEntity in
+            songsArray = songsArray.enumerated().map { (index, song) -> SongEntity in
                 song.songOrder = Int32(index)
                 return song
             }

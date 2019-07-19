@@ -67,7 +67,7 @@ class RemoteControl: NSObject {
 
     }
     
-    func setMPControls(songArtist: String, songTitle: String, duration: Double = .nan) {
+func setMPControls(songArtist: String, songTitle: String, duration: Double = .nan) {
         let mpic = MPNowPlayingInfoCenter.default()
         mpic.nowPlayingInfo = [
             MPMediaItemPropertyArtist: songArtist,

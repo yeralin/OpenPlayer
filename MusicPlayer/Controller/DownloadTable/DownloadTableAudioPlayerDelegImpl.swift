@@ -7,15 +7,28 @@
 //
 
 import Foundation
+import UIKit
+import SwiftOverlays
 
 private typealias DownloadTableAudioPlayerDelegImpl = DownloadTableViewController
-extension DownloadTableAudioPlayerDelegImpl: StreamAudioPlayerDelegate {
+extension DownloadTableAudioPlayerDelegImpl: AudioPlayerDelegate {
     
     internal func initAudioPlayerDelegateImpl() {
-        StreamAudioPlayer.sharedInstance.delegate = self
+        // TODO: Refactor, rethink delegation assignment in player impls
+        AudioPlayer.instance.delegate = self
     }
     
-    func cellState(state: PlayerState, song: DownloadSongEntity) {
+    internal func propagateError(title: String, error: String) {
+        let alert = UIAlertController(title: title,
+                                      message: error,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK",
+                                      style: UIAlertAction.Style.default,
+                                      handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    internal func cellState(state: PlayerState, song: SongEntity) {
         if let cell = getCell(withSong: song) {
             if state == .prepare {
                 cell.prepareSongCellState()
@@ -31,7 +44,7 @@ extension DownloadTableAudioPlayerDelegImpl: StreamAudioPlayerDelegate {
         }
     }
     
-    func getSongArray() -> [DownloadSongEntity] {
+    func getSongArray() -> [SongEntity] {
         return searchSongs
     }
 }

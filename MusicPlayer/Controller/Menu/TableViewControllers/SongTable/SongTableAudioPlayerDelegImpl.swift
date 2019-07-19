@@ -7,15 +7,28 @@
 //
 
 import Foundation
+import UIKit
+import SwiftOverlays
 
 private typealias SongTableAudioPlayerDelegImpl = SongTableViewController
 extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
 
     internal func initAudioPlayerDelegateImpl() {
-        AudioPlayer.sharedInstance.delegate = self
+        AudioPlayer.instance.delegate = self
+    }
+    
+    internal func propagateError(title: String, error: String) {
+        let alert = UIAlertController(title: title,
+                                      message: error,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK",
+                                      style: UIAlertAction.Style.default,
+                                      handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 
-    internal func cellState(state: PlayerState, song: LocalSongEntity) {
+    internal func
+        cellState(state: PlayerState, song: SongEntity) {
         if !song.isProcessed {
             do {
                 try SongPersistencyManager.sharedInstance.processSong(toProcess: song)
@@ -34,8 +47,8 @@ extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
             cell.pauseSongCellState()
         case .stop:
             cell.stopSongCellState()
-        default:
-            fatalError("State is not supported")
+        case .prepare:
+            fatalError("This state should not have been executed")
         }
     }
 }

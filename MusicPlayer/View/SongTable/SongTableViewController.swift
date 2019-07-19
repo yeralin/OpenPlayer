@@ -15,8 +15,8 @@ class SongTableViewController: UITableViewController {
     var playlist: PlaylistEntity!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var songTableView: UITableView!
-    var songsArray: [LocalSongEntity]!
-    var matchedSongs: [LocalSongEntity]!
+    var songsArray: [SongEntity]!
+    var matchedSongs: [SongEntity]!
     var searching: Bool = false
 
     required init?(coder aDecoder: NSCoder) {
@@ -36,7 +36,7 @@ class SongTableViewController: UITableViewController {
         songTableView.allowsSelection = false
     }
 
-    internal func getCell(withSong song: LocalSongEntity) -> SongCell? {
+    internal func getCell(withSong song: SongEntity) -> SongCell? {
         if let visibleSongCells = tableView.visibleCells as? [SongCell],
            let index = visibleSongCells.firstIndex(where: { $0.song == song }) {
             return visibleSongCells[index]

@@ -14,7 +14,7 @@ class DownloadTableViewController: UITableViewController {
     @IBOutlet weak var menuButton: UIBarButtonItem!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet var downloadTableView: UITableView!
-    var searchSongs: [DownloadSongEntity]! = []
+    var searchSongs: [SongEntity]! = []
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

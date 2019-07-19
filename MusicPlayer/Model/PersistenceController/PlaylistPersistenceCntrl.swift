@@ -79,7 +79,8 @@ class PlaylistPersistencyManager: PersistenceController {
         }
     }
     
-    func wipePlaylists(cntxt: NSManagedObjectContext) throws {
+    func wipePlaylists(cntxt: NSManagedObjectContext?) throws {
+        let cntxt = try validateContext(context: cntxt)
         _ = try getPlaylistArray().map{cntxt.delete($0)}
         try saveContext(cntxt: cntxt)
     }

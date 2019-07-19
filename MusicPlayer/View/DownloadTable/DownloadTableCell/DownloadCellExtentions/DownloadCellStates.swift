@@ -26,7 +26,6 @@ extension DownloadCellStates {
         playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 26,
                                 color: .systemColor, forState: .normal)
         setupSliderCAD()
-        
     }
     
     func pauseSongCellState() {
@@ -54,12 +53,7 @@ extension DownloadCellStates {
     }
     
     func refreshSongCellState() {
-        if let player = StreamAudioPlayer.sharedInstance.player,
-           player.duration.seconds != .nan {
-            DispatchQueue.main.async() {
-                self.songProgressSlider.maximumValue = Float(player.duration.seconds)
-            }
-        }
+        // refresh cell
     }
     
 }

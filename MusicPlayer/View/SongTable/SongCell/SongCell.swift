@@ -25,7 +25,7 @@ class SongCell: UITableViewCell {
     internal var sliderCAD: CADisplayLink!
     weak var delegate: CellToTableDelegate!
 
-    internal var song: LocalSongEntity! {
+    internal var song: SongEntity! {
         didSet {
             artistName.text = song.songArtist
             songTitle.text = song.songTitle
@@ -33,14 +33,14 @@ class SongCell: UITableViewCell {
     }
 
     internal func setShuffleButton() {
-        if AudioPlayer.sharedInstance.shuffleMode {
+        if AudioPlayer.instance.shuffleMode {
             shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26, color: .systemColor, forState: .normal)
         } else {
             shuffleButton.setIcon(icon: .ionicons(.arrowReturnRight), iconSize: 26, color: .systemColor, forState: .normal)
         }
     }
 
-    func initCell(initSong: LocalSongEntity) {
+    func initCell(initSong: SongEntity) {
         self.song = initSong
         if sliderCAD != nil {
             sliderCAD.invalidate()
@@ -55,9 +55,9 @@ class SongCell: UITableViewCell {
         songProgressSlider.isEnabled = false
     }
 
-    func restorePlayingCell(song: LocalSongEntity) {
+    func restorePlayingCell(song: SongEntity) {
         self.song = song
-        if let player = AudioPlayer.sharedInstance.player {
+        if let player = AudioPlayer.instance.player {
             if player.isPlaying {
                 playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 23, color: .systemColor, forState: .normal)
             } else {

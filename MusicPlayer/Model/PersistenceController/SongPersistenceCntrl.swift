@@ -17,18 +17,18 @@ class SongPersistencyManager: PersistenceController {
     static let sharedInstance = SongPersistencyManager()
     
     func getSongArray(playlist: PlaylistEntity,
-                      cntxt: NSManagedObjectContext? = nil) throws -> [LocalSongEntity] {
+                      cntxt: NSManagedObjectContext? = nil) throws -> [SongEntity] {
         let cntxt = try validateContext(context: cntxt)
-        guard let songArray = _fetchData(entityName: "LocalSongEntity",
+        guard let songArray = _fetchData(entityName: "SongEntity",
                                          sortIn: NSSortDescriptor(key: "songOrder", ascending: true),
                                          predicate: NSPredicate(format: "%K == %@", "playlist.playlistName", playlist.playlistName!),
-                cntxt: cntxt) as? [LocalSongEntity] else {
-            throw "Could not cast data to [LocalSongEntity]"
+                cntxt: cntxt) as? [SongEntity] else {
+            throw "Could not cast data to [SongEntity]"
         }
         return songArray
     }
 
-    public func getSongPath(song: LocalSongEntity) throws -> URL {
+    public func getSongPath(song: SongEntity) throws -> URL {
         if let songName = song.songName, let playlistName = song.playlist?.playlistName {
             return docsUrl.appendingPathComponent(playlistName).appendingPathComponent(songName)
         } else {
@@ -36,7 +36,7 @@ class SongPersistencyManager: PersistenceController {
         }
     }
 
-    func deleteSong(song: LocalSongEntity, cntxt: NSManagedObjectContext? = nil) throws {
+    func deleteSong(song: SongEntity, cntxt: NSManagedObjectContext? = nil) throws {
         let cntxt = try validateContext(context: cntxt)
         do {
             let songPath = try getSongPath(song: song)
@@ -48,7 +48,7 @@ class SongPersistencyManager: PersistenceController {
         }
     }
 
-    func moveSong(toMoveSong: LocalSongEntity, fromPlaylist: PlaylistEntity, toPlaylist: PlaylistEntity) throws {
+    func moveSong(toMoveSong: SongEntity, fromPlaylist: PlaylistEntity, toPlaylist: PlaylistEntity) throws {
         do {
             guard let songName = toMoveSong.songName else {
                 throw "Could not extract songName"
@@ -64,7 +64,7 @@ class SongPersistencyManager: PersistenceController {
         }
     }
 
-    func renameSong(song: LocalSongEntity, newArtist: String, newTitle: String, cntxt: NSManagedObjectContext? = nil) throws {
+    func renameSong(song: SongEntity, newArtist: String, newTitle: String, cntxt: NSManagedObjectContext? = nil) throws {
         let cntxt = try validateContext(context: cntxt)
         if !newArtist.isEmpty && !newTitle.isEmpty {
             song.songArtist = newArtist
@@ -75,7 +75,7 @@ class SongPersistencyManager: PersistenceController {
     }
     
     func populateSongs(forPlaylist: PlaylistEntity,
-                       cntxt: NSManagedObjectContext? = nil) throws -> [LocalSongEntity] {
+                       cntxt: NSManagedObjectContext? = nil) throws -> [SongEntity] {
         let cntxt = try validateContext(context: cntxt)
         guard let playlistName = forPlaylist.playlistName else {
             throw "Could not extract playlistName"
@@ -95,8 +95,9 @@ class SongPersistencyManager: PersistenceController {
                     if let index = songsToMatchWithAudioFiles.firstIndex(where: { el in el.songName == audioFileName }) {
                         songsToMatchWithAudioFiles.remove(at: index)
                     } else {
-                        // New audio file is found, create corresponding LocalSongEntity
-                        let song = LocalSongEntity(context: cntxt)
+                        // New audio file is found, create corresponding SongEntity
+                        let song = SongEntity(context: cntxt)
+                        song.songUrl = nil
                         song.songName = audioFileName
                         song.songOrder = -1
                         song.isProcessed = false
@@ -122,8 +123,8 @@ class SongPersistencyManager: PersistenceController {
         return songsArray
     }
 
-    public func resetSongOrder(songArray: [LocalSongEntity],
-                               cntxt: NSManagedObjectContext? = nil) throws -> [LocalSongEntity] {
+    public func resetSongOrder(songArray: [SongEntity],
+                               cntxt: NSManagedObjectContext? = nil) throws -> [SongEntity] {
         let cntxt = try validateContext(context: cntxt)
         for (index, _) in songArray.enumerated() {
             songArray[index].songOrder = Int32(index)
@@ -132,7 +133,7 @@ class SongPersistencyManager: PersistenceController {
         return songArray
     }
 
-    func processSong(toProcess song: LocalSongEntity,
+    func processSong(toProcess song: SongEntity,
                      cntxt: NSManagedObjectContext? = nil) throws {
         let cntxt = try validateContext(context: cntxt)
         let songPath = try getSongPath(song: song)
