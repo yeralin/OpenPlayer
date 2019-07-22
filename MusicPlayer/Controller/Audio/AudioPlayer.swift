@@ -71,9 +71,12 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
         rc?.resetMPControls()
         rc = RemoteControl.init(resumeSong: resume,
                                 pauseSong: pause,
-                                playNextSong: {() -> () in self.playNextSong(forward: true)},
-                                playPreviousSong: {() -> () in self.playNextSong(forward: false)},
+                                playNextSong: {() -> () in self.playNextSong(backward: false)},
+                                playPreviousSong: {() -> () in self.playNextSong(backward: true)},
                                 seekFor: seekFor(seconds:forward:))
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleInterruption(notification:)),
+                                               name: AVAudioSession.interruptionNotification, object: nil)
     }
     
     deinit {
@@ -130,10 +133,10 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
             }
         }
         rc?.setMPControls(songArtist: songArtist, songTitle: songTitle, duration: player?.duration ?? .nan)
-        /*NotificationCenter.default.addObserver(self,
-         selector: #selector(playNextSong),
-         name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-         object: playerItem)*/
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(playNextSong(backward:)),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: player?.currentItem)
     }
     
     private func playRemote(_ remoteSongUrl: URL) {
@@ -203,19 +206,52 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
         }
     }
     
-    func playNextSong(forward: Bool) {
+    @objc internal func playNextSong(backward: Bool = false) {
         if let currentSong = currentSong {
             var nextSongIndex: Int = -1
             if shuffleMode == true {
                 nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
             } else if let currSongIndex = songsArray.firstIndex(of: currentSong) {
-                nextSongIndex = forward ? currSongIndex + 1 : currSongIndex - 1
+                nextSongIndex = backward ? currSongIndex - 1 : currSongIndex + 1
             }
             if songsArray.indices.contains(nextSongIndex) {
                 play(song: songsArray[nextSongIndex])
             } else {
                 stop()
             }
+        }
+    }
+    
+    internal func getCurrentTimeAsString() -> String {
+        var seconds = 0
+        var minutes = 0
+        if let time = player?.currentTime {
+            seconds = Int(time) % 60
+            minutes = (Int(time) / 60) % 60
+        }
+        return String(format: "%0.2d:%0.2d",minutes,seconds)
+    }
+    
+    @objc internal func handleInterruption(notification: Notification) {
+        guard let userInfo = notification.userInfo,
+            let typeInt = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let type = AVAudioSession.InterruptionType(rawValue: typeInt) else {
+                return
+        }
+        switch type {
+        case .began:
+            self.pause()
+        case .ended:
+            guard let optionInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
+                log.error("Could not extract interruption options")
+                return
+            }
+            let options = AVAudioSession.InterruptionOptions(rawValue: optionInt)
+            if options.contains(.shouldResume) {
+                self.resume()
+            }
+        @unknown default:
+            log.error("Unhandled interruption type has occured")
         }
     }
     
