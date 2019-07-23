@@ -18,6 +18,10 @@ extension DownloadTableAudioPlayerDelegImpl: AudioPlayerDelegate {
         AudioPlayer.instance.delegate = self
     }
     
+    func getSongsArray(song: SongEntity) -> [SongEntity] {
+        return searchSongs
+    }
+    
     internal func propagateError(title: String, error: String) {
         let alert = UIAlertController(title: title,
                                       message: error,

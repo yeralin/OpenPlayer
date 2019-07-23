@@ -16,7 +16,7 @@ extension SongTablePlaylistPickerImpl: PlaylistPickerDelegate {
             do {
                 let songPerstManager = SongPersistencyManager.sharedInstance
                 try songPerstManager.moveSong(toMoveSong: song, fromPlaylist: fromPlaylist, toPlaylist: toPlaylist)
-                var songsArray = try songPerstManager.getSongArray(playlist: self.playlist)
+                var songsArray = try songPerstManager.getSongsArray(playlist: self.playlist)
                 songsArray = try songPerstManager.resetSongOrder(songArray: songsArray)
                 try songPerstManager.saveContext()
                 self.songsArray = songsArray

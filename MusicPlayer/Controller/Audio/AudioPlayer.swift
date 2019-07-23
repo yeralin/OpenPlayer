@@ -16,6 +16,7 @@ enum PlayerState {
 }
 
 protocol AudioPlayerDelegate : class {
+    func getSongsArray(song: SongEntity) -> [SongEntity]
     func cellState(state: PlayerState, song: SongEntity)
     func propagateError(title: String, error: String)
 }
@@ -56,15 +57,14 @@ class LocalPlayerItem: AVPlayerItem {
 class AudioPlayer: NSObject, CachingPlayerItemDelegate {
     
     static let instance = AudioPlayer()
-    weak var delegate: AudioPlayerDelegate?
+    // The delegate is intentionally not marked as weak
+    var delegate: AudioPlayerDelegate?
     
     var shuffleMode: Bool = false
     var player: AVPlayer?
     var currentSong: SongEntity?
     var currentBufferValue: Double = 0
-    
     private var rc: RemoteControl?
-    private var songsArray: [SongEntity] = []
     
     override init() {
         super.init()
@@ -207,7 +207,8 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
     }
     
     @objc internal func playNextSong(backward: Bool = false) {
-        if let currentSong = currentSong {
+        if let currentSong = currentSong,
+           let songsArray = delegate?.getSongsArray(song: currentSong) {
             var nextSongIndex: Int = -1
             if shuffleMode == true {
                 nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))

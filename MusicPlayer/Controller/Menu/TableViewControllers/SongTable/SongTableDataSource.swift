@@ -100,7 +100,7 @@ extension SongTableViewDataSource {
             do {
                 let songPerstManager = SongPersistencyManager.sharedInstance
                 try songPerstManager.deleteSong(song: song)
-                var songsArray = try songPerstManager.getSongArray(playlist: self.playlist)
+                var songsArray = try songPerstManager.getSongsArray(playlist: self.playlist)
                 songsArray = try songPerstManager.resetSongOrder(songArray: songsArray)
                 try songPerstManager.saveContext()
                 self.songsArray = songsArray

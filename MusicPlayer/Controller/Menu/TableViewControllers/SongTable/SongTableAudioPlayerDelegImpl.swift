@@ -17,6 +17,17 @@ extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
         AudioPlayer.instance.delegate = self
     }
     
+    func getSongsArray(song: SongEntity) -> [SongEntity] {
+        if let playlist = song.playlist {
+            do {
+                return try SongPersistencyManager.sharedInstance.getSongsArray(playlist: playlist)
+            } catch let error {
+                propagateError(title: "Could not retrieve songsArray", error: error.localizedDescription)
+            }
+        }
+        return []
+    }
+    
     internal func propagateError(title: String, error: String) {
         let alert = UIAlertController(title: title,
                                       message: error,

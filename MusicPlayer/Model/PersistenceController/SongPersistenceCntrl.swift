@@ -16,7 +16,7 @@ class SongPersistencyManager: PersistenceController {
     
     static let sharedInstance = SongPersistencyManager()
     
-    func getSongArray(playlist: PlaylistEntity,
+    func getSongsArray(playlist: PlaylistEntity,
                       cntxt: NSManagedObjectContext? = nil) throws -> [SongEntity] {
         let cntxt = try validateContext(context: cntxt)
         guard let songArray = _fetchData(entityName: "SongEntity",
@@ -80,7 +80,7 @@ class SongPersistencyManager: PersistenceController {
         guard let playlistName = forPlaylist.playlistName else {
             throw "Could not extract playlistName"
         }
-        var songsArray = try getSongArray(playlist: forPlaylist, cntxt: cntxt)
+        var songsArray = try getSongsArray(playlist: forPlaylist, cntxt: cntxt)
         var songsToMatchWithAudioFiles = songsArray
         let playlistPath: URL = docsUrl.appendingPathComponent(playlistName)
         let filePaths = try fm.contentsOfDirectory(at: playlistPath,
