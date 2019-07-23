@@ -103,16 +103,10 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
             resume()
             return
         }
-        guard let songArtist = song.songArtist,
-            let songTitle = song.songTitle,
-            let songName = song.songName else {
-                log.error("Could not unwrap SongEntity: \(song)")
-                return
-        }
         self.stop()
         self.currentSong = song
         // Determine whether playing a remote or local audio file
-        if let remoteSongUrl = song.songUrl {
+        if let remoteSongUrl = song.songUrl, let songName = song.songName {
             let tempUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
             let localSongUrl = tempUrl.appendingPathComponent(songName).appendingPathExtension("mp3")
             if FileManager.default.fileExists(atPath: localSongUrl.relativePath) {
@@ -131,6 +125,12 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
             } catch let error {
                 fatalError("Could not play local audio file: \(error)")
             }
+        }
+        
+        guard let songArtist = song.songArtist,
+            let songTitle = song.songTitle else {
+                log.error("Could not unwrap SongEntity: \(song)")
+                return
         }
         rc?.setMPControls(songArtist: songArtist, songTitle: songTitle, duration: player?.duration ?? .nan)
         NotificationCenter.default.addObserver(self,
