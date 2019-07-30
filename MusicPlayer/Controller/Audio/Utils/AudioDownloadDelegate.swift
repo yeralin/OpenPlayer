@@ -15,7 +15,7 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
     var mediaData: Data?
     var response: URLResponse?
     var loadingRequest: AVAssetResourceLoadingRequest?
-    weak var owner: CachingPlayerItem?
+    weak var owner: RemotePlayerItem?
 
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
         if session == nil {
@@ -37,8 +37,18 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         configuration.allowsCellularAccess = true
         configuration.shouldUseExtendedBackgroundIdleMode = true
         configuration.waitsForConnectivity = true
-        configuration.timeoutIntervalForRequest = 60.0
-        configuration.timeoutIntervalForResource = 60.0
+        /* The timeout interval to use when waiting for additional data.
+           The timer associated with this value is reset whenever new data arrives.
+           When the request timer reaches the specified interval
+            without receiving any new data, it triggers a timeout.
+         */
+        configuration.timeoutIntervalForRequest = 30.0
+        /* The maximum amount of time that a resource request should be allowed to take.
+           This value controls how long to wait for an entire resource to transfer before giving up.
+           The resource timer starts when the request is initiated and counts until
+             either the request completes or this timeout interval is reached, whichever comes first.
+        */
+        configuration.timeoutIntervalForResource = Double.greatestFiniteMagnitude
         session = URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
         session?.dataTask(with: url).resume()
     }

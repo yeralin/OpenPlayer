@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Xcode 9.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18F132" minimumToolsVersion="Xcode 9.0" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PlaylistEntity" representedClassName="PlaylistEntity" syncable="YES" codeGenerationType="class">
         <attribute name="playlistName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="playlistOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="songs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SongEntity" inverseName="playlist" inverseEntity="SongEntity" syncable="YES"/>
     </entity>
-    <entity name="SongEntity" representedClassName="SongEntity" syncable="YES" codeGenerationType="class">
+    <entity name="SongEntity" representedClassName="SongEntity" syncable="YES">
         <attribute name="isProcessed" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="songArtist" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="songArtwork" optional="YES" attributeType="Binary" syncable="YES"/>

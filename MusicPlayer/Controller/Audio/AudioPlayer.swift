@@ -54,7 +54,7 @@ class LocalPlayerItem: AVPlayerItem {
     }
 }
 
-class AudioPlayer: NSObject, CachingPlayerItemDelegate {
+class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
     
     static let instance = AudioPlayer()
     // The delegate is intentionally not marked as weak
@@ -106,15 +106,13 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
         self.stop()
         self.currentSong = song
         // Determine whether playing a remote or local audio file
-        if let remoteSongUrl = song.songUrl, let songName = song.songName {
-            let tempUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-            let localSongUrl = tempUrl.appendingPathComponent(songName).appendingPathExtension("mp3")
-            if FileManager.default.fileExists(atPath: localSongUrl.relativePath) {
-                // Song was already cached, not yet saved
-                self.playLocal(localSongUrl)
+        if song.isRemote() {
+            // Song was already cached, not yet saved
+            if let cachedSongUrl = song.isCached() {
+                self.playLocal(cachedSongUrl)
                 delegate?.cellState(state: .play, song: song)
             } else {
-                self.playRemote(remoteSongUrl)
+                self.playRemote(song)
                 delegate?.cellState(state: .prepare, song: song)
             }
         } else {
@@ -139,10 +137,10 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
                                                object: player?.currentItem)
     }
     
-    private func playRemote(_ remoteSongUrl: URL) {
-        let playerItem = CachingPlayerItem(url: remoteSongUrl, customFileExtension: "mp3")
-        playerItem.delegate = self
-        let player = AVPlayer(playerItem: playerItem)
+    private func playRemote(_ song: SongEntity) {
+        let remotePlayerItem = RemotePlayerItem(song: song)
+        remotePlayerItem.delegate = self
+        let player = AVPlayer(playerItem: remotePlayerItem)
         player.automaticallyWaitsToMinimizeStalling = false
         player.play()
         self.player = player
@@ -257,7 +255,7 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
     }
     
     // Delegate methods
-    func playerItemReadyToPlay(_ playerItem: CachingPlayerItem) {
+    func playerItemReadyToPlay(_ playerItem: RemotePlayerItem) {
         log.info("Ready to play...")
         if let player = self.player {
             let duration = playerItem.asset.duration.seconds
@@ -267,24 +265,14 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
         }
     }
     
-    func playerItem(_ playerItem: CachingPlayerItem, didFinishDownloadingData data: Data) {
-        log.info("Finished downloading")
+    func playerItem(_ playerItem: RemotePlayerItem, didDownloadBytesSoFar bytesDownloaded: Int, outOf bytesExpected: Int) {
+        log.info("Loaded so far: \(bytesDownloaded) out of \(bytesExpected)")
         DispatchQueue.main.sync {
-            if let songName = currentSong?.songName {
-                let tempUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-                let destUrl = tempUrl.appendingPathComponent(songName).appendingPathExtension("mp3")
-                do {
-                    log.info("Writing to a file: \(destUrl)")
-                    try data.write(to: destUrl, options: .atomic)
-                } catch {
-                    log.error("Failed writing file to \(destUrl) " +
-                        "Error: " + error.localizedDescription)
-                }
-            }
+            self.currentBufferValue = Double(bytesDownloaded/(bytesExpected/100))/100
         }
     }
     
-    func playerItem(_ playerItem: CachingPlayerItem, didReceiveResponse response: HTTPURLResponse) {
+    func playerItem(_ playerItem: RemotePlayerItem, didReceiveResponse response: HTTPURLResponse) {
         log.debug("Received response: \(response)")
         DispatchQueue.main.sync {
             if let rawSeconds = response.allHeaderFields["Audio-Duration"] as? String,
@@ -294,14 +282,7 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
         }
     }
     
-    func playerItem(_ playerItem: CachingPlayerItem, didDownloadBytesSoFar bytesDownloaded: Int, outOf bytesExpected: Int) {
-        log.info("Loaded so far: \(bytesDownloaded) out of \(bytesExpected)")
-        DispatchQueue.main.sync {
-            self.currentBufferValue = Double(bytesDownloaded/(bytesExpected/100))/100
-        }
-    }
-    
-    func playerItemDidStopPlayback(playerItem: CachingPlayerItem) {
+    func playerItemDidStopPlayback(playerItem: RemotePlayerItem) {
         log.info("Not enough data for playback. Probably because of the poor network. Wait a bit and try to play later.")
         DispatchQueue.main.sync {
             if let currentSong = currentSong {
@@ -310,12 +291,27 @@ class AudioPlayer: NSObject, CachingPlayerItemDelegate {
         }
     }
     
-    func playerItem(_ playerItem: CachingPlayerItem, downloadingFailedWith error: Error) {
+    func playerItem(_ playerItem: RemotePlayerItem, downloadingFailedWith error: Error) {
         log.error("The streaming has failed due to: \(error.localizedDescription)")
         DispatchQueue.main.sync {
             if let currentSong = currentSong, error._code != NSURLErrorCancelled {
                 delegate?.propagateError(title: "The streaming has failed", error: error.localizedDescription)
                 delegate?.cellState(state: .stop, song: currentSong)
+            }
+        }
+    }
+    
+    func playerItem(_ playerItem: RemotePlayerItem, didFinishDownloadingData data: Data) {
+        log.info("Finished downloading")
+        if let songName = playerItem.assignedSong.songName {
+            let tempUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            let destUrl = tempUrl.appendingPathComponent(songName).appendingPathExtension("mp3")
+            do {
+                log.info("Writing to a file: \(destUrl)")
+                try data.write(to: destUrl, options: .atomic)
+            } catch {
+                log.error("Failed writing file to \(destUrl) " +
+                    "Error: " + error.localizedDescription)
             }
         }
     }

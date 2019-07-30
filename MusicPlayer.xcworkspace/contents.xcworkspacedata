@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:MusicPlayer/Model/SongEntity+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:MusicPlayer/Model/SongEntity+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
       location = "group:MusicPlayer.xcodeproj">
    </FileRef>
    <FileRef
