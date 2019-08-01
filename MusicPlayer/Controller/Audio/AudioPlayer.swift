@@ -183,7 +183,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
         if let player = self.player, let currentSong = currentSong, player.isPlaying {
             delegate?.cellState(state: .pause, song: currentSong)
             player.pause()
-            rc?.updateMP(state: .pause)
+            rc?.updateMP(state: .pause, currentTime: player.currentTime().seconds)
         }
     }
     
@@ -192,7 +192,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
             let forCmTime = CMTime(seconds: seconds, preferredTimescale: 1000000)
             let seekTo = forward ? currentTime + forCmTime : currentTime - forCmTime
             player.currentItem?.seek(to: seekTo, completionHandler: nil)
-            rc?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
+            rc?.updateMP(state: .resume, currentTime: seekTo.seconds)
         }
     }
     

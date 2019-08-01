@@ -100,7 +100,7 @@ func setMPControls(songArtist: String, songTitle: String, duration: Double = .na
         mpic.nowPlayingInfo?[MPMediaItemPropertyPlaybackDuration] = duration
     }
     
-    internal func initSeekWorker(_ forward: Bool) -> DispatchWorkItem {
+    internal func initSeekWorker(_ forward: Bool) -> DispatchWorkItem? {
         return DispatchWorkItem { [weak self] in
             var timesSeeked = 0
             var seekTime: Double = 5 // sec
@@ -128,8 +128,10 @@ func setMPControls(songArtist: String, songTitle: String, duration: Double = .na
     internal func handleRemoteControlSeek(event: MPSeekCommandEvent, forward: Bool) -> MPRemoteCommandHandlerStatus {
         switch event.type {
         case .beginSeeking:
-            seekWorker = initSeekWorker(forward)
-            DispatchQueue.global().async(execute: seekWorker!)
+            if let seekWorker = initSeekWorker(forward) {
+                DispatchQueue.global(qos: .userInteractive).async(execute: seekWorker)
+                self.seekWorker = seekWorker
+            }
         case .endSeeking:
             seekWorker?.cancel()
         @unknown default:
