@@ -67,7 +67,7 @@
 		680C5F4B458AA440DC57BBD7 /* Pods_MusicPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */; };
 		CF2F594D0BD61EB500B2B5C6 /* MenuSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2F5CC456DFFE1FA5E899E3 /* MenuSettings.swift */; };
 		CF2F5D418ED701CC945C2B36 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2F59FCF07DAB737CE9F931 /* MenuTableViewController.swift */; };
-		CF2F5E7E81A30C0F0AD7F0EE /* RemoteControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2F594116AB4F210B91751A /* RemoteControl.swift */; };
+		CF2F5E7E81A30C0F0AD7F0EE /* MPControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2F594116AB4F210B91751A /* MPControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,7 +156,7 @@
 		879D82898F7D82C29BDD416F /* Pods_MusicPlayerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E293939B668052A02317BD /* Pods-MusicPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF2F594116AB4F210B91751A /* RemoteControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteControl.swift; sourceTree = "<group>"; };
+		CF2F594116AB4F210B91751A /* MPControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPControl.swift; sourceTree = "<group>"; };
 		CF2F59FCF07DAB737CE9F931 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		CF2F5CC456DFFE1FA5E899E3 /* MenuSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -520,7 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				31491B9522BACC9C00445027 /* RemotePlayerItem.swift */,
-				CF2F594116AB4F210B91751A /* RemoteControl.swift */,
+				CF2F594116AB4F210B91751A /* MPControl.swift */,
 				31491B9722BACFD600445027 /* AudioDownloadDelegate.swift */,
 			);
 			path = Utils;
@@ -845,7 +845,7 @@
 				CF2F594D0BD61EB500B2B5C6 /* MenuSettings.swift in Sources */,
 				CF2F5D418ED701CC945C2B36 /* MenuTableViewController.swift in Sources */,
 				3127DC9322AD5E9600A972AF /* ServerController.swift in Sources */,
-				CF2F5E7E81A30C0F0AD7F0EE /* RemoteControl.swift in Sources */,
+				CF2F5E7E81A30C0F0AD7F0EE /* MPControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

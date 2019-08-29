@@ -64,12 +64,12 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
     var player: AVPlayer?
     var currentSong: SongEntity?
     var currentBufferValue: Double = 0
-    private var rc: RemoteControl?
+    private var mp: MPControl?
     
     override init() {
         super.init()
-        rc?.resetMPControls()
-        rc = RemoteControl.init(resumeSong: resume,
+        mp?.resetMPControls()
+        mp = MPControl.init(resumeSong: resume,
                                 pauseSong: pause,
                                 playNextSong: {() -> () in self.playNextSong(backward: false)},
                                 playPreviousSong: {() -> () in self.playNextSong(backward: true)},
@@ -80,7 +80,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
     }
     
     deinit {
-        rc?.resetMPControls()
+        mp?.resetMPControls()
         let scc = MPRemoteCommandCenter.shared()
         scc.playCommand.removeTarget(self)
         scc.pauseCommand.removeTarget(self)
@@ -130,7 +130,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
                 log.error("Could not unwrap SongEntity: \(song)")
                 return
         }
-        rc?.setMPControls(songArtist: songArtist, songTitle: songTitle, duration: player?.duration ?? .nan)
+        mp?.setMPControls(songArtist: songArtist, songTitle: songTitle, duration: player?.duration ?? .nan)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(playNextSong(backward:)),
                                                name: .AVPlayerItemDidPlayToEndTime,
@@ -159,7 +159,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
             if let player = self.player {
                 player.play()
                 delegate?.cellState(state: .resume,song: currentSong)
-                rc?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
+                mp?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
             } else {
                 play(song: currentSong)
             }
@@ -175,7 +175,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
             player.currentItem?.seek(to: startCmTime, completionHandler: nil)
             self.player = nil
             delegate?.cellState(state: .stop, song: currentSong)
-            rc?.resetMPControls()
+            mp?.resetMPControls()
         }
     }
     
@@ -183,7 +183,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
         if let player = self.player, let currentSong = currentSong, player.isPlaying {
             delegate?.cellState(state: .pause, song: currentSong)
             player.pause()
-            rc?.updateMP(state: .pause, currentTime: player.currentTime().seconds)
+            mp?.updateMP(state: .pause, currentTime: player.currentTime().seconds)
         }
     }
     
@@ -192,7 +192,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
             let forCmTime = CMTime(seconds: seconds, preferredTimescale: 1000000)
             let seekTo = forward ? currentTime + forCmTime : currentTime - forCmTime
             player.currentItem?.seek(to: seekTo, completionHandler: nil)
-            rc?.updateMP(state: .resume, currentTime: seekTo.seconds)
+            mp?.updateMP(state: .resume, currentTime: seekTo.seconds)
         }
     }
     
@@ -200,7 +200,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
         if let player = self.player {
             let toCmTime = CMTime(seconds: position, preferredTimescale: 1000000)
             player.currentItem?.seek(to: toCmTime, completionHandler: nil)
-            rc?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
+            mp?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
         }
     }
     
@@ -259,7 +259,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
         log.info("Ready to play...")
         if let player = self.player {
             let duration = playerItem.asset.duration.seconds
-            rc?.updateMPDuration(duration: duration)
+            mp?.updateMPDuration(duration: duration)
             delegate?.cellState(state: .play, song: currentSong!)
             player.play()
         }

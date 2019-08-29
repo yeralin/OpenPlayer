@@ -10,7 +10,7 @@ import Foundation
 import MediaPlayer
 
 @objcMembers
-class RemoteControl: NSObject {
+class MPControl: NSObject {
     
     var seekWorker: DispatchWorkItem? = nil
     var seekFor: (_ seconds: Double, _ forward: Bool) -> ()
