@@ -11,36 +11,42 @@ fileprivate extension URL {
 
 }
 
-@objc protocol RemotePlayerItemStatusDelegate {
-
-    @objc optional func playerItem(_ playerItem: RemotePlayerItem, didReceiveResponse response: HTTPURLResponse)
-
-    /// Is called when the media file is fully downloaded.
-    @objc optional func playerItem(_ playerItem: RemotePlayerItem, didFinishDownloadingData data: Data)
-
-    /// Is called every time a new portion of data is received.
-    @objc optional func playerItem(_ playerItem: RemotePlayerItem, didDownloadBytesSoFar bytesDownloaded: Int, outOf bytesExpected: Int)
-
-    /// Is called after initial prebuffering is finished, means
-    /// we are ready to play.
-    @objc optional func playerItemReadyToPlay(_ playerItem: RemotePlayerItem)
-
-    /// Is called when the data being downloaded did not arrive in time to
-    /// continue playback.
-    @objc optional func playerItemPlaybackStalled(_ playerItem: RemotePlayerItem)
-
-    /// Is called on downloading error.
-    @objc optional func playerItem(_ playerItem: RemotePlayerItem, downloadingFailedWith error: Error)
-
+extension Notification.Name {
+    static var receivedHttpResponse: Notification.Name {
+        return .init("AudioPlayer.receivedHttpResponse")
+    }
+    static var readyToPlay: Notification.Name {
+        return .init("AudioPlayer.readyToPlay")
+    }
+    static var errored: Notification.Name {
+        return .init("AudioPlayer.errored")
+    }
+    static var stalled: Notification.Name {
+        return .init("AudioPlayer.stalled")
+    }
+    static var downloadProgress: Notification.Name {
+        return .init("AudioPlayer.downloadProgress")
+    }
+    static var finishedDownload: Notification.Name {
+        return .init("AudioPlayer.finishedDownload")
+    }
 }
 
 open class RemotePlayerItem: AVPlayerItem {
 
     private(set) var assignedSong: SongEntity
+    private let notificationCenter: NotificationCenter = .default
     internal let audioDownloadDelegate = AudioDownloadDelegate()
+    
     internal let url: URL
     internal let initialScheme: String?
     internal var customFileExtension: String?
+    
+    internal var payload: Data?
+    internal var bytesTotal: Int?
+    internal var bytesDownloaded: Int?
+    internal var httpResponse: HTTPURLResponse?
+    
     internal var mutableDuration: CMTime = CMTimeMakeWithSeconds(0, preferredTimescale: 600)
     override open var duration: CMTime {
         get {
@@ -50,8 +56,16 @@ open class RemotePlayerItem: AVPlayerItem {
             self.mutableDuration = newValue
         }
     }
-
-    weak var delegate: RemotePlayerItemStatusDelegate?
+    
+    internal var mutableError: Error?
+    override open var error: Error? {
+        get {
+            return mutableError
+        }
+        set {
+            self.mutableError = newValue
+        }
+    }
 
     // Key-value observing context
     private var playerItemContext = 0
@@ -123,11 +137,12 @@ open class RemotePlayerItem: AVPlayerItem {
             }
             switch status {
             case .readyToPlay:
-                delegate?.playerItemReadyToPlay?(self)
+                notificationCenter.post(name: .readyToPlay, object: self)
             case .failed:
-                delegate?.playerItem?(self, downloadingFailedWith: self.error?.localizedDescription ?? "unknown")
-            case .unknown: break
-            @unknown default: break
+                notificationCenter.post(name: .errored, object: self)
+            case .unknown: fallthrough
+            @unknown default:
+                log.warning("Received unknown status")
             }
         }
     }
@@ -135,7 +150,7 @@ open class RemotePlayerItem: AVPlayerItem {
     // MARK: Notification handlers
 
     @objc func playbackStalledHandler() {
-        delegate?.playerItemPlaybackStalled?(self)
+        notificationCenter.post(name: .stalled, object: self)
     }
 
     // MARK: -

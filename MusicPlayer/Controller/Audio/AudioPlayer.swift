@@ -54,7 +54,7 @@ class LocalPlayerItem: AVPlayerItem {
     }
 }
 
-class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
+class AudioPlayer: NSObject {
     
     static let instance = AudioPlayer()
     // The delegate is intentionally not marked as weak
@@ -77,6 +77,21 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(handleInterruption(notification:)),
                                                name: AVAudioSession.interruptionNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(remotePlayerItemReceivedHttpResponse(_:)),
+                                               name: .receivedHttpResponse, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(remotePlayerItemReadyToPlay(_:)),
+                                               name: .readyToPlay, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(remotePlayerItemErrored(_:)),
+                                               name: .errored, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(remotePlayerItemStalled(_:)),
+                                               name: .stalled, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(remotePlayerItemDownloadProgress(_:)),
+                                               name: .downloadProgress, object: nil)
     }
     
     deinit {
@@ -89,6 +104,7 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
         scc.previousTrackCommand.removeTarget(self)
         scc.seekBackwardCommand.removeTarget(self)
         scc.seekForwardCommand.removeTarget(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func isPlaying(song: SongEntity) -> Bool {
@@ -139,10 +155,8 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
     
     private func playRemote(_ song: SongEntity) {
         let remotePlayerItem = RemotePlayerItem(song: song)
-        remotePlayerItem.delegate = self
         let player = AVPlayer(playerItem: remotePlayerItem)
         player.automaticallyWaitsToMinimizeStalling = false
-        player.play()
         self.player = player
     }
     
@@ -254,49 +268,80 @@ class AudioPlayer: NSObject, RemotePlayerItemStatusDelegate {
         }
     }
     
-    // Delegate methods
-    func playerItemReadyToPlay(_ playerItem: RemotePlayerItem) {
-        log.info("Ready to play...")
-        if let player = self.player {
-            let duration = playerItem.asset.duration.seconds
-            mp?.updateMPDuration(duration: duration)
-            delegate?.cellState(state: .play, song: currentSong!)
-            player.play()
+    // Handle notifications methods
+    
+    @objc func remotePlayerItemReadyToPlay(_ notification: Notification) {
+        guard let remotePlayerItem = notification.object as? RemotePlayerItem,
+              let player = self.player,
+              let currentSong = self.currentSong,
+                  remotePlayerItem.assignedSong == currentSong else {
+            log.error("Could not properly handle a notification: \(notification)")
+            return
         }
+        let duration = remotePlayerItem.asset.duration.seconds
+        mp?.updateMPDuration(duration: duration)
+        delegate?.cellState(state: .play, song: currentSong)
+        player.playImmediately(atRate: 1)
     }
     
-    func playerItem(_ playerItem: RemotePlayerItem, didDownloadBytesSoFar bytesDownloaded: Int, outOf bytesExpected: Int) {
-        log.info("Loaded so far: \(bytesDownloaded) out of \(bytesExpected)")
-        DispatchQueue.main.sync {
-            self.currentBufferValue = Double(bytesDownloaded/(bytesExpected/100))/100
+    @objc func remotePlayerItemErrored(_ notification: Notification) {
+        guard let remotePlayerItem = notification.object as? RemotePlayerItem,
+            let error = remotePlayerItem.error,
+            let currentSong = self.currentSong,
+                remotePlayerItem.assignedSong == currentSong else {
+                log.error("Could not properly handle a notification: \(notification)")
+                return
         }
-    }
-    
-    func playerItem(_ playerItem: RemotePlayerItem, didReceiveResponse response: HTTPURLResponse) {
-        log.debug("Received response: \(response)")
-        DispatchQueue.main.sync {
-            if let rawSeconds = response.allHeaderFields["Audio-Duration"] as? String,
-                let seconds = Double(rawSeconds), seconds > 0 {
-                playerItem.duration = CMTimeMakeWithSeconds(seconds, preferredTimescale: 600)
-            }
-        }
-    }
-    
-    func playerItemDidStopPlayback(playerItem: RemotePlayerItem) {
-        log.info("Not enough data for playback. Probably because of the poor network. Wait a bit and try to play later.")
-        DispatchQueue.main.sync {
-            if let currentSong = currentSong {
-                delegate?.cellState(state: .prepare, song: currentSong)
-            }
-        }
-    }
-    
-    func playerItem(_ playerItem: RemotePlayerItem, downloadingFailedWith error: Error) {
         log.error("The streaming has failed due to: \(error.localizedDescription)")
         DispatchQueue.main.sync {
-            if let currentSong = currentSong, error._code != NSURLErrorCancelled {
+            if error._code != NSURLErrorCancelled {
                 delegate?.propagateError(title: "The streaming has failed", error: error.localizedDescription)
                 delegate?.cellState(state: .stop, song: currentSong)
+            }
+        }
+    }
+    
+    @objc func remotePlayerItemStalled(_ notification: Notification) {
+        guard let remotePlayerItem = notification.object as? RemotePlayerItem,
+            let currentSong = self.currentSong,
+                remotePlayerItem.assignedSong == currentSong else {
+                log.error("Could not properly handle a notification: \(notification)")
+                return
+        }
+        log.info("Not enough data for playback. Probably because of the poor network. Wait a bit and try to play later.")
+        DispatchQueue.main.sync {
+            delegate?.cellState(state: .prepare, song: currentSong)
+        }
+    }
+    
+    @objc func remotePlayerItemDownloadProgress(_ notification: Notification) {
+        guard let remotePlayerItem = notification.object as? RemotePlayerItem,
+            let bytesDownloaded = remotePlayerItem.bytesDownloaded,
+            let totalBytesExpected = remotePlayerItem.bytesTotal,
+            let currentSong = self.currentSong,
+            remotePlayerItem.assignedSong == currentSong else {
+                log.error("Could not properly handle a notification: \(notification)")
+                return
+        }
+        log.info("Loaded so far: \(bytesDownloaded) out of \(totalBytesExpected)")
+        DispatchQueue.main.sync {
+            self.currentBufferValue = Double(bytesDownloaded/(totalBytesExpected/100))/100
+        }
+    }
+    
+    @objc func remotePlayerItemReceivedHttpResponse(_ notification: Notification) {
+        guard let remotePlayerItem = notification.object as? RemotePlayerItem,
+            let httpResponse = remotePlayerItem.httpResponse,
+            let currentSong = self.currentSong,
+            remotePlayerItem.assignedSong == currentSong else {
+                log.error("Could not properly handle a notification: \(notification)")
+                return
+        }
+        log.info("Received response: \(httpResponse)")
+        DispatchQueue.main.sync {
+            if let rawSeconds = httpResponse.allHeaderFields["Audio-Duration"] as? String,
+                let seconds = Double(rawSeconds), seconds > 0 {
+                remotePlayerItem.duration = CMTimeMakeWithSeconds(seconds, preferredTimescale: 600)
             }
         }
     }

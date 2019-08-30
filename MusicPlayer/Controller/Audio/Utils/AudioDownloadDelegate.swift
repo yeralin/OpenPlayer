@@ -10,11 +10,14 @@ import Foundation
 import AVFoundation
 
 class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSessionDelegate, URLSessionDataDelegate, URLSessionTaskDelegate {
+    
+    private let notificationCenter: NotificationCenter = .default
 
-    var session: URLSession?
-    var mediaData: Data?
-    var response: URLResponse?
-    var loadingRequest: AVAssetResourceLoadingRequest?
+    internal var session: URLSession?
+    private var mediaData: Data?
+    private var response: URLResponse?
+    private var loadingRequest: AVAssetResourceLoadingRequest?
+    
     weak var owner: RemotePlayerItem?
 
     func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
@@ -62,29 +65,34 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
 
     // MARK: URLSession delegate
 
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        mediaData?.append(data)
-        processLoadingRequest()
-        owner?.delegate?.playerItem?(owner!, didDownloadBytesSoFar: mediaData!.count, outOf: Int(dataTask.countOfBytesExpectedToReceive))
-    }
-
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         completionHandler(Foundation.URLSession.ResponseDisposition.allow)
         mediaData = Data()
         self.response = response
         if let response = response as? HTTPURLResponse {
-            owner?.delegate?.playerItem?(owner!, didReceiveResponse: response)
+            owner?.httpResponse = response
+            notificationCenter.post(name: .receivedHttpResponse, object: owner)
         }
         processLoadingRequest()
+    }
+    
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        mediaData?.append(data)
+        processLoadingRequest()
+        owner?.bytesTotal = Int(dataTask.countOfBytesExpectedToReceive)
+        owner?.bytesDownloaded = mediaData?.count
+        notificationCenter.post(name: .downloadProgress, object: owner)
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
-            owner?.delegate?.playerItem?(owner!, downloadingFailedWith: error)
+            owner?.error = error
+            notificationCenter.post(name: .errored, object: owner)
             return
         }
         processLoadingRequest()
-        owner?.delegate?.playerItem?(owner!, didFinishDownloadingData: mediaData!)
+        owner?.payload = mediaData
+        notificationCenter.post(name: .finishedDownload, object: owner)
     }
 
     // MARK: -
