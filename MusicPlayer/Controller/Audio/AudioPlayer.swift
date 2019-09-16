@@ -49,6 +49,7 @@ extension AVPlayer {
 
 open class PlayerItem: AVPlayerItem {
     
+    public var bufferValue: Double = 1
     private(set) var assignedSong: SongEntity
     
     override open var duration: CMTime {
@@ -84,7 +85,6 @@ class AudioPlayer: NSObject {
             return currentPlayerItem?.assignedSong
         }
     }
-    var currentBufferValue: Double = 0
     private var mp: MPControl?
     
     override init() {
@@ -135,26 +135,27 @@ class AudioPlayer: NSObject {
         return false
     }
     
-    func play(song: SongEntity) {
+    func play(song: SongEntity) throws {
         if self.isPlaying(song: song) {
-            resume()
+            try resume()
             return
         }
-        self.stop()
+        do {
+            try stop()
+        } catch {} // Ignore, player might be nil
         
         // Determine whether playing a remote or local audio file
         if song.isRemote() && song.isCached() == nil {
-            self.playRemote(song)
+            self.currentPlayerItem = self.playRemote(song)
             delegate?.cellState(state: .prepare, song: song)
         } else {
-            self.playLocal(song)
+            self.currentPlayerItem = self.playLocal(song)
             delegate?.cellState(state: .play, song: song)
         }
         
         guard let songArtist = song.songArtist,
             let songTitle = song.songTitle else {
-                log.error("Could not unwrap SongEntity: \(song)")
-                return
+                throw "Could not unwrap SongEntity: \(song)"
         }
         mp?.setMPControls(songArtist: songArtist, songTitle: songTitle, duration: player?.duration ?? .nan)
         NotificationCenter.default.addObserver(self,
@@ -163,83 +164,72 @@ class AudioPlayer: NSObject {
                                                object: player?.currentItem)
     }
     
-    private func playRemote(_ song: SongEntity) {
-        currentPlayerItem = RemotePlayerItem(song: song)
-        let player = AVPlayer(playerItem: currentPlayerItem)
+    private func playRemote(_ song: SongEntity) -> RemotePlayerItem {
+        let remotePlayerItem = RemotePlayerItem(song: song)
+        let player = AVPlayer(playerItem: remotePlayerItem)
         player.automaticallyWaitsToMinimizeStalling = false
         self.player = player
+        return remotePlayerItem
     }
     
-    private func playLocal(_ song: SongEntity) {
-        currentPlayerItem = PlayerItem(song: song)
-        let player = AVPlayer(playerItem: currentPlayerItem)
+    private func playLocal(_ song: SongEntity) -> PlayerItem {
+        let localPlayerItem = PlayerItem(song: song)
+        let player = AVPlayer(playerItem: localPlayerItem)
         player.play()
         self.player = player
-        self.currentBufferValue = 1
+        return localPlayerItem
     }
     
-    func resume() {
-        if let currentSong = self.currentSong {
-            if let player = self.player {
-                player.play()
-                delegate?.cellState(state: .resume,song: currentSong)
-                mp?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
-            } else {
-                play(song: currentSong)
-            }
+    func resume() throws {
+        guard let currentSong = self.currentSong else {
+            throw "Could not locate currentSong, nothing to resume"
         }
-        
-    }
-    
-    func stop() {
-        if let player = self.player, let currentSong = currentSong {
-            player.pause()
-            self.player = nil
-            delegate?.cellState(state: .stop, song: currentSong)
-            mp?.resetMPControls()
-        }
-    }
-    
-    func pause() {
-        if let player = self.player, let currentSong = currentSong, player.isPlaying {
-            delegate?.cellState(state: .pause, song: currentSong)
-            player.pause()
-            mp?.updateMP(state: .pause, currentTime: player.currentTime().seconds)
-        }
-    }
-    
-    func seekFor(seconds: Double, forward: Bool) {
-        if let player = self.player, let currentTime = player.currentItem?.currentTime() {
-            let forCmTime = CMTime(seconds: seconds, preferredTimescale: 1000000)
-            let seekTo = forward ? currentTime + forCmTime : currentTime - forCmTime
-            player.currentItem?.seek(to: seekTo, completionHandler: nil)
-            mp?.updateMP(state: .resume, currentTime: seekTo.seconds)
-        }
-    }
-    
-    func seekTo(position: TimeInterval) {
         if let player = self.player {
-            let toCmTime = CMTime(seconds: position, preferredTimescale: 1000000)
-            player.currentItem?.seek(to: toCmTime, completionHandler: nil)
+            player.play()
+            delegate?.cellState(state: .resume,song: currentSong)
             mp?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
+        } else {
+            try play(song: currentSong)
         }
     }
     
-    @objc internal func playNextSong(backward: Bool = false) {
-        if let currentSong = currentSong,
-           let songsArray = delegate?.getSongsArray(song: currentSong) {
-            var nextSongIndex: Int = -1
-            if shuffleMode == true {
-                nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
-            } else if let currSongIndex = songsArray.firstIndex(of: currentSong) {
-                nextSongIndex = backward ? currSongIndex - 1 : currSongIndex + 1
-            }
-            if songsArray.indices.contains(nextSongIndex) {
-                play(song: songsArray[nextSongIndex])
-            } else {
-                stop()
-            }
+    func stop() throws {
+        guard let player = self.player, let currentSong = currentSong else {
+            throw "Could not locate an active player, nothing to stop"
         }
+        player.pause()
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
+        self.player = nil
+        delegate?.cellState(state: .stop, song: currentSong)
+        mp?.resetMPControls()
+    }
+    
+    func pause() throws {
+        guard let player = self.player, let currentSong = currentSong, player.isPlaying else {
+            throw "Could not locate an active player, nothing to pause"
+        }
+        delegate?.cellState(state: .pause, song: currentSong)
+        player.pause()
+        mp?.updateMP(state: .pause, currentTime: player.currentTime().seconds)
+    }
+    
+    func seekFor(seconds: Double, forward: Bool) throws {
+        guard let player = self.player, let currentTime = player.currentItem?.currentTime() else {
+            throw "Could not locate an active player, nothing to seek"
+        }
+        let forCmTime = CMTime(seconds: seconds, preferredTimescale: 1000000)
+        let seekTo = forward ? currentTime + forCmTime : currentTime - forCmTime
+        player.currentItem?.seek(to: seekTo, completionHandler: nil)
+        mp?.updateMP(state: .resume, currentTime: seekTo.seconds)
+    }
+    
+    func seekTo(position: TimeInterval) throws {
+        guard let player = self.player else {
+            throw "Could not locate an active player, nothing to seek"
+        }
+        let toCmTime = CMTime(seconds: position, preferredTimescale: 1000000)
+        player.currentItem?.seek(to: toCmTime, completionHandler: nil)
+        mp?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
     }
     
     internal func getCurrentTimeAsString() -> String {
@@ -252,26 +242,52 @@ class AudioPlayer: NSObject {
         return String(format: "%0.2d:%0.2d",minutes,seconds)
     }
     
-    @objc internal func handleInterruption(notification: Notification) {
-        guard let userInfo = notification.userInfo,
-            let typeInt = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-            let type = AVAudioSession.InterruptionType(rawValue: typeInt) else {
-                return
+    @objc internal func playNextSong(backward: Bool = false) {
+        do {
+            guard let currentSong = currentSong,
+               let songsArray = delegate?.getSongsArray(song: currentSong) else {
+                throw "Could not locate songsArray"
+            }
+            var nextSongIndex: Int = -1
+            if shuffleMode == true {
+                nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
+            } else if let currSongIndex = songsArray.firstIndex(of: currentSong) {
+                nextSongIndex = backward ? currSongIndex - 1 : currSongIndex + 1
+            }
+            if songsArray.indices.contains(nextSongIndex) {
+                try play(song: songsArray[nextSongIndex])
+            } else {
+                try stop()
+            }
+        } catch let error {
+            fatalError("Reached internal inconsistency: \(error)")
         }
-        switch type {
-        case .began:
-            self.pause()
-        case .ended:
-            guard let optionInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
-                log.error("Could not extract interruption options")
-                return
+    }
+    
+    @objc internal func handleInterruption(notification: Notification) {
+        do {
+            guard let userInfo = notification.userInfo,
+                let typeInt = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+                let type = AVAudioSession.InterruptionType(rawValue: typeInt) else {
+                    return
             }
-            let options = AVAudioSession.InterruptionOptions(rawValue: optionInt)
-            if options.contains(.shouldResume) {
-                self.resume()
+            switch type {
+            case .began:
+                try pause()
+            case .ended:
+                guard let optionInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
+                    log.error("Could not extract interruption options")
+                    return
+                }
+                let options = AVAudioSession.InterruptionOptions(rawValue: optionInt)
+                if options.contains(.shouldResume) {
+                    try resume()
+                }
+            @unknown default:
+                log.error("Unhandled interruption type has occured")
             }
-        @unknown default:
-            log.error("Unhandled interruption type has occured")
+        } catch let error {
+            fatalError("Reached internal inconsistency: \(error)")
         }
     }
     
@@ -332,7 +348,7 @@ class AudioPlayer: NSObject {
         }
         log.info("Loaded so far: \(bytesDownloaded) out of \(totalBytesExpected)")
         DispatchQueue.main.sync {
-            self.currentBufferValue = Double(bytesDownloaded/(totalBytesExpected/100))/100
+            remotePlayerItem.bufferValue = Double(bytesDownloaded/(totalBytesExpected/100))/100
         }
     }
     

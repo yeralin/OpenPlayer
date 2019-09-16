@@ -15,9 +15,13 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text == "" {
-            AudioPlayer.instance.stop()
-            searchSongs.removeAll()
-            tableView.reloadData()
+            do {
+                try AudioPlayer.instance.stop()
+                searchSongs.removeAll()
+                tableView.reloadData()
+            } catch let error {
+                self.propagateError(title: "Audio player failed", error: error.localizedDescription)
+            }
         }
     }
     
@@ -43,8 +47,12 @@ extension DownloadTableSearchBar: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchSongs.removeAll()
-        AudioPlayer.instance.stop()
+        do {
+            searchSongs.removeAll()
+            try AudioPlayer.instance.stop()
+        } catch let error {
+            self.propagateError(title: "Audio player failed", error: error.localizedDescription)
+        }
         if var searchText = searchBar.text, !searchText.isEmpty {
             searchText = searchText.lowercased()
             self.showWaitOverlay()

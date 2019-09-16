@@ -38,9 +38,11 @@ extension DownloadCellSliderUIController {
     }
     
     @objc internal  func updateSliderCAD() {
-        if sliderCAD != nil, let currentTime = AudioPlayer.instance.player?.currentTime {
+        if sliderCAD != nil,
+            let currentTime = AudioPlayer.instance.player?.currentTime,
+            let currentPlayerItem = AudioPlayer.instance.currentPlayerItem {
             songProgressSlider.value = currentTime
-            songProgressSlider.bufferEndValue = AudioPlayer.instance.currentBufferValue
+            songProgressSlider.bufferEndValue = currentPlayerItem.bufferValue
         } else {
             log.error("Could not update slider CAD")
         }

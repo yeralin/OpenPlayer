@@ -12,10 +12,14 @@ private typealias DownloadCellActions = DownloadCell
 extension DownloadCellActions {
     
     internal func actionOnPlayPauseTap(isPlaying: Bool, isInProgress: Bool) {
-        if !isPlaying {
-            AudioPlayer.instance.play(song: song)
-        } else {
-            AudioPlayer.instance.pause()
+        do {
+            if !isPlaying {
+                try AudioPlayer.instance.play(song: song)
+            } else {
+                try AudioPlayer.instance.pause()
+            }
+        } catch let error {
+            delegate.propagateError(title: "Audio player failed", error: error.localizedDescription)
         }
     }
     
@@ -28,6 +32,10 @@ extension DownloadCellActions {
     }
     
     internal func actionOnChangeSliderPosition(position: TimeInterval) {
-        AudioPlayer.instance.seekTo(position: position)
+        do {
+            try AudioPlayer.instance.seekTo(position: position)
+        } catch let error {
+            delegate.propagateError(title: "Audio player failed", error: error.localizedDescription)
+        }
     }
 }

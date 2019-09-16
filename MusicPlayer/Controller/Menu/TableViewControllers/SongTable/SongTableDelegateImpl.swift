@@ -10,11 +10,26 @@ import Foundation
 import UIKit
 import SwiftOverlays
 
-private typealias SongTableAudioPlayerDelegImpl = SongTableViewController
-extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
+private typealias SongTableDelegateImpl = SongTableViewController
+extension SongTableDelegateImpl: AudioPlayerDelegate, CellToTableDelegate {
 
     internal func initAudioPlayerDelegateImpl() {
         AudioPlayer.instance.delegate = self
+    }
+    
+    // MARK - CellToTableDelegateImpl
+    func performSegueForCell(sender: Any?, identifier: String) {
+        if identifier == Constants.PRESENT_PLAYLIST_PICKER {
+            self.performSegue(withIdentifier: identifier, sender: sender)
+        }
+    }
+    
+    // MARK - AudioPlayerDelegateImpl
+    
+    func presentAlertForCell(alert: UIAlertController, alertName: String) {
+        if alertName == Constants.PRESENT_CHANGE_SONG_NAME_ALERT {
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     func getSongsArray(song: SongEntity) -> [SongEntity] {
@@ -27,19 +42,8 @@ extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
         }
         return []
     }
-    
-    internal func propagateError(title: String, error: String) {
-        let alert = UIAlertController(title: title,
-                                      message: error,
-                                      preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK",
-                                      style: UIAlertAction.Style.default,
-                                      handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
 
-    internal func
-        cellState(state: PlayerState, song: SongEntity) {
+    internal func cellState(state: PlayerState, song: SongEntity) {
         if !song.isProcessed {
             do {
                 try SongPersistencyManager.sharedInstance.processSong(toProcess: song)
@@ -61,5 +65,17 @@ extension SongTableAudioPlayerDelegImpl: AudioPlayerDelegate {
         case .prepare:
             fatalError("This state should not have been executed")
         }
+    }
+    
+    // MARK - Shared
+    
+    internal func propagateError(title: String, error: String) {
+        let alert = UIAlertController(title: title,
+                                      message: error,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK",
+                                      style: UIAlertAction.Style.default,
+                                      handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }

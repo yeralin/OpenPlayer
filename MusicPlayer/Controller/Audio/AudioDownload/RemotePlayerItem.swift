@@ -68,7 +68,7 @@ open class RemotePlayerItem: PlayerItem {
 
     // Key-value observing context
     private var playerItemContext = 0
-
+    
     open func downloadWithoutPlay() {
         if audioDownloadDelegate.session == nil {
             audioDownloadDelegate.owner = self
@@ -101,6 +101,7 @@ open class RemotePlayerItem: PlayerItem {
         let asset = AVURLAsset(url: urlWithCustomScheme)
         asset.resourceLoader.setDelegate(audioDownloadDelegate, queue: DispatchQueue.global(qos: .userInitiated))
         super.init(song: song, asset: asset, automaticallyLoadedAssetKeys: nil )
+        bufferValue = 0
         audioDownloadDelegate.owner = self
         
         addObserver(self,

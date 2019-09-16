@@ -14,14 +14,18 @@ extension SongCellActions {
     internal func actionOnPlayPauseTap(isPlaying: Bool, isInProgress: Bool) {
         let audioPlayerInst = AudioPlayer.instance
         //TODO: Change logic, don't depend on title
-        if !isPlaying {
-            if isInProgress {
-                audioPlayerInst.resume()
+        do {
+            if !isPlaying {
+                if isInProgress {
+                    try audioPlayerInst.resume()
+                } else {
+                    try audioPlayerInst.play(song: song)
+                }
             } else {
-                audioPlayerInst.play(song: song)
+                try audioPlayerInst.pause()
             }
-        } else {
-            audioPlayerInst.pause()
+        } catch let error {
+            delegate.propagateError(title: "Audio player failed", error: error.localizedDescription)
         }
     }
 
@@ -31,6 +35,10 @@ extension SongCellActions {
     }
 
     internal func actionOnChangeSliderPosition(songNewPosition: TimeInterval) {
-        AudioPlayer.instance.seekTo(position: songNewPosition)
+        do {
+            try AudioPlayer.instance.seekTo(position: songNewPosition)
+        } catch let error {
+            delegate.propagateError(title: "Audio player failed", error: error.localizedDescription)
+        }
     }
 }
