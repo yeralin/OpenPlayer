@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         let console = ConsoleDestination()
         let file = FileDestination()
-        console.format = "$DHH:mm:ss$d $L $M"
+        console.format = "$DHH:mm:ss$d $N.$F():$l $L: $M"
         log.addDestination(console)
         log.addDestination(file)
         return true
