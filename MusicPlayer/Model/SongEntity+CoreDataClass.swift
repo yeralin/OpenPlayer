@@ -29,15 +29,18 @@ public class SongEntity: NSManagedObject {
     
     // Returns either remote http URL or local file URL
     func getSongUrl() -> URL {
-        if let remoteSongUrl = self.songUrl {
-            return remoteSongUrl
+        if self.isRemote(), let remoteSongUrl = self.songUrl {
+            guard let cachedSongUrl = self.isCached() else {
+                return remoteSongUrl
+            }
+            return cachedSongUrl
+        } else {
+            let songPerstManager = SongPersistencyManager.sharedInstance
+            guard let localSongUrl = try? songPerstManager.getSongPath(song: self) else {
+                fatalError("Could not locate the song: \(self)")
+            }
+            return localSongUrl
         }
-        let songPerstManager = SongPersistencyManager.sharedInstance
-        // Either try to find a song in the store or in the cache
-        guard let localSongUrl = (try? songPerstManager.getSongPath(song: self)) ?? self.isCached() else {
-            fatalError("Could not locate the song: \(self)")
-        }
-        return localSongUrl
     }
     
     

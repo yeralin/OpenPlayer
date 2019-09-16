@@ -108,6 +108,7 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
             return
         }
         owner?.payload = mediaData
+        log.debug("Finished downloading: \(owner?.url.absoluteString ?? "Unknown item")")
         notificationCenter.post(name: .downloadFinished, object: owner)
         invalidateURLSession()
     }

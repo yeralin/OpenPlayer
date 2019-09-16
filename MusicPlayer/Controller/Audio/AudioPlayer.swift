@@ -74,6 +74,7 @@ open class PlayerItem: AVPlayerItem {
 class AudioPlayer: NSObject {
     
     static let instance = AudioPlayer()
+    private let audioDownloadManager = AudioDownloadManager()
     // The delegate is intentionally not marked as weak
     var delegate: AudioPlayerDelegate?
     
@@ -140,10 +141,7 @@ class AudioPlayer: NSObject {
             try resume()
             return
         }
-        do {
-            try stop()
-        } catch {} // Ignore, player might be nil
-        
+        try? stop() // Ignore, player might be nil
         // Determine whether playing a remote or local audio file
         if song.isRemote() && song.isCached() == nil {
             self.currentPlayerItem = self.playRemote(song)
@@ -293,7 +291,7 @@ class AudioPlayer: NSObject {
     
     // Handle notifications methods
     
-    @objc func remotePlayerItemReadyToPlay(_ notification: Notification) {
+    @objc internal func remotePlayerItemReadyToPlay(_ notification: Notification) {
         guard let remotePlayerItem = notification.object as? RemotePlayerItem,
               let player = self.player,
               let currentSong = self.currentSong,
@@ -307,7 +305,7 @@ class AudioPlayer: NSObject {
         player.playImmediately(atRate: 1)
     }
     
-    @objc func remotePlayerItemErrored(_ notification: Notification) {
+    @objc internal func remotePlayerItemErrored(_ notification: Notification) {
         guard let remotePlayerItem = notification.object as? RemotePlayerItem,
             let error = remotePlayerItem.error,
             let currentSong = self.currentSong,
@@ -324,7 +322,7 @@ class AudioPlayer: NSObject {
         }
     }
     
-    @objc func remotePlayerItemStalled(_ notification: Notification) {
+    @objc internal func remotePlayerItemStalled(_ notification: Notification) {
         guard let remotePlayerItem = notification.object as? RemotePlayerItem,
             let currentSong = self.currentSong,
                 remotePlayerItem.assignedSong == currentSong else {
@@ -337,7 +335,7 @@ class AudioPlayer: NSObject {
         }
     }
     
-    @objc func remotePlayerItemDownloadProgress(_ notification: Notification) {
+    @objc internal func remotePlayerItemDownloadProgress(_ notification: Notification) {
         guard let remotePlayerItem = notification.object as? RemotePlayerItem,
             let bytesDownloaded = remotePlayerItem.bytesDownloaded,
             let totalBytesExpected = remotePlayerItem.bytesTotal,
@@ -346,13 +344,13 @@ class AudioPlayer: NSObject {
                 log.error("Could not properly handle a notification: \(notification)")
                 return
         }
-        log.info("Loaded so far: \(bytesDownloaded) out of \(totalBytesExpected)")
+        log.debug("Loaded so far: \(bytesDownloaded) out of \(totalBytesExpected)")
         DispatchQueue.main.sync {
             remotePlayerItem.bufferValue = Double(bytesDownloaded/(totalBytesExpected/100))/100
         }
     }
     
-    @objc func remotePlayerItemReceivedHttpResponse(_ notification: Notification) {
+    @objc internal func remotePlayerItemReceivedHttpResponse(_ notification: Notification) {
         guard let remotePlayerItem = notification.object as? RemotePlayerItem,
             let httpResponse = remotePlayerItem.httpResponse,
             let currentSong = self.currentSong,

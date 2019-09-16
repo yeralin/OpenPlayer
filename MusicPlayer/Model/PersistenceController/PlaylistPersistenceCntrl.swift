@@ -51,6 +51,18 @@ class PlaylistPersistencyManager: PersistenceController {
         return playlistEntity
     }
     
+    func getPlaylistPath(playlist: PlaylistEntity) throws -> URL {
+        var isDir : ObjCBool = false
+        guard let directoryName = playlist.playlistName else {
+            throw "Could not extract playlistName from playlist entity"
+        }
+        let playlistUrl = docsUrl.appendingPathComponent(directoryName)
+        if !fm.fileExists(atPath: playlistUrl.path, isDirectory: &isDir) && !isDir.boolValue {
+            throw "Playlist does not exist at path: \(playlistUrl.path)"
+        }
+        return playlistUrl
+    }
+    
     func getPlaylistArray(cntxt: NSManagedObjectContext? = nil) throws -> [PlaylistEntity] {
         let cntxt = try validateContext(context: cntxt)
         guard let playlistArray = _fetchData(entityName: "PlaylistEntity",
@@ -133,14 +145,4 @@ class PlaylistPersistencyManager: PersistenceController {
         return self._fetchCount(entityName: "PlaylistEntity")
     }
     
-    internal func getPlaylistPath(playlist: PlaylistEntity) throws -> URL {
-        guard let playlistName = playlist.playlistName else {
-            throw "Could not extract playlistName from playlist entity"
-        }
-        let playlistUrl = docsUrl.appendingPathComponent(playlistName)
-        if !fm.fileExists(atPath: playlistUrl.path) {
-            throw "Playlist does not exist at path: \(playlistUrl)"
-        }
-        return playlistUrl
-    }
 }
