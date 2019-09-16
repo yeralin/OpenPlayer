@@ -27,20 +27,19 @@ extension Notification.Name {
     static var downloadProgress: Notification.Name {
         return .init("AudioPlayer.downloadProgress")
     }
-    static var finishedDownload: Notification.Name {
+    static var downloadFinished: Notification.Name {
         return .init("AudioPlayer.finishedDownload")
     }
 }
 
-open class RemotePlayerItem: AVPlayerItem {
+open class RemotePlayerItem: PlayerItem {
 
-    private(set) var assignedSong: SongEntity
     private let notificationCenter: NotificationCenter = .default
     internal let audioDownloadDelegate = AudioDownloadDelegate()
     
     internal let url: URL
     internal let initialScheme: String?
-    internal var customFileExtension: String?
+    internal var customFileExtension: String? = "mp3"
     
     internal var payload: Data?
     internal var bytesTotal: Int?
@@ -72,25 +71,24 @@ open class RemotePlayerItem: AVPlayerItem {
 
     open func downloadWithoutPlay() {
         if audioDownloadDelegate.session == nil {
-            audioDownloadDelegate.startDataRequest(with: url)
+            audioDownloadDelegate.owner = self
+            audioDownloadDelegate.startDataTaskWithoutPlayback()
         }
     }
 
     // Dirty hack to satisfy AVURLAsset
     private let fakeScheme = "fakeScheme"
-
-    /// Override/append custom file extension to URL path.
-    /// This is required for the player to work correctly with the intended file type.
-    init(song: SongEntity, customFileExtension: String? = "mp3") {
-
+    
+    // Override/append custom file extension to URL path.
+    // This is required for the player to work correctly with the intended file type.
+    override init(song: SongEntity) {
         guard let url = song.songUrl,
-              let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-              let scheme = components.scheme,
-              var urlWithCustomScheme = url.withScheme(fakeScheme) else {
-            fatalError("Urls without a scheme are not supported")
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+            let scheme = components.scheme,
+            var urlWithCustomScheme = url.withScheme(fakeScheme) else {
+                fatalError("Urls without a scheme are not supported")
         }
         
-        self.assignedSong = song
         self.url = url
         self.initialScheme = scheme
         
@@ -99,24 +97,23 @@ open class RemotePlayerItem: AVPlayerItem {
             urlWithCustomScheme.appendPathExtension(ext)
             self.customFileExtension = ext
         }
-
+        
         let asset = AVURLAsset(url: urlWithCustomScheme)
         asset.resourceLoader.setDelegate(audioDownloadDelegate, queue: DispatchQueue.global(qos: .userInitiated))
-        super.init(asset: asset, automaticallyLoadedAssetKeys: nil)
+        super.init(song: song, asset: asset, automaticallyLoadedAssetKeys: nil )
         audioDownloadDelegate.owner = self
-
+        
         addObserver(self,
-                forKeyPath: "status",
-                options: NSKeyValueObservingOptions.new,
-                context: &playerItemContext)
-
+                    forKeyPath: "status",
+                    options: .new,
+                    context: &playerItemContext)
+        
         NotificationCenter.default.addObserver(self,
-                selector: #selector(playbackStalledHandler),
-                name:NSNotification.Name.AVPlayerItemPlaybackStalled,
-                object: self)
-
+                                               selector: #selector(playbackStalledHandler),
+                                               name: .AVPlayerItemPlaybackStalled,
+                                               object: self)
     }
-
+    
     // MARK: KVO
 
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -154,10 +151,6 @@ open class RemotePlayerItem: AVPlayerItem {
     }
 
     // MARK: -
-
-    override init(asset: AVAsset, automaticallyLoadedAssetKeys: [String]?) {
-        fatalError("not implemented")
-    }
 
     deinit {
         log.info("Deinit PlayerItem")

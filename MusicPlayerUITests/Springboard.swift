@@ -19,7 +19,7 @@ class Springboard {
         XCUIApplication().terminate()
         
         // Force delete the app from the springboard
-        let icon = springboard.icons["MusicPlayer"]
+        let icon = springboard.icons["OpenPlayer"]
         if icon.exists {
             let iconFrame = icon.frame
             let springboardFrame = springboard.frame

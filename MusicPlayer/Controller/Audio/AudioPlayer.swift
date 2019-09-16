@@ -44,13 +44,29 @@ extension AVPlayer {
             return Float(self.currentTime().seconds)
         }
     }
+    
 }
 
-class LocalPlayerItem: AVPlayerItem {
+open class PlayerItem: AVPlayerItem {
+    
+    private(set) var assignedSong: SongEntity
+    
     override open var duration: CMTime {
         get {
             return self.asset.duration
         }
+    }
+    
+    // Default: For playing local items
+    init(song: SongEntity) {
+        self.assignedSong = song
+        super.init(asset: AVAsset(url: song.getSongUrl()), automaticallyLoadedAssetKeys: ["duration"])
+    }
+    
+    // More customizable: for playing remote items
+    init(song: SongEntity, asset: AVAsset, automaticallyLoadedAssetKeys: [String]?) {
+        self.assignedSong = song
+        super.init(asset: asset, automaticallyLoadedAssetKeys: automaticallyLoadedAssetKeys)
     }
 }
 
@@ -62,7 +78,12 @@ class AudioPlayer: NSObject {
     
     var shuffleMode: Bool = false
     var player: AVPlayer?
-    var currentSong: SongEntity?
+    var currentPlayerItem: PlayerItem?
+    var currentSong: SongEntity? {
+        get {
+            return currentPlayerItem?.assignedSong
+        }
+    }
     var currentBufferValue: Double = 0
     private var mp: MPControl?
     
@@ -120,25 +141,14 @@ class AudioPlayer: NSObject {
             return
         }
         self.stop()
-        self.currentSong = song
+        
         // Determine whether playing a remote or local audio file
-        if song.isRemote() {
-            // Song was already cached, not yet saved
-            if let cachedSongUrl = song.isCached() {
-                self.playLocal(cachedSongUrl)
-                delegate?.cellState(state: .play, song: song)
-            } else {
-                self.playRemote(song)
-                delegate?.cellState(state: .prepare, song: song)
-            }
+        if song.isRemote() && song.isCached() == nil {
+            self.playRemote(song)
+            delegate?.cellState(state: .prepare, song: song)
         } else {
-            do {
-                let localSongUrl = try SongPersistencyManager.sharedInstance.getSongPath(song: song)
-                self.playLocal(localSongUrl)
-                delegate?.cellState(state: .play, song: song)
-            } catch let error {
-                fatalError("Could not play local audio file: \(error)")
-            }
+            self.playLocal(song)
+            delegate?.cellState(state: .play, song: song)
         }
         
         guard let songArtist = song.songArtist,
@@ -154,15 +164,15 @@ class AudioPlayer: NSObject {
     }
     
     private func playRemote(_ song: SongEntity) {
-        let remotePlayerItem = RemotePlayerItem(song: song)
-        let player = AVPlayer(playerItem: remotePlayerItem)
+        currentPlayerItem = RemotePlayerItem(song: song)
+        let player = AVPlayer(playerItem: currentPlayerItem)
         player.automaticallyWaitsToMinimizeStalling = false
         self.player = player
     }
     
-    private func playLocal(_ localSongUrl: URL) {
-        let localPlayerItem = LocalPlayerItem(url: localSongUrl)
-        let player = AVPlayer(playerItem: localPlayerItem)
+    private func playLocal(_ song: SongEntity) {
+        currentPlayerItem = PlayerItem(song: song)
+        let player = AVPlayer(playerItem: currentPlayerItem)
         player.play()
         self.player = player
         self.currentBufferValue = 1
@@ -183,10 +193,7 @@ class AudioPlayer: NSObject {
     
     func stop() {
         if let player = self.player, let currentSong = currentSong {
-            //player.currentItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.duration))
             player.pause()
-            let startCmTime = CMTime(seconds: 0, preferredTimescale: 1)
-            player.currentItem?.seek(to: startCmTime, completionHandler: nil)
             self.player = nil
             delegate?.cellState(state: .stop, song: currentSong)
             mp?.resetMPControls()
@@ -342,21 +349,6 @@ class AudioPlayer: NSObject {
             if let rawSeconds = httpResponse.allHeaderFields["Audio-Duration"] as? String,
                 let seconds = Double(rawSeconds), seconds > 0 {
                 remotePlayerItem.duration = CMTimeMakeWithSeconds(seconds, preferredTimescale: 600)
-            }
-        }
-    }
-    
-    func playerItem(_ playerItem: RemotePlayerItem, didFinishDownloadingData data: Data) {
-        log.info("Finished downloading")
-        if let songName = playerItem.assignedSong.songName {
-            let tempUrl = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-            let destUrl = tempUrl.appendingPathComponent(songName).appendingPathExtension("mp3")
-            do {
-                log.info("Writing to a file: \(destUrl)")
-                try data.write(to: destUrl, options: .atomic)
-            } catch {
-                log.error("Failed writing file to \(destUrl) " +
-                    "Error: " + error.localizedDescription)
             }
         }
     }
