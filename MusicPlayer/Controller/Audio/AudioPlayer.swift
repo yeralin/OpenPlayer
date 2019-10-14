@@ -6,6 +6,7 @@
 //  Copyright © 2017 Daniyar Yeralin. All rights reserved.
 //
 import MediaPlayer
+import AVFoundation
 
 enum PlayerState {
     case prepare
@@ -83,7 +84,7 @@ class AudioPlayer: NSObject {
     var currentPlayerItem: PlayerItem?
     var currentSong: SongEntity? {
         get {
-            return currentPlayerItem?.assignedSong
+            currentPlayerItem?.assignedSong
         }
     }
     private var mp: MPControl?
@@ -179,20 +180,16 @@ class AudioPlayer: NSObject {
     }
     
     func resume() throws {
-        guard let currentSong = self.currentSong else {
+        guard let player = self.player, let currentSong = self.currentSong else {
             throw "Could not locate currentSong, nothing to resume"
         }
-        if let player = self.player {
-            player.play()
-            delegate?.cellState(state: .resume,song: currentSong)
-            mp?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
-        } else {
-            try play(song: currentSong)
-        }
+        player.play()
+        delegate?.cellState(state: .resume,song: currentSong)
+        mp?.updateMP(state: .resume, currentTime: player.currentTime().seconds)
     }
     
     func stop() throws {
-        guard let player = self.player, let currentSong = currentSong else {
+        guard let player = self.player, let currentSong = self.currentSong else {
             throw "Could not locate an active player, nothing to stop"
         }
         player.pause()
@@ -203,7 +200,7 @@ class AudioPlayer: NSObject {
     }
     
     func pause() throws {
-        guard let player = self.player, let currentSong = currentSong, player.isPlaying else {
+        guard let player = self.player, let currentSong = self.currentSong else {
             throw "Could not locate an active player, nothing to pause"
         }
         delegate?.cellState(state: .pause, song: currentSong)
@@ -273,11 +270,11 @@ class AudioPlayer: NSObject {
             case .began:
                 try pause()
             case .ended:
-                guard let optionInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
-                    log.error("Could not extract interruption options")
+                guard let optionsInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
+                    log.error("Could not extract interruption option int")
                     return
                 }
-                let options = AVAudioSession.InterruptionOptions(rawValue: optionInt)
+                let options = AVAudioSession.InterruptionOptions(rawValue: optionsInt)
                 if options.contains(.shouldResume) {
                     try resume()
                 }
