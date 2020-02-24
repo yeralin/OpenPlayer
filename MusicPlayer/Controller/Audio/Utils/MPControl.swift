@@ -30,6 +30,16 @@ class MPControl: NSObject {
                 return .commandFailed
             }
         })
+        scc.togglePlayPauseCommand.addTarget(handler: { _ in
+            // TODO: handle toggle i.e. if isPlaying
+            do {
+                try pauseSong()
+                return .success
+            } catch let error {
+                log.error(error)
+                return .commandFailed
+            }
+        })
         scc.pauseCommand.addTarget(handler: { _ in
             do {
                 try pauseSong()
