@@ -268,7 +268,13 @@ class AudioPlayer: NSObject {
             }
             switch type {
             case .began:
-                try pause()
+                var shouldPause = true
+                if #available(iOS 10.3, *) {
+                    if let _ = userInfo[AVAudioSessionInterruptionWasSuspendedKey] as? Bool {
+                        shouldPause = false
+                    }
+                }
+                if shouldPause { try pause() }
             case .ended:
                 guard let optionsInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
                     log.error("Could not extract interruption option int")
@@ -279,7 +285,7 @@ class AudioPlayer: NSObject {
                     try resume()
                 }
             @unknown default:
-                log.error("Unhandled interruption type has occured")
+                log.error("Unhandled interruption type has occurred")
             }
         } catch let error {
             fatalError("Reached internal inconsistency: \(error)")

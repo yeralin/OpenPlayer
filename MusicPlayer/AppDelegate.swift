@@ -49,7 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
-        debugPrint("handleEventsForBackgroundURLSession: \(identifier)")
         completionHandler()
     }
     
@@ -69,11 +68,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        do {
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            log.error("Could not activate AVAudioSession")
-        }
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
