@@ -12,6 +12,11 @@ import AVFoundation
 import CoreData
 import UIKit
 
+enum SongPersistenceCntrlError: Error {
+    case FileAlreadyExists
+    case UnknownError(msg: String)
+}
+
 class SongPersistencyManager: PersistenceController {
     
     static let sharedInstance = SongPersistencyManager()
@@ -56,11 +61,16 @@ class SongPersistencyManager: PersistenceController {
             let playlistPerstManager = PlaylistPersistencyManager.sharedInstance
             let toPlaylistPath = try playlistPerstManager.getPlaylistPath(playlist: toPlaylist)
             let toMovePath = toPlaylistPath.appendingPathComponent(songName)
+            if fm.fileExists(atPath: toMovePath.path) {
+                throw SongPersistenceCntrlError.FileAlreadyExists
+            }
             try fm.moveItem(at: getSongPath(song: toMoveSong), to: toMovePath)
             fromPlaylist.removeFromSongs(toMoveSong)
             toPlaylist.addToSongs(toMoveSong)
-        } catch let error {
-            throw "Could not move song to a different playlist: \(error)"
+        } catch SongPersistenceCntrlError.FileAlreadyExists {
+            throw SongPersistenceCntrlError.FileAlreadyExists
+        } catch {
+            throw SongPersistenceCntrlError.UnknownError(msg: "Could not move song to a different playlist: \(error)")
         }
     }
 
