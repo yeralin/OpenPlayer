@@ -39,7 +39,7 @@ extension PlaylistTableViewController {
             self.playlistTableView.insertRows(at: [IndexPath(row: Int(newPosition), section: 0)],
                                               with: .fade)
         } catch UIError.AlreadyExists(let err) {
-            present(popUIErrorAlert(reason: err), animated: true)
+            present(popUIErrorAlert(title: "Playlist Error", reason: err), animated: true)
         } catch let err {
             log.error("Could not insert a playlist \"\(playlistName)\": \(err)")
         }

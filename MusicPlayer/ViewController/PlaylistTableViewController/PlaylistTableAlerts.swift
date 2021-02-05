@@ -32,11 +32,11 @@ extension PlaylistTableViewController {
         alertNewPlaylist.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alertNewPlaylist.addAction(UIAlertAction(title: "OK", style: .default,
                                                  handler: { (_:UIAlertAction) in
-            if let playListName = alertNewPlaylist.textFields?[0].text {
-                self.insertPlaylist(playListName: playListName)
-            } else {
+            guard let playListName = alertNewPlaylist.textFields?[0].text else {
                 log.error("Could not unwrap playlist name")
+                return;
             }
+            self.insertPlaylist(playListName: playListName)
         }))
         return alertNewPlaylist
     }

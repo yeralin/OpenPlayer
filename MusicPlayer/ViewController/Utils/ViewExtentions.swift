@@ -250,8 +250,8 @@ extension Double{
     }
 }
 
-func popUIErrorAlert(reason: String) -> UIAlertController {
-    let uiErrorAlert = UIAlertController(title: "Error", message: reason, preferredStyle: .alert)
+func popUIErrorAlert(title: String, reason: String) -> UIAlertController {
+    let uiErrorAlert = UIAlertController(title: title, message: reason, preferredStyle: .alert)
     uiErrorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
     return uiErrorAlert
 }

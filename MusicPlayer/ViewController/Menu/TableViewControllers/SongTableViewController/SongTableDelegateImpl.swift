@@ -37,7 +37,9 @@ extension SongTableViewController: AudioPlayerDelegate, CellToTableDelegate {
             do {
                 return try SongPersistencyManager.sharedInstance.getSongsArray(playlist: playlist)
             } catch let error {
-                propagateError(title: "Could not retrieve songsArray", error: error.localizedDescription)
+                present(popUIErrorAlert(title: "Could not retrieve songs",
+                                        reason: error.localizedDescription),
+                        animated: true)
             }
         }
         return []
@@ -70,12 +72,7 @@ extension SongTableViewController: AudioPlayerDelegate, CellToTableDelegate {
     // MARK - Shared
     
     internal func propagateError(title: String, error: String) {
-        let alert = UIAlertController(title: title,
-                                      message: error,
-                                      preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "OK",
-                                      style: UIAlertAction.Style.default,
-                                      handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        present(popUIErrorAlert(title: "Could not retrieve songs", reason: error.localizedDescription),
+                animated: true)
     }
 }

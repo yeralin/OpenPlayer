@@ -22,7 +22,9 @@ extension SongTableViewController: PlaylistPickerDelegate {
                 self.songsArray = songsArray
                 songTableView.deleteRows(at: [IndexPath(row: Int(song.songOrder), section: 0)], with: .fade)
             } catch SongPersistenceCntrlError.FileAlreadyExists {
-                propagateError(title: "Could not move the song", error: "The song already exists in the target playlist")
+                present(popUIErrorAlert(title: "Could not move the song",
+                                        reason: "The song already exists in the target playlist"),
+                        animated: true)
             } catch let err {
                 log.error("""
                           Could not move \"\(song.songName ?? "unknown")\" song 
