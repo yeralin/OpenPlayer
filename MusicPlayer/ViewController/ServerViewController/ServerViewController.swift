@@ -21,7 +21,8 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMenuGestureRecognizer()
-        setupMenuButton(button: menuButton)
+        menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        menuButton.target = self.revealViewController()
         navBar.delegate = self
     }
     

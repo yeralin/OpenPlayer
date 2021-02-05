@@ -7,33 +7,30 @@
 //
 
 import Foundation
-import SwiftIcons
 
 // AudioPlayerDelegate Callees
 // MARK: Song cell states
 extension SongCell {
     
     func playSongCellState() {
-        //TODO: Replace/Test with one playPauseButton.setIcon(icon: .ionicons(.pause), iconSize: 26)
+        playPauseButton.isSelected = true
         if sliderCAD == nil {
-            setupSliderCAD()
-            playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 26, color: .systemColor, forState: .normal)
-            setShuffleButton()
+            restoreSliderCAD()
+            shuffleButton.isSelected = AudioPlayer.instance.shuffleMode
             shuffleButton.isHidden = false
         } else {
             sliderCAD.isPaused = false
-            playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 26, color: .systemColor, forState: .normal)
         }
     }
     
     func pauseSongCellState() {
         sliderCAD.isPaused = true
-        playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24, color: .systemColor, forState: .normal)
+        playPauseButton.isSelected = false
     }
     
     func stopSongCellState() {
         self.resetSliderCAD()
-        playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24, color: .systemColor, forState: .normal)
+        playPauseButton.isSelected = false
         shuffleButton.isHidden = true
     }
     

@@ -62,18 +62,13 @@ extension SongTableViewController {
     
     // Fill SongTable with SongCells
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let song: SongEntity
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell",
-                for: indexPath) as? SongCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath)
+                as? SongCell else {
             fatalError("Could not dequeue SongCell")
         }
-        // For SongCellDelegate
         cell.delegate = self
-        // If user is searching, get a song from a filtered list
-        if searching {
-            song = matchedSongs[indexPath.row]
-        }
-        else { song = songsArray[indexPath.row] }
+        // If user is searching, get a song from the filtered list
+        let song = searching ? matchedSongs[indexPath.row] : songsArray[indexPath.row]
         if !song.isProcessed {
             do {
                 try SongPersistencyManager.sharedInstance.processSong(toProcess: song)

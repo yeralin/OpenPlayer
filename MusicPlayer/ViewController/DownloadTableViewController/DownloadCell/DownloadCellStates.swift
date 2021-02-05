@@ -7,49 +7,66 @@
 //
 
 import Foundation
-import SwiftIcons
 
 //AudioPlayerDelegate Callees
 // MARK: Download cell states
 extension DownloadCell {
     
     func prepareSongCellState() {
-        playPauseButton.setIcon(icon: .ionicons(.loadC), iconSize: 26,
-                                color: .systemColor,  forState: .normal)
-        playPauseButton.startRotating()
-        setShuffleButton()
+        if !playPauseButton.isRotating() {
+            highlightedTimer = Timer.scheduledTimer(withTimeInterval: 0, repeats: true) { [weak self] _ in
+                self?.playPauseButton.isHighlighted = true
+            }
+            playPauseButton.startRotating()
+        }
+        shuffleButton.isSelected = AudioPlayer.instance.shuffleMode
         shuffleButton.isHidden = false
     }
     
     func playSongCellState() {
-        playPauseButton.stopRotating()
-        playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 26,
-                                color: .systemColor, forState: .normal)
-        setupSliderCAD()
+        if playPauseButton.isRotating() {
+            playPauseButton.stopRotating()
+            highlightedTimer?.invalidate()
+            playPauseButton.isHighlighted = false
+        }
+        playPauseButton.isSelected = true
+        restoreSliderCAD()
     }
     
     func pauseSongCellState() {
-        playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24,
-                                color: .systemColor, forState: .normal)
+        if playPauseButton.isRotating() {
+            playPauseButton.stopRotating()
+            highlightedTimer?.invalidate()
+            playPauseButton.isHighlighted = false
+        }
+        playPauseButton.isSelected = false
+        // TODO: test this chunk
         if sliderCAD != nil {
             //sliderCAD.isPaused = true
         }
     }
     
     func resumeSongCellState() {
-        playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 26,
-                                color: .systemColor, forState: .normal)
+        if playPauseButton.isRotating() {
+            playPauseButton.stopRotating()
+            highlightedTimer?.invalidate()
+            playPauseButton.isHighlighted = false
+        }
+        playPauseButton.isSelected = true
         if sliderCAD != nil {
             //sliderCAD.isPaused = false
         }
     }
     
     func stopSongCellState() {
-        resetSliderCAD()
-        playPauseButton.stopRotating()
-        playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24,
-                                color: .systemColor, forState: .normal)
+        if playPauseButton.isRotating() {
+            playPauseButton.stopRotating()
+            highlightedTimer?.invalidate()
+            playPauseButton.isHighlighted = false
+        }
+        playPauseButton.isSelected = false
         shuffleButton.isHidden = true
+        resetSliderCAD()
     }
     
     func refreshSongCellState() {

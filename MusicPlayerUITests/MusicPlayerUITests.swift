@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import SwiftIcons
 @testable import MusicPlayer
 
 extension XCUIElement {

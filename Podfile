@@ -9,7 +9,6 @@ target 'MusicPlayer' do
   pod 'SwiftLint'
   pod 'SWRevealViewController'
   pod 'SwiftyBeaver'
-  pod 'SwiftIcons'
   pod 'SwiftOverlays'
   pod 'Alamofire'
   pod "GCDWebServer/WebUploader"
@@ -18,5 +17,4 @@ end
 
 target 'MusicPlayerUITests' do
   use_frameworks!
-  pod 'SwiftIcons'
 end

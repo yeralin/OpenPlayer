@@ -30,8 +30,7 @@ extension SongCell {
     }
 
     internal func actionOnShuffleTap(isShuffleMode: Bool) {
-        let audioPlayerInst = AudioPlayer.instance
-        audioPlayerInst.shuffleMode = isShuffleMode
+            AudioPlayer.instance.shuffleMode = isShuffleMode
     }
 
     internal func actionOnChangeSliderPosition(songNewPosition: TimeInterval) {

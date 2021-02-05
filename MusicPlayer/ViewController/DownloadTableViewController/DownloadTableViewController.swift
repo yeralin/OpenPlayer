@@ -28,9 +28,9 @@ class DownloadTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Download"
         setupMenuGestureRecognizer()
-        setupMenuButton(button: menuButton)
+        menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        menuButton.target = self.revealViewController()
         downloadTableView.allowsSelection = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)

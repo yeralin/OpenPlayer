@@ -1,22 +1,20 @@
 PODS:
   - Alamofire (4.9.1)
-  - CocoaLumberjack (3.6.0):
-    - CocoaLumberjack/Core (= 3.6.0)
-  - CocoaLumberjack/Core (3.6.0)
-  - GCDWebServer/Core (3.5.3)
-  - GCDWebServer/WebUploader (3.5.3):
+  - CocoaLumberjack (3.6.2):
+    - CocoaLumberjack/Core (= 3.6.2)
+  - CocoaLumberjack/Core (3.6.2)
+  - GCDWebServer/Core (3.5.4)
+  - GCDWebServer/WebUploader (3.5.4):
     - GCDWebServer/Core
-  - SwiftIcons (2.2.0)
-  - SwiftLint (0.38.1)
+  - SwiftLint (0.40.2)
   - SwiftOverlays (5.0.1)
-  - SwiftyBeaver (1.8.4)
+  - SwiftyBeaver (1.9.2)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - Alamofire
   - CocoaLumberjack
   - GCDWebServer/WebUploader
-  - SwiftIcons
   - SwiftLint
   - SwiftOverlays
   - SwiftyBeaver
@@ -27,7 +25,6 @@ SPEC REPOS:
     - Alamofire
     - CocoaLumberjack
     - GCDWebServer
-    - SwiftIcons
     - SwiftLint
     - SwiftOverlays
     - SwiftyBeaver
@@ -35,14 +32,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  CocoaLumberjack: 78b0c238666f4f58db069738ec176f4519557516
-  GCDWebServer: c0ab22c73e1b84f358d1e2f74bf6afd1c60829f2
-  SwiftIcons: e7eb9bf2b475d6bdd8b37c5bdedc6d120aab0829
-  SwiftLint: 0aeb99ca7ccfc222ef93e2560a35e669f5465e6c
+  CocoaLumberjack: bd155f2dd06c0e0b03f876f7a3ee55693122ec94
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
+  SwiftLint: 1216c910d27c2633ade33b4f071bb6b930982e62
   SwiftOverlays: ab459ea9194b0e96aaccaa00e9ead1bf6d46eef1
-  SwiftyBeaver: f9a9aba96a6a6166e21682377804d728b0d20b95
+  SwiftyBeaver: b8239f6bfe9e1ea3303e6139abc8c24228081d84
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 0cb584a26ed1de1547e1d9209f7cbaf645b0ef0b
+PODFILE CHECKSUM: 58050fbda5f7941deb63f7a475d690828f8f1274
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

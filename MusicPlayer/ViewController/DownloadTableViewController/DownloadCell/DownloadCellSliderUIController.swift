@@ -24,22 +24,22 @@ extension DownloadCell {
         songProgressSlider.isEnabled = false
     }
     
-    internal func setupSliderCAD() {
-        if let duration = AudioPlayer.instance.player?.duration {
-            songProgressSlider.minimumValue = 0
-            songProgressSlider.maximumValue = Float(duration)
-            songProgressSlider.isEnabled = true
-            sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
-            sliderCAD.preferredFramesPerSecond = 60
-            sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
-        } else {
+    internal func restoreSliderCAD() {
+        guard let duration = AudioPlayer.instance.duration() else {
             log.warning("Could not setup slider because duration is not yet known")
+            return;
         }
+        songProgressSlider.minimumValue = 0
+        songProgressSlider.maximumValue = Float(duration)
+        songProgressSlider.isEnabled = true
+        sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
+        sliderCAD.preferredFramesPerSecond = 60
+        sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
     }
     
     @objc internal  func updateSliderCAD() {
         if sliderCAD != nil,
-            let currentTime = AudioPlayer.instance.player?.currentTime,
+            let currentTime = AudioPlayer.instance.currentTime(),
             let currentPlayerItem = AudioPlayer.instance.currentPlayerItem {
             songProgressSlider.value = currentTime
             songProgressSlider.bufferEndValue = currentPlayerItem.bufferValue

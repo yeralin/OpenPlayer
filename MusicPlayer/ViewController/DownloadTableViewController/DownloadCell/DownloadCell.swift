@@ -13,6 +13,8 @@ class DownloadCell: UITableViewCell {
     @IBOutlet weak var artistName: UILabel!
     @IBOutlet weak var songTitle: UILabel!
     
+    var highlightedTimer: Timer?
+    
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var downloadButton: UIButton!
@@ -28,13 +30,6 @@ class DownloadCell: UITableViewCell {
         }
     }
     
-    internal func setShuffleButton() {
-        shuffleButton.setIcon(icon: .ionicons(.arrowReturnRight), iconSize: 26,
-                              color: .systemColor, forState: .normal)
-        //shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26,
-        //                      color: .systemColor, forState: .normal)
-    }
-    
     override func awakeFromNib() {
         self.selectionStyle = .none
     }
@@ -45,11 +40,8 @@ class DownloadCell: UITableViewCell {
             sliderCAD.invalidate()
         }
         sliderCAD = nil
-        playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24,
-                                color: .systemColor, forState: .normal)
-        downloadButton.setIcon(icon: .ionicons(.iosCloudDownload), iconSize: 28,
-                               color: .systemColor, forState: .normal)
-        setShuffleButton()
+        playPauseButton.isSelected = false
+        shuffleButton.isSelected = AudioPlayer.instance.shuffleMode
         shuffleButton.isHidden = true
         songProgressSlider.value = 0
         songProgressSlider.bufferStartValue = 0
@@ -60,34 +52,29 @@ class DownloadCell: UITableViewCell {
     
     func restorePlayingCell(song: SongEntity) {
         self.song = song
-        
-        if let player = AudioPlayer.instance.player, player.isPlaying {
-            playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 23,
-                                    color: .systemColor, forState: .normal)
-        } else {
-            playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24,
-                                    color: .systemColor, forState: .normal)
-        }
-        downloadButton.setIcon(icon: .ionicons(.iosDownload), iconSize: 24,
-                               color: .systemColor, forState: .normal)
-        setShuffleButton()
+        playPauseButton.isSelected = true
         shuffleButton.isHidden = false
-        setupSliderCAD()
+        shuffleButton.isSelected = AudioPlayer.instance.shuffleMode
+        shuffleButton.isHidden = false
+        restoreSliderCAD()
     }
     
     @IBAction func playPauseTapped(_ sender: UIButton) {
-        actionOnPlayPauseTapUI()
+        self.actionOnPlayPauseTap(isPlaying: sender.isSelected,
+                                  isInProgress: songProgressSlider.value != 0
+                                    && songProgressSlider.isEnabled == true)
     }
     
     @IBAction func shuffleButtonTapped(_ sender: UIButton) {
-        actionOnShuffleTapUI()
+        actionOnShuffleTap(isShuffleMode: !sender.isSelected)
     }
     
     @IBAction func downloadTapped(_ sender: UIButton) {
-        actionOnDownloadTapUI()
+        self.actionOnDownloadTap()
     }
     @IBAction func changeSliderPosition(_ sender: UISlider) {
-        actionOnChangeSliderPositionUI(sender)
+        let songNewPosition = TimeInterval(sender.value)
+        self.actionOnChangeSliderPosition(position: songNewPosition)
     }
     
     deinit {

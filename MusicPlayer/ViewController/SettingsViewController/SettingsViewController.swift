@@ -23,10 +23,8 @@ class SettingsViewController: UIViewController, UINavigationBarDelegate, UITextF
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMenuGestureRecognizer()
-        menuButton.setIcon(icon: .ionicons(.navicon),  iconSize: 35, color: .systemColor,
-                           cgRect: CGRect(x: 0, y: 0, width: 30, height: 30),
-                           target: self.revealViewController(),
-                           action: #selector(SWRevealViewController.revealToggle(_:)))
+        menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        menuButton.target = self.revealViewController()
         navBar.delegate = self
         memoryLabel.text = self.reportUsedFreeMem()
         if let serverAddress = self.extractServerSettings()?["serverAddress"] {

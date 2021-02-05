@@ -32,24 +32,14 @@ class SongCell: UITableViewCell {
         }
     }
 
-    internal func setShuffleButton() {
-        if AudioPlayer.instance.shuffleMode {
-            shuffleButton.setIcon(icon: .ionicons(.shuffle), iconSize: 26, color: .systemColor, forState: .normal)
-        } else {
-            shuffleButton.setIcon(icon: .ionicons(.arrowReturnRight), iconSize: 26, color: .systemColor, forState: .normal)
-        }
-    }
-
     func initCell(initSong: SongEntity) {
         self.song = initSong
         if sliderCAD != nil {
             sliderCAD.invalidate()
         }
         sliderCAD = nil
-        playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24, color: .systemColor, forState: .normal)
-        editButton.setIcon(icon: .ionicons(.edit), iconSize: 24, color: .systemColor, forState: .normal)
-        moveButton.setIcon(icon: .ionicons(.folder), iconSize: 28, color: .systemColor, forState: .normal)
-        setShuffleButton()
+        playPauseButton.isSelected = false
+        shuffleButton.isSelected = AudioPlayer.instance.shuffleMode
         shuffleButton.isHidden = true
         songProgressSlider.value = 0
         songProgressSlider.isEnabled = false
@@ -57,38 +47,34 @@ class SongCell: UITableViewCell {
 
     func restorePlayingCell(song: SongEntity) {
         self.song = song
-        if let player = AudioPlayer.instance.player {
-            if player.isPlaying {
-                playPauseButton.setIcon(icon: .ionicons(.iosPause), iconSize: 23, color: .systemColor, forState: .normal)
-            } else {
-                playPauseButton.setIcon(icon: .ionicons(.play), iconSize: 24, color: .systemColor, forState: .normal)
-            }
-            editButton.setIcon(icon: .ionicons(.edit), iconSize: 24, color: .systemColor, forState: .normal)
-            moveButton.setIcon(icon: .ionicons(.folder), iconSize: 24, color: .systemColor, forState: .normal)
-            setShuffleButton()
-            shuffleButton.isHidden = false
-            setupSliderCAD()
-        }
+        playPauseButton.isSelected = AudioPlayer.instance.isPlaying()
+        shuffleButton.isHidden = false
+        shuffleButton.isSelected = AudioPlayer.instance.shuffleMode
+        restoreSliderCAD()
     }
     
     @IBAction func playPauseTapped(_ sender: UIButton) {
-        actionOnPlayPauseTapUI()
+        actionOnPlayPauseTap(isPlaying: sender.isSelected,
+                             isInProgress: songProgressSlider.value != 0
+                                && songProgressSlider.isEnabled == true)
     }
     
     @IBAction func shuffleButtonTapped(_ sender: UIButton) {
-        actionOnShuffleTapUI()
+        actionOnShuffleTap(isShuffleMode: !sender.isSelected)
+        sender.isSelected = AudioPlayer.instance.shuffleMode
     }
     
     @IBAction func moveTapped(_ sender: UIButton) {
-        actionOnMoveTapUI()
+        delegate.performSegueForCell(sender: song, identifier: Constants.PRESENT_PLAYLIST_PICKER)
     }
     
     @IBAction func changeSongNameTapped(_ sender: UIButton) {
-        actionOnChangeSongNameTapUI()
+        delegate.presentAlertForCell(alert: changeSongNameAlert(), alertName: Constants.PRESENT_CHANGE_SONG_NAME_ALERT)
     }
     
     @IBAction func changeSliderPosition(_ sender: UISlider) {
-        actionOnChangeSliderPositionUI(sender)
+        let songNewPosition = TimeInterval(sender.value)
+        actionOnChangeSliderPosition(songNewPosition: songNewPosition)
     }
     
 }

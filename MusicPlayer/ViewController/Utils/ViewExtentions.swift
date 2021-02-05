@@ -33,27 +33,24 @@ extension UIBarButtonItem {
 
 extension UIView {
     
-    //Start Rotating view
-    func startRotating(duration: Double = 1) {
-        let kAnimationKey = "rotation"
-        
-        if self.layer.animation(forKey: kAnimationKey) == nil {
+    func startRotating(duration: Double = 1, _ animationKey: String = "rotation") {
+        if self.layer.animation(forKey: animationKey) == nil {
             let animate = CABasicAnimation(keyPath: "transform.rotation")
             animate.duration = duration
             animate.repeatCount = Float.infinity
-            
             animate.fromValue = 0.0
             animate.toValue = Float(.pi * 2.0)
-            self.layer.add(animate, forKey: kAnimationKey)
+            self.layer.add(animate, forKey: animationKey)
         }
     }
     
-    //Stop rotating view
-    func stopRotating() {
-        let kAnimationKey = "rotation"
-        
-        if self.layer.animation(forKey: kAnimationKey) != nil {
-            self.layer.removeAnimation(forKey: kAnimationKey)
+    func isRotating(_ animationKey: String = "rotation") -> Bool {
+        return self.layer.animation(forKey: animationKey) != nil
+    }
+    
+    func stopRotating(_ animationKey: String = "rotation") {
+        if self.layer.animation(forKey: animationKey) != nil {
+            self.layer.removeAnimation(forKey: animationKey)
         }
     }
     

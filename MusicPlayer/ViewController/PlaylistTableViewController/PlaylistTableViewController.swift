@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftIcons
 import CoreData
 import SWRevealViewController
 
@@ -35,9 +34,9 @@ class PlaylistTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Playlists"
         setupMenuGestureRecognizer()
-        setupMenuButton(button: menuButton)
+        menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+        menuButton.target = self.revealViewController()
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         refreshControl?.addTarget(self,
                                   action: #selector(self.handleRefresh(refreshControl:)),

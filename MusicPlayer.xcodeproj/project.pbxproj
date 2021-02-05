@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		31017C991F018787008C4A87 /* SongCellUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017C981F018787008C4A87 /* SongCellUIActions.swift */; };
 		31017C9C1F018A35008C4A87 /* DownloadCellStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017C9B1F018A35008C4A87 /* DownloadCellStates.swift */; };
-		31017C9E1F018A3E008C4A87 /* DownloadCellUIActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017C9D1F018A3E008C4A87 /* DownloadCellUIActions.swift */; };
 		31017CA11F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */; };
 		310B4F841FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B4F831FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift */; };
 		311221B11EF42E9500C94244 /* ServerRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311221B01EF42E9500C94244 /* ServerRequests.swift */; };
@@ -42,7 +40,6 @@
 		3189DDAA1EADA5C800EBCD03 /* SongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3189DDA91EADA5C800EBCD03 /* SongTableViewController.swift */; };
 		318CDDCC22F0D1C400DF240C /* SongEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318CDDCA22F0D1C300DF240C /* SongEntity+CoreDataClass.swift */; };
 		318CDDCD22F0D1C400DF240C /* SongEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318CDDCB22F0D1C400DF240C /* SongEntity+CoreDataProperties.swift */; };
-		31A2E049229B422A00EFB0B1 /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2E048229B422A00EFB0B1 /* PlaylistCell.swift */; };
 		31A2E04E229B60DC00EFB0B1 /* SongCellActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A2E04D229B60DC00EFB0B1 /* SongCellActions.swift */; };
 		31A2E059229B6A0500EFB0B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A2E057229B6A0500EFB0B1 /* LaunchScreen.storyboard */; };
 		31A2E05A229B6A0500EFB0B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31A2E058229B6A0500EFB0B1 /* Main.storyboard */; };
@@ -87,9 +84,7 @@
 
 /* Begin PBXFileReference section */
 		13290ED2CD179817052B0884 /* Pods-MusicPlayerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayerUITests/Pods-MusicPlayerUITests.release.xcconfig"; sourceTree = "<group>"; };
-		31017C981F018787008C4A87 /* SongCellUIActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongCellUIActions.swift; sourceTree = "<group>"; };
 		31017C9B1F018A35008C4A87 /* DownloadCellStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCellStates.swift; sourceTree = "<group>"; };
-		31017C9D1F018A3E008C4A87 /* DownloadCellUIActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadCellUIActions.swift; sourceTree = "<group>"; };
 		31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTableAudioPlayerDelegImpl.swift; sourceTree = "<group>"; };
 		310B4F831FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadTablePlaylistPickerImpl.swift; sourceTree = "<group>"; };
 		311221B01EF42E9500C94244 /* ServerRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerRequests.swift; sourceTree = "<group>"; };
@@ -123,7 +118,6 @@
 		3189DDA91EADA5C800EBCD03 /* SongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewController.swift; sourceTree = "<group>"; };
 		318CDDCA22F0D1C300DF240C /* SongEntity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SongEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		318CDDCB22F0D1C400DF240C /* SongEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SongEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		31A2E048229B422A00EFB0B1 /* PlaylistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
 		31A2E04D229B60DC00EFB0B1 /* SongCellActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCellActions.swift; sourceTree = "<group>"; };
 		31A2E057229B6A0500EFB0B1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		31A2E058229B6A0500EFB0B1 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -207,7 +201,6 @@
 			children = (
 				3185A37F1F016769008E2D21 /* DownloadCell.swift */,
 				3127DCA022B43C5800A972AF /* DownloadCellActions.swift */,
-				31017C9D1F018A3E008C4A87 /* DownloadCellUIActions.swift */,
 				311609D11F1E45DA0071C291 /* DownloadCellSliderUIController.swift */,
 				31017C9B1F018A35008C4A87 /* DownloadCellStates.swift */,
 			);
@@ -329,8 +322,8 @@
 		318DB3CB1EC21C8600039541 /* SongTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3189DDA91EADA5C800EBCD03 /* SongTableViewController.swift */,
 				31A3C4421F4293E700CBFAC7 /* SongCell */,
+				3189DDA91EADA5C800EBCD03 /* SongTableViewController.swift */,
 				3148C29F1EC8C7F2005947CB /* SongTableDataSource.swift */,
 				F6F5EC312330228800E99FFB /* SongTableDelegateImpl.swift */,
 				31A7AEE41ECDF0CF00103789 /* SongTablePlaylistPickerImpl.swift */,
@@ -340,21 +333,12 @@
 			path = Menu/TableViewControllers/SongTableViewController;
 			sourceTree = "<group>";
 		};
-		31A2E047229B420700EFB0B1 /* PlaylistCell */ = {
-			isa = PBXGroup;
-			children = (
-				31A2E048229B422A00EFB0B1 /* PlaylistCell.swift */,
-			);
-			path = PlaylistCell;
-			sourceTree = "<group>";
-		};
 		31A3C4421F4293E700CBFAC7 /* SongCell */ = {
 			isa = PBXGroup;
 			children = (
 				3185A37D1F016479008E2D21 /* SongCell.swift */,
 				3148C2A21EC8D049005947CB /* SongCellStates.swift */,
 				31A2E04D229B60DC00EFB0B1 /* SongCellActions.swift */,
-				31017C981F018787008C4A87 /* SongCellUIActions.swift */,
 				3148C2A61EC95920005947CB /* SongCellAlerts.swift */,
 				311609D31F1FCF9D0071C291 /* SongCellSliderUIController.swift */,
 				31705B131FD25F0C00999125 /* SongCellDelegate.swift */,
@@ -405,7 +389,6 @@
 			isa = PBXGroup;
 			children = (
 				31F2F0341EC14DE70072DE30 /* PlaylistTableViewController.swift */,
-				31A2E047229B420700EFB0B1 /* PlaylistCell */,
 				313306C31ECA4918008CCE38 /* PlaylistTableDataSource.swift */,
 				31A745001EDDEFEF003FC171 /* PlaylistTableAlerts.swift */,
 			);
@@ -516,7 +499,6 @@
 				31CA1AB31EDB770300285EB9 /* Sources */,
 				31CA1AB41EDB770300285EB9 /* Frameworks */,
 				31CA1AB51EDB770300285EB9 /* Resources */,
-				F097F1A97F64F51DF8007D12 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -625,7 +607,6 @@
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SWRevealViewController/SWRevealViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftOverlays/SwiftOverlays.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 			);
@@ -635,7 +616,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWRevealViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIcons.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftOverlays.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 			);
@@ -660,24 +640,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F097F1A97F64F51DF8007D12 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MusicPlayerUITests/Pods-MusicPlayerUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/SwiftIcons/SwiftIcons.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftIcons.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MusicPlayerUITests/Pods-MusicPlayerUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FC08FF7ED85446184E3F2AA0 /* [CP] Check Pods Manifest.lock */ = {
@@ -726,7 +688,6 @@
 				3127DCA122B43C5800A972AF /* DownloadCellActions.swift in Sources */,
 				3185A37E1F016479008E2D21 /* SongCell.swift in Sources */,
 				311609D21F1E45DA0071C291 /* DownloadCellSliderUIController.swift in Sources */,
-				31017C991F018787008C4A87 /* SongCellUIActions.swift in Sources */,
 				310B4F841FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift in Sources */,
 				311609D41F1FCF9D0071C291 /* SongCellSliderUIController.swift in Sources */,
 				31A7AEE11ECDD7BE00103789 /* PlaylistPickerViewController.swift in Sources */,
@@ -738,7 +699,6 @@
 				31F2F0371EC14FE50072DE30 /* SongPersistenceCntrl.swift in Sources */,
 				31F2F0451EC15C700072DE30 /* ViewExtentions.swift in Sources */,
 				3185A3801F016769008E2D21 /* DownloadCell.swift in Sources */,
-				31A2E049229B422A00EFB0B1 /* PlaylistCell.swift in Sources */,
 				31F255841EAF86FC00E0AD84 /* MusicPlayer.xcdatamodeld in Sources */,
 				317D94FC22987B60009A029D /* UIError.swift in Sources */,
 				311221B11EF42E9500C94244 /* ServerRequests.swift in Sources */,
@@ -750,7 +710,6 @@
 				31F255861EB186C000E0AD84 /* PersistenceController.swift in Sources */,
 				31705B141FD25F0D00999125 /* SongCellDelegate.swift in Sources */,
 				F6F5EC322330228800E99FFB /* SongTableDelegateImpl.swift in Sources */,
-				31017C9E1F018A3E008C4A87 /* DownloadCellUIActions.swift in Sources */,
 				31491B9622BACC9C00445027 /* RemotePlayerItem.swift in Sources */,
 				313306C41ECA4918008CCE38 /* PlaylistTableDataSource.swift in Sources */,
 				31863F991EEDAF0B00F59F74 /* SettingsViewController.swift in Sources */,
@@ -847,7 +806,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -902,7 +861,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -920,7 +879,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q7W47GFKL3;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.OpenPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -939,7 +898,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Q7W47GFKL3;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.OpenPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

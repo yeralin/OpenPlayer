@@ -24,21 +24,23 @@ extension SongCell {
         songProgressSlider.isEnabled = false
     }
 
-    internal func setupSliderCAD() {
-        guard let audioPlayer = AudioPlayer.instance.player else {
+    internal func restoreSliderCAD() {
+        guard let duration = AudioPlayer.instance.duration(),
+              let currentTime = AudioPlayer.instance.currentTime() else {
             fatalError("Could not retrieve AudioPlayer instance")
         }
         songProgressSlider.isEnabled = true
         songProgressSlider.minimumValue = 0
-        songProgressSlider.maximumValue = Float(audioPlayer.duration)
+        songProgressSlider.maximumValue = Float(duration)
+        songProgressSlider.value = Float(currentTime)
         sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
         sliderCAD.preferredFramesPerSecond = 30
         sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
     }
 
     @objc internal func updateSliderCAD() {
-        if let player = AudioPlayer.instance.player, sliderCAD != nil {
-            songProgressSlider.value = Float(player.currentTime)
+        if let currentTime = AudioPlayer.instance.currentTime(), sliderCAD != nil {
+            songProgressSlider.value = Float(currentTime)
         }
     }
 }

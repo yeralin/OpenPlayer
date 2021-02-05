@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftIcons
 
 protocol CellToTableDelegate: class {
     func presentAlertForCell(alert: UIAlertController, alertName: String)
