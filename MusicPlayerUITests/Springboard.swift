@@ -21,11 +21,10 @@ class Springboard {
         // Force delete the app from the springboard
         let icon = springboard.icons["OpenPlayer"]
         if icon.exists {
-            let iconFrame = icon.frame
-            let springboardFrame = springboard.frame
             icon.press(forDuration: 1.3)
-            springboard.buttons["Delete App"].tap()
+            springboard.buttons["Remove App"].tap()
             sleep(1)
+            springboard.alerts.buttons["Delete App"].tap()
             springboard.alerts.buttons["Delete"].tap()
         }
     }
