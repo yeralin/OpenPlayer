@@ -74,13 +74,13 @@ open class PlayerItem: AVPlayerItem {
 
 class AudioPlayer: NSObject {
     
-    static let instance = AudioPlayer()
+    public static let instance = AudioPlayer()
     private let audioDownloadManager = AudioDownloadManager()
-    // The delegate is intentionally not marked as weak
+    private var player: AVPlayer?
+    // The delegate is intentionally not marked as weak (singleton)
     var delegate: AudioPlayerDelegate?
     
     var shuffleMode: Bool = false
-    var player: AVPlayer?
     var currentPlayerItem: PlayerItem?
     var currentSong: SongEntity? {
         get {
@@ -130,11 +130,32 @@ class AudioPlayer: NSObject {
         NotificationCenter.default.removeObserver(self)
     }
     
+    func isPlaying() -> Bool {
+        if let player = self.player {
+            return player.isPlaying
+        }
+        return false
+    }
+    
     func isPlaying(song: SongEntity) -> Bool {
         if let _ = self.player, let currentSong = self.currentSong {
             return song == currentSong
         }
         return false
+    }
+    
+    func duration() -> Double? {
+        if let player = self.player {
+            return player.duration
+        }
+        return nil
+    }
+    
+    func currentTime() -> Float? {
+        if let player = self.player {
+            return player.currentTime
+        }
+        return nil
     }
     
     func play(song: SongEntity) throws {

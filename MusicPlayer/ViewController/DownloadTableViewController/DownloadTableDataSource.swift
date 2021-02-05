@@ -51,14 +51,12 @@ extension DownloadTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let streamAudioPlayerInst = AudioPlayer.instance
         let song: SongEntity = searchSongs[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "DownloadSongCell",
                                                  for: indexPath) as! DownloadCell
         cell.delegate = self
         //If there is a song that's playing inside current playlist, restore its state view
-        if streamAudioPlayerInst.player != nil
-            && streamAudioPlayerInst.currentSong! == song {
+        if let currentSong = AudioPlayer.instance.currentSong, currentSong == song {
             cell.restorePlayingCell(song: song)
         } else {
             cell.initCell(initSong: song)
