@@ -30,32 +30,24 @@ class ServerViewController: UIViewController, UINavigationBarDelegate {
         return .topAttached
     }
     
-    internal func presentErrorAlert() {
-        let alert = UIAlertController(title: "Failure",
-                                      message: "Is your Wi-Fi on and \n connected to a network?",
-                                      preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Let me fix this!",
-                                      style: UIAlertAction.Style.default,
-                                      handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     @IBAction func serverSwitch(_ sender: UISwitch) {
         let switchedOn = sender.isOn
         if switchedOn {
             if let address = self.deployServer() {
                 serverAddressLabel.text = address.absoluteString
-                menuButton.disableButton()
+                menuButton.isEnabled = false
                 UIApplication.shared.isIdleTimerDisabled = true
             } else {
-                presentErrorAlert()
+                let alert = popUIErrorAlert(title: "Failed starting the web server",
+                                            reason: "Is your Wi-Fi on and \n connected to a network?")
+                self.present(alert, animated: true, completion: nil)
                 sender.isOn = false
             }
         } else {
             self.stopServer()
             serverAddressLabel.text = "Inactive"
             UIApplication.shared.isIdleTimerDisabled = false
-            menuButton.enableButton()
+            menuButton.isEnabled = true
         }
     }
     
