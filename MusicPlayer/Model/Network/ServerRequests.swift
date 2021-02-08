@@ -36,7 +36,7 @@ class ServerRequests {
         if var requestUrl = serverAddress {
             let versionEndpoint = "/version"
             requestUrl.appendPathComponent(versionEndpoint)
-            Alamofire.request(requestUrl, method: .get)
+            AF.request(requestUrl, method: .get)
                 .validate()
                 .responseJSON { res in
                     switch res.result {
@@ -61,7 +61,7 @@ class ServerRequests {
         if var requestUrl = serverAddress {
             requestUrl.appendPathComponent(endpoint)
             let params = ["q": query]
-            Alamofire.request(requestUrl, method: .get, parameters: params)
+            AF.request(requestUrl, method: .get, parameters: params)
                 .validate()
                 .responseJSON { res in
                     switch res.result {
