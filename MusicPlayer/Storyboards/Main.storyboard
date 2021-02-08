@@ -791,8 +791,7 @@
                                             <rect key="frame" x="64.5" y="14" width="285" height="21"/>
                                             <accessibility key="accessibilityConfiguration" identifier="artist"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="Sqn-lz-aWN"/>
-                                                <constraint firstAttribute="width" constant="285" id="ZbX-Zj-Tvb"/>
+                                                <constraint firstAttribute="height" constant="21" id="Uyg-AB-tvC"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
@@ -818,6 +817,9 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3P-iP-hjv">
                                             <rect key="frame" x="368.5" y="17" width="29.5" height="35"/>
                                             <accessibility key="accessibilityConfiguration" identifier="edit"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="29.5" id="MgR-yh-qVL"/>
+                                            </constraints>
                                             <state key="normal">
                                                 <imageReference key="image" image="square.and.pencil" catalog="system" symbolScale="large"/>
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="semibold"/>
@@ -841,7 +843,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vlf-hJ-r1x">
-                                            <rect key="frame" x="27" y="20" width="30.5" height="29"/>
+                                            <rect key="frame" x="26" y="20" width="30.5" height="29"/>
                                             <accessibility key="accessibilityConfiguration" identifier="play"/>
                                             <state key="normal">
                                                 <imageReference key="image" image="play.fill" catalog="system" symbolScale="large"/>
@@ -855,32 +857,32 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="I3P-iP-hjv" secondAttribute="trailing" constant="-4" id="0Jc-ca-xA6"/>
-                                        <constraint firstItem="ydJ-b1-eq3" firstAttribute="leading" secondItem="q21-cc-AgN" secondAttribute="leading" id="2Lf-8R-wWP"/>
-                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="leading" secondItem="ydJ-b1-eq3" secondAttribute="leading" id="4hd-OZ-5NC"/>
-                                        <constraint firstItem="Bzj-gT-5iJ" firstAttribute="top" secondItem="Vlf-hJ-r1x" secondAttribute="bottom" constant="5" id="7IY-4H-xbT"/>
-                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="trailing" secondItem="ydJ-b1-eq3" secondAttribute="trailing" id="Fvk-dp-05x"/>
-                                        <constraint firstItem="I3P-iP-hjv" firstAttribute="leading" secondItem="0Ti-J9-K2M" secondAttribute="trailing" constant="19" id="Gs2-DH-OrT"/>
-                                        <constraint firstItem="Bzj-gT-5iJ" firstAttribute="leading" secondItem="kZm-CC-TrE" secondAttribute="leadingMargin" constant="5" id="HdS-dd-2s8"/>
-                                        <constraint firstItem="ydJ-b1-eq3" firstAttribute="top" secondItem="kZm-CC-TrE" secondAttribute="topMargin" constant="22" id="JRe-60-gAZ"/>
-                                        <constraint firstItem="Vlf-hJ-r1x" firstAttribute="centerY" secondItem="I3P-iP-hjv" secondAttribute="centerY" id="RLc-5P-Qrj"/>
-                                        <constraint firstItem="qFI-N6-2xu" firstAttribute="top" secondItem="I3P-iP-hjv" secondAttribute="bottom" id="UIX-pG-S5V"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Bzj-gT-5iJ" secondAttribute="bottom" constant="-5" id="XyV-G5-mGD"/>
-                                        <constraint firstItem="Vlf-hJ-r1x" firstAttribute="trailing" secondItem="Bzj-gT-5iJ" secondAttribute="trailing" id="ZcN-vx-Uek"/>
-                                        <constraint firstItem="Bzj-gT-5iJ" firstAttribute="bottom" secondItem="q21-cc-AgN" secondAttribute="bottom" id="aKK-p5-K2N"/>
-                                        <constraint firstItem="Vlf-hJ-r1x" firstAttribute="leading" secondItem="kZm-CC-TrE" secondAttribute="leadingMargin" constant="7" id="aMo-Dh-jwE"/>
-                                        <constraint firstItem="I3P-iP-hjv" firstAttribute="top" secondItem="kZm-CC-TrE" secondAttribute="topMargin" constant="6" id="bwW-wa-RaE"/>
-                                        <constraint firstItem="I3P-iP-hjv" firstAttribute="trailing" secondItem="qFI-N6-2xu" secondAttribute="trailing" id="fhA-mt-Sp6"/>
-                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="leading" secondItem="Vlf-hJ-r1x" secondAttribute="trailing" constant="7" id="gCq-Kl-3ZT"/>
-                                        <constraint firstItem="I3P-iP-hjv" firstAttribute="leading" secondItem="qFI-N6-2xu" secondAttribute="leading" id="gxJ-hW-O5I"/>
-                                        <constraint firstItem="q21-cc-AgN" firstAttribute="top" secondItem="ydJ-b1-eq3" secondAttribute="bottom" id="jBt-pd-5OI"/>
-                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="top" secondItem="kZm-CC-TrE" secondAttribute="topMargin" constant="3" id="kXY-CL-ehX"/>
-                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="centerX" secondItem="kZm-CC-TrE" secondAttribute="centerX" id="lNQ-dY-ZDe"/>
-                                        <constraint firstItem="q21-cc-AgN" firstAttribute="centerY" secondItem="qFI-N6-2xu" secondAttribute="centerY" id="rdX-8M-1gW"/>
-                                        <constraint firstItem="ydJ-b1-eq3" firstAttribute="trailing" secondItem="q21-cc-AgN" secondAttribute="trailing" id="tDc-Tq-aIG"/>
-                                        <constraint firstItem="Bzj-gT-5iJ" firstAttribute="top" secondItem="q21-cc-AgN" secondAttribute="top" id="uFH-p0-a7W"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="qFI-N6-2xu" secondAttribute="bottom" constant="-7" id="wwL-Um-est"/>
-                                        <constraint firstItem="q21-cc-AgN" firstAttribute="top" secondItem="0Ti-J9-K2M" secondAttribute="bottom" constant="19" id="xSH-aV-KT5"/>
+                                        <constraint firstItem="I3P-iP-hjv" firstAttribute="leading" secondItem="0Ti-J9-K2M" secondAttribute="trailing" constant="19" id="99Z-jG-f75"/>
+                                        <constraint firstItem="q21-cc-AgN" firstAttribute="centerY" secondItem="qFI-N6-2xu" secondAttribute="centerY" id="DdN-zB-h0U"/>
+                                        <constraint firstItem="Vlf-hJ-r1x" firstAttribute="top" secondItem="kZm-CC-TrE" secondAttribute="topMargin" constant="9" id="HIG-ru-R4c"/>
+                                        <constraint firstItem="Bzj-gT-5iJ" firstAttribute="leading" secondItem="kZm-CC-TrE" secondAttribute="leadingMargin" constant="5" id="HL3-bf-pc8"/>
+                                        <constraint firstItem="ydJ-b1-eq3" firstAttribute="top" secondItem="kZm-CC-TrE" secondAttribute="topMargin" constant="22" id="HLV-bG-O40"/>
+                                        <constraint firstItem="Vlf-hJ-r1x" firstAttribute="centerY" secondItem="I3P-iP-hjv" secondAttribute="centerY" id="I3D-qH-jwf"/>
+                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="trailing" secondItem="ydJ-b1-eq3" secondAttribute="trailing" id="IBW-aT-bxh"/>
+                                        <constraint firstItem="I3P-iP-hjv" firstAttribute="leading" secondItem="qFI-N6-2xu" secondAttribute="leading" id="JGa-nE-MIS"/>
+                                        <constraint firstItem="Vlf-hJ-r1x" firstAttribute="centerX" secondItem="Bzj-gT-5iJ" secondAttribute="centerX" id="K1F-Ob-94E"/>
+                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="leading" secondItem="ydJ-b1-eq3" secondAttribute="leading" id="LxR-6w-8T6"/>
+                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="top" secondItem="kZm-CC-TrE" secondAttribute="topMargin" constant="3" id="M4r-p7-osd"/>
+                                        <constraint firstItem="q21-cc-AgN" firstAttribute="top" secondItem="0Ti-J9-K2M" secondAttribute="bottom" constant="19" id="NLw-1X-OSE"/>
+                                        <constraint firstItem="Bzj-gT-5iJ" firstAttribute="bottom" secondItem="q21-cc-AgN" secondAttribute="bottom" id="T62-a6-ePX"/>
+                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="centerX" secondItem="kZm-CC-TrE" secondAttribute="centerX" id="TKO-gS-7TT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="I3P-iP-hjv" secondAttribute="trailing" constant="-4" id="Ta2-aq-vfl"/>
+                                        <constraint firstItem="ydJ-b1-eq3" firstAttribute="trailing" secondItem="q21-cc-AgN" secondAttribute="trailing" id="VEp-md-Ucq"/>
+                                        <constraint firstItem="I3P-iP-hjv" firstAttribute="top" secondItem="kZm-CC-TrE" secondAttribute="topMargin" constant="6" id="Yvd-jq-FDv"/>
+                                        <constraint firstItem="I3P-iP-hjv" firstAttribute="trailing" secondItem="qFI-N6-2xu" secondAttribute="trailing" id="bRh-GL-9rm"/>
+                                        <constraint firstItem="Bzj-gT-5iJ" firstAttribute="top" secondItem="Vlf-hJ-r1x" secondAttribute="bottom" constant="5" id="dgs-On-fYa"/>
+                                        <constraint firstItem="qFI-N6-2xu" firstAttribute="top" secondItem="I3P-iP-hjv" secondAttribute="bottom" id="eWr-hj-CPt"/>
+                                        <constraint firstItem="q21-cc-AgN" firstAttribute="leading" secondItem="Bzj-gT-5iJ" secondAttribute="trailing" constant="7" id="fwF-oR-akv"/>
+                                        <constraint firstItem="q21-cc-AgN" firstAttribute="top" secondItem="ydJ-b1-eq3" secondAttribute="bottom" id="kIh-M2-yPq"/>
+                                        <constraint firstItem="Bzj-gT-5iJ" firstAttribute="top" secondItem="q21-cc-AgN" secondAttribute="top" id="oiW-lD-1CU"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Bzj-gT-5iJ" secondAttribute="bottom" constant="-5" id="sAy-18-R0C"/>
+                                        <constraint firstItem="0Ti-J9-K2M" firstAttribute="leading" secondItem="Vlf-hJ-r1x" secondAttribute="trailing" constant="8" id="x6y-91-SGA"/>
+                                        <constraint firstItem="ydJ-b1-eq3" firstAttribute="leading" secondItem="q21-cc-AgN" secondAttribute="leading" id="xcT-Wq-iHE"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -1178,10 +1180,10 @@
     </scenes>
     <designables>
         <designable name="GUM-AD-o6u">
-            <size key="intrinsicContentSize" width="27" height="30"/>
+            <size key="intrinsicContentSize" width="-1" height="30"/>
         </designable>
         <designable name="q21-cc-AgN">
-            <size key="intrinsicContentSize" width="27" height="30"/>
+            <size key="intrinsicContentSize" width="-1" height="30"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
