@@ -142,6 +142,8 @@
 		31F2F0381EC151CA0072DE30 /* PlaylistPersistenceCntrl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistPersistenceCntrl.swift; sourceTree = "<group>"; };
 		31F2F0441EC15C700072DE30 /* ViewExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewExtentions.swift; sourceTree = "<group>"; };
 		3F93ABB825CCC73F00F42CC9 /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
+		3FE48A9C25D46CAA005A8019 /* Logo.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Logo.xcf; sourceTree = "<group>"; };
+		3FE48A9D25D46CAB005A8019 /* Icon.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Icon.xcf; sourceTree = "<group>"; };
 		7A88A1723C2DEF843C607DEA /* Pods-MusicPlayerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayerUITests/Pods-MusicPlayerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7D2DF99FE7F46112B161997B /* Pods-MusicPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		879D82898F7D82C29BDD416F /* Pods_MusicPlayerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,6 +258,7 @@
 		317929A31EA84A510076F15F /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				3FE48A9B25D46C96005A8019 /* Raw assets */,
 				3188A90B2285126C008F43F1 /* Model */,
 				31F255891EB2CED600E0AD84 /* Storyboards */,
 				3188A90A22851259008F43F1 /* Audio */,
@@ -288,9 +291,9 @@
 		31863F9F1EF1871000F59F74 /* DownloadTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3185A3741F00840B008E2D21 /* DownloadTableViewController.swift */,
-				31B664791ED1FE1500EBCBA6 /* PlaylistPickerController */,
 				3127DC9F22B43C4800A972AF /* DownloadCell */,
+				31B664791ED1FE1500EBCBA6 /* PlaylistPickerController */,
+				3185A3741F00840B008E2D21 /* DownloadTableViewController.swift */,
 				3185A3771F0086A2008E2D21 /* DownloadTableDataSource.swift */,
 				31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */,
 				31BDC88F2028D919006BA7BB /* DownloadTableCellDelegImpl.swift */,
@@ -416,6 +419,15 @@
 			path = PlaylistCell;
 			sourceTree = "<group>";
 		};
+		3FE48A9B25D46C96005A8019 /* Raw assets */ = {
+			isa = PBXGroup;
+			children = (
+				3FE48A9D25D46CAB005A8019 /* Icon.xcf */,
+				3FE48A9C25D46CAA005A8019 /* Logo.xcf */,
+			);
+			path = "Raw assets";
+			sourceTree = "<group>";
+		};
 		8AD932F1652F9593541B9BF6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,7 +540,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Daniyar Yeralin";
 				TargetAttributes = {
 					317929A01EA84A510076F15F = {
@@ -792,6 +804,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -854,6 +867,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
