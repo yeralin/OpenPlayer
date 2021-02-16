@@ -289,13 +289,9 @@ class AudioPlayer: NSObject {
             }
             switch type {
             case .began:
-                var shouldPause = true
-                if #available(iOS 10.3, *) {
-                    if let _ = userInfo[AVAudioSessionInterruptionWasSuspendedKey] as? Bool {
-                        shouldPause = false
-                    }
+                if userInfo.index(forKey: AVAudioSessionInterruptionWasSuspendedKey) == nil {
+                    try pause()
                 }
-                if shouldPause { try pause() }
             case .ended:
                 guard let optionsInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
                     log.error("Could not extract interruption option int")
