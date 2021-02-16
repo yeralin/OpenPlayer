@@ -334,10 +334,10 @@ class AudioPlayer: NSObject {
                 return
         }
         log.error("The streaming has failed due to: \(error.localizedDescription)")
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             if error._code != NSURLErrorCancelled {
-                delegate?.propagateError(title: "The streaming has failed", error: error.localizedDescription)
-                delegate?.cellState(state: .stop, song: currentSong)
+                self.delegate?.propagateError(title: "The streaming has failed", error: error.localizedDescription)
+                self.delegate?.cellState(state: .stop, song: currentSong)
             }
         }
     }
@@ -350,8 +350,8 @@ class AudioPlayer: NSObject {
                 return
         }
         log.info("Not enough data for playback. Probably because of the poor network. Wait a bit and try to play later.")
-        DispatchQueue.main.sync {
-            delegate?.cellState(state: .prepare, song: currentSong)
+        DispatchQueue.main.async {
+            self.delegate?.cellState(state: .prepare, song: currentSong)
         }
     }
     

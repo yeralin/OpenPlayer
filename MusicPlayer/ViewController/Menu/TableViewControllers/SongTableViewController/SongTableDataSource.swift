@@ -25,25 +25,25 @@ extension SongTableViewController {
         }
     }
 
-    internal func constructPlaylistPicker(segue: UIStoryboardSegue, sender: Any?) {
+    internal func constructPlaylistPicker(segue: UIStoryboardSegue, _ songCellToMove: BaseCell) {
         do {
             guard let pickerView = segue.destination as? PlaylistPickerViewController else {
                 throw "Could not cast sender as PlaylistPickerViewController"
             }
-            guard let songToMove = sender as? SongEntity else {
-                throw "Could not cast sender as SongEntity"
+            guard let songCellToMove = songCellToMove as? SongCell else {
+                throw "Could not cast sender as SongCell"
             }
             var playlistArray = try PlaylistPersistencyManager.sharedInstance.getPlaylistArray()
             guard let currentPlaylistIndex = playlistArray.firstIndex(of: playlist) else {
                 throw "Could not locate playlist in playlistArray"
             }
             pickerView.delegate = self
-            pickerView.songToMove = songToMove
+            pickerView.songCellToMove = songCellToMove
             playlistArray.remove(at: currentPlaylistIndex)
             pickerView.playlistArray = playlistArray
         } catch let err {
             log.error("Could not construct \"moveSong\" picker for "
-                      + "\"\((sender as? SongEntity)?.songName ?? "unknown")\" song: \(err)")
+                        + "\"\(songCellToMove.song.songName ?? "unknown")\" song: \(err)")
         }
     }
     
@@ -67,6 +67,7 @@ extension SongTableViewController {
             fatalError("Could not dequeue SongCell")
         }
         cell.delegate = self
+        cell.rowIndex = indexPath.row
         // If user is searching, get a song from the filtered list
         let song = searching ? matchedSongs[indexPath.row] : songsArray[indexPath.row]
         if !song.isProcessed {
@@ -85,7 +86,8 @@ extension SongTableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
+                            forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let song = songsArray[indexPath.row]
             if let currentSong = AudioPlayer.instance.currentSong,

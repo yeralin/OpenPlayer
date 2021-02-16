@@ -27,15 +27,9 @@ class SettingsViewController: UIViewController, UINavigationBarDelegate, UITextF
         menuButton.target = self.revealViewController()
         navBar.delegate = self
         memoryLabel.text = self.reportUsedFreeMem()
-        if let serverAddress = self.extractServerSettings()?["serverAddress"] {
+        if let serverAddress = SettingsViewController.extractServerSettings()?["serverAddress"] {
             serverAddressField.text = serverAddress
-            self.tryConnectToRemoteServer(showErrorAlert: false)
-        }
-    }
-    
-    @IBAction func tryConnect(_ sender: UIButton) {
-        if serverAddressField.text != "" {
-            self.tryConnectToRemoteServer(showErrorAlert: true)
+            self.tryConnectToRemoteServer(showProgress: false)
         }
     }
     
@@ -46,6 +40,12 @@ class SettingsViewController: UIViewController, UINavigationBarDelegate, UITextF
     internal func textFieldShouldClear(_ textField: UITextField) -> Bool {
         serverAddressField.resignFirstResponder()
         return true
+    }
+    
+    @IBAction func tryConnect(_ sender: UIButton) {
+        if serverAddressField.text != "" {
+            self.tryConnectToRemoteServer(showProgress: true)
+        }
     }
     
     internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -59,32 +59,6 @@ class SettingsViewController: UIViewController, UINavigationBarDelegate, UITextF
         }
         textField.resignFirstResponder()
         return true
-    }
-    
-    internal func handleServerResponse(version: String, _ requestError: RequestError?, _ showErrorAlert: Bool) {
-        if let error = requestError {
-            var errorMessage = "Error: Unknown error has occured"
-            switch error {
-            case RequestError.ConnectionIssue:
-                errorMessage = "Error: Could not connect to a remote server"
-            case RequestError.FailToParse:
-                errorMessage = "Error: Could not parse server response"
-            }
-            DispatchQueue.main.async {
-                self.serverVersionLabel.text = "Unknown"
-                self.serverStatusLabel.text = "Not connected"
-                self.serverStatusLabel.textColor = UIColor.red
-                if showErrorAlert == true {
-                    self.presentServerConnectionFailureAlert(errorMessage)
-                }
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.serverVersionLabel.text = version
-                self.serverStatusLabel.text = "Connected"
-                self.serverStatusLabel.textColor = UIColor.green
-            }
-        }
     }
     
     internal func presentServerConnectionFailureAlert(_ errorMessage: String) {

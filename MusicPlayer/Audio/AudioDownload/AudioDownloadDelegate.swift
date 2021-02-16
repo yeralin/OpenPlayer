@@ -57,8 +57,13 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         let configuration = URLSessionConfiguration.background(withIdentifier: url.absoluteString)
         configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         configuration.allowsCellularAccess = true
+        configuration.allowsExpensiveNetworkAccess = true
+        configuration.allowsConstrainedNetworkAccess = true
         configuration.shouldUseExtendedBackgroundIdleMode = true
         configuration.waitsForConnectivity = true
+        configuration.sessionSendsLaunchEvents = true
+        configuration.isDiscretionary = false
+        configuration.urlCache = nil
         /* The timeout interval to use when waiting for additional data.
          The timer associated with this value is reset whenever new data arrives.
          When the request timer reaches the specified interval
@@ -71,9 +76,7 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
          either the request completes or this timeout interval is reached, whichever comes first.
          */
         configuration.timeoutIntervalForResource = Double.greatestFiniteMagnitude
-        let operationQueue = OperationQueue()
-        operationQueue.maxConcurrentOperationCount = 1
-        session = URLSession(configuration: configuration, delegate: self, delegateQueue: operationQueue)
+        session = URLSession(configuration: configuration, delegate: self, delegateQueue: OperationQueue())
         return session
     }
 
@@ -87,7 +90,6 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         if let response = response as? HTTPURLResponse {
             self.response = response
             owner?.httpResponse = response
-            notificationCenter.post(name: .receivedHttpResponse, object: owner)
         }
         processLoadingRequest()
         completionHandler(.allow)
@@ -103,6 +105,7 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         if let error = error {
+            log.error("URLSession failed: \(error.localizedDescription)")
             owner?.error = error
             notificationCenter.post(name: .errored, object: owner)
             return
@@ -160,7 +163,7 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         return mediaData.count >= requestedLength + requestedOffset
     }
     
-    private func invalidateURLSession() {
+    func invalidateURLSession() {
         session?.invalidateAndCancel()
         session = nil
     }

@@ -32,6 +32,14 @@ extension SongCell {
     internal func actionOnShuffleTap(isShuffleMode: Bool) {
             AudioPlayer.instance.shuffleMode = isShuffleMode
     }
+    
+    internal func actionOnMoveTap() {
+        delegate.performSegueForCell(songCellToMove: self, identifier: Constants.PRESENT_PLAYLIST_PICKER)
+    }
+    
+    internal func actionOnEditTap() {
+        delegate.presentAlertForCell(alert: changeSongNameAlert(), alertName: Constants.PRESENT_CHANGE_SONG_NAME_ALERT)
+    }
 
     internal func actionOnChangeSliderPosition(songNewPosition: TimeInterval) {
         do {

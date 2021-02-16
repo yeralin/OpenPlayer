@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PlaylistPickerDelegate : class {
-    func moveSong(song: SongEntity, toPlaylist: PlaylistEntity)
+    func moveSong(songCell: BaseCell, toPlaylist: PlaylistEntity)
 }
 
 
@@ -19,7 +19,7 @@ class PlaylistPickerViewController: UIViewController, UIPickerViewDataSource, UI
     @IBOutlet weak var playlistPicker: UIPickerView!
     @IBOutlet weak var pickerToolbar: UIToolbar!
     var playlistArray = [PlaylistEntity]()
-    var songToMove: Any! //Create a super song class
+    var songCellToMove: BaseCell!
     
     @IBAction func cancelTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -29,7 +29,7 @@ class PlaylistPickerViewController: UIViewController, UIPickerViewDataSource, UI
         if playlistArray.count != 0 {
             let selectedPlaylistIndex = playlistPicker.selectedRow(inComponent: 0)
             let toPlaylist = playlistArray[selectedPlaylistIndex]
-            delegate.moveSong(song: songToMove as! SongEntity, toPlaylist: toPlaylist)
+            delegate.moveSong(songCell: songCellToMove, toPlaylist: toPlaylist)
         }
         self.dismiss(animated: true, completion: nil)
         

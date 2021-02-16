@@ -28,7 +28,7 @@ extension DownloadCell {
     }
     
     internal func actionOnDownloadTap() {
-        delegate.performSegueForCell(sender: song, identifier: Constants.PRESENT_PLAYLIST_PICKER)
+        delegate.performSegueForCell(songCellToMove: self, identifier: Constants.PRESENT_PLAYLIST_PICKER)
     }
     
     internal func actionOnChangeSliderPosition(position: TimeInterval) {

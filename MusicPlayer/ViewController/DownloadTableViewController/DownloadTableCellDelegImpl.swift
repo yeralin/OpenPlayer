@@ -10,9 +10,9 @@ import UIKit
 // MARK: Download table cell delegate
 extension DownloadTableViewController: CellToTableDelegate {
     
-    func performSegueForCell(sender: Any?, identifier: String) {
+    func performSegueForCell(songCellToMove: BaseCell, identifier: String) {
         if identifier == Constants.PRESENT_PLAYLIST_PICKER {
-            self.performSegue(withIdentifier: identifier, sender: sender)
+            self.performSegue(withIdentifier: identifier, sender: songCellToMove)
         }
     }
     

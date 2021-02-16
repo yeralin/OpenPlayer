@@ -9,74 +9,62 @@
 import Foundation
 import Alamofire
 
-enum RequestError: Error {
-    case FailToParse
+enum Response: Error {
+    case Successful
+    case FailedToParse
     case ConnectionIssue
+    case ServerUndefined
 }
 
 class ServerRequests {
     
     static let sharedInstance = ServerRequests()
-    var serverAddress: URL?
     
-    init() {
-        fetchSettings()
-    }
-    
-    internal func fetchSettings() {
-        if let serverSettings = UserDefaults.standard.object(forKey: "serverSettings") as? [String : String] {
-            if let storedServerAddress = serverSettings["serverAddress"] {
-                serverAddress = URL(string: storedServerAddress)
-            }
+    internal func fetchServerURL() -> URL? {
+        if let serverSettings = SettingsViewController.extractServerSettings(),
+           let storedServerAddress = serverSettings["serverAddress"],
+           let serverAddress = URL(string: storedServerAddress) {
+            return serverAddress
         }
+        return nil
     }
-    
-    func getVersion(completion: @escaping (String, RequestError?) -> ()) {
-        fetchSettings()
-        if var requestUrl = serverAddress {
-            let versionEndpoint = "/version"
-            requestUrl.appendPathComponent(versionEndpoint)
-            AF.request(requestUrl, method: .get)
-                .validate()
-                .responseJSON { res in
-                    switch res.result {
-                    case .success(let responseData):
-                        if let version = (responseData as? [String:String])?["version"] {
-                            return completion(version, nil)
-                        }
-                        return completion("Unknown", RequestError.FailToParse)
-                    case .failure:
-                        return completion("Unknown", RequestError.ConnectionIssue)
-                    }
-            }
-        } else {
-            return completion("Unknown", RequestError.ConnectionIssue)
+
+    func getVersion(completion: @escaping (String, Response) -> ()) {
+        guard let serverAddress = fetchServerURL() else {
+            return completion("Unknown", .ServerUndefined)
         }
-    }
-    
-    func getSongs(query: String,
-                  endpoint: String,
-                  completion: @escaping ([[String:String]]?, RequestError?) -> ()) {
-        fetchSettings()
-        if var requestUrl = serverAddress {
-            requestUrl.appendPathComponent(endpoint)
-            let params = ["q": query]
-            AF.request(requestUrl, method: .get, parameters: params)
-                .validate()
-                .responseJSON { res in
-                    switch res.result {
-                    case .success(let responseData):
-                        if let songListResponse = responseData as? [[String:String]] {
-                            return completion(songListResponse, nil)
-                        }
-                        return completion(nil, RequestError.FailToParse)
-                    case .failure:
-                        return completion(nil, RequestError.ConnectionIssue)
+        let versionEndpoint = serverAddress.appendingPathComponent("/version")
+        AF.request(versionEndpoint, method: .get)
+            .validate()
+            .responseJSON { res in
+                switch res.result {
+                case .success(let responseData):
+                    if let version = (responseData as? [String:String])?["version"] {
+                        return completion(version, .Successful)
                     }
+                    return completion("Unknown", .FailedToParse)
+                case .failure:
+                    return completion("Unknown", .ConnectionIssue)
                 }
         }
     }
     
-    
-    
+    func getSongs(query: String, completion: @escaping (Data?, Response) -> ()) {
+        guard let serverAddress = fetchServerURL() else {
+            return completion(nil, .ServerUndefined)
+        }
+        let getSongsEndpoint = serverAddress.appendingPathComponent("/search")
+        let params = ["q": query]
+        AF.request(getSongsEndpoint, method: .get, parameters: params)
+            .authenticate(username: "daniyar", password: "dj2gvcP6%oN%eq")
+            .validate()
+            .responseData { res in
+                switch res.result {
+                case .success(let responseData):
+                    return completion(responseData, Response.Successful)
+                case .failure:
+                    return completion(nil, Response.ConnectionIssue)
+                }
+            }
+    }
 }

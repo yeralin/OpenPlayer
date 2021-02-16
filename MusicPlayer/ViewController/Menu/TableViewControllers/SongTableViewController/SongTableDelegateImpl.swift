@@ -18,9 +18,9 @@ extension SongTableViewController: AudioPlayerDelegate, CellToTableDelegate {
     }
     
     // MARK - CellToTableDelegateImpl
-    func performSegueForCell(sender: Any?, identifier: String) {
+    func performSegueForCell(songCellToMove: BaseCell, identifier: String) {
         if identifier == Constants.PRESENT_PLAYLIST_PICKER {
-            self.performSegue(withIdentifier: identifier, sender: sender)
+            self.performSegue(withIdentifier: identifier, sender: songCellToMove)
         }
     }
     

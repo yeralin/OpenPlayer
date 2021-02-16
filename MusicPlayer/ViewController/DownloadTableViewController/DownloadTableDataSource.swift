@@ -24,21 +24,18 @@ extension DownloadTableViewController {
         return nil
     }
     
-    internal func constructPlaylistPicker(segue: UIStoryboardSegue, sender: Any?) {
+    internal func constructPlaylistPicker(segue: UIStoryboardSegue, _ songCellToMove: BaseCell) {
         do {
             guard let pickerView = segue.destination as? PlaylistPickerViewController else {
                 throw "Could not cast sender as PlaylistPickerViewController"
             }
-            guard let songToDownload = sender as? SongEntity else {
-                throw "Could not cast sender as SongEntity"
-            }
             let playlistArray = try PlaylistPersistencyManager.sharedInstance.getPlaylistArray()
             pickerView.delegate = self
-            pickerView.songToMove = songToDownload
+            pickerView.songCellToMove = songCellToMove
             pickerView.playlistArray = playlistArray
         } catch let err {
             log.error("Could not construct \"moveSong\" picker for "
-                + "\((sender as? SongEntity)?.songName ?? "unknown")\" song: \(err)")
+                        + "\(songCellToMove.song.songName ?? "unknown")\" song: \(err)")
         }
     }
     

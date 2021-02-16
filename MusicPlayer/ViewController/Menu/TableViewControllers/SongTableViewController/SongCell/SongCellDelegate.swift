@@ -10,7 +10,7 @@ import UIKit
 
 protocol CellToTableDelegate: class {
     func presentAlertForCell(alert: UIAlertController, alertName: String)
-    func performSegueForCell(sender: Any?, identifier: String)
+    func performSegueForCell(songCellToMove: BaseCell, identifier: String)
     func propagateError(title: String, error: String)
 }
 

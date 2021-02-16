@@ -39,7 +39,7 @@ open class RemotePlayerItem: PlayerItem {
     
     internal let url: URL
     internal let initialScheme: String?
-    internal var customFileExtension: String? = "mp3"
+    internal var customFileExtension: String?
     
     internal var payload: Data?
     internal var bytesTotal: Int?
@@ -91,11 +91,11 @@ open class RemotePlayerItem: PlayerItem {
         
         self.url = url
         self.initialScheme = scheme
+        self.customFileExtension = "mp3"
         
         if let ext = customFileExtension {
             urlWithCustomScheme.deletePathExtension()
             urlWithCustomScheme.appendPathExtension(ext)
-            self.customFileExtension = ext
         }
         
         let asset = AVURLAsset(url: urlWithCustomScheme)

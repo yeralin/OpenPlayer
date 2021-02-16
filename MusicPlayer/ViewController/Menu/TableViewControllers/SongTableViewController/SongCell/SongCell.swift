@@ -8,29 +8,12 @@
 
 import UIKit
 
-class SongCell: UITableViewCell {
+class SongCell: BaseCell {
     
-    // Internal constants
-    internal let ARTIST_TEXT_FIELD_INDEX: Int = 0
-    internal let TITLE_TEXT_FIELD_INDEX: Int = 1
-    
-    @IBOutlet weak var artistName: UILabel!
-    @IBOutlet weak var songTitle: UILabel!
-    
-    @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var moveButton: UIButton!
     @IBOutlet weak var songProgressSlider: UISlider!
     internal var sliderCAD: CADisplayLink!
-    weak var delegate: CellToTableDelegate!
-
-    internal var song: SongEntity! {
-        didSet {
-            artistName.text = song.songArtist
-            songTitle.text = song.songTitle
-        }
-    }
 
     func initCell(initSong: SongEntity) {
         self.song = initSong
@@ -53,7 +36,7 @@ class SongCell: UITableViewCell {
         restoreSliderCAD()
     }
     
-    @IBAction func playPauseTapped(_ sender: UIButton) {
+    @IBAction func playPauseButtonTapped(_ sender: UIButton) {
         actionOnPlayPauseTap(isPlaying: sender.isSelected,
                              isInProgress: songProgressSlider.value != 0
                                 && songProgressSlider.isEnabled == true)
@@ -64,15 +47,15 @@ class SongCell: UITableViewCell {
         sender.isSelected = AudioPlayer.instance.shuffleMode
     }
     
-    @IBAction func moveTapped(_ sender: UIButton) {
-        delegate.performSegueForCell(sender: song, identifier: Constants.PRESENT_PLAYLIST_PICKER)
+    @IBAction func moveButtonTapped(_ sender: UIButton) {
+        actionOnMoveTap()
     }
     
-    @IBAction func changeSongNameTapped(_ sender: UIButton) {
-        delegate.presentAlertForCell(alert: changeSongNameAlert(), alertName: Constants.PRESENT_CHANGE_SONG_NAME_ALERT)
+    @IBAction func editButtonTapped(_ sender: UIButton) {
+        actionOnEditTap()
     }
     
-    @IBAction func changeSliderPosition(_ sender: UISlider) {
+    @IBAction func sliderPositionChanged(_ sender: UISlider) {
         let songNewPosition = TimeInterval(sender.value)
         actionOnChangeSliderPosition(songNewPosition: songNewPosition)
     }

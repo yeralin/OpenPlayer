@@ -46,7 +46,10 @@ class SongTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.PRESENT_PLAYLIST_PICKER {
-            constructPlaylistPicker(segue: segue, sender: sender)
+            guard let songCellToMove = sender as? BaseCell else {
+                fatalError("Could not cast sender as SongCell")
+            }
+            constructPlaylistPicker(segue: segue, songCellToMove)
         }
     }
 }

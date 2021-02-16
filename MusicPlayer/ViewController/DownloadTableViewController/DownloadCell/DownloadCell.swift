@@ -8,27 +8,13 @@
 
 import UIKit
 
-class DownloadCell: UITableViewCell {
-    
-    @IBOutlet weak var artistName: UILabel!
-    @IBOutlet weak var songTitle: UILabel!
+class DownloadCell: BaseCell {
     
     var highlightedTimer: Timer?
     
-    @IBOutlet weak var playPauseButton: UIButton!
-    @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var songProgressSlider: BufferSlider!
     internal var sliderCAD: CADisplayLink!
-    weak var delegate: CellToTableDelegate!
-    
-    internal var song: SongEntity!
-    {
-        didSet {
-            artistName.text = song?.songArtist
-            songTitle.text = song?.songTitle
-        }
-    }
     
     override func awakeFromNib() {
         self.selectionStyle = .none

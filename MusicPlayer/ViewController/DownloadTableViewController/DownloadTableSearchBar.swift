@@ -10,6 +10,12 @@ import Foundation
 import UIKit
 import Alamofire
 
+struct SearchResultEntry: Codable {
+    var source: String
+    var title: String
+    var url: URL
+}
+
 // MARK: Download table search bar
 extension DownloadTableViewController: UISearchBarDelegate {
     
@@ -21,26 +27,6 @@ extension DownloadTableViewController: UISearchBarDelegate {
         }
     }
     
-    func parseSearchRequest(_ songListResponse: [[String:String]]) {
-        guard let context = try? SongPersistencyManager.sharedInstance.validateContext(context: nil) else {
-            fatalError("Could not fetch context")
-        }
-        for entry in songListResponse {
-            if let songName = entry["title"], let url = entry["url"], let songUrl = URL(string: url) {
-                let song = SongEntity(context: context)
-                song.songTitle = songName
-                song.songArtist = ""
-                song.songName = songName
-                song.songUrl = songUrl
-                let tokSongName = songName.split(separator: "-", maxSplits: 1)
-                if tokSongName.count == 2 {
-                    song.songArtist = String(tokSongName[0]).trimmingCharacters(in: .whitespacesAndNewlines)
-                    song.songTitle = String(tokSongName[1]).trimmingCharacters(in: .whitespacesAndNewlines)
-                }
-                searchSongs.append(song)
-            }
-        }
-    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchSongs.removeAll()
@@ -48,32 +34,8 @@ extension DownloadTableViewController: UISearchBarDelegate {
         if var searchText = searchBar.text, !searchText.isEmpty {
             searchText = searchText.lowercased()
             self.showWaitOverlay()
-            ServerRequests.sharedInstance.getSongs(query: searchText, endpoint: "/youtube/search",
-                    completion: { songListResponse, requestError in
-                        if let error = requestError {
-                            var errorText = ""
-                            switch error {
-                            case RequestError.ConnectionIssue:
-                                errorText = "Error: Could not connect to a server"
-                            case RequestError.FailToParse:
-                                errorText = "Error: Could not parse server response"
-                            }
-                            DispatchQueue.main.async {
-                                self.removeAllOverlays()
-                                let alert = UIAlertController(title: "Error", message: errorText, preferredStyle: UIAlertController.Style.alert)
-                                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-                                self.present(alert, animated: true, completion: nil)
-                            }
-                        } else {
-                            if let songListResponse = songListResponse {
-                                DispatchQueue.main.async {
-                                    self.removeAllOverlays()
-                                    self.parseSearchRequest(songListResponse)
-                                    self.tableView.reloadData()
-                                }
-                            }
-                        }
-                })
+            ServerRequests.sharedInstance.getSongs(query: searchText,
+                                                   completion: parseSearchResponse(responseData:responseStatus:))
         }
         searchBar.resignFirstResponder()
     }
@@ -84,5 +46,63 @@ extension DownloadTableViewController: UISearchBarDelegate {
     
     @objc func dismissKeyboard() {
         searchBar.resignFirstResponder()
+    }
+    
+    private func parseSearchResponse(responseData: Data?, responseStatus: Response) {
+        do {
+            if responseStatus != .Successful {
+                throw "Unsuccessful HTTP request"
+            }
+            if  let responseData = responseData {
+                let decoder = JSONDecoder()
+                let songListResponse = try decoder.decode([SearchResultEntry].self, from: responseData)
+                DispatchQueue.main.async {
+                    self.removeAllOverlays()
+                    self.populateSongListResponse(songListResponse)
+                    self.tableView.reloadData()
+                }
+            } else {
+                var responseStatus = Response.FailedToParse
+                throw "Failed to parse the response"
+            }
+        } catch {
+            var errorMessage: String?
+            switch responseStatus {
+            case .ConnectionIssue:
+                errorMessage = "Error: Could not connect to the server"
+            case .FailedToParse:
+                errorMessage = "Error: Could not parse server response"
+            case .ServerUndefined:
+                errorMessage = "Error: No server URL was defined in settings"
+            default:
+                errorMessage = "Error: Unknown error occurred"
+            }
+            DispatchQueue.main.async {
+                self.removeAllOverlays()
+                let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func populateSongListResponse(_ songListResponse: [SearchResultEntry]) {
+        guard let context = try? SongPersistencyManager.sharedInstance.validateContext(context: nil) else {
+            fatalError("Could not fetch context")
+        }
+        for entry in songListResponse {
+            let song = SongEntity(context: context)
+            song.songName = entry.title
+            song.songUrl = entry.url
+            let tokSongName = entry.title.split(separator: "-", maxSplits: 1)
+            if tokSongName.count == 2 {
+                song.songArtist = String(tokSongName[0]).trimmingCharacters(in: .whitespacesAndNewlines)
+                song.songTitle = String(tokSongName[1]).trimmingCharacters(in: .whitespacesAndNewlines)
+            } else {
+                song.songTitle = entry.title
+                song.songArtist = ""
+            }
+            searchSongs.append(song)
+        }
     }
 }
