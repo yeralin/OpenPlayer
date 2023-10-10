@@ -562,7 +562,7 @@
 				TargetAttributes = {
 					317929A01EA84A510076F15F = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 94KV3E626L;
+						DevelopmentTeam = 926229A273;
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -644,6 +644,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/BufferSlider/BufferSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework",
 				"${BUILT_PRODUCTS_DIR}/SWRevealViewController/SWRevealViewController.framework",
@@ -653,6 +654,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BufferSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GCDWebServer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWRevealViewController.framework",
@@ -922,9 +924,9 @@
 				CODE_SIGN_ENTITLEMENTS = MusicPlayer/MusicPlayer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 94KV3E626L;
+				DEVELOPMENT_TEAM = 926229A273;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yeralin.open.player;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -942,9 +944,9 @@
 				CODE_SIGN_ENTITLEMENTS = MusicPlayer/MusicPlayer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 94KV3E626L;
+				DEVELOPMENT_TEAM = 926229A273;
 				INFOPLIST_FILE = MusicPlayer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.yeralin.open.player;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -960,6 +962,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = Q7W47GFKL3;
 				INFOPLIST_FILE = MusicPlayerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.OpenPlayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -974,6 +977,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = Q7W47GFKL3;
 				INFOPLIST_FILE = MusicPlayerTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.OpenPlayerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -988,6 +992,7 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q7W47GFKL3;
 				INFOPLIST_FILE = MusicPlayerUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.OpenPlayerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1002,6 +1007,7 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q7W47GFKL3;
 				INFOPLIST_FILE = MusicPlayerUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.OpenPlayerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
