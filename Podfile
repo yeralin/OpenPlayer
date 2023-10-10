@@ -14,6 +14,7 @@ target 'MusicPlayer' do
   pod 'GCDWebServer/WebUploader'
   pod 'CocoaLumberjack'
   pod 'BufferSlider'
+  pod 'MobileVLCKit'
 end
 
 target 'MusicPlayerUITests' do
