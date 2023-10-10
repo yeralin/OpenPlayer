@@ -1,5 +1,5 @@
 #define a global platform for your project
-platform :ios, '14.1'
+platform :ios, '17.0'
 workspace 'MusicPlayer'
 inhibit_all_warnings!
 
@@ -11,8 +11,9 @@ target 'MusicPlayer' do
   pod 'SwiftyBeaver'
   pod 'SwiftOverlays'
   pod 'Alamofire'
-  pod "GCDWebServer/WebUploader"
-  pod "CocoaLumberjack"
+  pod 'GCDWebServer/WebUploader'
+  pod 'CocoaLumberjack'
+  pod 'BufferSlider'
 end
 
 target 'MusicPlayerUITests' do
