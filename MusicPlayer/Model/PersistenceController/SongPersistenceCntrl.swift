@@ -66,6 +66,8 @@ class SongPersistencyManager: PersistenceController {
             }
             try fm.moveItem(at: getSongPath(song: toMoveSong), to: toMovePath)
             fromPlaylist.removeFromSongs(toMoveSong)
+            // Reset song order, so it is moved to the top of the playlist
+            toMoveSong.songOrder = -1
             toPlaylist.addToSongs(toMoveSong)
         } catch SongPersistenceCntrlError.FileAlreadyExists {
             throw SongPersistenceCntrlError.FileAlreadyExists
