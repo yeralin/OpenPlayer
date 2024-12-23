@@ -100,22 +100,21 @@ class SongPersistencyManager: PersistenceController {
         // Match song entities with their corresponding audio files:
         // If a new audio file is found, create a new song entity
         for filePath in filePaths {
-            if let fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, filePath.pathExtension as CFString, nil)?.takeRetainedValue() {
-                let isAudioFile = UTTypeConformsTo(fileUTI, kUTTypeAudio)
-                if isAudioFile {
-                    let audioFileName = filePath.lastPathComponent
-                    if let index = songsToMatchWithAudioFiles.firstIndex(where: { el in el.songName == audioFileName }) {
-                        songsToMatchWithAudioFiles.remove(at: index)
-                    } else {
-                        // New audio file is found, create corresponding SongEntity
-                        let song = SongEntity(context: cntxt)
-                        song.songUrl = nil
-                        song.songName = audioFileName
-                        song.songOrder = -1
-                        song.isProcessed = false
-                        forPlaylist.addToSongs(song)
-                        songsArray.append(song)
-                    }
+            let isAudioFile = UTType(filenameExtension: filePath.pathExtension)?
+                .conforms(to: .audio) ?? false
+            if isAudioFile {
+                let audioFileName = filePath.lastPathComponent
+                if let index = songsToMatchWithAudioFiles.firstIndex(where: { el in el.songName == audioFileName }) {
+                    // Matched/Found -> remove from the array
+                    songsToMatchWithAudioFiles.remove(at: index)
+                } else {
+                    // New audio file is found, create corresponding SongEntity
+                    let song = SongEntity(context: cntxt)
+                    song.songName = audioFileName
+                    song.songOrder = -1
+                    song.isProcessed = false
+                    forPlaylist.addToSongs(song)
+                    songsArray.insert(song, at: 0)
                 }
             }
         }
