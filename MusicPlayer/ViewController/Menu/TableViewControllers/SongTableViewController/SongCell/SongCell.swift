@@ -55,9 +55,18 @@ class SongCell: BaseCell {
         actionOnEditTap()
     }
     
-    @IBAction func sliderPositionChanged(_ sender: UISlider) {
-        let songNewPosition = TimeInterval(sender.value)
-        actionOnChangeSliderPosition(songNewPosition: songNewPosition)
+    @IBAction func sliderDraggingStarted(_ sender: UISlider) {
+        sliderCAD.isPaused = true
+    }
+    
+    @IBAction func sliderDraggingChanged(_ sender: UISlider) {
+        songProgressSlider.value = sender.value
+    }
+    
+    
+    @IBAction func sliderDraggingFinished(_ sender: UISlider) {
+        actionOnChangeSliderPosition(songNewPosition: TimeInterval(sender.value))
+        sliderCAD.isPaused = false
     }
     
 }

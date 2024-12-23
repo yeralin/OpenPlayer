@@ -31,9 +31,9 @@ extension DownloadCell {
         delegate.performSegueForCell(songCellToMove: self, identifier: Constants.PRESENT_PLAYLIST_PICKER)
     }
     
-    internal func actionOnChangeSliderPosition(position: TimeInterval) {
+    internal func actionOnChangeSliderPosition(songNewPosition: TimeInterval) {
         do {
-            try AudioPlayer.instance.seekTo(position: position)
+            try AudioPlayer.instance.seekTo(position: songNewPosition)
         } catch let error {
             delegate.propagateError(title: "Audio player failed", error: error.localizedDescription)
         }

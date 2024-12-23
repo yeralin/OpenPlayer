@@ -58,14 +58,12 @@ extension SongTableViewController: AudioPlayerDelegate, CellToTableDelegate {
             return
         }
         switch state {
-        case .play, .resume:
+        case .play, .resume, .prepare:
             cell.playSongCellState()
         case .pause:
             cell.pauseSongCellState()
         case .stop:
             cell.stopSongCellState()
-        case .prepare:
-            fatalError("This state should not have been executed")
         }
     }
     

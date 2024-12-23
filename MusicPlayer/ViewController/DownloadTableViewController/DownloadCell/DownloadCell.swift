@@ -58,9 +58,19 @@ class DownloadCell: BaseCell {
     @IBAction func downloadTapped(_ sender: UIButton) {
         self.actionOnDownloadTap()
     }
-    @IBAction func changeSliderPosition(_ sender: UISlider) {
-        let songNewPosition = TimeInterval(sender.value)
-        self.actionOnChangeSliderPosition(position: songNewPosition)
+
+    @IBAction func sliderDraggingStarted(_ sender: UISlider) {
+        sliderCAD.isPaused = true
+    }
+    
+    @IBAction func sliderDraggingChanged(_ sender: UISlider) {
+        songProgressSlider.value = sender.value
+    }
+    
+    
+    @IBAction func sliderDraggingFinished(_ sender: UISlider) {
+        actionOnChangeSliderPosition(songNewPosition: TimeInterval(sender.value))
+        sliderCAD.isPaused = false
     }
     
     deinit {

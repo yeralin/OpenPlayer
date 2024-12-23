@@ -34,7 +34,7 @@ extension SongCell {
         songProgressSlider.maximumValue = Float(duration)
         songProgressSlider.value = Float(currentTime)
         sliderCAD = CADisplayLink(target: self, selector: #selector(self.updateSliderCAD))
-        sliderCAD.preferredFramesPerSecond = 30
+        sliderCAD.preferredFramesPerSecond = 3
         sliderCAD.add(to: .current, forMode: RunLoop.Mode.default)
     }
 
