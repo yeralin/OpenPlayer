@@ -32,15 +32,21 @@ class SongPersistencyManager: PersistenceController {
         }
         return songArray
     }
-
+    
+    func wipeSongsMetadata(playlist: PlaylistEntity, cntxt: NSManagedObjectContext?) throws {
+        let cntxt = try validateContext(context: cntxt)
+        _ = try getSongsArray(playlist: playlist).map{cntxt.delete($0)}
+        try saveContext(cntxt: cntxt)
+    }
+    
     public func getSongPath(song: SongEntity) throws -> URL {
-        if let songName = song.songName, let playlistName = song.playlist?.playlistName {
+        if let playlistName = song.playlist?.playlistName, let songName = song.songName {
             return docsUrl.appendingPathComponent(playlistName).appendingPathComponent(songName)
         } else {
-            throw "Could not extract meta from song entity"
+            throw "Could not extract metadata from song entity"
         }
     }
-
+    
     func deleteSong(song: SongEntity, cntxt: NSManagedObjectContext? = nil) throws {
         let cntxt = try validateContext(context: cntxt)
         do {
