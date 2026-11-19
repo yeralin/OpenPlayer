@@ -4,7 +4,7 @@ PODS:
   - GCDWebServer/WebUploader (3.5.4):
     - GCDWebServer/Core
   - MobileVLCKit (3.5.1)
-  - SwiftLint (0.42.0)
+  - SwiftLint (0.65.1)
   - SwiftOverlays (5.0.1)
   - SwiftyBeaver (2.1.1)
   - SWRevealViewController (2.3.0)
@@ -32,7 +32,7 @@ SPEC CHECKSUMS:
   Alamofire: c5f37d8f438dc1d7fd3ff767f2f80fd01ca381d7
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   MobileVLCKit: 144d5f565512d1147d63b0fa1379231b3fd66535
-  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
+  SwiftLint: 7d51ad56923e88694cee5ca806dbbab30f85eaaa
   SwiftOverlays: ab459ea9194b0e96aaccaa00e9ead1bf6d46eef1
   SwiftyBeaver: ade157e4f857812e7d7f15f2e3396bb8733f8a1c
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
