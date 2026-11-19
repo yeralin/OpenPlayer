@@ -163,3 +163,20 @@ finish it:
 `AudioDownloadManager` is still live: when a stream finishes outside a
 download, it caches the file in the temporary directory
 (`SongEntity.isCached()`).
+
+### 2026-11-19: Synchronous AVAsset reads are kept for now (deferred)
+
+`PlayerItem.duration` returns `asset.duration`, and
+`SongPersistencyManager.processSong` reads `asset.commonMetadata`. Both are
+synchronous AVAsset APIs, deprecated since iOS 16 in favour of
+`try await asset.load(.duration)` / `.load(.commonMetadata)`, and they block
+the main thread while the file is read. Moving to the async API is not a
+drop-in change:
+- `AudioPlayer.play(song:)` and the cells' slider setup read the duration
+  synchronously right after creating the item, so local playback would need
+  to wait for the item's `readyToPlay` status (as remote playback already
+  does) before configuring the slider and Now Playing info.
+- `processSong` runs from `tableView(_:cellForRowAt:)`, so metadata would have
+  to be loaded asynchronously and the row reloaded afterwards.
+This is left as a separate change; until then these calls produce
+deprecation warnings only.
