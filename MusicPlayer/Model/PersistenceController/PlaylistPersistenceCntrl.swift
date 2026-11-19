@@ -32,9 +32,11 @@ class PlaylistPersistencyManager: PersistenceController {
     
     func createPlaylist(name: String, cntxt: NSManagedObjectContext? = nil) throws -> PlaylistEntity {
         let cntxt = try validateContext(context: cntxt)
+        // A plain case/diacritic-insensitive comparison: MATCHES would treat
+        // the name as a regular expression and raise on names like "Mix [2024".
         if !_fetchData(entityName: "PlaylistEntity",
                        sortIn: nil,
-                       predicate: NSPredicate(format: "playlistName MATCHES[cd] %@", name)).isEmpty {
+                       predicate: NSPredicate(format: "playlistName ==[cd] %@", name)).isEmpty {
             throw UIError.AlreadyExists(reason: "Playlist \"\(name)\" already exists")
         }
         let playlistPosition = fetchPlaylistSize()
