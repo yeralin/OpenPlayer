@@ -6,7 +6,7 @@ PODS:
   - MobileVLCKit (3.5.1)
   - SwiftLint (0.42.0)
   - SwiftOverlays (5.0.1)
-  - SwiftyBeaver (1.9.3)
+  - SwiftyBeaver (2.1.1)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
@@ -34,7 +34,7 @@ SPEC CHECKSUMS:
   MobileVLCKit: 144d5f565512d1147d63b0fa1379231b3fd66535
   SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   SwiftOverlays: ab459ea9194b0e96aaccaa00e9ead1bf6d46eef1
-  SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
+  SwiftyBeaver: ade157e4f857812e7d7f15f2e3396bb8733f8a1c
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
 PODFILE CHECKSUM: 2815b0ea776917b263e512e976483f787050d7d6
