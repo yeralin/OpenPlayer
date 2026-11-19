@@ -72,8 +72,12 @@ class MusicPlayerUITests: XCTestCase {
         app.navigationBars["Test"].buttons["Playlists"].tap()
         playlistsNavigationBar.buttons["Edit"].tap()
         // The edit-mode minus button is "Remove <row>" since iOS 26 ("Delete <row>" before).
-        tablesQuery.buttons.matching(NSPredicate(format: "label IN %@", ["Remove Test", "Delete Test"]))
-            .firstMatch.tap()
+        // It appears only once the edit-mode animation has run, so wait for it.
+        let removeButton = tablesQuery.buttons.matching(
+            NSPredicate(format: "label IN %@ OR identifier IN %@",
+                        ["Remove Test", "Delete Test"], ["Remove Test", "Delete Test"])).firstMatch
+        XCTAssertTrue(removeButton.waitForExistence(timeout: 5), "Expected the edit-mode delete button")
+        removeButton.tap()
         tablesQuery.buttons["Delete"].tap()
         let warning = app.alerts["Warning"]
         XCTAssertTrue(warning.waitForExistence(timeout: 5), "Expected the delete confirmation")
