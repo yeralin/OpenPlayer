@@ -63,6 +63,8 @@
 		5BDAC924224F110F7AC14302 /* Pods_MusicPlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7245D16484A4ED96875FA8B1 /* Pods_MusicPlayerTests.framework */; };
 		680C5F4B458AA440DC57BBD7 /* Pods_MusicPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */; };
 		96275DABB961CE14176FEFED /* TestPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F77B699E134585B7568516B /* TestPersistence.swift */; };
+		C30852EC7A46B6298417ED88 /* ServerCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61DE5EEC1637B3D26A3AD0F2 /* ServerCredentialsTests.swift */; };
+		C9AEEF71726F0C9DC10890C6 /* ServerCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B1A98476F1800E5E38BCDC /* ServerCredentials.swift */; };
 		CF2F5D418ED701CC945C2B36 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2F59FCF07DAB737CE9F931 /* MenuTableViewController.swift */; };
 		CF2F5E7E81A30C0F0AD7F0EE /* MPControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2F594116AB4F210B91751A /* MPControl.swift */; };
 		D41D2EB1D74FB0199BDBFEC2 /* PersistenceTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0290F7219DB15B770AE9BE /* PersistenceTestCase.swift */; };
@@ -152,8 +154,10 @@
 		3FEB77332666E043002E1F6F /* MusicPlayer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MusicPlayer.entitlements; sourceTree = "<group>"; };
 		3FEB77342666E043002E1F6F /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		58C99907BD638B50AD783D5B /* Pods-MusicPlayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayerTests/Pods-MusicPlayerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		61DE5EEC1637B3D26A3AD0F2 /* ServerCredentialsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerCredentialsTests.swift; sourceTree = "<group>"; };
 		6D27D0566CEF859331BD12A4 /* Project.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
 		7245D16484A4ED96875FA8B1 /* Pods_MusicPlayerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75B1A98476F1800E5E38BCDC /* ServerCredentials.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerCredentials.swift; sourceTree = "<group>"; };
 		7A88A1723C2DEF843C607DEA /* Pods-MusicPlayerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayerUITests/Pods-MusicPlayerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7C0290F7219DB15B770AE9BE /* PersistenceTestCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PersistenceTestCase.swift; sourceTree = "<group>"; };
 		7D2DF99FE7F46112B161997B /* Pods-MusicPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayer/Pods-MusicPlayer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				311221B01EF42E9500C94244 /* ServerRequests.swift */,
+				75B1A98476F1800E5E38BCDC /* ServerCredentials.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -397,6 +402,7 @@
 				FFB3EA0A1763E041FE8E0824 /* Fixtures */,
 				E510ED390BA635A3B05CCBF4 /* Persistence */,
 				2FEB207C799E442770F85ACB /* Configuration */,
+				90A0A2C30B966EB55ADD3F64 /* Network */,
 			);
 			path = MusicPlayerTests;
 			sourceTree = "<group>";
@@ -475,6 +481,15 @@
 				7245D16484A4ED96875FA8B1 /* Pods_MusicPlayerTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		90A0A2C30B966EB55ADD3F64 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				61DE5EEC1637B3D26A3AD0F2 /* ServerCredentialsTests.swift */,
+			);
+			name = Network;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		9F2357D2B79EA4C1C22AF9BC /* Config */ = {
@@ -840,6 +855,7 @@
 				3127DC9322AD5E9600A972AF /* ServerController.swift in Sources */,
 				F6CD7200231863E500C0F8AD /* AudioDownloadManager.swift in Sources */,
 				CF2F5E7E81A30C0F0AD7F0EE /* MPControl.swift in Sources */,
+				C9AEEF71726F0C9DC10890C6 /* ServerCredentials.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -851,6 +867,7 @@
 				D41D2EB1D74FB0199BDBFEC2 /* PersistenceTestCase.swift in Sources */,
 				D8451D1C5E793F0C57BDE2AE /* TestPersistenceTests.swift in Sources */,
 				523C218971B61772318BBD30 /* InfoPlistTests.swift in Sources */,
+				C30852EC7A46B6298417ED88 /* ServerCredentialsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
