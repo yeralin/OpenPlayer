@@ -154,7 +154,7 @@ class SongPersistencyManager: PersistenceController {
                 song.songTitle = meta[title].value as? String
             }
             if let artist = meta.firstIndex(where: { el in el.commonKey?.rawValue == "artist"}) {
-                song.songTitle = meta[artist].value as? String
+                song.songArtist = meta[artist].value as? String
             }
             //if let artwork = meta.index(where: { el in el.commonKey == "artwork"}) {
             //let imageData = meta.value as! Data
