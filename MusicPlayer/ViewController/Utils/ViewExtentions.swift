@@ -162,15 +162,13 @@ public enum VerticalPosition:Int{
         return result
     }
     
-    ///Custom Drawing. Subclass and and override to suit you needs.
-    open override func draw(_ rect: CGRect) {
-        //        UIColor.redColor().colorWithAlphaComponent(0.3).set()
-        //        UIRectFrame(rect)
-        baseColor.set()
-        let rect = self.bounds.insetBy(dx: CGFloat(borderWidth)+padding, dy: CGFloat(borderWidth))
+    /// Where the track is drawn inside `bounds`: full width (minus the
+    /// border), `sliderHeight` tall, placed according to `sliderPosition`.
+    internal func bufferTrackRect(in bounds: CGRect) -> CGRect {
+        let rect = bounds.insetBy(dx: CGFloat(borderWidth)+padding, dy: CGFloat(borderWidth))
         let height = sliderHeight.CGFloatValue
-        let radius = height/2
-        var sliderRect = CGRect(x: rect.origin.x, y: rect.origin.y + (rect.height/2-radius), width: rect.width, height: rect.width) //default center
+        var sliderRect = CGRect(x: rect.origin.x, y: rect.origin.y + (rect.height-height)/2,
+                                width: rect.width, height: height) //default center
         switch sliderPosition {
         case .top:
             sliderRect.origin.y = rect.origin.y
@@ -179,6 +177,17 @@ public enum VerticalPosition:Int{
         default:
             break
         }
+        return sliderRect
+    }
+
+    ///Custom Drawing. Subclass and and override to suit you needs.
+    open override func draw(_ rect: CGRect) {
+        //        UIColor.redColor().colorWithAlphaComponent(0.3).set()
+        //        UIRectFrame(rect)
+        baseColor.set()
+        let sliderRect = bufferTrackRect(in: self.bounds)
+        let height = sliderRect.height
+        let radius = height/2
         
         let path = UIBezierPath()
         if roundedSlider {

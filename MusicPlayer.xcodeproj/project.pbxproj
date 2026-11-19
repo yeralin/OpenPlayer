@@ -70,6 +70,7 @@
 		51407BFB2552C5CD9F5DC31D /* ID3Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63BFE5B7DD9A1FEACBB3EEC /* ID3Tag.swift */; };
 		523C218971B61772318BBD30 /* InfoPlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AA75E5E8D864B9A2AAECD /* InfoPlistTests.swift */; };
 		5BDAC924224F110F7AC14302 /* Pods_MusicPlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7245D16484A4ED96875FA8B1 /* Pods_MusicPlayerTests.framework */; };
+		661CD5CFBD77ECA6BC60B405 /* BufferSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6E32216DB0FC8A62FE25797 /* BufferSliderTests.swift */; };
 		66FAA9B1B619ADFB1090935D /* SongTableReorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36354AD6CE63A3BC3FF9ADF /* SongTableReorderTests.swift */; };
 		672BB9155E4E03DB093D2CA2 /* SearchResultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D33477251BB53C541C79E /* SearchResultsTests.swift */; };
 		680C5F4B458AA440DC57BBD7 /* Pods_MusicPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */; };
@@ -221,6 +222,7 @@
 		F01D33477251BB53C541C79E /* SearchResultsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SearchResultsTests.swift; sourceTree = "<group>"; };
 		F07FE8BC4A2C71586F98088E /* AudioPlayerEndOfTrackTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AudioPlayerEndOfTrackTests.swift; sourceTree = "<group>"; };
 		F6CD71FF231863E500C0F8AD /* AudioDownloadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDownloadManager.swift; sourceTree = "<group>"; };
+		F6E32216DB0FC8A62FE25797 /* BufferSliderTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BufferSliderTests.swift; sourceTree = "<group>"; };
 		F6F5EC312330228800E99FFB /* SongTableDelegateImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableDelegateImpl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -457,6 +459,7 @@
 				33BB77ECE9658C16BAA1C256 /* Audio */,
 				E9A44328C196E1949A357F2C /* SongTable */,
 				F5A6F0CEAADB11875EFE351C /* Download */,
+				8D7ED1847F45E698E171CE96 /* Views */,
 			);
 			path = MusicPlayerTests;
 			sourceTree = "<group>";
@@ -552,6 +555,15 @@
 				7245D16484A4ED96875FA8B1 /* Pods_MusicPlayerTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8D7ED1847F45E698E171CE96 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F6E32216DB0FC8A62FE25797 /* BufferSliderTests.swift */,
+			);
+			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		90A0A2C30B966EB55ADD3F64 /* Network */ = {
@@ -991,6 +1003,7 @@
 				672BB9155E4E03DB093D2CA2 /* SearchResultsTests.swift in Sources */,
 				42F5CBC46FC4BB566BE42319 /* DownloadTableViewControllerTests.swift in Sources */,
 				66FAA9B1B619ADFB1090935D /* SongTableReorderTests.swift in Sources */,
+				661CD5CFBD77ECA6BC60B405 /* BufferSliderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
