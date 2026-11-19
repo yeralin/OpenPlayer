@@ -59,7 +59,6 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         configuration.allowsCellularAccess = true
         configuration.allowsExpensiveNetworkAccess = true
         configuration.allowsConstrainedNetworkAccess = true
-        configuration.shouldUseExtendedBackgroundIdleMode = true
         configuration.waitsForConnectivity = true
         configuration.sessionSendsLaunchEvents = true
         configuration.isDiscretionary = false
