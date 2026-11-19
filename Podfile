@@ -13,8 +13,6 @@ target 'MusicPlayer' do
   pod 'SwiftOverlays'
   pod 'Alamofire'
   pod 'GCDWebServer/WebUploader'
-  pod 'CocoaLumberjack'
-  pod 'BufferSlider'
   pod 'MobileVLCKit'
 
   # Unit tests are hosted in the app and `@testable import MusicPlayer`, so
