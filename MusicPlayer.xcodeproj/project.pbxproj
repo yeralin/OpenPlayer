@@ -70,6 +70,7 @@
 		51407BFB2552C5CD9F5DC31D /* ID3Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63BFE5B7DD9A1FEACBB3EEC /* ID3Tag.swift */; };
 		523C218971B61772318BBD30 /* InfoPlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AA75E5E8D864B9A2AAECD /* InfoPlistTests.swift */; };
 		5BDAC924224F110F7AC14302 /* Pods_MusicPlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7245D16484A4ED96875FA8B1 /* Pods_MusicPlayerTests.framework */; };
+		66FAA9B1B619ADFB1090935D /* SongTableReorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36354AD6CE63A3BC3FF9ADF /* SongTableReorderTests.swift */; };
 		672BB9155E4E03DB093D2CA2 /* SearchResultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D33477251BB53C541C79E /* SearchResultsTests.swift */; };
 		680C5F4B458AA440DC57BBD7 /* Pods_MusicPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */; };
 		70229C941884D480A4318AE8 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A665A3F3807DA8C48A95CB7 /* AudioPlayerTests.swift */; };
@@ -203,6 +204,7 @@
 		A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53AA75E5E8D864B9A2AAECD /* InfoPlistTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InfoPlistTests.swift; sourceTree = "<group>"; };
 		BEB798B5C97E97CAF2EAEF6D /* SongTableTestCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SongTableTestCase.swift; sourceTree = "<group>"; };
+		C36354AD6CE63A3BC3FF9ADF /* SongTableReorderTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SongTableReorderTests.swift; sourceTree = "<group>"; };
 		C5C712FDDBC504B96F6C6465 /* BufferedFractionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BufferedFractionTests.swift; sourceTree = "<group>"; };
 		C63BFE5B7DD9A1FEACBB3EEC /* ID3Tag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ID3Tag.swift; sourceTree = "<group>"; };
 		C793F54B8375E87FE0F663F9 /* CreatePlaylistTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CreatePlaylistTests.swift; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 				853F559391F679F78D99A260 /* SongTableProcessingTests.swift */,
 				1290B217881C7DA1D5DFB177 /* SongTableDeletionTests.swift */,
 				6D6901E8A7332AAB256C0367 /* SongTableErrorAlertTests.swift */,
+				C36354AD6CE63A3BC3FF9ADF /* SongTableReorderTests.swift */,
 			);
 			name = SongTable;
 			path = SongTable;
@@ -991,6 +994,7 @@
 				96C316035EDF14D0A3CEE5C3 /* SongTableErrorAlertTests.swift in Sources */,
 				672BB9155E4E03DB093D2CA2 /* SearchResultsTests.swift in Sources */,
 				42F5CBC46FC4BB566BE42319 /* DownloadTableViewControllerTests.swift in Sources */,
+				66FAA9B1B619ADFB1090935D /* SongTableReorderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

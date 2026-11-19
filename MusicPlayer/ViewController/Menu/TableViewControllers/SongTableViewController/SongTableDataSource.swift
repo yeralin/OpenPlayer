@@ -145,7 +145,9 @@ extension SongTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        // Row positions in a filtered list say nothing about where a song
+        // belongs in the playlist, so reordering waits until search is cleared.
+        return !searching
     }
     
 }
