@@ -10,3 +10,14 @@
 
 ## Download music from a remote server
 https://github.com/yeralin/OpenPlayer-Server
+
+# Building
+
+```bash
+pod install
+open MusicPlayer.xcworkspace
+```
+
+If your OpenPlayer-Server requires a username and password, copy
+`Config/Secrets.example.xcconfig` to `Config/Secrets.xcconfig` (gitignored) and
+fill them in. Without that file the app talks to the server unauthenticated.
