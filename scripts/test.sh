@@ -24,6 +24,11 @@ common_args=(
   -destination "$destination"
   -derivedDataPath "$derived_data"
   CODE_SIGNING_ALLOWED=NO
+  # Only the standard Swift toolchain. With the Metal toolchain installed (as
+  # on GitHub's macos-26 image), Xcode 26 also adds its usr/lib/swift/<platform>
+  # folder, which Metal does not ship, to every link: "ld: warning: search
+  # path '...MetalToolchain.../usr/lib/swift/iphonesimulator' not found".
+  TOOLCHAINS=com.apple.dt.toolchain.XcodeDefault
 )
 
 echo "==> Building for testing on simulator ${udid}"
