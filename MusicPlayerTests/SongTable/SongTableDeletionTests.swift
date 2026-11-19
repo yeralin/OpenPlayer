@@ -15,7 +15,7 @@ final class SongTableDeletionTests: SongTableTestCase {
     private func makeVisibleTable() throws -> SongTableViewController {
         let playlist = try persistence.makePlaylist("Test", songFiles: files)
         let table = try makeSongTable(for: playlist)
-        show(table)
+        try show(table)
         table.tableView.layoutIfNeeded()
         return table
     }

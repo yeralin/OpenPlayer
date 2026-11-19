@@ -26,6 +26,10 @@ class SongTableTestCase: PersistenceTestCase {
     override func tearDownWithError() throws {
         try? AudioPlayer.instance.stop() // Nothing may be playing.
         AudioPlayer.instance.delegate = originalPlayerDelegate
+        // Dismiss alerts and detach the controller before dropping the window,
+        // so the next test starts without a half-finished presentation.
+        window?.rootViewController?.dismiss(animated: false)
+        window?.rootViewController = nil
         window?.isHidden = true
         window = nil
         try super.tearDownWithError()
@@ -41,12 +45,25 @@ class SongTableTestCase: PersistenceTestCase {
         return controller
     }
 
-    /// Puts the controller in a visible window, so it can present alerts.
-    func show(_ controller: UIViewController) {
-        let window = UIWindow(frame: UIScreen.main.bounds)
+    /// Puts the controller in a visible window and waits until it has
+    /// appeared, so it can present alerts. UIKit drops a presentation that
+    /// starts while the presenter is still being added to the window.
+    func show(_ controller: UIViewController) throws {
+        let scene = try XCTUnwrap(
+            UIApplication.shared.connectedScenes.compactMap { $0 as? UIWindowScene }.first,
+            "The host app has no window scene")
+        let window = UIWindow(windowScene: scene)
         window.rootViewController = controller
         window.makeKeyAndVisible()
         self.window = window
+
+        let inWindow = expectation(for: NSPredicate { _, _ in controller.viewIfLoaded?.window != nil },
+                                   evaluatedWith: nil)
+        wait(for: [inWindow], timeout: 2)
+        // viewDidAppear runs on a later run loop pass than the window change.
+        let appeared = expectation(description: "appearance transition finished")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { appeared.fulfill() }
+        wait(for: [appeared], timeout: 2)
     }
 
     func cell(_ table: SongTableViewController, row: Int) -> SongCell? {
