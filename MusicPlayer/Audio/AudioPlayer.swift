@@ -258,25 +258,30 @@ class AudioPlayer: NSObject {
         return String(format: "%0.2d:%0.2d",minutes,seconds)
     }
     
+    // Reached from the lock screen, headphones and end-of-track, so it must
+    // cope with nothing being loaded and with songs that fail to play.
     @objc internal func playNextSong(backward: Bool = false) {
+        guard let currentSong = currentSong,
+           let songsArray = delegate?.getSongsArray(song: currentSong) else {
+            log.info("Nothing is loaded, no next song to play")
+            return
+        }
+        var nextSongIndex: Int = -1
+        if shuffleMode == true {
+            nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
+        } else if let currSongIndex = songsArray.firstIndex(of: currentSong) {
+            nextSongIndex = backward ? currSongIndex - 1 : currSongIndex + 1
+        }
         do {
-            guard let currentSong = currentSong,
-               let songsArray = delegate?.getSongsArray(song: currentSong) else {
-                throw "Could not locate songsArray"
-            }
-            var nextSongIndex: Int = -1
-            if shuffleMode == true {
-                nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
-            } else if let currSongIndex = songsArray.firstIndex(of: currentSong) {
-                nextSongIndex = backward ? currSongIndex - 1 : currSongIndex + 1
-            }
             if songsArray.indices.contains(nextSongIndex) {
                 try play(song: songsArray[nextSongIndex])
             } else {
                 try stop()
             }
-        } catch let error {
-            fatalError("Reached internal inconsistency: \(error)")
+        } catch {
+            log.error("Could not switch to the next song: \(error)")
+            delegate?.propagateError(title: "Could not play the next song",
+                                     error: error.localizedDescription)
         }
     }
     
