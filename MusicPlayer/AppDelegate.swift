@@ -12,7 +12,7 @@ import AVFoundation
 import SwiftyBeaver
 let log = SwiftyBeaver.self
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
