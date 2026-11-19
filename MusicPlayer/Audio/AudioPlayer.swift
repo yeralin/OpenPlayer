@@ -94,6 +94,7 @@ class AudioPlayer: NSObject {
         mp?.resetMPControls()
         mp = MPControl.init(resumeSong: resume,
                                 pauseSong: pause,
+                                isPlaying: { self.isPlaying() },
                                 playNextSong: {() -> () in self.playNextSong(backward: false)},
                                 playPreviousSong: {() -> () in self.playNextSong(backward: true)},
                                 seekFor: seekFor(seconds:forward:))

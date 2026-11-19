@@ -12,8 +12,8 @@ final class MPControlSeekTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        control = MPControl(resumeSong: {}, pauseSong: {}, playNextSong: {}, playPreviousSong: {},
-                            seekFor: { _, _ in })
+        control = MPControl(resumeSong: {}, pauseSong: {}, isPlaying: { false },
+                            playNextSong: {}, playPreviousSong: {}, seekFor: { _, _ in })
     }
 
     override func tearDown() {

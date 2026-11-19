@@ -16,6 +16,7 @@ class MPControl: NSObject {
     
     init(resumeSong: @escaping () throws -> (),
          pauseSong: @escaping () throws -> (),
+         isPlaying: @escaping () -> Bool,
          playNextSong: @escaping () -> (),
          playPreviousSong: @escaping () -> (),
          seekFor: @escaping (_ seconds: Double, _ forward: Bool) throws -> ()) {
@@ -31,14 +32,7 @@ class MPControl: NSObject {
             }
         })
         scc.togglePlayPauseCommand.addTarget(handler: { _ in
-            // TODO: handle toggle i.e. if isPlaying
-            do {
-                try pauseSong()
-                return .success
-            } catch let error {
-                log.error(error)
-                return .commandFailed
-            }
+            MPControl.togglePlayPause(isPlaying: isPlaying, resumeSong: resumeSong, pauseSong: pauseSong)
         })
         scc.pauseCommand.addTarget(handler: { _ in
             do {
@@ -73,6 +67,23 @@ class MPControl: NSObject {
         })
     }
     
+    /// Headphone and lock-screen toggle: pauses when playing, resumes otherwise.
+    internal static func togglePlayPause(isPlaying: () -> Bool,
+                                         resumeSong: () throws -> (),
+                                         pauseSong: () throws -> ()) -> MPRemoteCommandHandlerStatus {
+        do {
+            if isPlaying() {
+                try pauseSong()
+            } else {
+                try resumeSong()
+            }
+            return .success
+        } catch let error {
+            log.error(error)
+            return .commandFailed
+        }
+    }
+
     internal func handleRemoteControlSeek(event: MPSeekCommandEvent,
                                           seekFor: @escaping (_ seconds: Double, _ forward: Bool) throws -> (),
                                           forward: Bool) -> MPRemoteCommandHandlerStatus {
