@@ -64,4 +64,17 @@ final class MPControlSeekTests: XCTestCase {
         wait(for: [settle], timeout: 3)
         XCTAssertEqual(seekCount, countAfterStop)
     }
+
+    func testSeekFailureStopsTheWorkerInsteadOfCrashing() {
+        // AudioPlayer.seekFor throws once playback stops. The worker used
+        // `try!`, so stopping while the seek button was held crashed the app.
+        var attempts = 0
+        control.beginSeeking(seekFor: { _, _ in
+            attempts += 1
+            throw "Could not locate an active player, nothing to seek"
+        }, forward: true)
+
+        waitUntil { attempts > 0 && self.control.seekWorker == nil }
+        XCTAssertEqual(attempts, 1)
+    }
 }

@@ -114,8 +114,19 @@ class MPControl: NSObject {
                     break
                 }
                 // Seek in a main thread bc it affects UI
+                var seekFailed = false
                 DispatchQueue.main.sync {
-                    try! seekFor(seekTime, forward) // force try otherwise too hacky
+                    do {
+                        try seekFor(seekTime, forward)
+                    } catch {
+                        // e.g. playback stopped while the button was held
+                        log.info("Stopped seeking: \(error)")
+                        seekFailed = true
+                    }
+                }
+                if seekFailed {
+                    self?.seekWorker = nil
+                    break
                 }
                 // Sleep for 1 second after each seek
                 sleep(1)
