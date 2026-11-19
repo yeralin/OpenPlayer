@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0404C73E674902B8B64D5512 /* RemotePlayerItemResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035D51615D10D2038F066DC /* RemotePlayerItemResponseTests.swift */; };
+		0A3C200D53DD8A586432E3BF /* PopulateSongsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5469CA99C309C294D1C4DCCD /* PopulateSongsTests.swift */; };
 		261BF33C11E8C4682B92AFC8 /* SongTableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB798B5C97E97CAF2EAEF6D /* SongTableTestCase.swift */; };
 		31017C9C1F018A35008C4A87 /* DownloadCellStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017C9B1F018A35008C4A87 /* DownloadCellStates.swift */; };
 		31017CA11F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */; };
@@ -185,6 +186,7 @@
 		47EF2E18074EE76B0837E89B /* ServerAddress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerAddress.swift; sourceTree = "<group>"; };
 		4D95C57C77108D1C78F3A0FA /* MPControlSeekTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MPControlSeekTests.swift; sourceTree = "<group>"; };
 		4E7C216B8D2A5F820E70E615 /* ServerRequestsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerRequestsTests.swift; sourceTree = "<group>"; };
+		5469CA99C309C294D1C4DCCD /* PopulateSongsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PopulateSongsTests.swift; sourceTree = "<group>"; };
 		58C99907BD638B50AD783D5B /* Pods-MusicPlayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayerTests/Pods-MusicPlayerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		61DE5EEC1637B3D26A3AD0F2 /* ServerCredentialsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerCredentialsTests.swift; sourceTree = "<group>"; };
 		6D27D0566CEF859331BD12A4 /* Project.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 				E94D051B52AEA5BE171181CC /* TestPersistenceTests.swift */,
 				C793F54B8375E87FE0F663F9 /* CreatePlaylistTests.swift */,
 				D2AEDA230920D7CB078F70DB /* ProcessSongTests.swift */,
+				5469CA99C309C294D1C4DCCD /* PopulateSongsTests.swift */,
 			);
 			name = Persistence;
 			path = Persistence;
@@ -1004,6 +1007,7 @@
 				42F5CBC46FC4BB566BE42319 /* DownloadTableViewControllerTests.swift in Sources */,
 				66FAA9B1B619ADFB1090935D /* SongTableReorderTests.swift in Sources */,
 				661CD5CFBD77ECA6BC60B405 /* BufferSliderTests.swift in Sources */,
+				0A3C200D53DD8A586432E3BF /* PopulateSongsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

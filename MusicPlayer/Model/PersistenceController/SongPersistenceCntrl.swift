@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import MobileCoreServices
+import UniformTypeIdentifiers
 import AVFoundation
 import CoreData
 import UIKit
@@ -109,8 +109,8 @@ class SongPersistencyManager: PersistenceController {
         // Match song entities with their corresponding audio files:
         // If a new audio file is found, create a new song entity
         for filePath in filePaths {
-            if let fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, filePath.pathExtension as CFString, nil)?.takeRetainedValue() {
-                let isAudioFile = UTTypeConformsTo(fileUTI, kUTTypeAudio)
+            if let fileType = UTType(filenameExtension: filePath.pathExtension) {
+                let isAudioFile = fileType.conforms(to: .audio)
                 if isAudioFile {
                     let audioFileName = filePath.lastPathComponent
                     if let index = songsToMatchWithAudioFiles.firstIndex(where: { el in el.songName == audioFileName }) {
