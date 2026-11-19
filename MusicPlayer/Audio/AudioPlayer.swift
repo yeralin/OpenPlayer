@@ -16,7 +16,7 @@ enum PlayerState {
     case stop
 }
 
-protocol AudioPlayerDelegate : class {
+protocol AudioPlayerDelegate: AnyObject {
     func getSongsArray(song: SongEntity) -> [SongEntity]
     func cellState(state: PlayerState, song: SongEntity)
     func propagateError(title: String, error: String)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CellToTableDelegate: class {
+protocol CellToTableDelegate: AnyObject {
     func presentAlertForCell(alert: UIAlertController, alertName: String)
     func performSegueForCell(songCellToMove: BaseCell, identifier: String)
     func propagateError(title: String, error: String)
