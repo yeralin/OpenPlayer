@@ -26,7 +26,7 @@ final class CreatePlaylistTests: PersistenceTestCase {
     }
 
     func testDuplicateNamesAreRejectedIgnoringCaseAndDiacritics() throws {
-        try playlistManager.createPlaylist(name: "Café")
+        _ = try playlistManager.createPlaylist(name: "Café")
 
         assertAlreadyExists("Café")
         assertAlreadyExists("café")
@@ -35,7 +35,7 @@ final class CreatePlaylistTests: PersistenceTestCase {
 
     func testANameIsNotTreatedAsAPattern() throws {
         // With MATCHES, "Rock.*" matched the existing "Rock and Roll".
-        try playlistManager.createPlaylist(name: "Rock and Roll")
+        _ = try playlistManager.createPlaylist(name: "Rock and Roll")
 
         XCTAssertNoThrow(try playlistManager.createPlaylist(name: "Rock.*"))
     }
