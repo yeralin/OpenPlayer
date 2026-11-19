@@ -29,8 +29,9 @@ common_args=(
 echo "==> Building for testing on simulator ${udid}"
 xcodebuild build-for-testing "${common_args[@]}" -quiet
 
+# Usage: run_suite <name> <test target> <per-test time limit in seconds>
 run_suite() {
-  local name="$1" target="$2"
+  local name="$1" target="$2" allowance="$3"
   rm -rf "${results}/${name}.xcresult"
   echo "==> Running ${name} tests (${target})"
   # Time limits turn a hung test into a failure with a report instead of a
@@ -38,17 +39,23 @@ run_suite() {
   xcodebuild test-without-building "${common_args[@]}" \
     -only-testing:"${target}" \
     -test-timeouts-enabled YES \
-    -default-test-execution-time-allowance 120 \
-    -maximum-test-execution-time-allowance 300 \
+    -default-test-execution-time-allowance "$allowance" \
+    -maximum-test-execution-time-allowance "$((allowance * 2))" \
     -resultBundlePath "${results}/${name}.xcresult"
 }
 
+# Each UI test first deletes the app through SpringBoard, which alone takes
+# about two minutes on CI (it waits for SpringBoard to go idle), hence the
+# much larger limit.
+run_unit() { run_suite unit MusicPlayerTests 120; }
+run_ui() { run_suite ui MusicPlayerUITests 600; }
+
 case "$suite" in
-  unit) run_suite unit MusicPlayerTests ;;
-  ui) run_suite ui MusicPlayerUITests ;;
+  unit) run_unit ;;
+  ui) run_ui ;;
   all)
-    run_suite unit MusicPlayerTests
-    run_suite ui MusicPlayerUITests
+    run_unit
+    run_ui
     ;;
   *)
     echo "Unknown suite: ${suite} (expected unit, ui or all)" >&2
