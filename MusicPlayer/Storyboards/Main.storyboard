@@ -749,7 +749,7 @@
         <!--Song Table View Controller-->
         <scene sceneID="RzF-ri-HEH">
             <objects>
-                <tableViewController id="VWp-Qd-oOH" customClass="SongTableViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="songTable" id="VWp-Qd-oOH" customClass="SongTableViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="91" sectionHeaderHeight="28" sectionFooterHeight="28" id="XHm-Wj-Aac">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

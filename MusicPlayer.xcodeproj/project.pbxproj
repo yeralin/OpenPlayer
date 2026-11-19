@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		261BF33C11E8C4682B92AFC8 /* SongTableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB798B5C97E97CAF2EAEF6D /* SongTableTestCase.swift */; };
 		31017C9C1F018A35008C4A87 /* DownloadCellStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017C9B1F018A35008C4A87 /* DownloadCellStates.swift */; };
 		31017CA11F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */; };
 		310B4F841FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310B4F831FD27F9E00C237A3 /* DownloadTablePlaylistPickerImpl.swift */; };
@@ -82,6 +83,7 @@
 		E82EB57EC9E07502CE3296F2 /* MPControlSeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95C57C77108D1C78F3A0FA /* MPControlSeekTests.swift */; };
 		F6CD7200231863E500C0F8AD /* AudioDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD71FF231863E500C0F8AD /* AudioDownloadManager.swift */; };
 		F6F5EC322330228800E99FFB /* SongTableDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F5EC312330228800E99FFB /* SongTableDelegateImpl.swift */; };
+		FA23233AB6BEB736CF6A884A /* SongTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD237AC8F5C356257F743698 /* SongTableViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -185,8 +187,10 @@
 		9DE5B700D544EF3E53B1A3D0 /* Pods-MusicPlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayerTests/Pods-MusicPlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 		A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53AA75E5E8D864B9A2AAECD /* InfoPlistTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InfoPlistTests.swift; sourceTree = "<group>"; };
+		BEB798B5C97E97CAF2EAEF6D /* SongTableTestCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SongTableTestCase.swift; sourceTree = "<group>"; };
 		C5C712FDDBC504B96F6C6465 /* BufferedFractionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BufferedFractionTests.swift; sourceTree = "<group>"; };
 		C793F54B8375E87FE0F663F9 /* CreatePlaylistTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CreatePlaylistTests.swift; sourceTree = "<group>"; };
+		CD237AC8F5C356257F743698 /* SongTableViewControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SongTableViewControllerTests.swift; sourceTree = "<group>"; };
 		CF2F594116AB4F210B91751A /* MPControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPControl.swift; sourceTree = "<group>"; };
 		CF2F59FCF07DAB737CE9F931 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		D6C8F88646FBC72C245A5780 /* ServerAddressTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerAddressTests.swift; sourceTree = "<group>"; };
@@ -427,6 +431,7 @@
 				2FEB207C799E442770F85ACB /* Configuration */,
 				90A0A2C30B966EB55ADD3F64 /* Network */,
 				33BB77ECE9658C16BAA1C256 /* Audio */,
+				E9A44328C196E1949A357F2C /* SongTable */,
 			);
 			path = MusicPlayerTests;
 			sourceTree = "<group>";
@@ -568,6 +573,15 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		E9A44328C196E1949A357F2C /* SongTable */ = {
+			isa = PBXGroup;
+			children = (
+				CD237AC8F5C356257F743698 /* SongTableViewControllerTests.swift */,
+			);
+			name = SongTable;
+			path = SongTable;
+			sourceTree = "<group>";
+		};
 		F6F5EC2E2330141900E99FFB /* AudioDownload */ = {
 			isa = PBXGroup;
 			children = (
@@ -597,6 +611,7 @@
 				3F77B699E134585B7568516B /* TestPersistence.swift */,
 				7C0290F7219DB15B770AE9BE /* PersistenceTestCase.swift */,
 				88552E65A5A17F3A87BD947E /* AudioPlayerTestCase.swift */,
+				BEB798B5C97E97CAF2EAEF6D /* SongTableTestCase.swift */,
 			);
 			name = Fixtures;
 			path = Fixtures;
@@ -921,6 +936,8 @@
 				3A3A2AAA0D6A04D27FFF2BE5 /* BufferedFractionTests.swift in Sources */,
 				E82EB57EC9E07502CE3296F2 /* MPControlSeekTests.swift in Sources */,
 				41DB22CCF266A675DD8AC8E9 /* CreatePlaylistTests.swift in Sources */,
+				261BF33C11E8C4682B92AFC8 /* SongTableTestCase.swift in Sources */,
+				FA23233AB6BEB736CF6A884A /* SongTableViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
