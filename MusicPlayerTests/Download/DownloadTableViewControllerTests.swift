@@ -50,4 +50,17 @@ final class DownloadTableViewControllerTests: PersistenceTestCase {
         XCTAssertEqual(downloadCell.artistName.text, "Artist")
         XCTAssertEqual(downloadCell.songTitle.text, "Title")
     }
+
+    func testDownloadButtonIsHidden() throws {
+        let controller = try makeDownloadTable()
+        controller.populateSongListResponse([
+            SearchResultEntry(source: "test", title: "Artist - Title", url: URL(string: "http://127.0.0.1:9/1.mp3")!),
+        ])
+
+        let cell = try XCTUnwrap(controller.tableView(controller.tableView, cellForRowAt: IndexPath(row: 0, section: 0))
+                                    as? DownloadCell)
+
+        // It opened a playlist picker whose "Done" did nothing.
+        XCTAssertTrue(cell.downloadButton.isHidden)
+    }
 }

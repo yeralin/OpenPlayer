@@ -129,3 +129,21 @@ keep a single handler and never call it. Handlers now go into
 `BackgroundSessionCompletion.shared` keyed by identifier, and
 `AudioDownloadDelegate` completes its own session's handler. Streaming creates
 one background session per song (identifier = song URL), hence the dictionary.
+
+### 2026-11-19: "Download to playlist" is hidden until it is finished
+
+The download button on remote search results opened a playlist picker whose
+handler (`DownloadTablePlaylistPickerImpl.moveSong`) is commented out, and
+nothing ever calls `AudioDownloadManager.append(toDownload:toPlaylist:)`. The
+owner chose to hide the button (`DownloadCell.awakeFromNib`) rather than
+finish the feature now. The rest of the code is left in place for later. To
+finish it:
+- `AudioDownloadManager.offer` checks `active != nil` where it means `== nil`,
+  so a queued download never starts, and it also leaves the started item in
+  `downloadQueue`.
+- The picker handler must call `append`, and on `.downloadFinished` the file
+  must be written into the playlist folder and a `SongEntity` created for it
+  (search results are unsaved objects, see `makeUnsavedSong()`).
+`AudioDownloadManager` is still live: when a stream finishes outside a
+download, it caches the file in the temporary directory
+(`SongEntity.isCached()`).
