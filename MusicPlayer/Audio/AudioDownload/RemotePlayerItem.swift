@@ -69,6 +69,20 @@ open class RemotePlayerItem: PlayerItem {
     // Key-value observing context
     private var playerItemContext = 0
 
+    /// OpenPlayer-Server sends the track length in seconds in an
+    /// `Audio-Duration` header, before enough audio has arrived for
+    /// AVFoundation to work it out. Returns whether a valid value was applied.
+    @discardableResult
+    func applyDurationHeader(from response: HTTPURLResponse) -> Bool {
+        // value(forHTTPHeaderField:) is case-insensitive; HTTP/2 lowercases names.
+        guard let rawSeconds = response.value(forHTTPHeaderField: "Audio-Duration"),
+              let seconds = Double(rawSeconds), seconds > 0, seconds.isFinite else {
+            return false
+        }
+        duration = CMTimeMakeWithSeconds(seconds, preferredTimescale: 600)
+        return true
+    }
+
     /// Share of the file downloaded so far, from 0 to 1, for the buffer bar.
     ///
     /// `expected` is -1 (NSURLSessionTransferSizeUnknown) when the server

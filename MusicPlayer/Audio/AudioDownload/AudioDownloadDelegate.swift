@@ -90,6 +90,7 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         if let response = response as? HTTPURLResponse {
             self.response = response
             owner?.httpResponse = response
+            notificationCenter.post(name: .receivedHttpResponse, object: owner)
         }
         processLoadingRequest()
         completionHandler(.allow)

@@ -98,6 +98,17 @@ final class TestPersistence {
         return try SongPersistencyManager.sharedInstance.populateSongs(forPlaylist: playlist)
     }
 
+    /// A search-result style song: remote URL, no playlist, not saved.
+    func makeRemoteSong(_ title: String = "Artist - Title",
+                        url: URL = URL(string: "http://127.0.0.1:9/song.mp3")!) -> SongEntity {
+        let song = SongEntity(context: context)
+        song.songName = title
+        song.songUrl = url
+        song.songArtist = "Artist"
+        song.songTitle = "Title"
+        return song
+    }
+
     func fetchCount(_ entityName: String) throws -> Int {
         try context.count(for: NSFetchRequest<NSFetchRequestResult>(entityName: entityName))
     }

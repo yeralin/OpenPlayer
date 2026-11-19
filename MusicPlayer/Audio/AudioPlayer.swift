@@ -400,9 +400,8 @@ class AudioPlayer: NSObject {
         }
         log.info("Received response: \(httpResponse)")
         DispatchQueue.main.sync {
-            if let rawSeconds = httpResponse.allHeaderFields["Audio-Duration"] as? String,
-                let seconds = Double(rawSeconds), seconds > 0 {
-                remotePlayerItem.duration = CMTimeMakeWithSeconds(seconds, preferredTimescale: 600)
+            if remotePlayerItem.applyDurationHeader(from: httpResponse) {
+                mp?.updateMPDuration(duration: remotePlayerItem.duration.seconds)
             }
         }
     }

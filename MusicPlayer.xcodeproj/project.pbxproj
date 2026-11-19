@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0404C73E674902B8B64D5512 /* RemotePlayerItemResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7035D51615D10D2038F066DC /* RemotePlayerItemResponseTests.swift */; };
 		261BF33C11E8C4682B92AFC8 /* SongTableTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB798B5C97E97CAF2EAEF6D /* SongTableTestCase.swift */; };
 		31017C9C1F018A35008C4A87 /* DownloadCellStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017C9B1F018A35008C4A87 /* DownloadCellStates.swift */; };
 		31017CA11F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31017CA01F044346008C4A87 /* DownloadTableAudioPlayerDelegImpl.swift */; };
@@ -180,6 +181,7 @@
 		58C99907BD638B50AD783D5B /* Pods-MusicPlayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayerTests/Pods-MusicPlayerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		61DE5EEC1637B3D26A3AD0F2 /* ServerCredentialsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerCredentialsTests.swift; sourceTree = "<group>"; };
 		6D27D0566CEF859331BD12A4 /* Project.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
+		7035D51615D10D2038F066DC /* RemotePlayerItemResponseTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RemotePlayerItemResponseTests.swift; sourceTree = "<group>"; };
 		71B1EE04C1CD39F15B1C8D70 /* AudioPlayerInterruptionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AudioPlayerInterruptionTests.swift; sourceTree = "<group>"; };
 		7245D16484A4ED96875FA8B1 /* Pods_MusicPlayerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75B1A98476F1800E5E38BCDC /* ServerCredentials.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerCredentials.swift; sourceTree = "<group>"; };
@@ -496,6 +498,7 @@
 				C5C712FDDBC504B96F6C6465 /* BufferedFractionTests.swift */,
 				4D95C57C77108D1C78F3A0FA /* MPControlSeekTests.swift */,
 				E819EB286AC5AFAAB2EFE07E /* MPControlToggleTests.swift */,
+				7035D51615D10D2038F066DC /* RemotePlayerItemResponseTests.swift */,
 			);
 			name = Audio;
 			path = Audio;
@@ -958,6 +961,7 @@
 				51407BFB2552C5CD9F5DC31D /* ID3Tag.swift in Sources */,
 				9773E6CD755A508D011C2F02 /* ProcessSongTests.swift in Sources */,
 				76A3A3F7D27C1D1B4A191FC5 /* MPControlToggleTests.swift in Sources */,
+				0404C73E674902B8B64D5512 /* RemotePlayerItemResponseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
