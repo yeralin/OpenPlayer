@@ -280,32 +280,38 @@ class AudioPlayer: NSObject {
         }
     }
     
+    // Interruptions (calls, Siri, alarms) arrive whether or not a song is
+    // loaded, so "nothing to pause/resume" is expected here, not an error.
     @objc internal func handleInterruption(notification: Notification) {
-        do {
-            guard let userInfo = notification.userInfo,
-                let typeInt = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-                let type = AVAudioSession.InterruptionType(rawValue: typeInt) else {
-                    return
-            }
-            switch type {
-            case .began:
-                if userInfo.index(forKey: AVAudioSessionInterruptionWasSuspendedKey) == nil {
+        guard let userInfo = notification.userInfo,
+            let typeInt = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let type = AVAudioSession.InterruptionType(rawValue: typeInt) else {
+                return
+        }
+        switch type {
+        case .began:
+            if userInfo.index(forKey: AVAudioSessionInterruptionWasSuspendedKey) == nil {
+                do {
                     try pause()
+                } catch {
+                    log.info("Interruption began with nothing to pause: \(error)")
                 }
-            case .ended:
-                guard let optionsInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
-                    log.error("Could not extract interruption option int")
-                    return
-                }
-                let options = AVAudioSession.InterruptionOptions(rawValue: optionsInt)
-                if options.contains(.shouldResume) {
-                    try resume()
-                }
-            @unknown default:
-                log.error("Unhandled interruption type has occurred")
             }
-        } catch let error {
-            fatalError("Reached internal inconsistency: \(error)")
+        case .ended:
+            guard let optionsInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
+                log.error("Could not extract interruption option int")
+                return
+            }
+            let options = AVAudioSession.InterruptionOptions(rawValue: optionsInt)
+            if options.contains(.shouldResume) {
+                do {
+                    try resume()
+                } catch {
+                    log.info("Interruption ended with nothing to resume: \(error)")
+                }
+            }
+        @unknown default:
+            log.error("Unhandled interruption type has occurred")
         }
     }
     
