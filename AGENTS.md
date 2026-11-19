@@ -178,3 +178,15 @@ synchronously with APIs that are not deprecated:
 - length: `AVAudioFile` (frames / sample rate), cached in `PlayerItem`.
 Streams have no local file: `RemotePlayerItem.duration` is the server's
 `Audio-Duration` header, falling back to `AVPlayerItem.duration` once known.
+
+### 2026-11-19: UI tests reset the app with a launch argument, not by uninstalling it
+
+UI tests used to uninstall the app through SpringBoard before each test to
+get an empty library. On iOS 26 CI that cost about two minutes per test and
+failed at a different SpringBoard step on each run. They now launch with
+`--reset-state`, which makes `AppDelegate` call
+`PlaylistPersistencyManager.removeAllPlaylists()` (all Documents folders plus
+all Core Data rows) before any screen loads. `<name>:<count>` arguments still
+seed playlists; parsing lives in `UITestLaunchArguments`, which ignores
+arguments it does not recognise. Other app state (UserDefaults such as the
+server address) is not reset; no UI test depends on it today.

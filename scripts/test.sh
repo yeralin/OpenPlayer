@@ -66,11 +66,9 @@ for failure in json.load(sys.stdin).get("testFailures", []):
 ' || echo "(could not read $1)"
 }
 
-# Each UI test first deletes the app through SpringBoard, which alone takes
-# about two minutes on CI (it waits for SpringBoard to go idle), hence the
-# much larger limit.
+# UI tests launch and drive the whole app, so they get a larger limit.
 run_unit() { run_suite unit MusicPlayerTests 120; }
-run_ui() { run_suite ui MusicPlayerUITests 600; }
+run_ui() { run_suite ui MusicPlayerUITests 300; }
 
 case "$suite" in
   unit) run_unit ;;
