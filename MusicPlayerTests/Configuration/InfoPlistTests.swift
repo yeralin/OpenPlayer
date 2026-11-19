@@ -23,4 +23,11 @@ final class InfoPlistTests: XCTestCase {
             XCTAssertFalse(value?.contains("$(") ?? false, "\(key) was not expanded: \(value ?? "")")
         }
     }
+
+    func testLocalNetworkUsageIsExplained() {
+        // Required since iOS 14 to reach a LAN server or serve Wi-Fi uploads;
+        // without it the system prompt has no explanation for the user.
+        let description = infoString("NSLocalNetworkUsageDescription") ?? ""
+        XCTAssertFalse(description.trimmingCharacters(in: .whitespaces).isEmpty)
+    }
 }
