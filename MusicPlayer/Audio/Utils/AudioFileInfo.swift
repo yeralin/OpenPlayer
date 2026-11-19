@@ -7,6 +7,7 @@
 //
 
 import AudioToolbox
+import AVFAudio
 
 enum AudioFileInfo {
 
@@ -35,6 +36,18 @@ enum AudioFileInfo {
         }
         return Tags(title: nonEmpty(dictionary[kAFInfoDictionary_Title]),
                     artist: nonEmpty(dictionary[kAFInfoDictionary_Artist]))
+    }
+
+    /// Length in seconds, or nil when the file cannot be decoded.
+    static func duration(of url: URL) -> Double? {
+        guard let file = try? AVAudioFile(forReading: url) else {
+            return nil
+        }
+        let sampleRate = file.processingFormat.sampleRate
+        guard sampleRate > 0 else {
+            return nil
+        }
+        return Double(file.length) / sampleRate
     }
 
     private static func nonEmpty(_ value: Any?) -> String? {

@@ -52,22 +52,31 @@ open class PlayerItem: AVPlayerItem {
     
     public var bufferValue: Double = 1
     private(set) var assignedSong: SongEntity
+    /// Read from the file up front, so local playback knows its length
+    /// before AVFoundation has loaded the item.
+    private let fileDuration: CMTime?
     
     override open var duration: CMTime {
         get {
-            return self.asset.duration
+            // Falls back to AVPlayerItem's own value (known once it is ready).
+            return fileDuration ?? super.duration
         }
     }
     
     // Default: For playing local items
     init(song: SongEntity) {
+        let url = song.getSongUrl()
         self.assignedSong = song
-        super.init(asset: AVAsset(url: song.getSongUrl()), automaticallyLoadedAssetKeys: ["duration"])
+        self.fileDuration = AudioFileInfo.duration(of: url).map {
+            CMTime(seconds: $0, preferredTimescale: 600)
+        }
+        super.init(asset: AVURLAsset(url: url), automaticallyLoadedAssetKeys: ["duration"])
     }
     
     // More customizable: for playing remote items
     init(song: SongEntity, asset: AVAsset, automaticallyLoadedAssetKeys: [String]?) {
         self.assignedSong = song
+        self.fileDuration = nil
         super.init(asset: asset, automaticallyLoadedAssetKeys: automaticallyLoadedAssetKeys)
     }
 }

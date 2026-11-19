@@ -19,6 +19,17 @@ final class AudioPlayerTests: AudioPlayerTestCase {
         XCTAssertEqual(delegate.lastState, .play)
     }
 
+    func testLocalSongDurationIsKnownAsSoonAsItPlays() throws {
+        // The slider and Now Playing info read it right after play(song:).
+        let song = try XCTUnwrap(makePlayableSongs(["a - one.mp3"]).first)
+
+        try player.play(song: song)
+
+        let duration = try XCTUnwrap(player.duration())
+        XCTAssertEqual(duration, AudioFileInfo.duration(of: TestPersistence.testSongUrl) ?? .nan, accuracy: 0.01)
+        XCTAssertGreaterThan(duration, 0)
+    }
+
     func testPauseAndResume() throws {
         let song = try XCTUnwrap(makePlayableSongs(["a - one.mp3"]).first)
         try player.play(song: song)

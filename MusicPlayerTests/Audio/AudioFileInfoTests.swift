@@ -42,4 +42,19 @@ final class AudioFileInfoTests: XCTestCase {
         XCTAssertEqual(AudioFileInfo.tags(of: missing), AudioFileInfo.Tags())
         XCTAssertEqual(AudioFileInfo.tags(of: notAudio), AudioFileInfo.Tags())
     }
+
+    func testDurationOfADecodableFile() throws {
+        let seconds = try XCTUnwrap(AudioFileInfo.duration(of: TestPersistence.testSongUrl))
+
+        XCTAssertTrue(seconds.isFinite)
+        XCTAssertGreaterThan(seconds, 0)
+    }
+
+    func testNoDurationForUnreadableFiles() throws {
+        let notAudio = directory.appendingPathComponent("notes.mp3")
+        try Data("not audio".utf8).write(to: notAudio)
+
+        XCTAssertNil(AudioFileInfo.duration(of: directory.appendingPathComponent("missing.mp3")))
+        XCTAssertNil(AudioFileInfo.duration(of: notAudio))
+    }
 }
