@@ -80,3 +80,20 @@ same classes and makes `SongEntity(context:)` ambiguous.
 
 Unit tests are hosted in the app (`TEST_HOST`), so the app launches normally
 first; tests must not depend on whatever the real Documents folder contains.
+
+### 2026-11-19: Server credentials come from a gitignored xcconfig
+
+The OpenPlayer-Server username and password used to be hard-coded in
+`ServerRequests.swift` (and are therefore in the public git history; the
+owner has to change them on the server). They now flow:
+
+`Config/Secrets.xcconfig` (gitignored, optional) -> build settings
+`OPENPLAYER_SERVER_USERNAME` / `OPENPLAYER_SERVER_PASSWORD` (defaulted to empty
+in the tracked `Config/Project.xcconfig`) -> Info.plist keys
+`OPServerUsername` / `OPServerPassword` -> `ServerCredentials` at runtime.
+
+`Config/Project.xcconfig` is the *project-level* base configuration, because
+the targets' base configuration slot belongs to CocoaPods. Copy
+`Config/Secrets.example.xcconfig` to get started. The values still end up in
+the app bundle, so this keeps them out of source control, not out of the
+binary; that was the owner's explicit choice over a Settings/Keychain UI.

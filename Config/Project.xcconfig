@@ -1,0 +1,13 @@
+// Project-level base configuration of MusicPlayer.xcodeproj (Debug and
+// Release). Targets keep the CocoaPods xcconfigs as their own base
+// configuration and inherit these settings.
+
+// Credentials sent to OpenPlayer-Server's /search endpoint. Leave them empty
+// for a server without authentication. Never put real values in this tracked
+// file: copy Config/Secrets.example.xcconfig to Config/Secrets.xcconfig
+// (gitignored) and set them there.
+OPENPLAYER_SERVER_USERNAME =
+OPENPLAYER_SERVER_PASSWORD =
+
+// Optional: a missing file is not an error.
+#include? "Secrets.xcconfig"
