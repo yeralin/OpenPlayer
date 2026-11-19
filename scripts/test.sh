@@ -27,7 +27,9 @@ common_args=(
 )
 
 echo "==> Building for testing on simulator ${udid}"
-xcodebuild build-for-testing "${common_args[@]}" -quiet
+# -quiet prints only warnings and errors; keep them for scripts/report-warnings.sh.
+mkdir -p build/logs
+xcodebuild build-for-testing "${common_args[@]}" -quiet 2>&1 | tee build/logs/build.log
 
 # Usage: run_suite <name> <test target> <per-test time limit in seconds>
 run_suite() {
