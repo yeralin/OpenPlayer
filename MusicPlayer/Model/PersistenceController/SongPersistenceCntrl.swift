@@ -187,16 +187,6 @@ class SongPersistencyManager: PersistenceController {
         song.isProcessed = true
         try saveContext(cntxt: cntxt)
     }
-    
-    private func getPlaylistPath(playlist: PlaylistEntity) throws -> URL {
-        guard let playlistName = playlist.playlistName else {
-            throw "Could not extract playlistName from playlist entity"
-        }
-        let playlistPath = docsUrl.appendingPathComponent(playlistName)
-        if !fm.fileExists(atPath: playlistPath.absoluteString) {
-            throw "Playlist does not exist at path: \(playlistPath)"
-        }
-        return playlistPath
-    }
+
     
 }
