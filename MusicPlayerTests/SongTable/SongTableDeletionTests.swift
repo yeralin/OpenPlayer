@@ -60,4 +60,27 @@ final class SongTableDeletionTests: SongTableTestCase {
         XCTAssertTrue(table.matchedSongs.isEmpty)
         XCTAssertEqual(table.tableView.numberOfRows(inSection: 0), 0)
     }
+
+    func testDeletingThePlayingSongStopsPlayback() throws {
+        let table = try makeVisibleTable()
+        let playing = table.songsArray[0]
+        try AudioPlayer.instance.play(song: playing)
+        XCTAssertTrue(AudioPlayer.instance.isPlaying(song: playing))
+
+        delete(row: 0, in: table)
+
+        // Used to keep playing a song whose file had just been deleted.
+        XCTAssertFalse(AudioPlayer.instance.isPlaying(song: playing))
+        XCTAssertFalse(AudioPlayer.instance.isPlaying())
+    }
+
+    func testDeletingAnotherSongKeepsPlaying() throws {
+        let table = try makeVisibleTable()
+        let playing = table.songsArray[0]
+        try AudioPlayer.instance.play(song: playing)
+
+        delete(row: 1, in: table)
+
+        XCTAssertTrue(AudioPlayer.instance.isPlaying(song: playing))
+    }
 }

@@ -93,9 +93,9 @@ extension SongTableViewController {
         if editingStyle == .delete {
             // Rows come from the filtered list while searching.
             let song = searching ? matchedSongs[indexPath.row] : songsArray[indexPath.row]
-            if let currentSong = AudioPlayer.instance.currentSong,
-               song == currentSong {
-                // TODO: Stop song
+            if AudioPlayer.instance.isPlaying(song: song) {
+                // Its file is about to disappear.
+                try? AudioPlayer.instance.stop()
             }
             do {
                 let songPerstManager = SongPersistencyManager.sharedInstance
