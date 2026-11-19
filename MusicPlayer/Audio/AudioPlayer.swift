@@ -303,12 +303,10 @@ class AudioPlayer: NSObject {
         }
         switch type {
         case .began:
-            if userInfo.index(forKey: AVAudioSessionInterruptionWasSuspendedKey) == nil {
-                do {
-                    try pause()
-                } catch {
-                    log.info("Interruption began with nothing to pause: \(error)")
-                }
+            do {
+                try pause()
+            } catch {
+                log.info("Interruption began with nothing to pause: \(error)")
             }
         case .ended:
             guard let optionsInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
