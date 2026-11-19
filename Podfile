@@ -1,4 +1,4 @@
-IOS_DEPLOYMENT_TARGET = '17.0'
+IOS_DEPLOYMENT_TARGET = '26.0'
 
 platform :ios, IOS_DEPLOYMENT_TARGET
 workspace 'MusicPlayer'
