@@ -91,7 +91,8 @@ extension SongTableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let song = songsArray[indexPath.row]
+            // Rows come from the filtered list while searching.
+            let song = searching ? matchedSongs[indexPath.row] : songsArray[indexPath.row]
             if let currentSong = AudioPlayer.instance.currentSong,
                song == currentSong {
                 // TODO: Stop song
@@ -103,6 +104,9 @@ extension SongTableViewController {
                 songsArray = try songPerstManager.resetSongOrder(songArray: songsArray)
                 try songPerstManager.saveContext()
                 self.songsArray = songsArray
+                if searching, let searchText = searchBar.text {
+                    matchedSongs = filterSongsArrayBy(searchText: searchText)
+                }
                 tableView.deleteRows(at: [indexPath], with: .fade)
             } catch let err {
                 log.error("Could not delete \"\(song.songName ?? "unknown")\" song: \(err)")
