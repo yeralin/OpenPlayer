@@ -117,6 +117,13 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         invalidateURLSession()
     }
 
+    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        guard let identifier = session.configuration.identifier else {
+            return
+        }
+        BackgroundSessionCompletion.shared.complete(session: identifier)
+    }
+
     // MARK: Utils
     
     func processLoadingRequest() {

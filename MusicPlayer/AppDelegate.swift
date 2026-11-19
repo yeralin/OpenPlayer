@@ -16,7 +16,6 @@ let log = SwiftyBeaver.self
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var backgroundSessionCompletionHandler: (() -> Void)?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         var launchArgs = ProcessInfo.processInfo.arguments
@@ -50,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         log.info("Application awakend from background due to URLSession \"\(identifier)\" completion")
-        backgroundSessionCompletionHandler = completionHandler
+        BackgroundSessionCompletion.shared.store(completionHandler, forSession: identifier)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

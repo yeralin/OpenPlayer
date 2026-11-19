@@ -118,3 +118,14 @@ self-hosted and often reachable only over plain HTTP on a LAN.
 hostname without TLS. Consequence: Basic auth credentials can travel
 unencrypted. `ServerAddress.normalize` therefore never rewrites an explicit
 `https://`, and only defaults to `http://` when no scheme is typed.
+
+### 2026-11-19: Background URLSession completion handlers live in one registry
+
+iOS hands the app a completion handler per background `URLSession` identifier
+(`application(_:handleEventsForBackgroundURLSession:completionHandler:)`) and
+expects it to be called on the main queue after that session's
+`urlSessionDidFinishEvents(forBackgroundURLSession:)`. `AppDelegate` used to
+keep a single handler and never call it. Handlers now go into
+`BackgroundSessionCompletion.shared` keyed by identifier, and
+`AudioDownloadDelegate` completes its own session's handler. Streaming creates
+one background session per song (identifier = song URL), hence the dictionary.
