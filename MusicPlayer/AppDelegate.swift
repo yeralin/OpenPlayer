@@ -18,18 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        var launchArgs = ProcessInfo.processInfo.arguments
-        if launchArgs.count > 1 {
-            launchArgs.removeFirst()
-            for arg in launchArgs {
-                // @param <playlistName>:<numberOfTestSongsInIt> - String
-                // Used by UI tests to pre-populate playlists with test songs
-                let testArg = arg.split(separator: ":")
-                let testPlaylist = String(testArg[0])
-                let countSongs = Int(testArg[1])!
-                PlaylistPersistencyManager.sharedInstance
-                    .createPlaylistWithTestData(playlistName: testPlaylist, testEntires: countSongs)
-            }
+        // UI tests start from a known state through launch arguments.
+        let testArguments = UITestLaunchArguments.current
+        if testArguments.resetState {
+            PlaylistPersistencyManager.sharedInstance.removeAllPlaylists()
+        }
+        for seed in testArguments.playlists {
+            PlaylistPersistencyManager.sharedInstance
+                .createPlaylistWithTestData(playlistName: seed.name, testEntires: seed.songCount)
         }
         // Override point for customization after application launch.
         do {
