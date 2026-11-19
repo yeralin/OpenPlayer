@@ -345,7 +345,7 @@ class AudioPlayer: NSObject {
             log.error("Could not properly handle a notification: \(notification)")
             return
         }
-        let duration = remotePlayerItem.asset.duration.seconds
+        let duration = remotePlayerItem.duration.seconds
         mp?.updateMPDuration(duration: duration)
         delegate?.cellState(state: .play, song: currentSong)
         player.playImmediately(atRate: 1)

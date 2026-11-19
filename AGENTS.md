@@ -165,19 +165,16 @@ finish it:
 download, it caches the file in the temporary directory
 (`SongEntity.isCached()`).
 
-### 2026-11-19: Synchronous AVAsset reads are kept for now (deferred)
+### 2026-11-19: Local file metadata is read synchronously, without AVAsset
 
-`PlayerItem.duration` returns `asset.duration`, and
-`SongPersistencyManager.processSong` reads `asset.commonMetadata`. Both are
-synchronous AVAsset APIs, deprecated since iOS 16 in favour of
-`try await asset.load(.duration)` / `.load(.commonMetadata)`, and they block
-the main thread while the file is read. Moving to the async API is not a
-drop-in change:
-- `AudioPlayer.play(song:)` and the cells' slider setup read the duration
-  synchronously right after creating the item, so local playback would need
-  to wait for the item's `readyToPlay` status (as remote playback already
-  does) before configuring the slider and Now Playing info.
-- `processSong` runs from `tableView(_:cellForRowAt:)`, so metadata would have
-  to be loaded asynchronously and the row reloaded afterwards.
-This is left as a separate change; until then these calls produce
-deprecation warnings only.
+AVAsset's synchronous property getters (`duration`, `commonMetadata`,
+`AVMetadataItem.value`) are deprecated since iOS 16 in favour of async
+`load(_:)`. The app needs these values synchronously: `processSong` runs from
+`tableView(_:cellForRowAt:)`, and `AudioPlayer.play(song:)` and the cells'
+slider setup read the duration right after creating the item. Rather than
+restructure both flows around async loading, `AudioFileInfo` reads local files
+synchronously with APIs that are not deprecated:
+- tags: Audio File Services (`kAudioFilePropertyInfoDictionary`),
+- length: `AVAudioFile` (frames / sample rate), cached in `PlayerItem`.
+Streams have no local file: `RemotePlayerItem.duration` is the server's
+`Audio-Duration` header, falling back to `AVPlayerItem.duration` once known.

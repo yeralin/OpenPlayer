@@ -51,6 +51,9 @@ final class RemotePlayerItemResponseTests: PersistenceTestCase {
         for headers in [[:], ["Audio-Duration": "abc"], ["Audio-Duration": "0"], ["Audio-Duration": "-3"]] {
             XCTAssertFalse(item.applyDurationHeader(from: response(headers)), "\(headers)")
         }
-        XCTAssertEqual(item.duration.seconds, 0)
+        // Without a header the item reports AVFoundation's own duration,
+        // which is indefinite until the stream has loaded. It used to report
+        // 0 seconds, which set the progress slider's maximum to 0.
+        XCTAssertTrue(item.duration.isIndefinite)
     }
 }

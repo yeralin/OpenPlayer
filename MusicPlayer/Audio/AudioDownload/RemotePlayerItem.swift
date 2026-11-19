@@ -47,9 +47,11 @@ open class RemotePlayerItem: PlayerItem {
     internal var httpResponse: HTTPURLResponse?
     
     internal var mutableDuration: CMTime = CMTimeMakeWithSeconds(0, preferredTimescale: 600)
+    /// The server's Audio-Duration header when it sent one, otherwise what
+    /// AVFoundation works out from the stream (indefinite until it knows).
     override open var duration: CMTime {
         get {
-            return mutableDuration
+            return mutableDuration.seconds > 0 ? mutableDuration : super.duration
         }
         set {
             self.mutableDuration = newValue
