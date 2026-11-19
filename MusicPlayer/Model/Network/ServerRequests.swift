@@ -39,21 +39,30 @@ class ServerRequests {
         return nil
     }
 
+    /// Body of `GET /version`. Other fields in the response are ignored.
+    private struct VersionResponse: Decodable {
+        let version: String
+    }
+
     func getVersion(completion: @escaping (String, Response) -> ()) {
         guard let serverAddress = fetchServerURL() else {
             return completion("Unknown", .ServerUndefined)
         }
+        getVersion(serverAddress: serverAddress, completion: completion)
+    }
+
+    internal func getVersion(serverAddress: URL, completion: @escaping (String, Response) -> ()) {
         let versionEndpoint = serverAddress.appendingPathComponent("/version")
         session.request(versionEndpoint, method: .get)
             .validate()
-            .responseJSON { res in
+            .responseDecodable(of: VersionResponse.self) { res in
                 switch res.result {
-                case .success(let responseData):
-                    if let version = (responseData as? [String:String])?["version"] {
-                        return completion(version, .Successful)
+                case .success(let body):
+                    return completion(body.version, .Successful)
+                case .failure(let error):
+                    if case .responseSerializationFailed = error {
+                        return completion("Unknown", .FailedToParse)
                     }
-                    return completion("Unknown", .FailedToParse)
-                case .failure:
                     return completion("Unknown", .ConnectionIssue)
                 }
         }

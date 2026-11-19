@@ -75,6 +75,7 @@
 		66FAA9B1B619ADFB1090935D /* SongTableReorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C36354AD6CE63A3BC3FF9ADF /* SongTableReorderTests.swift */; };
 		672BB9155E4E03DB093D2CA2 /* SearchResultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D33477251BB53C541C79E /* SearchResultsTests.swift */; };
 		680C5F4B458AA440DC57BBD7 /* Pods_MusicPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */; };
+		69861F72B5D66903FEAA8F10 /* StubURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D843C8B7B0D097CC2D6D58 /* StubURLProtocol.swift */; };
 		70229C941884D480A4318AE8 /* AudioPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A665A3F3807DA8C48A95CB7 /* AudioPlayerTests.swift */; };
 		76A3A3F7D27C1D1B4A191FC5 /* MPControlToggleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E819EB286AC5AFAAB2EFE07E /* MPControlToggleTests.swift */; };
 		8EAFF4AA9A8D2A86380690BA /* BackgroundSessionCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14B5E6EAAD8B97FCF7E4969 /* BackgroundSessionCompletion.swift */; };
@@ -94,6 +95,7 @@
 		D7E3D3B9EA74854703700A3C /* SongTableProcessingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853F559391F679F78D99A260 /* SongTableProcessingTests.swift */; };
 		D8451D1C5E793F0C57BDE2AE /* TestPersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94D051B52AEA5BE171181CC /* TestPersistenceTests.swift */; };
 		E078BD2FCB6A78B18E72DD53 /* AudioPlayerInterruptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B1EE04C1CD39F15B1C8D70 /* AudioPlayerInterruptionTests.swift */; };
+		E6252897B4A8E8D3EDC12681 /* ServerVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F8ED6AC3DCC8249F681AE5 /* ServerVersionTests.swift */; };
 		E82EB57EC9E07502CE3296F2 /* MPControlSeekTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95C57C77108D1C78F3A0FA /* MPControlSeekTests.swift */; };
 		F6CD7200231863E500C0F8AD /* AudioDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD71FF231863E500C0F8AD /* AudioDownloadManager.swift */; };
 		F6F5EC322330228800E99FFB /* SongTableDelegateImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F5EC312330228800E99FFB /* SongTableDelegateImpl.swift */; };
@@ -207,6 +209,7 @@
 		A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53AA75E5E8D864B9A2AAECD /* InfoPlistTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InfoPlistTests.swift; sourceTree = "<group>"; };
 		BEB798B5C97E97CAF2EAEF6D /* SongTableTestCase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SongTableTestCase.swift; sourceTree = "<group>"; };
+		C0F8ED6AC3DCC8249F681AE5 /* ServerVersionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerVersionTests.swift; sourceTree = "<group>"; };
 		C36354AD6CE63A3BC3FF9ADF /* SongTableReorderTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SongTableReorderTests.swift; sourceTree = "<group>"; };
 		C5C712FDDBC504B96F6C6465 /* BufferedFractionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BufferedFractionTests.swift; sourceTree = "<group>"; };
 		C63BFE5B7DD9A1FEACBB3EEC /* ID3Tag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ID3Tag.swift; sourceTree = "<group>"; };
@@ -219,6 +222,7 @@
 		D14B5E6EAAD8B97FCF7E4969 /* BackgroundSessionCompletion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BackgroundSessionCompletion.swift; sourceTree = "<group>"; };
 		D2AEDA230920D7CB078F70DB /* ProcessSongTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProcessSongTests.swift; sourceTree = "<group>"; };
 		D6C8F88646FBC72C245A5780 /* ServerAddressTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerAddressTests.swift; sourceTree = "<group>"; };
+		E3D843C8B7B0D097CC2D6D58 /* StubURLProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StubURLProtocol.swift; sourceTree = "<group>"; };
 		E819EB286AC5AFAAB2EFE07E /* MPControlToggleTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MPControlToggleTests.swift; sourceTree = "<group>"; };
 		E94D051B52AEA5BE171181CC /* TestPersistenceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TestPersistenceTests.swift; sourceTree = "<group>"; };
 		F01D33477251BB53C541C79E /* SearchResultsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SearchResultsTests.swift; sourceTree = "<group>"; };
@@ -574,6 +578,7 @@
 				61DE5EEC1637B3D26A3AD0F2 /* ServerCredentialsTests.swift */,
 				4E7C216B8D2A5F820E70E615 /* ServerRequestsTests.swift */,
 				D6C8F88646FBC72C245A5780 /* ServerAddressTests.swift */,
+				C0F8ED6AC3DCC8249F681AE5 /* ServerVersionTests.swift */,
 			);
 			name = Network;
 			path = Network;
@@ -672,6 +677,7 @@
 				88552E65A5A17F3A87BD947E /* AudioPlayerTestCase.swift */,
 				BEB798B5C97E97CAF2EAEF6D /* SongTableTestCase.swift */,
 				C63BFE5B7DD9A1FEACBB3EEC /* ID3Tag.swift */,
+				E3D843C8B7B0D097CC2D6D58 /* StubURLProtocol.swift */,
 			);
 			name = Fixtures;
 			path = Fixtures;
@@ -1008,6 +1014,8 @@
 				66FAA9B1B619ADFB1090935D /* SongTableReorderTests.swift in Sources */,
 				661CD5CFBD77ECA6BC60B405 /* BufferSliderTests.swift in Sources */,
 				0A3C200D53DD8A586432E3BF /* PopulateSongsTests.swift in Sources */,
+				69861F72B5D66903FEAA8F10 /* StubURLProtocol.swift in Sources */,
+				E6252897B4A8E8D3EDC12681 /* ServerVersionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
