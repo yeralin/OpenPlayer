@@ -33,6 +33,22 @@ scripts/test.sh unit     # unit tests only
 
 Open `MusicPlayer.xcworkspace` (not the `.xcodeproj`) in Xcode.
 
+### `pod install` without Xcode or the CocoaPods CDN
+
+`pod install` also runs on Linux (`gem install cocoapods -v 1.17.0`, needs
+`rsync`, and `--allow-root` as root), which is enough to regenerate
+`Podfile.lock` and the project changes it makes. In a sandbox that blocks
+`cdn.cocoapods.org`'s jsDelivr backend, build a local spec repo instead: fetch
+each `Specs/<a>/<b>/<c>/<Name>/<version>/<Name>.podspec.json` (shard =
+first three hex chars of `md5(Name)`) from
+`raw.githubusercontent.com/CocoaPods/Specs/master`, add a
+`CocoaPods-version.yml` with `prefix_lengths: [1, 1, 1]`, `git init` it, and
+put `source 'file:///path/to/specs'` at the top of a scratch copy of the
+Podfile. MobileVLCKit downloads from a host such sandboxes usually block, so
+drop it from the scratch Podfile and ignore its two lines in the
+"[CP] Embed Pods Frameworks" diff. Port only the real changes back; CI's
+`check-pods-in-sync.sh` verifies the result with the real CDN.
+
 CI (`.github/workflows/ci.yml`) runs on every push, on a GitHub-hosted macOS
 runner, and does exactly the steps above plus `scripts/check-pods-in-sync.sh`.
 
