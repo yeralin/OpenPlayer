@@ -72,7 +72,6 @@ extension SongTableViewController: AudioPlayerDelegate, CellToTableDelegate {
     // MARK - Shared
     
     internal func propagateError(title: String, error: String) {
-        present(popUIErrorAlert(title: "Could not retrieve songs", reason: error.localizedDescription),
-                animated: true)
+        present(popUIErrorAlert(title: title, reason: error), animated: true)
     }
 }
