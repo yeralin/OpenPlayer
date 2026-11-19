@@ -8,7 +8,6 @@
 
 import Foundation
 import UniformTypeIdentifiers
-import AVFoundation
 import CoreData
 import UIKit
 
@@ -158,19 +157,12 @@ class SongPersistencyManager: PersistenceController {
                      cntxt: NSManagedObjectContext? = nil) throws {
         let cntxt = try validateContext(context: cntxt)
         let songPath = try getSongPath(song: song)
-        let songAsset = AVAsset.init(url: songPath)
-        if !songAsset.commonMetadata.isEmpty {
-            let meta = songAsset.commonMetadata
-            if let title = meta.firstIndex(where: { el in el.commonKey?.rawValue == "title"}) {
-                song.songTitle = meta[title].value as? String
-            }
-            if let artist = meta.firstIndex(where: { el in el.commonKey?.rawValue == "artist"}) {
-                song.songArtist = meta[artist].value as? String
-            }
-            //if let artwork = meta.index(where: { el in el.commonKey == "artwork"}) {
-            //let imageData = meta.value as! Data
-            // song.songArtwork = UIImageJPEGRepresentation(UIImage(data: imageData)!, 1) as NSData?
-            //}
+        let tags = AudioFileInfo.tags(of: songPath)
+        if let title = tags.title {
+            song.songTitle = title
+        }
+        if let artist = tags.artist {
+            song.songArtist = artist
         }
         if song.songArtist == nil || song.songTitle == nil {
             song.songArtist = songPath.deletingPathExtension().lastPathComponent
