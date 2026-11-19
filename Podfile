@@ -16,6 +16,12 @@ target 'MusicPlayer' do
   pod 'CocoaLumberjack'
   pod 'BufferSlider'
   pod 'MobileVLCKit'
+
+  # Unit tests are hosted in the app and `@testable import MusicPlayer`, so
+  # they need the pods' module search paths (but must not link them twice).
+  target 'MusicPlayerTests' do
+    inherit! :search_paths
+  end
 end
 
 target 'MusicPlayerUITests' do
