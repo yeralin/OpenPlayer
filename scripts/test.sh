@@ -33,8 +33,13 @@ run_suite() {
   local name="$1" target="$2"
   rm -rf "${results}/${name}.xcresult"
   echo "==> Running ${name} tests (${target})"
+  # Time limits turn a hung test into a failure with a report instead of a
+  # silent wait until the CI job times out.
   xcodebuild test-without-building "${common_args[@]}" \
     -only-testing:"${target}" \
+    -test-timeouts-enabled YES \
+    -default-test-execution-time-allowance 120 \
+    -maximum-test-execution-time-allowance 300 \
     -resultBundlePath "${results}/${name}.xcresult"
 }
 

@@ -56,8 +56,12 @@ The old `.travis.yml` was template boilerplate and never ran. CI is now a
 GitHub Actions workflow on a `macos-26` runner. It installs the CocoaPods
 version recorded in `Podfile.lock`, runs `pod install`, checks that this did
 not modify tracked files, then runs `scripts/test.sh`. All the real logic lives
-in `scripts/` so a local run behaves exactly like CI. Runs are not cancelled
-when a newer commit is pushed, so every commit of a stacked PR gets a result.
+in `scripts/` so a local run behaves exactly like CI (shared setup steps are in
+`.github/actions/setup`). The unit-test job is never cancelled, so every commit
+of a stacked PR gets a result. The UI-test job is slow (each test reinstalls
+the app), so it uses a per-branch concurrency group with cancel-in-progress:
+only the newest push runs it. `scripts/test.sh` enables per-test time limits so
+a hung test fails with a report instead of running into the job timeout.
 
 ### 2026-11-19: Tests swap the persistence singletons' state, not the singletons
 

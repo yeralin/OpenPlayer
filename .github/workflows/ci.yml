@@ -1,7 +1,5 @@
 name: CI
 
-# Every pushed commit gets its own run (no cancel-in-progress), so each commit
-# of a stacked PR can be checked on its own.
 on:
   push:
   pull_request:
@@ -11,52 +9,45 @@ permissions:
   contents: read
 
 jobs:
-  build-and-test:
+  # Every pushed commit gets its own unit test run (no cancel-in-progress),
+  # so each commit of a stacked PR can be checked on its own.
+  unit-tests:
     # Same-repo PRs are already covered by the push event; only run
     # pull_request for forks to avoid duplicate runs.
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: macos-26
-    timeout-minutes: 90
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-
-      - name: Select newest Xcode
-        run: |
-          xcode="$(ls -d /Applications/Xcode_*.app | sort -V | tail -n 1)"
-          sudo xcode-select -s "$xcode/Contents/Developer"
-          xcodebuild -version
-
-      - name: Install the CocoaPods version from Podfile.lock
-        run: |
-          version="$(awk '/^COCOAPODS:/ { print $2 }' Podfile.lock)"
-          sudo gem install cocoapods -v "$version" --no-document
-          pod --version
-
-      - name: Cache Pods
-        uses: actions/cache@v4
-        with:
-          path: |
-            Pods
-            ~/Library/Caches/CocoaPods
-          key: pods-${{ runner.os }}-${{ hashFiles('Podfile.lock') }}
-          restore-keys: pods-${{ runner.os }}-
-
-      - name: pod install
-        run: pod install
-
-      - name: Check Podfile.lock and project are in sync
-        run: scripts/check-pods-in-sync.sh
-
+      - uses: ./.github/actions/setup
       - name: Unit tests
         run: scripts/test.sh unit
-
-      - name: UI tests
-        run: scripts/test.sh ui
-
       - name: Upload test results
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: xcresults-${{ github.sha }}
+          name: unit-xcresult-${{ github.sha }}
+          path: build/results
+          if-no-files-found: ignore
+
+  # UI tests are slow (each test reinstalls and relaunches the app), so only
+  # the newest push on a branch runs them; older runs are cancelled.
+  ui-tests:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+    runs-on: macos-26
+    timeout-minutes: 60
+    concurrency:
+      group: ui-tests-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: UI tests
+        run: scripts/test.sh ui
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-xcresult-${{ github.sha }}
           path: build/results
           if-no-files-found: ignore
