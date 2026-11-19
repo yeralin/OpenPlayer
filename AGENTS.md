@@ -40,7 +40,10 @@ runner, and does exactly the steps above plus `scripts/check-pods-in-sync.sh`.
 
 - Small, single-purpose commits. A fix that needs several commits shares a
   common title prefix, e.g. `Move server credentials out of source (1/3): ...`.
-- Every behaviour fix comes with a test that fails without it.
+- Every behaviour fix comes with a test that fails without it. When the old
+  behaviour cannot be reproduced reliably (e.g. undefined behaviour that
+  happens to work), the commit message says so and the test pins the
+  intended behaviour.
 - New source or test files must be added to `MusicPlayer.xcodeproj`. Without
   Xcode, use `scripts/xcodeproj-add.rb <target> <file>...` (needs
   `gem install xcodeproj`); it mirrors folders as groups and is idempotent.

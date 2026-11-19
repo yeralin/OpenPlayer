@@ -179,7 +179,7 @@ class AudioPlayer: NSObject {
         }
         mp?.setMPControls(songArtist: songArtist, songTitle: songTitle, duration: player?.duration ?? .nan)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(playNextSong(backward:)),
+                                               selector: #selector(currentItemDidPlayToEnd(_:)),
                                                name: .AVPlayerItemDidPlayToEndTime,
                                                object: player?.currentItem)
     }
@@ -258,6 +258,13 @@ class AudioPlayer: NSObject {
         return String(format: "%0.2d:%0.2d",minutes,seconds)
     }
     
+    // Notification observers get the Notification as their argument, so this
+    // must not be playNextSong(backward:) itself: its Bool would receive the
+    // Notification pointer.
+    @objc internal func currentItemDidPlayToEnd(_ notification: Notification) {
+        playNextSong(backward: false)
+    }
+
     // Reached from the lock screen, headphones and end-of-track, so it must
     // cope with nothing being loaded and with songs that fail to play.
     @objc internal func playNextSong(backward: Bool = false) {
