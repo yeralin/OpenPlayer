@@ -77,11 +77,17 @@ version recorded in `Podfile.lock`, runs `pod install`, checks that this did
 not modify tracked files, then runs `scripts/test.sh`. All the real logic lives
 in `scripts/` so a local run behaves exactly like CI (shared setup steps are in
 `.github/actions/setup`). The unit-test job is never cancelled, so every commit
-of a stacked PR gets a result. The UI-test job is slow (each test reinstalls
-the app), so a small Linux job (`newest-push`) first checks whether the commit
-is still the branch head; older commits skip the UI tests. A per-branch
-concurrency group still cancels a UI run that is overtaken mid-way. `scripts/test.sh` enables per-test time limits so
-a hung test fails with a report instead of running into the job timeout.
+of a stacked PR gets a result. The UI-test job is slower (about 8 minutes), so
+a small Linux job (`newest-push`) first checks whether the commit is still the
+branch head; older commits skip the UI tests. A per-branch
+concurrency group still cancels a UI run that is overtaken mid-way.
+`scripts/test.sh` enables per-test time limits so a hung test fails with a
+report instead of running into the job timeout, prints each failed test with
+its message at the end of the log, and builds with only the default toolchain
+(`TOOLCHAINS=com.apple.dt.toolchain.XcodeDefault`), because the runner's Metal
+toolchain otherwise adds a missing library search path to every link.
+`scripts/report-warnings.sh` lists the build's warnings at the end of the
+unit-test job; keep it at zero.
 
 ### 2026-11-19: Tests swap the persistence singletons' state, not the singletons
 
