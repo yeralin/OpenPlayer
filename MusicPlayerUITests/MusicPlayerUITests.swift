@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import MusicPlayer
 
 extension XCUIElement {
     /**
@@ -123,9 +122,9 @@ class MusicPlayerUITests: XCTestCase {
         let playPauseButton = testingCell.buttons["play"]
         playPauseButton.tap()
         sleep(2)
-        XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.iosPause).text)
+        XCTAssertTrue(testingCell.buttons["play"].isSelected, "Expected the pause icon")
         playPauseButton.tap()
-        XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.play).text)
+        XCTAssertFalse(testingCell.buttons["play"].isSelected, "Expected the play icon")
     }
 
     func testRestoreSongState() {
@@ -141,7 +140,7 @@ class MusicPlayerUITests: XCTestCase {
         app.navigationBars["Test"].buttons["Playlists"].tap()
         sleep(2)
         tablesQuery.staticTexts["Test"].tap()
-        XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.iosPause).text)
+        XCTAssertTrue(testingCell.buttons["play"].isSelected, "Expected the pause icon")
     }
     
     func testRenameSong() {
@@ -177,8 +176,8 @@ class MusicPlayerUITests: XCTestCase {
         firstTestingCell.buttons["play"].tap()
         sleep(2)
         secondTestingCell.buttons["play"].tap()
-        XCTAssertTrue(firstTestingCell.buttons["play"].label == FontType.ionicons(.play).text)
-        XCTAssertTrue(secondTestingCell.buttons["play"].label == FontType.ionicons(.iosPause).text)
+        XCTAssertFalse(firstTestingCell.buttons["play"].isSelected, "Expected the play icon")
+        XCTAssertTrue(secondTestingCell.buttons["play"].isSelected, "Expected the pause icon")
     }
     
     func testMoveSongFromOnePlaylistToAnother() {
