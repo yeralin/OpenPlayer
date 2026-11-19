@@ -38,12 +38,27 @@ run_suite() {
   echo "==> Running ${name} tests (${target})"
   # Time limits turn a hung test into a failure with a report instead of a
   # silent wait until the CI job times out.
-  xcodebuild test-without-building "${common_args[@]}" \
+  if ! xcodebuild test-without-building "${common_args[@]}" \
     -only-testing:"${target}" \
     -test-timeouts-enabled YES \
     -default-test-execution-time-allowance "$allowance" \
     -maximum-test-execution-time-allowance "$((allowance * 2))" \
-    -resultBundlePath "${results}/${name}.xcresult"
+    -resultBundlePath "${results}/${name}.xcresult"; then
+    print_failures "${results}/${name}.xcresult"
+    return 1
+  fi
+}
+
+# Prints each failed test with its failure message from a result bundle, so
+# failures can be read without digging through thousands of log lines.
+print_failures() {
+  echo "==> Failed tests"
+  xcrun xcresulttool get test-results summary --path "$1" --compact 2>/dev/null | python3 -c '
+import json, sys
+for failure in json.load(sys.stdin).get("testFailures", []):
+    print("- {}: {}".format(failure.get("testIdentifierString") or failure.get("testName"),
+                            " ".join(str(failure.get("failureText", "")).split())))
+' || echo "(could not read $1)"
 }
 
 # Each UI test first deletes the app through SpringBoard, which alone takes
