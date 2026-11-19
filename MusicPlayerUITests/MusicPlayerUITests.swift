@@ -64,7 +64,7 @@ class MusicPlayerUITests: XCTestCase {
         let playlistsNavigationBar = app.navigationBars["Playlists"]
         playlistsNavigationBar.buttons["Add"].tap()
         let createNewPlaylistAlert = app.alerts["Create new playlist"]
-        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test")
+        createNewPlaylistAlert.textFields["Playlist Name"].typeText("Test")
         createNewPlaylistAlert.buttons["OK"].tap()
         tablesQuery.staticTexts["Test"].tap()
         app.navigationBars["Test"].buttons["Playlists"].tap()
@@ -82,10 +82,10 @@ class MusicPlayerUITests: XCTestCase {
         let playlistsNavigationBar = app.navigationBars["Playlists"]
         playlistsNavigationBar.buttons["Add"].tap()
         let createNewPlaylistAlert = app.alerts["Create new playlist"]
-        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test")
+        createNewPlaylistAlert.textFields["Playlist Name"].typeText("Test")
         createNewPlaylistAlert.buttons["OK"].tap()
         playlistsNavigationBar.buttons["Add"].tap()
-        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test")
+        createNewPlaylistAlert.textFields["Playlist Name"].typeText("Test")
         createNewPlaylistAlert.buttons["OK"].tap()
         XCTAssertTrue(app.alerts["Error"].visible())
         app.alerts["Error"].buttons["OK"].tap()
