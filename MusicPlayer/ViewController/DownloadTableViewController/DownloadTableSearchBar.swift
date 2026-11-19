@@ -86,12 +86,14 @@ extension DownloadTableViewController: UISearchBarDelegate {
         }
     }
     
-    private func populateSongListResponse(_ songListResponse: [SearchResultEntry]) {
-        guard let context = try? SongPersistencyManager.sharedInstance.validateContext(context: nil) else {
-            fatalError("Could not fetch context")
-        }
+    internal func populateSongListResponse(_ songListResponse: [SearchResultEntry]) {
         for entry in songListResponse {
-            let song = SongEntity(context: context)
+            // Not inserted into the app's context: search results must never
+            // be saved alongside the playlists.
+            guard let song = try? SongPersistencyManager.sharedInstance.makeUnsavedSong() else {
+                log.error("Could not create a song for search result \"\(entry.title)\"")
+                continue
+            }
             song.songName = entry.title
             song.songUrl = entry.url
             let tokSongName = entry.title.split(separator: "-", maxSplits: 1)

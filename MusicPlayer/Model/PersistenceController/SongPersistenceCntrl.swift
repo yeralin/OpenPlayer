@@ -33,6 +33,17 @@ class SongPersistencyManager: PersistenceController {
         return songArray
     }
 
+    /// A song that belongs to no managed object context, for remote search
+    /// results: it can be played and shown like any song, but no later
+    /// `save()` can ever write it to the store.
+    func makeUnsavedSong() throws -> SongEntity {
+        let cntxt = try validateContext(context: nil)
+        guard let entity = NSEntityDescription.entity(forEntityName: "SongEntity", in: cntxt) else {
+            throw "Could not find the SongEntity description"
+        }
+        return SongEntity(entity: entity, insertInto: nil)
+    }
+
     public func getSongPath(song: SongEntity) throws -> URL {
         if let songName = song.songName, let playlistName = song.playlist?.playlistName {
             return docsUrl.appendingPathComponent(playlistName).appendingPathComponent(songName)
