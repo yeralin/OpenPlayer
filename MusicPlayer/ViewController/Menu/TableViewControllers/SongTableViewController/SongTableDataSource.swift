@@ -74,7 +74,9 @@ extension SongTableViewController {
             do {
                 try SongPersistencyManager.sharedInstance.processSong(toProcess: song)
             } catch let err {
-                fatalError("Could not process \"\(song.songName ?? "unknown")\" song: \(err)")
+                // One unreadable song must not take the whole table down.
+                // It stays unprocessed and is retried the next time it is shown.
+                log.error("Could not process \"\(song.songName ?? "unknown")\" song: \(err)")
             }
         }
         // If there is a song that's playing inside a current playlist, restore its state view
