@@ -68,6 +68,18 @@ open class RemotePlayerItem: PlayerItem {
 
     // Key-value observing context
     private var playerItemContext = 0
+
+    /// Share of the file downloaded so far, from 0 to 1, for the buffer bar.
+    ///
+    /// `expected` is -1 (NSURLSessionTransferSizeUnknown) when the server
+    /// sends no Content-Length, and can be smaller than 100 bytes, so this
+    /// never divides by an unknown or zero size.
+    static func bufferedFraction(downloaded: Int, expected: Int) -> Double {
+        guard expected > 0, downloaded > 0 else {
+            return 0
+        }
+        return min(Double(downloaded) / Double(expected), 1)
+    }
     
     open func downloadWithoutPlay() {
         if audioDownloadDelegate.session == nil {

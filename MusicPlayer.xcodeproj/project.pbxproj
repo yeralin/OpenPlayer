@@ -56,6 +56,7 @@
 		31F2F0391EC151CA0072DE30 /* PlaylistPersistenceCntrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2F0381EC151CA0072DE30 /* PlaylistPersistenceCntrl.swift */; };
 		31F2F0451EC15C700072DE30 /* ViewExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F2F0441EC15C700072DE30 /* ViewExtentions.swift */; };
 		36247A139E99DD177661C29B /* AudioPlayerEndOfTrackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07FE8BC4A2C71586F98088E /* AudioPlayerEndOfTrackTests.swift */; };
+		3A3A2AAA0D6A04D27FFF2BE5 /* BufferedFractionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5C712FDDBC504B96F6C6465 /* BufferedFractionTests.swift */; };
 		3DCF955EC4ECFB6D60CA2368 /* Pods_MusicPlayerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 879D82898F7D82C29BDD416F /* Pods_MusicPlayerUITests.framework */; };
 		3F87125725E976B00021F446 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87125625E976B00021F446 /* BaseCell.swift */; };
 		3F93ABB925CCC73F00F42CC9 /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93ABB825CCC73F00F42CC9 /* PlaylistCell.swift */; };
@@ -181,6 +182,7 @@
 		9DE5B700D544EF3E53B1A3D0 /* Pods-MusicPlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MusicPlayerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MusicPlayerTests/Pods-MusicPlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 		A02E6364D6B5956BA3AED1BB /* Pods_MusicPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MusicPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53AA75E5E8D864B9A2AAECD /* InfoPlistTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InfoPlistTests.swift; sourceTree = "<group>"; };
+		C5C712FDDBC504B96F6C6465 /* BufferedFractionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BufferedFractionTests.swift; sourceTree = "<group>"; };
 		CF2F594116AB4F210B91751A /* MPControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPControl.swift; sourceTree = "<group>"; };
 		CF2F59FCF07DAB737CE9F931 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		D6C8F88646FBC72C245A5780 /* ServerAddressTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ServerAddressTests.swift; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 				71B1EE04C1CD39F15B1C8D70 /* AudioPlayerInterruptionTests.swift */,
 				4187E0AE72D07081B4675587 /* AudioPlayerNextSongTests.swift */,
 				F07FE8BC4A2C71586F98088E /* AudioPlayerEndOfTrackTests.swift */,
+				C5C712FDDBC504B96F6C6465 /* BufferedFractionTests.swift */,
 			);
 			name = Audio;
 			path = Audio;
@@ -909,6 +912,7 @@
 				E078BD2FCB6A78B18E72DD53 /* AudioPlayerInterruptionTests.swift in Sources */,
 				A56C0A4DF0008398D67B802D /* AudioPlayerNextSongTests.swift in Sources */,
 				36247A139E99DD177661C29B /* AudioPlayerEndOfTrackTests.swift in Sources */,
+				3A3A2AAA0D6A04D27FFF2BE5 /* BufferedFractionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

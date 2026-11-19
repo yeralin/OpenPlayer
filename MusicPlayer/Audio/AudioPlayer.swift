@@ -384,7 +384,8 @@ class AudioPlayer: NSObject {
         }
         log.debug("Loaded so far: \(bytesDownloaded) out of \(totalBytesExpected)")
         DispatchQueue.main.sync {
-            remotePlayerItem.bufferValue = Double(bytesDownloaded/(totalBytesExpected/100))/100
+            remotePlayerItem.bufferValue = RemotePlayerItem.bufferedFraction(downloaded: bytesDownloaded,
+                                                                            expected: totalBytesExpected)
         }
     }
     
