@@ -14,7 +14,9 @@ extension UIColor {
     static var systemColor: UIColor { return system }
 }
 
-extension String: LocalizedError {
+// Lets the app `throw "message"`. @retroactive acknowledges that String and
+// Error/LocalizedError both belong to the standard library.
+extension String: @retroactive Error, @retroactive LocalizedError {
     public var errorDescription: String? { return self }
 }
 

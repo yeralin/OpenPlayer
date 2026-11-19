@@ -10,7 +10,9 @@ import UIKit
 
 import SWRevealViewController
 
-extension UIViewController: SWRevealViewControllerDelegate {
+// Every screen is the side menu's delegate. @retroactive acknowledges that
+// neither the type (UIKit) nor the protocol (SWRevealViewController) is ours.
+extension UIViewController: @retroactive SWRevealViewControllerDelegate {
     
     func setupMenuGestureRecognizer() {
         // nil when the screen is shown outside the side menu (e.g. in tests).
