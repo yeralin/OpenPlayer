@@ -16,7 +16,7 @@ enum PlayerState {
     case stop
 }
 
-protocol AudioPlayerDelegate : class {
+protocol AudioPlayerDelegate: AnyObject {
     func getSongsArray(song: SongEntity) -> [SongEntity]
     func cellState(state: PlayerState, song: SongEntity)
     func propagateError(title: String, error: String)
@@ -52,22 +52,31 @@ open class PlayerItem: AVPlayerItem {
     
     public var bufferValue: Double = 1
     private(set) var assignedSong: SongEntity
+    /// Read from the file up front, so local playback knows its length
+    /// before AVFoundation has loaded the item.
+    private let fileDuration: CMTime?
     
     override open var duration: CMTime {
         get {
-            return self.asset.duration
+            // Falls back to AVPlayerItem's own value (known once it is ready).
+            return fileDuration ?? super.duration
         }
     }
     
     // Default: For playing local items
     init(song: SongEntity) {
+        let url = song.getSongUrl()
         self.assignedSong = song
-        super.init(asset: AVAsset(url: song.getSongUrl()), automaticallyLoadedAssetKeys: ["duration"])
+        self.fileDuration = AudioFileInfo.duration(of: url).map {
+            CMTime(seconds: $0, preferredTimescale: 600)
+        }
+        super.init(asset: AVURLAsset(url: url), automaticallyLoadedAssetKeys: ["duration"])
     }
     
     // More customizable: for playing remote items
     init(song: SongEntity, asset: AVAsset, automaticallyLoadedAssetKeys: [String]?) {
         self.assignedSong = song
+        self.fileDuration = nil
         super.init(asset: asset, automaticallyLoadedAssetKeys: automaticallyLoadedAssetKeys)
     }
 }
@@ -94,6 +103,7 @@ class AudioPlayer: NSObject {
         mp?.resetMPControls()
         mp = MPControl.init(resumeSong: resume,
                                 pauseSong: pause,
+                                isPlaying: { self.isPlaying() },
                                 playNextSong: {() -> () in self.playNextSong(backward: false)},
                                 playPreviousSong: {() -> () in self.playNextSong(backward: true)},
                                 seekFor: seekFor(seconds:forward:))
@@ -179,7 +189,7 @@ class AudioPlayer: NSObject {
         }
         mp?.setMPControls(songArtist: songArtist, songTitle: songTitle, duration: player?.duration ?? .nan)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(playNextSong(backward:)),
+                                               selector: #selector(currentItemDidPlayToEnd(_:)),
                                                name: .AVPlayerItemDidPlayToEndTime,
                                                object: player?.currentItem)
     }
@@ -258,54 +268,70 @@ class AudioPlayer: NSObject {
         return String(format: "%0.2d:%0.2d",minutes,seconds)
     }
     
+    // Notification observers get the Notification as their argument, so this
+    // must not be playNextSong(backward:) itself: its Bool would receive the
+    // Notification pointer.
+    @objc internal func currentItemDidPlayToEnd(_ notification: Notification) {
+        playNextSong(backward: false)
+    }
+
+    // Reached from the lock screen, headphones and end-of-track, so it must
+    // cope with nothing being loaded and with songs that fail to play.
     @objc internal func playNextSong(backward: Bool = false) {
+        guard let currentSong = currentSong,
+           let songsArray = delegate?.getSongsArray(song: currentSong) else {
+            log.info("Nothing is loaded, no next song to play")
+            return
+        }
+        var nextSongIndex: Int = -1
+        if shuffleMode == true {
+            nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
+        } else if let currSongIndex = songsArray.firstIndex(of: currentSong) {
+            nextSongIndex = backward ? currSongIndex - 1 : currSongIndex + 1
+        }
         do {
-            guard let currentSong = currentSong,
-               let songsArray = delegate?.getSongsArray(song: currentSong) else {
-                throw "Could not locate songsArray"
-            }
-            var nextSongIndex: Int = -1
-            if shuffleMode == true {
-                nextSongIndex = Int(arc4random_uniform(UInt32(songsArray.count)))
-            } else if let currSongIndex = songsArray.firstIndex(of: currentSong) {
-                nextSongIndex = backward ? currSongIndex - 1 : currSongIndex + 1
-            }
             if songsArray.indices.contains(nextSongIndex) {
                 try play(song: songsArray[nextSongIndex])
             } else {
                 try stop()
             }
-        } catch let error {
-            fatalError("Reached internal inconsistency: \(error)")
+        } catch {
+            log.error("Could not switch to the next song: \(error)")
+            delegate?.propagateError(title: "Could not play the next song",
+                                     error: error.localizedDescription)
         }
     }
     
+    // Interruptions (calls, Siri, alarms) arrive whether or not a song is
+    // loaded, so "nothing to pause/resume" is expected here, not an error.
     @objc internal func handleInterruption(notification: Notification) {
-        do {
-            guard let userInfo = notification.userInfo,
-                let typeInt = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-                let type = AVAudioSession.InterruptionType(rawValue: typeInt) else {
-                    return
+        guard let userInfo = notification.userInfo,
+            let typeInt = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let type = AVAudioSession.InterruptionType(rawValue: typeInt) else {
+                return
+        }
+        switch type {
+        case .began:
+            do {
+                try pause()
+            } catch {
+                log.info("Interruption began with nothing to pause: \(error)")
             }
-            switch type {
-            case .began:
-                if userInfo.index(forKey: AVAudioSessionInterruptionWasSuspendedKey) == nil {
-                    try pause()
-                }
-            case .ended:
-                guard let optionsInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
-                    log.error("Could not extract interruption option int")
-                    return
-                }
-                let options = AVAudioSession.InterruptionOptions(rawValue: optionsInt)
-                if options.contains(.shouldResume) {
+        case .ended:
+            guard let optionsInt = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
+                log.error("Could not extract interruption option int")
+                return
+            }
+            let options = AVAudioSession.InterruptionOptions(rawValue: optionsInt)
+            if options.contains(.shouldResume) {
+                do {
                     try resume()
+                } catch {
+                    log.info("Interruption ended with nothing to resume: \(error)")
                 }
-            @unknown default:
-                log.error("Unhandled interruption type has occurred")
             }
-        } catch let error {
-            fatalError("Reached internal inconsistency: \(error)")
+        @unknown default:
+            log.error("Unhandled interruption type has occurred")
         }
     }
     
@@ -319,7 +345,7 @@ class AudioPlayer: NSObject {
             log.error("Could not properly handle a notification: \(notification)")
             return
         }
-        let duration = remotePlayerItem.asset.duration.seconds
+        let duration = remotePlayerItem.duration.seconds
         mp?.updateMPDuration(duration: duration)
         delegate?.cellState(state: .play, song: currentSong)
         player.playImmediately(atRate: 1)
@@ -366,7 +392,8 @@ class AudioPlayer: NSObject {
         }
         log.debug("Loaded so far: \(bytesDownloaded) out of \(totalBytesExpected)")
         DispatchQueue.main.sync {
-            remotePlayerItem.bufferValue = Double(bytesDownloaded/(totalBytesExpected/100))/100
+            remotePlayerItem.bufferValue = RemotePlayerItem.bufferedFraction(downloaded: bytesDownloaded,
+                                                                            expected: totalBytesExpected)
         }
     }
     
@@ -380,9 +407,8 @@ class AudioPlayer: NSObject {
         }
         log.info("Received response: \(httpResponse)")
         DispatchQueue.main.sync {
-            if let rawSeconds = httpResponse.allHeaderFields["Audio-Duration"] as? String,
-                let seconds = Double(rawSeconds), seconds > 0 {
-                remotePlayerItem.duration = CMTimeMakeWithSeconds(seconds, preferredTimescale: 600)
+            if remotePlayerItem.applyDurationHeader(from: httpResponse) {
+                mp?.updateMPDuration(duration: remotePlayerItem.duration.seconds)
             }
         }
     }

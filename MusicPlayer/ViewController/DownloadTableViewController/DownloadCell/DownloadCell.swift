@@ -18,6 +18,9 @@ class DownloadCell: BaseCell {
     
     override func awakeFromNib() {
         self.selectionStyle = .none
+        // Downloading into a playlist is unfinished (see AGENTS.md), so the
+        // button is hidden rather than left doing nothing.
+        downloadButton.isHidden = true
     }
     
     func initCell(initSong: SongEntity) {

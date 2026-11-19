@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import MusicPlayer
 
 extension XCUIElement {
     /**
@@ -43,12 +42,14 @@ class MusicPlayerUITests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        Springboard.deleteMyApp()
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         launcher = XCUIApplication()
+        // Start every test with an empty library (see UITestLaunchArguments).
+        // This replaces uninstalling the app through SpringBoard, which was
+        // slow and unreliable on CI.
+        launcher?.launchArguments = ["--reset-state"]
         
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
@@ -65,14 +66,22 @@ class MusicPlayerUITests: XCTestCase {
         let playlistsNavigationBar = app.navigationBars["Playlists"]
         playlistsNavigationBar.buttons["Add"].tap()
         let createNewPlaylistAlert = app.alerts["Create new playlist"]
-        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test")
+        createNewPlaylistAlert.textFields["Playlist Name"].typeText("Test")
         createNewPlaylistAlert.buttons["OK"].tap()
         tablesQuery.staticTexts["Test"].tap()
         app.navigationBars["Test"].buttons["Playlists"].tap()
         playlistsNavigationBar.buttons["Edit"].tap()
-        tablesQuery.buttons["Delete Test"].tap()
+        // The edit-mode minus button is "Remove <row>" since iOS 26 ("Delete <row>" before).
+        // It appears only once the edit-mode animation has run, so wait for it.
+        let removeButton = tablesQuery.buttons.matching(
+            NSPredicate(format: "label IN %@ OR identifier IN %@",
+                        ["Remove Test", "Delete Test"], ["Remove Test", "Delete Test"])).firstMatch
+        XCTAssertTrue(removeButton.waitForExistence(timeout: 5), "Expected the edit-mode delete button")
+        removeButton.tap()
         tablesQuery.buttons["Delete"].tap()
-        app.alerts["Warning"].buttons["Delete"].tap()
+        let warning = app.alerts["Warning"]
+        XCTAssertTrue(warning.waitForExistence(timeout: 5), "Expected the delete confirmation")
+        warning.buttons["Delete"].tap()
         app.navigationBars["Playlists"].buttons["Done"].tap()
         XCTAssertTrue(tablesQuery.cells.count == 0)
     }
@@ -83,13 +92,15 @@ class MusicPlayerUITests: XCTestCase {
         let playlistsNavigationBar = app.navigationBars["Playlists"]
         playlistsNavigationBar.buttons["Add"].tap()
         let createNewPlaylistAlert = app.alerts["Create new playlist"]
-        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test")
+        createNewPlaylistAlert.textFields["Playlist Name"].typeText("Test")
         createNewPlaylistAlert.buttons["OK"].tap()
         playlistsNavigationBar.buttons["Add"].tap()
-        createNewPlaylistAlert.collectionViews.textFields["Playlist Name"].typeText("Test")
+        createNewPlaylistAlert.textFields["Playlist Name"].typeText("Test")
         createNewPlaylistAlert.buttons["OK"].tap()
-        XCTAssertTrue(app.alerts["Error"].visible())
-        app.alerts["Error"].buttons["OK"].tap()
+        // PlaylistTableDataSource.insertPlaylist titles this alert "Playlist Error".
+        let errorAlert = app.alerts["Playlist Error"]
+        XCTAssertTrue(errorAlert.waitForExistence(timeout: 5), "Expected the duplicate-name error")
+        errorAlert.buttons["OK"].tap()
     }
     
     func testChangePlaylistRowPositions() {
@@ -123,9 +134,9 @@ class MusicPlayerUITests: XCTestCase {
         let playPauseButton = testingCell.buttons["play"]
         playPauseButton.tap()
         sleep(2)
-        XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.iosPause).text)
+        XCTAssertTrue(testingCell.buttons["play"].isSelected, "Expected the pause icon")
         playPauseButton.tap()
-        XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.play).text)
+        XCTAssertFalse(testingCell.buttons["play"].isSelected, "Expected the play icon")
     }
 
     func testRestoreSongState() {
@@ -141,7 +152,7 @@ class MusicPlayerUITests: XCTestCase {
         app.navigationBars["Test"].buttons["Playlists"].tap()
         sleep(2)
         tablesQuery.staticTexts["Test"].tap()
-        XCTAssertTrue(testingCell.buttons["play"].label == FontType.ionicons(.iosPause).text)
+        XCTAssertTrue(testingCell.buttons["play"].isSelected, "Expected the pause icon")
     }
     
     func testRenameSong() {
@@ -177,8 +188,8 @@ class MusicPlayerUITests: XCTestCase {
         firstTestingCell.buttons["play"].tap()
         sleep(2)
         secondTestingCell.buttons["play"].tap()
-        XCTAssertTrue(firstTestingCell.buttons["play"].label == FontType.ionicons(.play).text)
-        XCTAssertTrue(secondTestingCell.buttons["play"].label == FontType.ionicons(.iosPause).text)
+        XCTAssertFalse(firstTestingCell.buttons["play"].isSelected, "Expected the play icon")
+        XCTAssertTrue(secondTestingCell.buttons["play"].isSelected, "Expected the pause icon")
     }
     
     func testMoveSongFromOnePlaylistToAnother() {

@@ -47,9 +47,11 @@ open class RemotePlayerItem: PlayerItem {
     internal var httpResponse: HTTPURLResponse?
     
     internal var mutableDuration: CMTime = CMTimeMakeWithSeconds(0, preferredTimescale: 600)
+    /// The server's Audio-Duration header when it sent one, otherwise what
+    /// AVFoundation works out from the stream (indefinite until it knows).
     override open var duration: CMTime {
         get {
-            return mutableDuration
+            return mutableDuration.seconds > 0 ? mutableDuration : super.duration
         }
         set {
             self.mutableDuration = newValue
@@ -68,6 +70,32 @@ open class RemotePlayerItem: PlayerItem {
 
     // Key-value observing context
     private var playerItemContext = 0
+
+    /// OpenPlayer-Server sends the track length in seconds in an
+    /// `Audio-Duration` header, before enough audio has arrived for
+    /// AVFoundation to work it out. Returns whether a valid value was applied.
+    @discardableResult
+    func applyDurationHeader(from response: HTTPURLResponse) -> Bool {
+        // value(forHTTPHeaderField:) is case-insensitive; HTTP/2 lowercases names.
+        guard let rawSeconds = response.value(forHTTPHeaderField: "Audio-Duration"),
+              let seconds = Double(rawSeconds), seconds > 0, seconds.isFinite else {
+            return false
+        }
+        duration = CMTimeMakeWithSeconds(seconds, preferredTimescale: 600)
+        return true
+    }
+
+    /// Share of the file downloaded so far, from 0 to 1, for the buffer bar.
+    ///
+    /// `expected` is -1 (NSURLSessionTransferSizeUnknown) when the server
+    /// sends no Content-Length, and can be smaller than 100 bytes, so this
+    /// never divides by an unknown or zero size.
+    static func bufferedFraction(downloaded: Int, expected: Int) -> Double {
+        guard expected > 0, downloaded > 0 else {
+            return 0
+        }
+        return min(Double(downloaded) / Double(expected), 1)
+    }
     
     open func downloadWithoutPlay() {
         if audioDownloadDelegate.session == nil {

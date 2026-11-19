@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import MobileCoreServices
-import AVFoundation
+import UniformTypeIdentifiers
 import CoreData
 import UIKit
 
@@ -31,6 +30,17 @@ class SongPersistencyManager: PersistenceController {
             throw "Could not cast data to [SongEntity]"
         }
         return songArray
+    }
+
+    /// A song that belongs to no managed object context, for remote search
+    /// results: it can be played and shown like any song, but no later
+    /// `save()` can ever write it to the store.
+    func makeUnsavedSong() throws -> SongEntity {
+        let cntxt = try validateContext(context: nil)
+        guard let entity = NSEntityDescription.entity(forEntityName: "SongEntity", in: cntxt) else {
+            throw "Could not find the SongEntity description"
+        }
+        return SongEntity(entity: entity, insertInto: nil)
     }
 
     public func getSongPath(song: SongEntity) throws -> URL {
@@ -98,8 +108,8 @@ class SongPersistencyManager: PersistenceController {
         // Match song entities with their corresponding audio files:
         // If a new audio file is found, create a new song entity
         for filePath in filePaths {
-            if let fileUTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, filePath.pathExtension as CFString, nil)?.takeRetainedValue() {
-                let isAudioFile = UTTypeConformsTo(fileUTI, kUTTypeAudio)
+            if let fileType = UTType(filenameExtension: filePath.pathExtension) {
+                let isAudioFile = fileType.conforms(to: .audio)
                 if isAudioFile {
                     let audioFileName = filePath.lastPathComponent
                     if let index = songsToMatchWithAudioFiles.firstIndex(where: { el in el.songName == audioFileName }) {
@@ -147,19 +157,12 @@ class SongPersistencyManager: PersistenceController {
                      cntxt: NSManagedObjectContext? = nil) throws {
         let cntxt = try validateContext(context: cntxt)
         let songPath = try getSongPath(song: song)
-        let songAsset = AVAsset.init(url: songPath)
-        if !songAsset.commonMetadata.isEmpty {
-            let meta = songAsset.commonMetadata
-            if let title = meta.firstIndex(where: { el in el.commonKey?.rawValue == "title"}) {
-                song.songTitle = meta[title].value as? String
-            }
-            if let artist = meta.firstIndex(where: { el in el.commonKey?.rawValue == "artist"}) {
-                song.songTitle = meta[artist].value as? String
-            }
-            //if let artwork = meta.index(where: { el in el.commonKey == "artwork"}) {
-            //let imageData = meta.value as! Data
-            // song.songArtwork = UIImageJPEGRepresentation(UIImage(data: imageData)!, 1) as NSData?
-            //}
+        let tags = AudioFileInfo.tags(of: songPath)
+        if let title = tags.title {
+            song.songTitle = title
+        }
+        if let artist = tags.artist {
+            song.songArtist = artist
         }
         if song.songArtist == nil || song.songTitle == nil {
             song.songArtist = songPath.deletingPathExtension().lastPathComponent
@@ -176,16 +179,6 @@ class SongPersistencyManager: PersistenceController {
         song.isProcessed = true
         try saveContext(cntxt: cntxt)
     }
-    
-    private func getPlaylistPath(playlist: PlaylistEntity) throws -> URL {
-        guard let playlistName = playlist.playlistName else {
-            throw "Could not extract playlistName from playlist entity"
-        }
-        let playlistPath = docsUrl.appendingPathComponent(playlistName)
-        if !fm.fileExists(atPath: playlistPath.absoluteString) {
-            throw "Playlist does not exist at path: \(playlistPath)"
-        }
-        return playlistPath
-    }
+
     
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PlaylistPickerDelegate : class {
+protocol PlaylistPickerDelegate: AnyObject {
     func moveSong(songCell: BaseCell, toPlaylist: PlaylistEntity)
 }
 

@@ -32,9 +32,11 @@ class PlaylistPersistencyManager: PersistenceController {
     
     func createPlaylist(name: String, cntxt: NSManagedObjectContext? = nil) throws -> PlaylistEntity {
         let cntxt = try validateContext(context: cntxt)
+        // A plain case/diacritic-insensitive comparison: MATCHES would treat
+        // the name as a regular expression and raise on names like "Mix [2024".
         if !_fetchData(entityName: "PlaylistEntity",
                        sortIn: nil,
-                       predicate: NSPredicate(format: "playlistName MATCHES[cd] %@", name)).isEmpty {
+                       predicate: NSPredicate(format: "playlistName ==[cd] %@", name)).isEmpty {
             throw UIError.AlreadyExists(reason: "Playlist \"\(name)\" already exists")
         }
         let playlistPosition = fetchPlaylistSize()
@@ -91,6 +93,25 @@ class PlaylistPersistencyManager: PersistenceController {
         }
     }
     
+    /// Deletes every playlist folder under Documents and every playlist (and,
+    /// by cascade, song) row. Used by UI tests (`--reset-state`) instead of
+    /// reinstalling the app.
+    func removeAllPlaylists() {
+        let entries = (try? fm.contentsOfDirectory(at: docsUrl, includingPropertiesForKeys: nil)) ?? []
+        for entry in entries {
+            do {
+                try fm.removeItem(at: entry)
+            } catch {
+                log.error("Could not remove \(entry.lastPathComponent): \(error)")
+            }
+        }
+        do {
+            try wipePlaylists(cntxt: nil)
+        } catch {
+            log.error("Could not delete playlist entities: \(error)")
+        }
+    }
+
     func wipePlaylists(cntxt: NSManagedObjectContext?) throws {
         let cntxt = try validateContext(context: cntxt)
         _ = try getPlaylistArray().map{cntxt.delete($0)}

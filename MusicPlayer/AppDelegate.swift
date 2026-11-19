@@ -12,25 +12,20 @@ import AVFoundation
 import SwiftyBeaver
 let log = SwiftyBeaver.self
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var backgroundSessionCompletionHandler: (() -> Void)?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        var launchArgs = ProcessInfo.processInfo.arguments
-        if launchArgs.count > 1 {
-            launchArgs.removeFirst()
-            for arg in launchArgs {
-                // @param <playlistName>:<numberOfTestSongsInIt> - String
-                // Used by UI tests to pre-populate playlists with test songs
-                let testArg = arg.split(separator: ":")
-                let testPlaylist = String(testArg[0])
-                let countSongs = Int(testArg[1])!
-                PlaylistPersistencyManager.sharedInstance
-                    .createPlaylistWithTestData(playlistName: testPlaylist, testEntires: countSongs)
-            }
+        // UI tests start from a known state through launch arguments.
+        let testArguments = UITestLaunchArguments.current
+        if testArguments.resetState {
+            PlaylistPersistencyManager.sharedInstance.removeAllPlaylists()
+        }
+        for seed in testArguments.playlists {
+            PlaylistPersistencyManager.sharedInstance
+                .createPlaylistWithTestData(playlistName: seed.name, testEntires: seed.songCount)
         }
         // Override point for customization after application launch.
         do {
@@ -50,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         log.info("Application awakend from background due to URLSession \"\(identifier)\" completion")
-        backgroundSessionCompletionHandler = completionHandler
+        BackgroundSessionCompletion.shared.store(completionHandler, forSession: identifier)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

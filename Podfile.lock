@@ -1,22 +1,16 @@
 PODS:
-  - Alamofire (5.4.1)
-  - BufferSlider (0.2.0)
-  - CocoaLumberjack (3.7.0):
-    - CocoaLumberjack/Core (= 3.7.0)
-  - CocoaLumberjack/Core (3.7.0)
+  - Alamofire (5.12.2)
   - GCDWebServer/Core (3.5.4)
   - GCDWebServer/WebUploader (3.5.4):
     - GCDWebServer/Core
-  - MobileVLCKit (3.5.1)
-  - SwiftLint (0.42.0)
+  - MobileVLCKit (3.7.5)
+  - SwiftLint (0.65.1)
   - SwiftOverlays (5.0.1)
-  - SwiftyBeaver (1.9.3)
+  - SwiftyBeaver (2.1.1)
   - SWRevealViewController (2.3.0)
 
 DEPENDENCIES:
   - Alamofire
-  - BufferSlider
-  - CocoaLumberjack
   - GCDWebServer/WebUploader
   - MobileVLCKit
   - SwiftLint
@@ -27,8 +21,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - BufferSlider
-    - CocoaLumberjack
     - GCDWebServer
     - MobileVLCKit
     - SwiftLint
@@ -37,16 +29,14 @@ SPEC REPOS:
     - SWRevealViewController
 
 SPEC CHECKSUMS:
-  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
-  BufferSlider: 4a9cbdff15a8c4eb42350fb27c0876d589d71243
-  CocoaLumberjack: e8955b9d337ac307103b0a34fd141c32f27e53c5
+  Alamofire: c5f37d8f438dc1d7fd3ff767f2f80fd01ca381d7
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
-  MobileVLCKit: 144d5f565512d1147d63b0fa1379231b3fd66535
-  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
+  MobileVLCKit: 9fb4475cd820b2d271ac394d5d7ba18c525332ab
+  SwiftLint: 7d51ad56923e88694cee5ca806dbbab30f85eaaa
   SwiftOverlays: ab459ea9194b0e96aaccaa00e9ead1bf6d46eef1
-  SwiftyBeaver: 2e8acd6fc90c6d0a27055867a290794926d57c02
+  SwiftyBeaver: ade157e4f857812e7d7f15f2e3396bb8733f8a1c
   SWRevealViewController: 6d3fd97f70112fd7cef9de14df4260eacce4c63a
 
-PODFILE CHECKSUM: 35175461a6507475029c889fc372f1eadf0136b2
+PODFILE CHECKSUM: 2815b0ea776917b263e512e976483f787050d7d6
 
 COCOAPODS: 1.17.0

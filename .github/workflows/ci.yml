@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Every pushed commit gets its own unit test run (no cancel-in-progress),
+  # so each commit of a stacked PR can be checked on its own.
+  unit-tests:
+    # Same-repo PRs are already covered by the push event; only run
+    # pull_request for forks to avoid duplicate runs.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+      - name: Unit tests
+        run: scripts/test.sh unit
+      - name: Report build warnings
+        if: always()
+        run: scripts/report-warnings.sh
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: unit-xcresult-${{ github.sha }}
+          path: build/results
+          if-no-files-found: ignore
+
+  # UI tests are slow (each test reinstalls and relaunches the app), so they
+  # only run for the commit that is still the branch head when CI starts.
+  # Older commits skip them (shown as skipped, not cancelled), and this check
+  # runs on a cheap Linux runner instead of holding a macOS one.
+  newest-push:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+    runs-on: ubuntu-latest
+    outputs:
+      newest: ${{ steps.check.outputs.newest }}
+    steps:
+      - id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ github.event_name }}" != "push" ]; then
+            echo "newest=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          head="$(gh api "repos/${{ github.repository }}/commits/${{ github.ref_name }}" --jq .sha)"
+          if [ "$head" = "${{ github.sha }}" ]; then
+            echo "newest=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Branch head is now $head; skipping UI tests for ${{ github.sha }}."
+            echo "newest=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  ui-tests:
+    needs: newest-push
+    if: needs.newest-push.outputs.newest == 'true'
+    runs-on: macos-26
+    timeout-minutes: 60
+    concurrency:
+      group: ui-tests-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v6
+      - uses: ./.github/actions/setup
+      - name: UI tests
+        run: scripts/test.sh ui
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: ui-xcresult-${{ github.sha }}
+          path: build/results
+          if-no-files-found: ignore

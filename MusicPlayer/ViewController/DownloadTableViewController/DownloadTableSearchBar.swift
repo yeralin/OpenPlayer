@@ -62,21 +62,10 @@ extension DownloadTableViewController: UISearchBarDelegate {
                     self.tableView.reloadData()
                 }
             } else {
-                var responseStatus = Response.FailedToParse
                 throw "Failed to parse the response"
             }
         } catch {
-            var errorMessage: String?
-            switch responseStatus {
-            case .ConnectionIssue:
-                errorMessage = "Error: Could not connect to the server"
-            case .FailedToParse:
-                errorMessage = "Error: Could not parse server response"
-            case .ServerUndefined:
-                errorMessage = "Error: No server URL was defined in settings"
-            default:
-                errorMessage = "Error: Unknown error occurred"
-            }
+            let errorMessage = DownloadTableViewController.searchErrorMessage(for: responseStatus)
             DispatchQueue.main.async {
                 self.removeAllOverlays()
                 let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: UIAlertController.Style.alert)
@@ -86,12 +75,27 @@ extension DownloadTableViewController: UISearchBarDelegate {
         }
     }
     
-    private func populateSongListResponse(_ songListResponse: [SearchResultEntry]) {
-        guard let context = try? SongPersistencyManager.sharedInstance.validateContext(context: nil) else {
-            fatalError("Could not fetch context")
+    /// The alert text for a search that failed with `status`. A request that
+    /// succeeded but still ended up here had a missing or undecodable body.
+    static func searchErrorMessage(for status: Response) -> String {
+        switch status {
+        case .ConnectionIssue:
+            return "Error: Could not connect to the server"
+        case .Successful, .FailedToParse:
+            return "Error: Could not parse server response"
+        case .ServerUndefined:
+            return "Error: No server URL was defined in settings"
         }
+    }
+
+    internal func populateSongListResponse(_ songListResponse: [SearchResultEntry]) {
         for entry in songListResponse {
-            let song = SongEntity(context: context)
+            // Not inserted into the app's context: search results must never
+            // be saved alongside the playlists.
+            guard let song = try? SongPersistencyManager.sharedInstance.makeUnsavedSong() else {
+                log.error("Could not create a song for search result \"\(entry.title)\"")
+                continue
+            }
             song.songName = entry.title
             song.songUrl = entry.url
             let tokSongName = entry.title.split(separator: "-", maxSplits: 1)

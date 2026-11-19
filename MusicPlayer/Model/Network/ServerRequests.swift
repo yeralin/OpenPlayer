@@ -19,6 +19,16 @@ enum Response: Error {
 class ServerRequests {
     
     static let sharedInstance = ServerRequests()
+
+    private let session: Session
+    private let credentials: ServerCredentials?
+
+    /// - Parameter credentials: sent to `/search` when present. Defaults to
+    ///   the build's credentials (see Config/Secrets.example.xcconfig).
+    init(session: Session = AF, credentials: ServerCredentials? = .bundled) {
+        self.session = session
+        self.credentials = credentials
+    }
     
     internal func fetchServerURL() -> URL? {
         if let serverSettings = SettingsViewController.extractServerSettings(),
@@ -29,21 +39,30 @@ class ServerRequests {
         return nil
     }
 
+    /// Body of `GET /version`. Other fields in the response are ignored.
+    private struct VersionResponse: Decodable {
+        let version: String
+    }
+
     func getVersion(completion: @escaping (String, Response) -> ()) {
         guard let serverAddress = fetchServerURL() else {
             return completion("Unknown", .ServerUndefined)
         }
+        getVersion(serverAddress: serverAddress, completion: completion)
+    }
+
+    internal func getVersion(serverAddress: URL, completion: @escaping (String, Response) -> ()) {
         let versionEndpoint = serverAddress.appendingPathComponent("/version")
-        AF.request(versionEndpoint, method: .get)
+        session.request(versionEndpoint, method: .get)
             .validate()
-            .responseJSON { res in
+            .responseDecodable(of: VersionResponse.self) { res in
                 switch res.result {
-                case .success(let responseData):
-                    if let version = (responseData as? [String:String])?["version"] {
-                        return completion(version, .Successful)
+                case .success(let body):
+                    return completion(body.version, .Successful)
+                case .failure(let error):
+                    if case .responseSerializationFailed = error {
+                        return completion("Unknown", .FailedToParse)
                     }
-                    return completion("Unknown", .FailedToParse)
-                case .failure:
                     return completion("Unknown", .ConnectionIssue)
                 }
         }
@@ -53,11 +72,7 @@ class ServerRequests {
         guard let serverAddress = fetchServerURL() else {
             return completion(nil, .ServerUndefined)
         }
-        let getSongsEndpoint = serverAddress.appendingPathComponent("/search")
-        let params = ["q": query]
-        AF.request(getSongsEndpoint, method: .get, parameters: params)
-            .authenticate(username: "daniyar", password: "dj2gvcP6%oN%eq")
-            .validate()
+        searchRequest(serverAddress: serverAddress, query: query)
             .responseData { res in
                 switch res.result {
                 case .success(let responseData):
@@ -66,5 +81,15 @@ class ServerRequests {
                     return completion(nil, Response.ConnectionIssue)
                 }
             }
+    }
+
+    /// The `/search` request, authenticated only when credentials are set.
+    internal func searchRequest(serverAddress: URL, query: String) -> DataRequest {
+        let endpoint = serverAddress.appendingPathComponent("/search")
+        let request = session.request(endpoint, method: .get, parameters: ["q": query])
+        if let credentials = credentials {
+            request.authenticate(username: credentials.username, password: credentials.password)
+        }
+        return request.validate()
     }
 }

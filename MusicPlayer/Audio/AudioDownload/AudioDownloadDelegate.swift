@@ -59,7 +59,6 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         configuration.allowsCellularAccess = true
         configuration.allowsExpensiveNetworkAccess = true
         configuration.allowsConstrainedNetworkAccess = true
-        configuration.shouldUseExtendedBackgroundIdleMode = true
         configuration.waitsForConnectivity = true
         configuration.sessionSendsLaunchEvents = true
         configuration.isDiscretionary = false
@@ -90,6 +89,7 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         if let response = response as? HTTPURLResponse {
             self.response = response
             owner?.httpResponse = response
+            notificationCenter.post(name: .receivedHttpResponse, object: owner)
         }
         processLoadingRequest()
         completionHandler(.allow)
@@ -114,6 +114,13 @@ class AudioDownloadDelegate: NSObject, AVAssetResourceLoaderDelegate, URLSession
         log.debug("Finished downloading: \(owner?.url.absoluteString ?? "Unknown item")")
         notificationCenter.post(name: .downloadFinished, object: owner)
         invalidateURLSession()
+    }
+
+    func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {
+        guard let identifier = session.configuration.identifier else {
+            return
+        }
+        BackgroundSessionCompletion.shared.complete(session: identifier)
     }
 
     // MARK: Utils

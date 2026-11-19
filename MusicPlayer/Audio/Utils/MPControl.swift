@@ -16,6 +16,7 @@ class MPControl: NSObject {
     
     init(resumeSong: @escaping () throws -> (),
          pauseSong: @escaping () throws -> (),
+         isPlaying: @escaping () -> Bool,
          playNextSong: @escaping () -> (),
          playPreviousSong: @escaping () -> (),
          seekFor: @escaping (_ seconds: Double, _ forward: Bool) throws -> ()) {
@@ -31,14 +32,7 @@ class MPControl: NSObject {
             }
         })
         scc.togglePlayPauseCommand.addTarget(handler: { _ in
-            // TODO: handle toggle i.e. if isPlaying
-            do {
-                try pauseSong()
-                return .success
-            } catch let error {
-                log.error(error)
-                return .commandFailed
-            }
+            MPControl.togglePlayPause(isPlaying: isPlaying, resumeSong: resumeSong, pauseSong: pauseSong)
         })
         scc.pauseCommand.addTarget(handler: { _ in
             do {
@@ -73,21 +67,50 @@ class MPControl: NSObject {
         })
     }
     
+    /// Headphone and lock-screen toggle: pauses when playing, resumes otherwise.
+    internal static func togglePlayPause(isPlaying: () -> Bool,
+                                         resumeSong: () throws -> (),
+                                         pauseSong: () throws -> ()) -> MPRemoteCommandHandlerStatus {
+        do {
+            if isPlaying() {
+                try pauseSong()
+            } else {
+                try resumeSong()
+            }
+            return .success
+        } catch let error {
+            log.error(error)
+            return .commandFailed
+        }
+    }
+
     internal func handleRemoteControlSeek(event: MPSeekCommandEvent,
                                           seekFor: @escaping (_ seconds: Double, _ forward: Bool) throws -> (),
                                           forward: Bool) -> MPRemoteCommandHandlerStatus {
         switch event.type {
         case .beginSeeking:
-            if let seekWorker = initSeekWorker(seekFor, forward) {
-                DispatchQueue.global(qos: .userInteractive).async(execute: seekWorker)
-                self.seekWorker = seekWorker
-            }
+            beginSeeking(seekFor: seekFor, forward: forward)
         case .endSeeking:
-            seekWorker?.cancel()
+            endSeeking()
         @unknown default:
             log.error("Unhandled case detected")
         }
         return .success
+    }
+
+    /// Starts seeking repeatedly (faster over time) until `endSeeking()`.
+    internal func beginSeeking(seekFor: @escaping (_ seconds: Double, _ forward: Bool) throws -> (),
+                               forward: Bool) {
+        if let seekWorker = initSeekWorker(seekFor, forward) {
+            // Publish the worker before it starts: it stops as soon as it sees
+            // `self.seekWorker` is nil or cancelled.
+            self.seekWorker = seekWorker
+            DispatchQueue.global(qos: .userInteractive).async(execute: seekWorker)
+        }
+    }
+
+    internal func endSeeking() {
+        seekWorker?.cancel()
     }
     
     internal func initSeekWorker(_ seekFor: @escaping (_ seconds: Double, _ forward: Bool) throws -> (),
@@ -102,8 +125,19 @@ class MPControl: NSObject {
                     break
                 }
                 // Seek in a main thread bc it affects UI
+                var seekFailed = false
                 DispatchQueue.main.sync {
-                    try! seekFor(seekTime, forward) // force try otherwise too hacky
+                    do {
+                        try seekFor(seekTime, forward)
+                    } catch {
+                        // e.g. playback stopped while the button was held
+                        log.info("Stopped seeking: \(error)")
+                        seekFailed = true
+                    }
+                }
+                if seekFailed {
+                    self?.seekWorker = nil
+                    break
                 }
                 // Sleep for 1 second after each seek
                 sleep(1)

@@ -74,7 +74,9 @@ extension SongTableViewController {
             do {
                 try SongPersistencyManager.sharedInstance.processSong(toProcess: song)
             } catch let err {
-                fatalError("Could not process \"\(song.songName ?? "unknown")\" song: \(err)")
+                // One unreadable song must not take the whole table down.
+                // It stays unprocessed and is retried the next time it is shown.
+                log.error("Could not process \"\(song.songName ?? "unknown")\" song: \(err)")
             }
         }
         // If there is a song that's playing inside a current playlist, restore its state view
@@ -89,10 +91,11 @@ extension SongTableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let song = songsArray[indexPath.row]
-            if let currentSong = AudioPlayer.instance.currentSong,
-               song == currentSong {
-                // TODO: Stop song
+            // Rows come from the filtered list while searching.
+            let song = searching ? matchedSongs[indexPath.row] : songsArray[indexPath.row]
+            if AudioPlayer.instance.isPlaying(song: song) {
+                // Its file is about to disappear.
+                try? AudioPlayer.instance.stop()
             }
             do {
                 let songPerstManager = SongPersistencyManager.sharedInstance
@@ -101,6 +104,9 @@ extension SongTableViewController {
                 songsArray = try songPerstManager.resetSongOrder(songArray: songsArray)
                 try songPerstManager.saveContext()
                 self.songsArray = songsArray
+                if searching, let searchText = searchBar.text {
+                    matchedSongs = filterSongsArrayBy(searchText: searchText)
+                }
                 tableView.deleteRows(at: [indexPath], with: .fade)
             } catch let err {
                 log.error("Could not delete \"\(song.songName ?? "unknown")\" song: \(err)")
@@ -139,7 +145,9 @@ extension SongTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
+        // Row positions in a filtered list say nothing about where a song
+        // belongs in the playlist, so reordering waits until search is cleared.
+        return !searching
     }
     
 }
