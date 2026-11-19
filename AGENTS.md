@@ -97,3 +97,21 @@ the targets' base configuration slot belongs to CocoaPods. Copy
 `Config/Secrets.example.xcconfig` to get started. The values still end up in
 the app bundle, so this keeps them out of source control, not out of the
 binary; that was the owner's explicit choice over a Settings/Keychain UI.
+
+### 2026-11-19: The Wi-Fi upload server stays unauthenticated (documented risk)
+
+`ServerController.deployServer()` starts `GCDWebUploader` on port 80 with no
+authentication, so anyone on the same network can upload, rename or delete
+files under Documents while it runs. GCDWebServer supports Basic/Digest auth
+(`GCDWebServerOption_AuthenticationMethod`), but the owner chose to keep the
+current behaviour and document the risk (README "Security notes") rather than
+add a password. Revisit if the server ever runs in the background.
+
+### 2026-11-19: App Transport Security stays off
+
+`Info.plist` keeps `NSAllowsArbitraryLoads = true` because OpenPlayer-Server is
+self-hosted and often reachable only over plain HTTP on a LAN.
+`NSAllowsLocalNetworking` alone would break servers reached by a public
+hostname without TLS. Consequence: Basic auth credentials can travel
+unencrypted. `ServerAddress.normalize` therefore never rewrites an explicit
+`https://`, and only defaults to `http://` when no scheme is typed.
