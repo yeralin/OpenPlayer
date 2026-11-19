@@ -78,16 +78,28 @@ class MPControl: NSObject {
                                           forward: Bool) -> MPRemoteCommandHandlerStatus {
         switch event.type {
         case .beginSeeking:
-            if let seekWorker = initSeekWorker(seekFor, forward) {
-                DispatchQueue.global(qos: .userInteractive).async(execute: seekWorker)
-                self.seekWorker = seekWorker
-            }
+            beginSeeking(seekFor: seekFor, forward: forward)
         case .endSeeking:
-            seekWorker?.cancel()
+            endSeeking()
         @unknown default:
             log.error("Unhandled case detected")
         }
         return .success
+    }
+
+    /// Starts seeking repeatedly (faster over time) until `endSeeking()`.
+    internal func beginSeeking(seekFor: @escaping (_ seconds: Double, _ forward: Bool) throws -> (),
+                               forward: Bool) {
+        if let seekWorker = initSeekWorker(seekFor, forward) {
+            // Publish the worker before it starts: it stops as soon as it sees
+            // `self.seekWorker` is nil or cancelled.
+            self.seekWorker = seekWorker
+            DispatchQueue.global(qos: .userInteractive).async(execute: seekWorker)
+        }
+    }
+
+    internal func endSeeking() {
+        seekWorker?.cancel()
     }
     
     internal func initSeekWorker(_ seekFor: @escaping (_ seconds: Double, _ forward: Bool) throws -> (),
