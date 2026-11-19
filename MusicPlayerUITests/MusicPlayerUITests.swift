@@ -87,8 +87,10 @@ class MusicPlayerUITests: XCTestCase {
         playlistsNavigationBar.buttons["Add"].tap()
         createNewPlaylistAlert.textFields["Playlist Name"].typeText("Test")
         createNewPlaylistAlert.buttons["OK"].tap()
-        XCTAssertTrue(app.alerts["Error"].visible())
-        app.alerts["Error"].buttons["OK"].tap()
+        // PlaylistTableDataSource.insertPlaylist titles this alert "Playlist Error".
+        let errorAlert = app.alerts["Playlist Error"]
+        XCTAssertTrue(errorAlert.waitForExistence(timeout: 5), "Expected the duplicate-name error")
+        errorAlert.buttons["OK"].tap()
     }
     
     func testChangePlaylistRowPositions() {
