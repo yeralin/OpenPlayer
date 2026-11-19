@@ -10,14 +10,6 @@ runs:
         sudo xcode-select -s "$xcode/Contents/Developer"
         xcodebuild -version
 
-    # Xcode adds the Metal toolchain's Swift libraries to every link's search
-    # paths. On the runner image the component is registered but not mounted,
-    # so every target logged "ld: warning: search path ... MetalToolchain ...
-    # not found". Downloading it mounts it. Not fatal if it fails.
-    - name: Make the Metal toolchain available
-      shell: bash
-      run: xcodebuild -downloadComponent MetalToolchain || echo "::warning::Could not download the Metal toolchain"
-
     - name: Install the CocoaPods version from Podfile.lock
       shell: bash
       run: |
