@@ -1,5 +1,6 @@
-#define a global platform for your project
-platform :ios, '17.0'
+IOS_DEPLOYMENT_TARGET = '17.0'
+
+platform :ios, IOS_DEPLOYMENT_TARGET
 workspace 'MusicPlayer'
 inhibit_all_warnings!
 
@@ -19,4 +20,15 @@ end
 
 target 'MusicPlayerUITests' do
   use_frameworks!
+end
+
+# Several pods declare iOS 8-10 as their minimum. Current Xcode cannot build
+# for those versions (it no longer ships libarclite), so build every pod for
+# the app's own deployment target instead.
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = IOS_DEPLOYMENT_TARGET
+    end
+  end
 end
