@@ -71,7 +71,9 @@ class MusicPlayerUITests: XCTestCase {
         playlistsNavigationBar.buttons["Edit"].tap()
         tablesQuery.buttons["Delete Test"].tap()
         tablesQuery.buttons["Delete"].tap()
-        app.alerts["Warning"].buttons["Delete"].tap()
+        let warning = app.alerts["Warning"]
+        XCTAssertTrue(warning.waitForExistence(timeout: 5), "Expected the delete confirmation")
+        warning.buttons["Delete"].tap()
         app.navigationBars["Playlists"].buttons["Done"].tap()
         XCTAssertTrue(tablesQuery.cells.count == 0)
     }
