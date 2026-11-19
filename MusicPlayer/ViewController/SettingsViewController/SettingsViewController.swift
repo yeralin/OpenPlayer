@@ -49,12 +49,8 @@ class SettingsViewController: UIViewController, UINavigationBarDelegate, UITextF
     }
     
     internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if var serverAddress = serverAddressField.text, serverAddressField.text != "" {
-            // TODO: Force user to define the protocol
-            if !serverAddress.contains("http") {
-                serverAddress = "http://" + serverAddress
-                serverAddressField.text = serverAddress
-            }
+        if let serverAddress = ServerAddress.normalize(serverAddressField.text ?? "") {
+            serverAddressField.text = serverAddress
             self.handleServerAddressUpdate(serverAddress)
         }
         textField.resignFirstResponder()
