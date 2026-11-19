@@ -58,3 +58,21 @@ version recorded in `Podfile.lock`, runs `pod install`, checks that this did
 not modify tracked files, then runs `scripts/test.sh`. All the real logic lives
 in `scripts/` so a local run behaves exactly like CI. Runs are not cancelled
 when a newer commit is pushed, so every commit of a stacked PR gets a result.
+
+### 2026-11-19: Tests swap the persistence singletons' state, not the singletons
+
+`PlaylistPersistencyManager.sharedInstance` and
+`SongPersistencyManager.sharedInstance` are used directly all over the app
+(view controllers, `SongEntity.getSongUrl()`, `AudioDownloadManager`).
+Injecting new instances everywhere would be a large refactor, so tests use
+`MusicPlayerTests/Fixtures/TestPersistence.swift` instead: it points the
+shared instances' `docsUrl` at a fresh temporary folder and their
+`managedObjectContext` at an in-memory store, and restores both afterwards.
+Subclass `PersistenceTestCase` to get this per test.
+
+The in-memory container reuses the app's `NSManagedObjectModel` instance.
+Loading the model a second time registers two entity descriptions for the
+same classes and makes `SongEntity(context:)` ambiguous.
+
+Unit tests are hosted in the app (`TEST_HOST`), so the app launches normally
+first; tests must not depend on whatever the real Documents folder contains.
