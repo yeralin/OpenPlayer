@@ -41,8 +41,9 @@ runner, and does exactly the steps above plus `scripts/check-pods-in-sync.sh`.
 - Small, single-purpose commits. A fix that needs several commits shares a
   common title prefix, e.g. `Move server credentials out of source (1/3): ...`.
 - Every behaviour fix comes with a test that fails without it.
-- New source or test files must be added to `MusicPlayer.xcodeproj` (the
-  `xcodeproj` Ruby gem works for this even without Xcode).
+- New source or test files must be added to `MusicPlayer.xcodeproj`. Without
+  Xcode, use `scripts/xcodeproj-add.rb <target> <file>...` (needs
+  `gem install xcodeproj`); it mirrors folders as groups and is idempotent.
 - After editing the `Podfile`, commit the resulting `Podfile.lock` and project
   changes; CI fails otherwise. The Podfile checksum in `Podfile.lock` is the
   SHA-1 of the `Podfile` contents.
