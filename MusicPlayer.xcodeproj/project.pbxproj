@@ -66,6 +66,7 @@
 		40DB669357178B92DDBDCC53 /* ServerRequestsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7C216B8D2A5F820E70E615 /* ServerRequestsTests.swift */; };
 		41DB22CCF266A675DD8AC8E9 /* CreatePlaylistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C793F54B8375E87FE0F663F9 /* CreatePlaylistTests.swift */; };
 		41F55ADDF2027046DA34E2EA /* SongTableDeletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1290B217881C7DA1D5DFB177 /* SongTableDeletionTests.swift */; };
+		42F5CBC46FC4BB566BE42319 /* DownloadTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2010389BD29BD4927BAF77 /* DownloadTableViewControllerTests.swift */; };
 		51407BFB2552C5CD9F5DC31D /* ID3Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63BFE5B7DD9A1FEACBB3EEC /* ID3Tag.swift */; };
 		523C218971B61772318BBD30 /* InfoPlistTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53AA75E5E8D864B9A2AAECD /* InfoPlistTests.swift */; };
 		5BDAC924224F110F7AC14302 /* Pods_MusicPlayerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7245D16484A4ED96875FA8B1 /* Pods_MusicPlayerTests.framework */; };
@@ -205,6 +206,7 @@
 		C5C712FDDBC504B96F6C6465 /* BufferedFractionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BufferedFractionTests.swift; sourceTree = "<group>"; };
 		C63BFE5B7DD9A1FEACBB3EEC /* ID3Tag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ID3Tag.swift; sourceTree = "<group>"; };
 		C793F54B8375E87FE0F663F9 /* CreatePlaylistTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CreatePlaylistTests.swift; sourceTree = "<group>"; };
+		CA2010389BD29BD4927BAF77 /* DownloadTableViewControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DownloadTableViewControllerTests.swift; sourceTree = "<group>"; };
 		CD237AC8F5C356257F743698 /* SongTableViewControllerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SongTableViewControllerTests.swift; sourceTree = "<group>"; };
 		CDBCDB85B9F86F63A068312C /* BackgroundSessionCompletionTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BackgroundSessionCompletionTests.swift; sourceTree = "<group>"; };
 		CF2F594116AB4F210B91751A /* MPControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPControl.swift; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 			isa = PBXGroup;
 			children = (
 				F01D33477251BB53C541C79E /* SearchResultsTests.swift */,
+				CA2010389BD29BD4927BAF77 /* DownloadTableViewControllerTests.swift */,
 			);
 			name = Download;
 			path = Download;
@@ -987,6 +990,7 @@
 				C6F9C953A80011ACCBFB71D7 /* BackgroundSessionCompletionTests.swift in Sources */,
 				96C316035EDF14D0A3CEE5C3 /* SongTableErrorAlertTests.swift in Sources */,
 				672BB9155E4E03DB093D2CA2 /* SearchResultsTests.swift in Sources */,
+				42F5CBC46FC4BB566BE42319 /* DownloadTableViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

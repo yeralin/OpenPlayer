@@ -13,8 +13,12 @@ import SWRevealViewController
 extension UIViewController: SWRevealViewControllerDelegate {
     
     func setupMenuGestureRecognizer() {
-        revealViewController().delegate = self
-        view.addGestureRecognizer(revealViewController().tapGestureRecognizer())
+        // nil when the screen is shown outside the side menu (e.g. in tests).
+        guard let revealController = revealViewController() else {
+            return
+        }
+        revealController.delegate = self
+        view.addGestureRecognizer(revealController.tapGestureRecognizer())
     }
 }
 
