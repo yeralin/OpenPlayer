@@ -18,7 +18,7 @@ runs:
         pod --version
 
     - name: Cache Pods
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: |
           Pods

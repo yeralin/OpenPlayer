@@ -18,7 +18,7 @@ jobs:
     runs-on: macos-26
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
       - name: Unit tests
         run: scripts/test.sh unit
@@ -27,7 +27,7 @@ jobs:
         run: scripts/report-warnings.sh
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: unit-xcresult-${{ github.sha }}
           path: build/results
@@ -68,13 +68,13 @@ jobs:
       group: ui-tests-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
       - name: UI tests
         run: scripts/test.sh ui
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ui-xcresult-${{ github.sha }}
           path: build/results
